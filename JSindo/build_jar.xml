@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project sindo.master">
+<project default="create_run_jar" name="Create Runnable Jar for JSindo">
     <tstamp>
       <format property="DATE" pattern="yyMMdd" />
     </tstamp>
-    <echo> date-${DATE} </echo>
-    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
-    <!--ANT 1.7 is required                                        -->
+
     <!--define folder properties-->
-    <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="${dir.buildfile}/../../.."/>
-    <property name="dir.jarfile" value="${dir.buildfile}"/>
-    <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/JSindo-4.0_${DATE}.jar" filesetmanifest="mergewithoutmain">
-            <manifest>
-                <attribute name="Main-Class" value="JSindo"/>
-                <attribute name="Class-Path" value="."/>
-            </manifest>
-            <fileset dir="${dir.jarfile}/bin"/>
-            <!-- zipfileset excludes="META-INF/*.SF" src="/Users/kyagi/Work/lib/Jama/Jama-1.0.2.jar"/ -->
-        </jar>
+    <property name="dir.bin" value="./bin"/>
+    <property name="jarfile" value="JSindo-4.0_${DATE}.jar"/>
+
+    <target name="clean">
+      <delete dir="${dir.bin}" />
+      <delete file="${jarfile}" />
     </target>
+
+    <target name="compile" depends="clean">
+      <mkdir dir="${dir.bin}" />
+      <path id="buildpath">
+        <fileset dir="/Users/kyagi/Work/lib/Jama" includes="*.jar" />
+      </path>
+      <javac srcdir="./src" destdir="${dir.bin}" 
+             includeantruntime="false" 
+             classpathref="buildpath" />
+    </target>
+
+    <target name="create_run_jar" depends="compile">
+      <jar destfile="${jarfile}" filesetmanifest="mergewithoutmain">
+        <manifest>
+          <attribute name="Main-Class" value="JSindo"/>
+          <attribute name="Class-Path" value="."/>
+        </manifest>
+        <fileset dir="${dir.bin}"
+                 includes="JSindo.class,*/*.class"/>
+      </jar>
+    </target>
+
 </project>
