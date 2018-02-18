@@ -30,7 +30,8 @@
           <attribute name="Class-Path" value="."/>
         </manifest>
         <fileset dir="${dir.bin}"
-                 includes="JSindo.class,RunMakePES.class,*/*.class"/>
+                 includes="JSindo.class,
+                           */*.class"/>
       </jar>
     </target>
 
