@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for JSindo">
+<project default="create_jar" name="Create Runnable Jar for JSindo">
     <tstamp>
       <format property="DATE" pattern="yyMMdd" />
     </tstamp>
@@ -23,14 +23,14 @@
              classpathref="buildpath" />
     </target>
 
-    <target name="create_run_jar" depends="compile">
+    <target name="create_jar" depends="compile">
       <jar destfile="${jarfile}" filesetmanifest="mergewithoutmain">
         <manifest>
           <attribute name="Main-Class" value="JSindo"/>
           <attribute name="Class-Path" value="."/>
         </manifest>
         <fileset dir="${dir.bin}"
-                 includes="JSindo.class,*/*.class"/>
+                 includes="JSindo.class,RunMakePES.class,*/*.class"/>
       </jar>
     </target>
 

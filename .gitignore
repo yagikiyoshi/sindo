@@ -10,6 +10,8 @@ FSindo/lib/*.a
 JSindo/.classpath
 JSindo/.project
 JSindo/.settings
+JSindo/bin
+JSindo/*.jar
 
 # memo used for debug
 JSindo/memo
