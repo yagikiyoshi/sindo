@@ -1,0 +1,53 @@
+PSF EXT CMAP CHEQ
+
+         2 !NTITLE
+* QM/MM WATER DIMER                                                             
+*  DATE:    11/ 7/14     16:28:44      CREATED BY USER: kyagi                   
+
+         9 !NATOM
+         1 WATERS   1        TIP3     OH2        75  -0.834000       15.9994           0   0.00000     -0.301140E-02
+         2 WATERS   1        TIP3     H1          4   0.417000       1.00800           0   0.00000     -0.301140E-02
+         3 WATERS   1        TIP3     H2          4   0.417000       1.00800           0   0.00000     -0.301140E-02
+         4 WATERS   2        TIP3     OH2        75  -0.834000       15.9994           0   0.00000     -0.301140E-02
+         5 WATERS   2        TIP3     H1          4   0.417000       1.00800           0   0.00000     -0.301140E-02
+         6 WATERS   2        TIP3     H2          4   0.417000       1.00800           0   0.00000     -0.301140E-02
+         7 WATERS   3        TIP3     OH2        75  -0.834000       15.9994           0   0.00000     -0.301140E-02
+         8 WATERS   3        TIP3     H1          4   0.417000       1.00800           0   0.00000     -0.301140E-02
+         9 WATERS   3        TIP3     H2          4   0.417000       1.00800           0   0.00000     -0.301140E-02
+
+         9 !NBOND: bonds
+         1         2         1         3         2         3         4         5
+         4         6         5         6         7         8         7         9
+         8         9
+
+         3 !NTHETA: angles
+         2         1         3         5         4         6         8         7         9
+
+         0 !NPHI: dihedrals
+
+
+         0 !NIMPHI: impropers
+
+
+         0 !NDON: donors
+
+
+         3 !NACC: acceptors
+         1         0         4         0         7         0
+
+         0 !NNB
+
+         0         0         0         0         0         0         0         0
+         0
+
+         3         0 !NGRP NST2
+         0         1         0         3         1         0         6         1         0
+
+         1 !MOLNT
+         1         1         1         1         1         1         1         1
+         1
+
+         0         0 !NUMLP NUMLPH
+
+         0 !NCRTERM: cross-terms
+

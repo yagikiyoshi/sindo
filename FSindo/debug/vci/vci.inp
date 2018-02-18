@@ -1,0 +1,21 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='eq-singlet.minfo' /
+ &sys maxmem=30 /
+
+#--- [  VIB  ]
+ &vib 
+   MR=3 
+   vmaxall=6 
+   vscf=.t. 
+   vci=.t. 
+  /
+
+#--- [  VCI  ]
+ &vci 
+   nstate=60 
+   nCUP=4 
+   maxSum=6 
+   dump=.t. 
+   geomav=.t. 
+ /
+

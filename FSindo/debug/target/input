@@ -1,0 +1,7 @@
+ &states nstate=3 
+       fund=.t.
+       target_state(2,1)=2 
+       target_state(3,2)=2 
+       target_state(2,3)=1 
+       target_state(3,3)=1 
+  /

@@ -1,0 +1,12 @@
+REMARK  2015/02/06 at 17:28:21 JST created by kyagi
+TITLE  PDB FOR WATERS 
+ATOM      1  OH2 TIP3    1       1.036   1.014  -0.061  0.00  0.00    WATERS
+ATOM      2  H1  TIP3    1       0.510   0.894   0.551  0.00  0.00    WATERS
+ATOM      3  H2  TIP3    1       1.993   1.197   0.496  0.00  0.00    WATERS
+ATOM      4  OH2 TIP3    2      -0.996   0.016   1.242  0.00  0.00    WATERS
+ATOM      5  H1  TIP3    2      -1.345  -0.702   2.138  0.00  0.00    WATERS
+ATOM      6  H2  TIP3    2      -0.928  -0.557   0.306  0.00  0.00    WATERS
+ATOM      7  OH2 TIP3    3      -0.043  -1.020  -1.195  0.00  0.00    WATERS
+ATOM      8  H1  TIP3    3       0.437  -0.376  -0.997  0.00  0.00    WATERS
+ATOM      9  H2  TIP3    3      -0.503  -0.825  -2.096  0.00  0.00    WATERS
+END

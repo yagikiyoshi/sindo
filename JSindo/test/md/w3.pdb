@@ -1,0 +1,13 @@
+REMARK  QM/MM WATER DIMER                                                             
+REMARK   DATE:    11/ 7/14     16:28:44      CREATED BY USER: kyagi                   
+ATOM      1  OH2 TIP3    1       1.036   1.014  -0.061  1.00  0.00      WATE
+ATOM      2  H1  TIP3    1       0.510   0.894   0.551  1.00  0.00      WATE
+ATOM      3  H2  TIP3    1       1.993   1.197   0.496  1.00  0.00      WATE
+ATOM      4  OH2 TIP3    2      -0.996   0.016   1.242  1.00  0.00      WATE
+ATOM      5  H1  TIP3    2      -1.254  -0.567   1.847  1.00  0.00      WATE
+ATOM      6  H2  TIP3    2      -0.938  -0.482   0.427  1.00  0.00      WATE
+ATOM      7  OH2 TIP3    3      -0.043  -1.020  -1.195  1.00  0.00      WATE
+ATOM      8  H1  TIP3    3       0.437  -0.376  -0.997  1.00  0.00      WATE
+ATOM      9  H2  TIP3    3      -0.503  -0.825  -2.096  1.00  0.00      WATE
+TER      10      TIP3     3
+END

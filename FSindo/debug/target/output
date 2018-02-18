@@ -1,0 +1,72 @@
+ -------------------------------------------------------
+                                                      
+    ***   WELCOME TO SINDO PROGRAM                    
+     ***                (  VERSION 3.4  NARITA  ) 
+      ***                                             
+       ***       COPYRIGHT 2013:                      
+        ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP
+                                                      
+ -------------------------------------------------------
+
+     JOB STARTED AT: Wed May  1 12:50:48 2013
+     RUNNING ON kyagi-mac.ad78.riken.go.jp      
+
+
+(  SETUP MEM MODULE  )
+
+   o MAXIMUM MEMORY :  300 MB
+
+
+(  SETUP VIB MODULE  )
+
+   >> RUN OPTIONS
+      VSCF    =     F
+      OC-VSCF =     F
+      VCI     =     F
+      VPT     =     F
+      PRPT    =     F
+
+
+   >> BASIS FUNCTIONS
+      MODE :         1        2        3        4        5        6
+      MAXV :        10       10       10       10       10       10
+      FREQ :      0.00     0.00     0.00     0.00     0.00     0.00
+
+
+(  SETUP TARGET MODULE  )
+
+   >> TARGET STATES
+       000   : ZERO-POINT STATE
+     001-006 : FUNDAMENTALS
+       007   :  2_2
+       008   :  3_2
+       009   :  2_1    3_1
+
+     1   100000
+     2   010000
+     3   001000
+     4   000100
+     5   000010
+     6   000001
+     7   020000
+     8   002000
+     9   011000
+
+     1     1_1
+     2     2_1
+     3     3_1
+     4     4_1
+     5     5_1
+     6     6_1
+     7     2_2
+     8     3_2
+     9     2_1    3_1
+
+(  FINALIZE TARGET MODULE  )
+
+
+(  FINALIZE VIB MODULE  )
+
+
+   (TOTAL MEMORY USAGE)   [     0.00 MB /   300.00 MB (  0.0 % ) ] 
+

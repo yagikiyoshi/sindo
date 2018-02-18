@@ -1,0 +1,30 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfoFile = 'ch3nh2_cff_ocvscf.minfo' /
+ &sys maxmem=500 /
+
+#--- [  MRPES ]
+ &mrpes mopFile='prop_no_1.mop_cff_ocvscf2' mcs_cutoff=-1.0D-03 /
+
+#--- [  VIB  ]
+ &vib MR=3 vmaxall=10 vscf=.t. vqdpt=.t. /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=20 Ethresh=1.D-03 / 
+
+ &states
+  fund=.t.
+ /
+
+#--- [  VQDPT  ]
+ &vqdpt 
+  maxSum=4
+  nGen=3 
+  thresh_p0=500.0 
+  thresh_p1=0.1 
+  thresh_p2=0.05
+  thresh_p3=0.95
+  pset=0
+  pqSum=1
+  thresh_ene=1.0e-04
+  printWeight=1.D-02
+ /

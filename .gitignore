@@ -1,0 +1,19 @@
+# Fortran object files
+*.o
+*.mod
+# Sindo build files
+FSindo/src/make.inc
+FSindo/bin/sindo*
+FSindo/lib/*.a
+
+# Configuration files used by Eclipse
+JSindo/.classpath
+JSindo/.project
+JSindo/.settings
+
+# memo used for debug
+JSindo/memo
+
+# Interface scripts
+Ext/*.sh
+

@@ -1,0 +1,29 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='eq-singlet.minfo' /
+ &sys maxmem=10 /
+
+#--- [  VIB  ]
+ &vib  MR=3 vmaxall=6 vscf=.f. vci=.f. prpt=.t. /
+
+#--- [  VSCF  ]
+ &vscf nstate=1
+       state=0,0,0,0,0,0
+       restart=.f.
+       Maxitr=20 Ethresh=1.D-03 / 
+
+#--- [  VCI  ]
+ &vci nstate=60 nCUP=3 maxSum=6 dump=.t. geomav=.f. /
+
+ &prpt MR=3
+       vciprpt=.t.
+       infrared=.t.
+       /
+       extn(1)='dipole' matrix(1)=1 Nstate(1)=10
+       extn(2)='force'  matrix(2)=0 Nstate(2)=1
+       extn(3)='torque' matrix(3)=0 Nstate(3)=1
+
+ &IRspectrum minOmega=500.0
+             maxOmega=4000.0
+             delOmega=1.0
+             fwhm=20.0
+ /

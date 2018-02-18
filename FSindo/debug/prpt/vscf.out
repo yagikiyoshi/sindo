@@ -1,0 +1,352 @@
+ -------------------------------------------------------
+                                                      
+    ***   WELCOME TO SINDO PROGRAM                    
+     ***                (  VERSION 3.4  NARITA  ) 
+      ***                                             
+       ***       COPYRIGHT 2013:                      
+        ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP
+                                                      
+ -------------------------------------------------------
+
+     JOB STARTED AT: Wed May  8 03:29:31 2013
+     RUNNING ON kyagi-mac.local                 
+
+
+(  SETUP MEM MODULE  )
+
+   o MAXIMUM MEMORY :   10 MB
+
+
+(  SETUP MOL MODULE  )
+
+
+   READ DATA FROM A MINFO FILE : [ eq-singlet.minfo ]
+
+
+(  ENTER NMA MODULE  )
+
+
+      o ATOMIC MASS
+        21874.6618   1837.1527   1837.1527   1837.1527
+
+      o REFERENCE GEOMETRY
+         -0.000000   -0.000000   -0.000000
+         -0.000000    2.053673   -0.000000
+          1.778533   -1.026836   -0.000000
+         -1.778533   -1.026836   -0.000000
+
+      o NORMAL DISPLACEMENT VECTOR
+          0.000000   -0.000000    0.448609
+         -0.000000    0.000000   -0.515994
+         -0.000000   -0.000000   -0.515994
+         -0.000000    0.000000   -0.515994
+
+         -0.298165    0.000001    0.000000
+          0.774326    0.000000   -0.000000
+          0.127263    0.373578   -0.000000
+          0.127267   -0.373583   -0.000000
+
+          0.000001    0.298165    0.000000
+         -0.000004    0.088422   -0.000000
+         -0.373581   -0.558640   -0.000000
+          0.373580   -0.558637   -0.000000
+
+         -0.000000   -0.000000    0.000000
+          0.000000   -0.577350   -0.000000
+         -0.500000    0.288675   -0.000000
+          0.500000    0.288675   -0.000000
+
+         -0.000022    0.335183    0.000000
+          0.000000   -0.769263   -0.000000
+          0.332359   -0.193687   -0.000000
+         -0.332284   -0.193644   -0.000000
+
+          0.335183    0.000022   -0.000000
+         -0.001799   -0.000050    0.000000
+         -0.577375    0.332309    0.000000
+         -0.577418   -0.332334    0.000000
+
+
+      o TRANSLATIONAL VECTOR
+          0.893728    0.000000    0.000000
+          0.259005    0.000000    0.000000
+          0.259005    0.000000    0.000000
+          0.259005    0.000000    0.000000
+
+          0.000000    0.893728    0.000000
+          0.000000    0.259005    0.000000
+          0.000000    0.259005    0.000000
+          0.000000    0.259005    0.000000
+
+          0.000000    0.000000    0.893728
+          0.000000    0.000000    0.259005
+          0.000000    0.000000    0.259005
+          0.000000    0.000000    0.259005
+
+
+      o ROTATIONAL VECTOR
+          0.000000    0.000000    0.000000
+          0.000000    0.000000    0.816497
+          0.000000    0.000000   -0.408248
+          0.000000    0.000000   -0.408248
+
+         -0.000000    0.000000    0.000000
+         -0.000000    0.000000    0.000000
+         -0.000000    0.000000   -0.707107
+         -0.000000    0.000000    0.707107
+
+         -0.000000   -0.000000    0.000000
+         -0.577350   -0.000000    0.000000
+          0.288675    0.500000    0.000000
+          0.288675   -0.500000    0.000000
+
+(  SETUP OF NMA COMPLETED  )
+
+
+
+(  SETUP VIB MODULE  )
+
+   >> RUN OPTIONS
+      VSCF    =     T
+      OC-VSCF =     F
+      VCI     =     F
+      VPT     =     F
+      VQDPT   =     F
+      PRPT    =     T
+
+
+   >> BASIS FUNCTIONS
+      MODE :         1        2        3        4        5        6
+      MAXV :         6        6        6        6        6        6
+      FREQ :   1451.59  1455.21  1455.21  3086.89  3292.80  3292.80
+
+
+(  SETUP TARGET MODULE  )
+
+   >> TARGET STATES
+       000   : ZERO-POINT STATE
+     001-006 : FUNDAMENTALS
+       007   :  2_2
+       008   :  3_2
+       009   :  2_1    3_1
+
+
+(  SETUP MRPES MODULE  )
+
+   >> POTENTIAL
+
+      [  OPTIONS  ]
+
+         MR         =        3
+         MCS_CUTOFF = 0.10E-03
+         MCS_GRID   = -.10E+01
+         POTDIR     = ./
+
+
+         1MR-PEF
+
+         o GRID PEF
+
+           MODE=   1, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   2, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   3, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   4, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   5, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   6, GRID=   7    MP2/cc-pVTZ (7)
+
+
+         2MR-PEF
+
+         o GRID PEF
+
+           MODE=   2   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   3   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   3   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   3, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   3, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   3, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5, GRID=   7   7    MP2/cc-pVTZ (7)
+
+
+         3MR-PEF
+
+         o GRID PEF
+
+           MODE=   3   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   3   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   3   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   3   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   3   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4   3, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   3   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   3   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4   3, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   3, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   4, GRID=   7   7   7    MP2/cc-pVTZ (7)
+
+
+(  FINALIZE MRPES MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.09 MB /    10.00 MB (  0.9 % ) ]  -- 
+            -- IN THE LAST STEP [     0.22 MB /    10.00 MB (  2.2 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.03, SYSTEM     0.01 SECS   <----
+
+
+(  ENTER VSCF MODULE  )
+
+  ---  VIBRATIONAL SELF-CONSISTENT FIELD CALCULATIONS   ---
+
+   >> SCF OPTIONS
+       STATE SPECIFIC :        F
+              RESTART :        F
+        MAX ITERATION :       20
+         CONV. THRESH : 0.10E-04
+
+   >> FILES
+       WFN READ/WRITE FILE : vscf_xxx.wfn
+
+   >> STATE 000:   ZERO-POINT STATE
+
+       o INITIAL GUESS FROM (CONTRACTED) HARMONIC OSCILLATOR 
+
+   -- (ITERATION) -------- (EOLD) -------- (ENEW) ----- (DELTA E) --
+                1         7022.33         6951.43      -0.709D+02
+                2         6951.43         6949.24      -0.219D+01
+                3         6949.24         6949.16      -0.795D-01
+                4         6949.16         6949.16      -0.308D-02
+                5         6949.16         6949.16      -0.121D-03
+                6         6949.16         6949.16      -0.487D-05
+   -----------------------------------------------------------------
+       E(VSCF)=     6949.15756740
+
+       o COEFFICIENTS
+
+         -MODES-          1         2         3         4         5         6
+              0     0.99996  -0.99995   0.99994   0.98871  -0.99991  -0.99998
+              1    -0.00000   0.00000   0.00002  -0.14766  -0.00018   0.00000
+              2     0.00934  -0.00983   0.01002   0.01766  -0.00667  -0.00580
+              3     0.00000  -0.00000  -0.00476  -0.01785   0.01165  -0.00000
+              4    -0.00046   0.00006   0.00006   0.00509   0.00124   0.00200
+              5    -0.00000  -0.00000  -0.00007  -0.00095   0.00016  -0.00000
+              6     0.00001  -0.00005   0.00009   0.00092  -0.00038   0.00006
+
+       o VIBRATIONALLY AVERAGED STRUCTURE
+
+         - Q0 -
+             -0.000000   -0.000008   -0.001176
+             -1.793733    0.000895   -0.000005
+
+         - X0 -
+              0.000000   -0.000000   -0.000000
+             -0.000000    2.077816    0.000000
+              1.799474   -1.038906    0.000000
+             -1.799474   -1.038906    0.000000
+
+   >> VIRTUAL VSCF ENERGIES
+
+      o VSCF STATES               TOTAL ENERGY         E-E0
+        1_1                       8362.93345376        1413.77588636
+        2_1                       8364.46394096        1415.30637355
+        3_1                       8363.12640595        1413.96883855
+        4_1                       9967.28865275        3018.13108535
+        5_1                      10172.80867343        3223.65110602
+        6_1                      10188.40297421        3239.24540681
+        2_2                       9782.17044380        2833.01287640
+        3_2                       9776.91029232        2827.75272492
+        2_1  3_1                  9783.52178572        2834.36421832
+
+(  FINALIZE VSCF MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.09 MB /    10.00 MB (  0.9 % ) ]  -- 
+            -- IN THE LAST STEP [     0.09 MB /    10.00 MB (  0.9 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE TARGET MODULE  )
+
+
+(  ENTER PROPERTY MODULE  )
+
+   >> RUN OPTIONS
+      MR    =      3
+      NPRPT =      1
+      VSCF  =      T
+      VCI   =      F
+      VPT   =      F
+      VQDPT =      F
+
+   >> CALC. PROPERTY MATRIX
+
+      PROP  1: 
+         o EXTN  =    .dipole
+         o CALC ALL MATRIX ELEMENTS
+
+      -> DONE FOR VSCF PROPERTY : [ vscf-prptMatrix.dipole ]
+
+
+(  FINALIZE TARGET MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.21 MB /    10.00 MB (  2.1 % ) ]  -- 
+            -- IN THE LAST STEP [     0.21 MB /    10.00 MB (  2.1 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.08, SYSTEM     0.02 SECS   <----
+
+   >> INFRARED SPECTRUM
+      MIN_OMEGA =      100.00
+      MAX_OMEGA =     4000.00
+      DEL_OMEGA =        1.00
+      FWHM      =       20.00
+
+
+(  FINALIZE TARGET MODULE  )
+
+      -> DONE FOR VSCF SPECTRUM : [ vscf-IR.data / vscf-IR.spectrum ]
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.21 MB /    10.00 MB (  2.1 % ) ]  -- 
+            -- IN THE LAST STEP [     0.21 MB /    10.00 MB (  2.1 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.08, SYSTEM     0.03 SECS   <----
+
+
+(  FINALIZE PROPERTY MODULE  )
+
+
+(  FINALIZE VIB MODULE  )
+
+
+(  FINALIZE NMA MODULE  )
+
+
+(  FINALIZE MOL MODULE  )
+
+
+
+   (TOTAL MEMORY USAGE)   [     0.22 MB /    10.00 MB (  2.2 % ) ] 
+
+   (CLOCK) ---->  TOTAL CPU-TIME  <----
+            >     USER :   0 DAYS   0 HOURS   0 MINS   0.2 SECS 
+            >    SYSTEM:   0 DAYS   0 HOURS   0 MINS   0.1 SECS 
+

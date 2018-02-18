@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="command1">#p MP2(Full)/Gen 6D 10F</entry>
+<entry key="title">Frequency at MP2/aug-cc-pVTZ</entry>
+<entry key="charge">0</entry>
+<entry key="multiplicity">1</entry>
+<entry key="oniom"> L, H, H </entry>
+<entry key="command2"> C O 0
+aug-cc-pVDZ
+****
+1 0
+S   1 1.00
+      .0987000000D-01   .1000000000D+01
+P   1 1.00
+      .0857000000D-01   .1000000000D+01
+****
+</entry>
+</properties>
+ 
+

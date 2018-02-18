@@ -1,0 +1,49 @@
+#
+&mol
+  minfofile='eq-mp2tz.minfo'
+/
+
+ &sys maxmem=1000 /
+
+#--- [  VIB  ]
+ &vib MR=4 vmax_base=8 vscf=.t. vci=.f. vpt=.t. /
+
+#--- [  VSCF  ]
+ &vscf nstate=1
+       Maxitr=50 Ethresh=1.D-06 /
+ vscf nstate=13
+      state_label(1,2)=1 
+      state_label(2,3)=1 
+      state_label(3,4)=1 
+      state_label(4,5)=1 
+      state_label(5,6)=1 
+      state_label(6,7)=1 
+      state_label(7,8)=1 
+      state_label(8,9)=1 
+      state_label(9,10)=1 
+      state_label(10,11)=1 
+      state_label(11,12)=1 
+      state_label(12,13)=1 
+
+#--- [  VCI  ]
+ &vci nstate=100 maxSum=3 nCUP=3 /
+
+#--- [  VPT  ]
+ vpt nLvl=0
+      nstate=13
+      state_label(1,2)=1 
+      state_label(2,3)=1 
+      state_label(3,4)=1 
+      state_label(4,5)=1 
+      state_label(5,6)=1 
+      state_label(6,7)=1 
+      state_label(7,8)=1 
+      state_label(8,9)=1 
+      state_label(9,10)=1 
+      state_label(10,11)=1 
+      state_label(11,12)=1 
+      state_label(12,13)=1 
+  /
+  &vpt maxSum=4 maxEx=-1 fund=.t. /
+
+ &mrpes mcs_cutoff=-1.0D-03 mopfile='prop_no_1.mop' /

@@ -1,0 +1,14 @@
+#--- [  MOL  ]
+ &mol Nat=4 
+      omega= 1.19690401e+03,  1.26675688e+03,  1.54013787e+03,  1.75293482e+03,  2.97365299e+03 
+             3.04762235e+03  /
+ &sys maxmem=500 /
+
+#--- [  VIB  ]
+ &vib  MR=3 vmaxall=10 vscf=.t. vci=.t. / 
+
+ &vci nstate=60 nCUP=4 maxSum=6 dump=.f. geomav=.t. /
+
+#--- [  PES  ]
+ &mrpes au=.f. mcs_cutoff=1.d-03  mcs_grid=20.0 /
+

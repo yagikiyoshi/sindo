@@ -1,0 +1,40 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2co-mp2-atz.minfo'  /
+ &sys maxmem=500 /
+
+#--- [  VIB  ]
+ &vib  MR=3 vmaxall=10 vscf=.t. vqdpt=.t. /
+
+#--- [  TARGET STATES  ]
+ &states 
+  nstate=6 fund=.t.
+  target_state(5,1)=2 
+  target_state(2,2)=2 
+  target_state(5,3)=1 
+  target_state(6,3)=1 
+  target_state(2,4)=1 
+  target_state(3,4)=1 
+  target_state(2,5)=0 
+  target_state(4,5)=1 
+  target_state(6,6)=2 
+ /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=20 Ethresh=1.D-03 / 
+
+#--- [  VQDPT  ]
+ &vqdpt 
+  nGen=3 
+  thresh_p0=500.0 
+  thresh_p1=0.1 
+  thresh_p2=0.05
+  thresh_p3=0.95
+  pset=0
+  maxSum=4
+  thresh_ene=1.0e-04
+  pqSum=-1
+  printWeight=1.D-02
+  dump=.t.
+ /
+
+ &mrpes au=.f./

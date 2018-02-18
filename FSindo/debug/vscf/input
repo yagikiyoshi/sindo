@@ -1,0 +1,25 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='eq-singlet.minfo' /
+ &sys maxmem=10 /
+
+#--- [  VIB  ]
+ &vib MR=3 
+   vmaxall=6 
+   vscf=.t. 
+ /
+
+ &states 
+   fund=.t. 
+   nstate=1
+   target_state(5,1)=1
+   target_state(6,1)=1
+ /
+
+#--- [  VSCF  ]
+ &vscf 
+   state_specific=.t.
+   restart=.f.
+   Maxitr=20 
+   Ethresh=1.D-03 
+ / 
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="command1">
+basis,default=def2-TZVPP,pt=def2-TZVPP
+{ks,PBE0MOL;wf,50,1,0}
+</entry>
+</properties>
+ 
+

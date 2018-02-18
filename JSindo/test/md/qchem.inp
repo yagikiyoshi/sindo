@@ -1,0 +1,20 @@
+$comment
+First QM/MM  calculation in this tutorial
+$end
+
+$rem
+exchange              hf
+basis                 sto-3g
+qm_mm                 true
+jobtype               force
+symmetry              off
+sym_ignore            true
+print_input           false
+qmmm_print            true
+scf_convergence       6
+$end
+
+$molecule
+0 1
+$end
+

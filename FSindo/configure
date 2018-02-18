@@ -1,0 +1,239 @@
+#!/bin/bash
+
+
+   echo "///  Welcome to SINDO  ///"
+   echo ""
+   echo " Running Configuration program "
+   echo ""
+   echo "------------------------------------------------------------------------"
+
+   echo -n "Press any key to continue:"
+   read yn
+
+   echo "------------------------------------------------------------------------"
+   echo "Detecting the system ..."
+   echo ""
+   echo ""
+
+   export SINDO_ROOT=`pwd`
+
+   UNAME=$(uname)
+   if [ $UNAME = Linux ] || [ $UNAME = Darwin ]; then
+      if [ ! -z $(which gfortran 2> /dev/null) ]; then
+         echo "     - Detected GNU Fortran (gfortran)"
+         DEFAULT=gfortranI8
+         if [ -z $BUILDLIST ]; then
+            BUILDLIST=gfortran/gfortranI8
+         else
+            BUILDLIST=$BUILDLIST/gfortran/gfortranI8
+         fi
+      fi
+      if [ ! -z $(which g95 2> /dev/null) ]; then
+         echo "     - Detected GNU Fortran (g95)"
+         DEFAULT=g95I8
+         if [ -z $BUILDLIST ]; then
+            BUILDLIST=g95/g95I8
+         else
+            BUILDLIST=$BUILDLIST/g95/g95I8
+         fi
+      fi
+      if [ ! -z $(which openf90 2> /dev/null) ]; then
+         echo "     - Detected Intel Fortran Compiler (ifort)"
+         DEFAULT=openf90I8
+         if [ -z $BUILDLIST ]; then
+            BUILDLIST=openf90/openf90I8
+         else
+            BUILDLIST=$BUILDLIST/openf90/openf90I8
+         fi
+      fi
+      if [ ! -z $(which ifort 2> /dev/null) ]; then
+         echo "     - Detected Intel Fortran Compiler (ifort)"
+         DEFAULT=ifortI8
+         if [ -z $BUILDLIST ]; then
+            BUILDLIST=ifort/ifortI8
+         else
+            BUILDLIST=$BUILDLIST/ifort/ifortI8
+         fi
+      fi
+
+      if [ -z $BUILDLIST ]; then
+         echo "Fortran compiler is not found!"
+         echo "Please set a proper compiler in src/make.inc."
+      else
+         echo ""
+         echo "Select the compiler [ $BUILDLIST ] "
+         echo -n "Default=$DEFAULT :"
+         read TARGET
+         if [ -z $TARGET ]; then
+            TARGET=$DEFAULT
+         fi
+      fi
+
+      echo ""
+      if [ $UNAME = Linux ]; then
+         echo "   o Operating System = Linux"
+      elif [ $UNAME = Darwin ]; then
+         echo "   o Operating System = Mac OS"
+      fi
+
+      if [ $TARGET = ifortI8 ]; then
+         echo "   o Fortran Compiler = Intel"
+         echo "   o Default integer  = 8-byte"
+      elif [ $TARGET = ifort ]; then
+         echo "   o Fortran Compiler = Intel"
+         echo "   o Default integer  = 4-byte"
+      elif [ $TARGET = gfortranI8 ]; then
+         echo "   o Fortran Compiler = GFortran"
+         echo "   o Default integer  = 8-byte"
+      elif [ $TARGET = gfortran ]; then
+         echo "   o Fortran Compiler = GFortran"
+         echo "   o Default integer  = 4-byte"
+      elif [ $TARGET = g95I8 ]; then
+         echo "   o Fortran Compiler = G95"
+         echo "   o Default integer  = 8-byte"
+      elif [ $TARGET = g95 ]; then
+         echo "   o Fortran Compiler = G95"
+         echo "   o Default integer  = 4-byte"
+      elif [ $TARGET = openf90I8 ]; then
+         echo "   o Fortran Compiler = AMD"
+         echo "   o Default integer  = 8-byte"
+      elif [ $TARGET = openf90 ]; then
+         echo "   o Fortran Compiler = AMD"
+         echo "   o Default integer  = 4-byte"
+      fi
+
+      echo ""
+
+   elif [ $UNAME = 'AIX' ]; then
+
+      DEFAULT=xlf64
+      echo -n " Please select the Build [xlf32/xlf64: Default=$DEFAULT ] : "
+      read TARGET
+      if [ -z $TARGET ]; then
+         TARGET=$DEFAULT
+      fi
+      echo "   o Operating System = AIX"
+      echo "   o Fortran Compiler = XL Fortran"
+      if [ $TARGET = 'xlf32' ]; then
+         echo "   o Build            = 32-bit"
+      else
+         echo "   o Build            = 64-bit"
+      fi
+
+      echo ""
+
+   else
+      echo "=== "
+      echo "=== "
+      echo "=== Sorry. Your system is not supported."
+      echo "=== The current Auto-Config supports [Linux/Mac OSX/AIX]"
+      echo "=== "
+      echo "=== Please manually configure the system."
+      echo "=== END OF Auto-Config."
+      echo "=== "
+      echo "=== "
+      exit -1
+
+   fi
+
+   if [ $TARGET = ifortI8 ] || [ $TARGET = ifort ]; then
+      if [ ! -z $MKLROOT ]; then
+         echo "Intel MKL library is detected. Would you like to use MKL? [y/n]:"
+         read yn
+         if [ $yn = y ] || [ $yn = Y ]; then
+            TARGET=$TARGET"_MKL"
+
+            echo "Would you like to use multi-threaded layer? [y/n]:"
+            read yn
+            if [ $yn = y ] || [ $yn = Y ]; then
+               TARGET=$TARGET"_thread"
+            else
+               TARGET=$TARGET"_sequential"
+            fi
+
+            if [ $TARGET = ifortI8_MKL_thread ]; then
+               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_ilp64.a \
+                       $(MKLROOT)/lib/intel64/libmkl_lapack95_ilp64.a \
+                       -Wl,--start-group \
+                         $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
+                         $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
+                         $(MKLROOT)/lib/intel64/libmkl_core.a \
+                       -Wl,--end-group \
+                       -liomp5 -lpthread -lm'
+            elif [ $TARGET = ifortI8_MKL_sequential ]; then
+               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_ilp64.a \
+                       $(MKLROOT)/lib/intel64/libmkl_lapack95_ilp64.a \
+                       -Wl,--start-group \
+                         $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
+                         $(MKLROOT)/lib/intel64/libmkl_sequential.a \
+                         $(MKLROOT)/lib/intel64/libmkl_core.a \
+                       -Wl,--end-group \
+                       -lpthread -lm'
+            elif [ $TARGET = ifort_MKL_thread ]; then
+               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a \
+                       $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a \
+                       -Wl,--start-group \
+                         $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
+                         $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
+                         $(MKLROOT)/lib/intel64/libmkl_core.a \
+                       -Wl,--end-group \
+                       -liomp5 -lpthread -lm'
+            elif [ $TARGET = ifort_MKL_sequential ]; then
+               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a \
+                       $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a \
+                       -Wl,--start-group  \
+                         $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
+                         $(MKLROOT)/lib/intel64/libmkl_sequential.a \
+                         $(MKLROOT)/lib/intel64/libmkl_core.a \
+                       -Wl,--end-group \
+                       -lpthread -lm'
+            fi
+
+            echo ""
+            echo "The link for LAPACK/BLAS is set to:"
+            echo ""
+            echo "LAPACK=$LAPACK"
+            echo ""
+            echo "Please check if the above line is appropriate for your MKL library "
+            echo "and edit src/make.inc to correct." 
+            echo "The link adviosor provided by Intel may be helpful to figure out:"
+            echo "   > http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor."
+            echo ""
+
+         fi
+      fi
+   fi
+
+   if [ -z "$LAPACK" ]; then
+      echo "Provide the path for BLAS and LAPACK libraries: "
+      echo "example) -L/usr/local/lib -llapack -lblas"
+      read LAPACK
+   fi
+
+   cd config/
+   if [ -e make.inc ]; then
+       /bin/rm make.inc
+   fi
+   echo " SINDO_ROOT = $SINDO_ROOT" > make.inc
+   echo " TARGET = $TARGET"        >> make.inc
+   echo " LAPACK = $LAPACK"        >> make.inc
+   cat make_common.inc             >> make.inc
+   cat make_$TARGET.inc            >> make.inc
+   mv make.inc ../src
+
+   cd ..
+   echo "Make config is written to src/make.inc"
+   echo " "
+   echo "  ========================= NOTICE ========================="
+   echo "   Compiler options are written in this file. Feel free to "
+   echo "   change them as you like. I must say there is still a    "
+   echo "   high possibility that an optimal choice improves the    "
+   echo "   efficiency.  Your report on better working option(s) is "
+   echo "   greatly appreciated!                                    "
+   echo "  ========================= NOTICE ========================="
+   echo " "
+   echo " "
+   echo -n "Press any key to continue:"
+   read yn
+
+   exit 0

@@ -1,0 +1,625 @@
+ -------------------------------------------------------
+                                                      
+    ***   WELCOME TO SINDO PROGRAM                    
+     ***                (  VERSION 3.4  NARITA  ) 
+      ***                                             
+       ***       COPYRIGHT 2013:                      
+        ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP
+                                                      
+ -------------------------------------------------------
+
+     JOB STARTED AT: Wed May  8 03:25:33 2013
+     RUNNING ON kyagi-mac.local                 
+
+
+(  SETUP MEM MODULE  )
+
+   o MAXIMUM MEMORY :  100 MB
+
+
+(  SETUP MOL MODULE  )
+
+
+   READ DATA FROM A MINFO FILE : [ eq-singlet.minfo ]
+
+
+(  ENTER NMA MODULE  )
+
+
+      o ATOMIC MASS
+        21874.6618   1837.1527   1837.1527   1837.1527
+
+      o REFERENCE GEOMETRY
+         -0.000000   -0.000000   -0.000000
+         -0.000000    2.053673   -0.000000
+          1.778533   -1.026836   -0.000000
+         -1.778533   -1.026836   -0.000000
+
+      o NORMAL DISPLACEMENT VECTOR
+          0.000000   -0.000000    0.448609
+         -0.000000    0.000000   -0.515994
+         -0.000000   -0.000000   -0.515994
+         -0.000000    0.000000   -0.515994
+
+         -0.298165    0.000001    0.000000
+          0.774326    0.000000   -0.000000
+          0.127263    0.373578   -0.000000
+          0.127267   -0.373583   -0.000000
+
+          0.000001    0.298165    0.000000
+         -0.000004    0.088422   -0.000000
+         -0.373581   -0.558640   -0.000000
+          0.373580   -0.558637   -0.000000
+
+         -0.000000   -0.000000    0.000000
+          0.000000   -0.577350   -0.000000
+         -0.500000    0.288675   -0.000000
+          0.500000    0.288675   -0.000000
+
+         -0.000022    0.335183    0.000000
+          0.000000   -0.769263   -0.000000
+          0.332359   -0.193687   -0.000000
+         -0.332284   -0.193644   -0.000000
+
+          0.335183    0.000022   -0.000000
+         -0.001799   -0.000050    0.000000
+         -0.577375    0.332309    0.000000
+         -0.577418   -0.332334    0.000000
+
+
+      o TRANSLATIONAL VECTOR
+          0.893728    0.000000    0.000000
+          0.259005    0.000000    0.000000
+          0.259005    0.000000    0.000000
+          0.259005    0.000000    0.000000
+
+          0.000000    0.893728    0.000000
+          0.000000    0.259005    0.000000
+          0.000000    0.259005    0.000000
+          0.000000    0.259005    0.000000
+
+          0.000000    0.000000    0.893728
+          0.000000    0.000000    0.259005
+          0.000000    0.000000    0.259005
+          0.000000    0.000000    0.259005
+
+
+      o ROTATIONAL VECTOR
+          0.000000    0.000000    0.000000
+          0.000000    0.000000    0.816497
+          0.000000    0.000000   -0.408248
+          0.000000    0.000000   -0.408248
+
+         -0.000000    0.000000    0.000000
+         -0.000000    0.000000    0.000000
+         -0.000000    0.000000   -0.707107
+         -0.000000    0.000000    0.707107
+
+         -0.000000   -0.000000    0.000000
+         -0.577350   -0.000000    0.000000
+          0.288675    0.500000    0.000000
+          0.288675   -0.500000    0.000000
+
+(  SETUP OF NMA COMPLETED  )
+
+
+
+(  SETUP VIB MODULE  )
+
+   >> RUN OPTIONS
+      VSCF    =     T
+      OC-VSCF =     F
+      VCI     =     T
+      VPT     =     F
+      VQDPT   =     F
+      PRPT    =     T
+
+
+   >> BASIS FUNCTIONS
+      MODE :         1        2        3        4        5        6
+      MAXV :         6        6        6        6        6        6
+      FREQ :   1451.59  1455.21  1455.21  3086.89  3292.80  3292.80
+
+
+(  SETUP TARGET MODULE  )
+
+   >> TARGET STATES
+       000   : ZERO-POINT STATE
+
+
+(  SETUP MRPES MODULE  )
+
+   >> POTENTIAL
+
+      [  OPTIONS  ]
+
+         MR         =        3
+         MCS_CUTOFF = 0.10E-03
+         MCS_GRID   = -.10E+01
+         POTDIR     = ./
+
+
+         1MR-PEF
+
+         o GRID PEF
+
+           MODE=   1, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   2, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   3, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   4, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   5, GRID=   7    MP2/cc-pVTZ (7)
+           MODE=   6, GRID=   7    MP2/cc-pVTZ (7)
+
+
+         2MR-PEF
+
+         o GRID PEF
+
+           MODE=   2   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   3   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   3   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   3, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   3, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   1, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   2, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   3, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4, GRID=   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5, GRID=   7   7    MP2/cc-pVTZ (7)
+
+
+         3MR-PEF
+
+         o GRID PEF
+
+           MODE=   3   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   3   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   4   3   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   3   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   3   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   5   4   3, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   2   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   3   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   3   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   4   3, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   1, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   2, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   3, GRID=   7   7   7    MP2/cc-pVTZ (7)
+           MODE=   6   5   4, GRID=   7   7   7    MP2/cc-pVTZ (7)
+
+
+(  FINALIZE MRPES MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.09 MB /   100.00 MB (  0.1 % ) ]  -- 
+            -- IN THE LAST STEP [     0.22 MB /   100.00 MB (  0.2 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.03, SYSTEM     0.01 SECS   <----
+
+
+(  ENTER VSCF MODULE  )
+
+  ---  VIBRATIONAL SELF-CONSISTENT FIELD CALCULATIONS   ---
+
+   >> SCF OPTIONS
+       STATE SPECIFIC :        F
+              RESTART :        F
+        MAX ITERATION :       20
+         CONV. THRESH : 0.10E-04
+
+   >> FILES
+       WFN READ/WRITE FILE : vscf_xxx.wfn
+
+   >> STATE 000:   ZERO-POINT STATE
+
+       o INITIAL GUESS FROM (CONTRACTED) HARMONIC OSCILLATOR 
+
+   -- (ITERATION) -------- (EOLD) -------- (ENEW) ----- (DELTA E) --
+                1         7022.33         6951.43      -0.709D+02
+                2         6951.43         6949.24      -0.219D+01
+                3         6949.24         6949.16      -0.795D-01
+                4         6949.16         6949.16      -0.308D-02
+                5         6949.16         6949.16      -0.121D-03
+                6         6949.16         6949.16      -0.487D-05
+   -----------------------------------------------------------------
+       E(VSCF)=     6949.15756740
+
+       o COEFFICIENTS
+
+         -MODES-          1         2         3         4         5         6
+              0     0.99996  -0.99995   0.99994   0.98871  -0.99991  -0.99998
+              1    -0.00000   0.00000   0.00002  -0.14766  -0.00018   0.00000
+              2     0.00934  -0.00983   0.01002   0.01766  -0.00667  -0.00580
+              3     0.00000  -0.00000  -0.00476  -0.01785   0.01165  -0.00000
+              4    -0.00046   0.00006   0.00006   0.00509   0.00124   0.00200
+              5    -0.00000  -0.00000  -0.00007  -0.00095   0.00016  -0.00000
+              6     0.00001  -0.00005   0.00009   0.00092  -0.00038   0.00006
+
+       o VIBRATIONALLY AVERAGED STRUCTURE
+
+         - Q0 -
+             -0.000000   -0.000008   -0.001176
+             -1.793733    0.000895   -0.000005
+
+         - X0 -
+              0.000000   -0.000000   -0.000000
+             -0.000000    2.077816    0.000000
+              1.799474   -1.038906    0.000000
+             -1.799474   -1.038906    0.000000
+
+
+(  FINALIZE VSCF MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.09 MB /   100.00 MB (  0.1 % ) ]  -- 
+            -- IN THE LAST STEP [     0.09 MB /   100.00 MB (  0.1 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  ENTER VCI MODULE  )
+
+   >> VCI OPTIONS
+
+       o VCI SPACE SELECTION
+         - MAX NUM. OF MODES TO EXCITE :          3
+         - MAX SUM OF QUANTUM NUM.     :          6
+         - MAX EXCITATION OF EACH MODE :    6  6  6
+                                            6  6  6
+         - VCI DIMENSION               :        662
+
+       o NUM_OF_STATES  :         20
+
+   >> VCI WITH ZERO-POINT VSCF REFERENCE
+       o READ VSCF WFN  : vscf-000.wfn
+       o DUMP VCI WFN   : vci-w.wfn
+
+       o VIB. AV. GEOM. : F
+
+   >> VCI MAIN
+
+      o FORMING HAMILTONIAN MATRIX     ... DONE
+
+            (CLOCK) ---->  LAST STEP: USER     0.23, SYSTEM     0.00 SECS   <----
+
+      o DIAGONALIZING HAMILTONIAN MATRIX     ... DONE
+
+            (CLOCK) ---->  LAST STEP: USER     0.11, SYSTEM     0.00 SECS   <----
+
+
+         > STATE 000: ZERO-POINT STATE
+
+             E(VCI)   =     6926.79
+
+             COEFF.  WEIGHT      CONFIG.
+              0.999   0.997        0_0
+
+         > STATE 001:   2_1
+
+             E(VCI)   =     8334.39
+             E(VCI)-E0=     1407.61
+
+             COEFF.  WEIGHT      CONFIG.
+              0.997   0.994        2_1
+              0.036   0.001        2_1    3_1
+
+         > STATE 002:   3_1
+
+             E(VCI)   =     8334.46
+             E(VCI)-E0=     1407.68
+
+             COEFF.  WEIGHT      CONFIG.
+              0.998   0.995        3_1
+
+         > STATE 003:   1_1
+
+             E(VCI)   =     8337.99
+             E(VCI)-E0=     1411.20
+
+             COEFF.  WEIGHT      CONFIG.
+             -0.998   0.997        1_1
+
+         > STATE 004:   2_2
+
+             E(VCI)   =     9706.79
+             E(VCI)-E0=     2780.01
+
+             COEFF.  WEIGHT      CONFIG.
+              0.569   0.323        2_2
+             -0.561   0.314        3_2
+              0.463   0.214        1_2
+              0.368   0.136        4_1
+              0.061   0.004        2_2    3_1
+
+         > STATE 005:   3_2
+
+             E(VCI)   =     9733.10
+             E(VCI)-E0=     2806.32
+
+             COEFF.  WEIGHT      CONFIG.
+              0.698   0.488        3_2
+              0.692   0.479        2_2
+             -0.159   0.025        5_1
+
+         > STATE 006:   1_2
+
+             E(VCI)   =     9742.42
+             E(VCI)-E0=     2815.64
+
+             COEFF.  WEIGHT      CONFIG.
+              0.832   0.692        1_2
+              0.382   0.146        3_2
+             -0.373   0.139        2_2
+              0.122   0.015        4_1
+             -0.044   0.002        1_2    4_1
+             -0.040   0.002        2_2    3_1
+
+         > STATE 007:   2_1    3_1
+
+             E(VCI)   =     9749.30
+             E(VCI)-E0=     2822.51
+
+             COEFF.  WEIGHT      CONFIG.
+              0.977   0.954        2_1    3_1
+              0.187   0.035        6_1
+              0.049   0.002        2_1    3_2
+              0.044   0.002        2_3
+             -0.037   0.001        2_1
+             -0.034   0.001        2_1    3_1    4_1
+
+         > STATE 008:   1_1    3_1
+
+             E(VCI)   =     9762.51
+             E(VCI)-E0=     2835.72
+
+             COEFF.  WEIGHT      CONFIG.
+              0.998   0.995        1_1    3_1
+             -0.045   0.002        1_1    3_1    4_1
+
+         > STATE 009:   1_1    2_1
+
+             E(VCI)   =     9763.26
+             E(VCI)-E0=     2836.48
+
+             COEFF.  WEIGHT      CONFIG.
+              0.997   0.995        1_1    2_1
+             -0.045   0.002        1_1    2_1    4_1
+              0.035   0.001        1_1    2_1    3_1
+
+         > STATE 010:   4_1
+
+             E(VCI)   =     9920.04
+             E(VCI)-E0=     2993.25
+
+             COEFF.  WEIGHT      CONFIG.
+              0.912   0.832        4_1
+             -0.297   0.088        1_2
+             -0.180   0.032        2_2
+              0.173   0.030        3_2
+              0.075   0.006        5_2
+              0.075   0.006        6_2
+             -0.036   0.001        4_2    6_2
+             -0.036   0.001        4_2    5_2
+
+         > STATE 011:   5_1
+
+             E(VCI)   =    10080.13
+             E(VCI)-E0=     3153.34
+
+             COEFF.  WEIGHT      CONFIG.
+              0.975   0.950        5_1
+              0.122   0.015        4_1    5_1
+              0.114   0.013        3_2
+              0.112   0.013        2_2
+              0.061   0.004        6_2
+              0.049   0.002        4_1    5_3
+
+         > STATE 012:   6_1
+
+             E(VCI)   =    10083.41
+             E(VCI)-E0=     3156.62
+
+             COEFF.  WEIGHT      CONFIG.
+              0.968   0.936        6_1
+             -0.189   0.036        2_1    3_1
+              0.119   0.014        4_1    6_1
+              0.082   0.007        5_1    6_1
+             -0.050   0.002        4_1    6_3
+             -0.035   0.001        5_1    6_3
+
+         > STATE 013:   3_3
+
+             E(VCI)   =    11092.43
+             E(VCI)-E0=     4165.64
+
+             COEFF.  WEIGHT      CONFIG.
+             -0.810   0.656        3_3
+             -0.399   0.159        3_1    4_1
+             -0.280   0.078        2_2    3_1
+             -0.270   0.073        1_2    3_1
+             -0.114   0.013        3_1    5_1
+             -0.063   0.004        2_2    3_2
+              0.047   0.002        3_3    5_1
+              0.046   0.002        3_3    4_1
+              0.043   0.002        2_1    6_1
+              0.033   0.001        2_1    3_2    6_1
+
+         > STATE 014:   2_3
+
+             E(VCI)   =    11094.61
+             E(VCI)-E0=     4167.82
+
+             COEFF.  WEIGHT      CONFIG.
+             -0.779   0.607        2_3
+              0.413   0.171        2_1    4_1
+             -0.304   0.092        2_1    3_2
+              0.282   0.079        1_2    2_1
+             -0.140   0.020        2_1    5_1
+             -0.101   0.010        2_3    3_1
+             -0.060   0.004        3_1    6_1
+              0.059   0.003        2_1    3_1
+              0.045   0.002        2_3    4_1
+             -0.042   0.002        2_3    5_1
+              0.037   0.001        2_2    3_1    6_1
+
+         > STATE 015:   1_3
+
+             E(VCI)   =    11106.14
+             E(VCI)-E0=     4179.36
+
+             COEFF.  WEIGHT      CONFIG.
+              0.717   0.515        1_3
+              0.512   0.263        1_1    4_1
+             -0.324   0.105        1_1    3_2
+              0.324   0.105        1_1    2_2
+             -0.058   0.003        1_3    4_1
+              0.034   0.001        1_1    2_2    3_1
+              0.033   0.001        1_1    4_2
+
+         > STATE 016:   2_2    3_1
+
+             E(VCI)   =    11135.29
+             E(VCI)-E0=     4208.50
+
+             COEFF.  WEIGHT      CONFIG.
+             -0.863   0.744        2_2    3_1
+              0.360   0.129        3_3
+              0.230   0.053        2_1    6_1
+              0.185   0.034        3_1    5_1
+             -0.098   0.010        1_2    3_1
+             -0.071   0.005        2_2    3_2
+              0.069   0.005        2_2
+             -0.067   0.005        3_1    4_1
+             -0.055   0.003        2_4
+              0.045   0.002        2_2    3_1    4_1
+             -0.037   0.001        3_2
+              0.032   0.001        2_3    6_1
+
+         > STATE 017:   2_1    3_2
+
+             E(VCI)   =    11139.47
+             E(VCI)-E0=     4212.69
+
+             COEFF.  WEIGHT      CONFIG.
+             -0.876   0.768        2_1    3_2
+              0.369   0.137        2_3
+             -0.225   0.050        3_1    6_1
+              0.171   0.029        2_1    5_1
+              0.057   0.003        1_2    2_1
+              0.051   0.003        2_1    3_3
+              0.045   0.002        2_1    3_2    4_1
+
+         > STATE 018:   1_1    3_2
+
+             E(VCI)   =    11160.68
+             E(VCI)-E0=     4233.89
+
+             COEFF.  WEIGHT      CONFIG.
+              0.814   0.663        1_1    3_2
+              0.536   0.287        1_1    2_2
+             -0.170   0.029        1_1    5_1
+              0.111   0.012        1_3
+             -0.051   0.003        1_1    3_2    4_1
+             -0.034   0.001        1_1    2_2    4_1
+             -0.032   0.001        1_1    3_2    5_1
+
+         > STATE 019:   1_2    3_1
+
+             E(VCI)   =    11161.87
+             E(VCI)-E0=     4235.08
+
+             COEFF.  WEIGHT      CONFIG.
+              0.896   0.804        1_2    3_1
+             -0.304   0.092        3_3
+             -0.226   0.051        2_2    3_1
+              0.192   0.037        3_1    4_1
+              0.066   0.004        2_1    6_1
+             -0.064   0.004        1_2    3_1    4_1
+             -0.035   0.001        2_2    3_2
+
+(  FINALIZE VCI MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.09 MB /   100.00 MB (  0.1 % ) ]  -- 
+            -- IN THE LAST STEP [     2.11 MB /   100.00 MB (  2.1 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.02, SYSTEM     0.01 SECS   <----
+
+
+(  FINALIZE TARGET MODULE  )
+
+
+(  ENTER PROPERTY MODULE  )
+
+   >> RUN OPTIONS
+      MR    =      3
+      NPRPT =      1
+      VSCF  =      F
+      VCI   =      T
+      VPT   =      F
+      VQDPT =      F
+
+   >> CALC. PROPERTY MATRIX
+
+      PROP  1: 
+         o EXTN  =    .dipole
+         o CALC ALL MATRIX ELEMENTS
+
+      o VCI PROPERTY OPTIONS
+         VCI_STATES       =           20
+
+      -> DONE FOR VCI PROPERTY : [ vci-prptMatrix.dipole ]
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.21 MB /   100.00 MB (  0.2 % ) ]  -- 
+            -- IN THE LAST STEP [    11.00 MB /   100.00 MB ( 11.0 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.75, SYSTEM     0.02 SECS   <----
+
+   >> INFRARED SPECTRUM
+      MIN_OMEGA =      100.00
+      MAX_OMEGA =     4000.00
+      DEL_OMEGA =        1.00
+      FWHM      =       20.00
+
+      o VCI PROPERTY OPTIONS
+         VCI_STATES       =           20
+
+      -> DONE FOR VCI SPECTRUM : [ vci-IR.data / vci-IR.spectrum ]
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.21 MB /   100.00 MB (  0.2 % ) ]  -- 
+            -- IN THE LAST STEP [    10.88 MB /   100.00 MB ( 10.9 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.75, SYSTEM     0.03 SECS   <----
+
+
+(  FINALIZE PROPERTY MODULE  )
+
+
+(  FINALIZE VIB MODULE  )
+
+
+(  FINALIZE NMA MODULE  )
+
+
+(  FINALIZE MOL MODULE  )
+
+
+
+   (TOTAL MEMORY USAGE)   [    11.00 MB /   100.00 MB ( 11.0 % ) ] 
+
+   (CLOCK) ---->  TOTAL CPU-TIME  <----
+            >     USER :   0 DAYS   0 HOURS   0 MINS   1.9 SECS 
+            >    SYSTEM:   0 DAYS   0 HOURS   0 MINS   0.1 SECS 
+

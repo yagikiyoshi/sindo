@@ -1,0 +1,29 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2co-mp2-atz.minfo'  /
+ &sys maxmem=500 /
+
+#--- [  VIB  ]
+ &vib
+   MR=3 vmaxall=10 vscf=.t. vpt=.t. 
+ /
+
+#--- [  TARGET STATES  ]
+ &states 
+   nstate=1 fund=.t.
+   target_state(1,1)=1 
+   target_state(2,1)=1 
+ /
+
+#--- [  VSCF  ]
+ &vscf 
+   Maxitr=20 Ethresh=1.D-03 
+ / 
+
+#--- [  VPT  ]
+ &vpt 
+   maxSum=4 maxEx=-1
+   thresh_ene=1.0e-04
+   dump=.t.
+ /
+
+ &mrpes au=.f./

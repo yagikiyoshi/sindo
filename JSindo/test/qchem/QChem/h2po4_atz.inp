@@ -1,0 +1,24 @@
+$comment
+optimize the geometry of phosphate ion in gas
+$end
+
+$rem
+exchange          b3lyp
+dft_d             empirical_grimme
+basis             aug-cc-pVTZ
+jobtype           opt
+mem_static        2000
+gui               2
+$end
+
+$molecule
+-1 1
+P      -0.0001927551     0.0007900152     0.1723214647
+O       0.9906865021     0.8226709121    -0.8923264643
+H       1.7638292120     0.2605040493    -0.9975144085
+O      -0.9869388569    -0.8286445589    -0.8904233754
+H      -1.7633933510    -0.2711026411    -0.9957980099
+O       0.8582672963    -1.0145556313     0.8594388321
+O      -0.8617080083     1.0203728237     0.8493723135
+$end
+

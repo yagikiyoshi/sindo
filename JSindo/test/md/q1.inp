@@ -1,0 +1,34 @@
+$external_charges
+      1.03614000      1.01377000     -0.06124000     -0.83400000
+      0.51044000      0.89445000      0.55141000      0.41700000
+      1.99269000      1.19731000      0.49569000      0.41700000
+     -0.04323000     -1.01985000     -1.19538000     -0.83400000
+      0.43675000     -0.37594000     -0.99732000      0.41700000
+     -0.50318000     -0.82514000     -2.09579000      0.41700000
+$end
+$comment
+first qm/mm  calculation in this tutorial
+$end
+
+$rem
+igdesp                   6
+symmetry                off
+sym_ignore             true
+exchange              hf
+basis                 sto-3g
+qm_mm                 true
+jobtype               force
+symmetry              off
+sym_ignore            true
+print_input           false
+qmmm_print            true
+scf_convergence       6
+$end
+
+$molecule
+0 1      
+ O           -0.9957200000        0.0160400000        1.2422500000
+ H           -1.2542700000       -0.5669700000        1.8472800000
+ H           -0.9377900000       -0.4817900000        0.4267500000
+$end
+

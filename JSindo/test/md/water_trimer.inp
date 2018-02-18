@@ -1,0 +1,47 @@
+* QM/MM water dimer
+*
+
+! Read in Topology and  Parameter files
+
+open unit 1 card read name top_all36_prot_lipid.rtf
+read RTF card unit 1
+close unit 1
+
+open unit 1 card read name par_all36_prot_lipid.prm
+read PARA card unit 1
+close unit 1
+
+! Generate the PSF and also the IC table (SETU keyword)
+read sequ tip3 3
+generate waters setup noangles nodihedrals
+open unit 1 card read name "w3.crd"
+read coor card unit 1 
+close unit 1
+
+open unite 1 card name "w3.psf"
+write psf card unit 1
+
+open unite 1 card name "w3-2.psf"
+write psf card XPLO unit 1
+
+open unit 1 card write name "w3.pdb"
+write coor pdb card unit 1
+
+nbonds cutnb 999.0 ctonnb 997.0 ctofnb 998.0 switch
+energy
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ envi qchemexe  "qchem"
+ envi qchemcnt  "qchem.inp"
+ envi qcheminp  "q1.inp"
+ envi qchemout  "q1.out"
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+qchem remove sele resid 2 show end
+
+energy
+
+! Tests derivatives via finite differences
+test first
+
+

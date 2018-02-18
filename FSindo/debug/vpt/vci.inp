@@ -1,0 +1,14 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2co-mp2-atz.minfo' /
+ &sys maxmem=30 /
+
+#--- [  VIB  ]
+ &vib MR=3 vmaxall=6 vscf=.t. vci=.t. readBasis=.f. /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=20 Ethresh=1.D-03 / 
+
+#--- [  VCI  ]
+ &vci nstate=60 nCUP=4 maxSum=6 dump=.t. geomav=.t. /
+
+ &mrpes au=.f./

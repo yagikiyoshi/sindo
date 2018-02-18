@@ -1,0 +1,24 @@
+#--- [ MOLECULE ]
+ &mol minfofile='eq-mp2tz.minfo' /
+ &sys maxmem=1000 /
+
+#--- [  VIB  ]
+ &vib 
+   MR=4 
+   vmax_base=8 
+   ocvscf=.t. 
+   vscf=.f. 
+   vci=.f. 
+   vpt=.f. 
+ /
+ &ocvscf 
+   mopfile='prop_no_1.mop' 
+   u1file='u1.dat' 
+   icff=0
+   iscreen=0
+   eta12thresh=500.0
+ /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=80 Ethresh=1.D-04 /
+

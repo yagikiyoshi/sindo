@@ -1,0 +1,21 @@
+&mol
+      Nfree=12
+/
+#--- [  VIB  ]
+ &vib MR=3 vmax_base=9 vscf=.t. vscfci=.f. vpt=.f. vvscf=.t. vci=.f. vmp2=.t./
+
+&airun runtyp='VIB'/
+#--- [  VCI  ]
+&vci nstate=100 maxSum=3 nCUP=3 restricted=.t. /
+&gen  storepot=.t.  
+virtual=.f. storeint=.t. debug=.f.
+getfreq=.f. scfthresh=1.d-10
+getUzero=.f. ssvscf=.f. ssvmp=.f./
+&pes
+ ateqb=.f.
+quartic=.f.
+harmonic=.f.
+qfftype=3
+fcfile='prop_no_1.mop'
+/
+

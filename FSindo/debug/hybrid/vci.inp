@@ -1,0 +1,23 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2o_freq.minfo' /
+ &sys maxmem=10 /
+
+#--- [  VIB  ]
+ &vib  MR=3 vmaxall=8 vscf=.t. vci=.t. prpt=.t. /
+
+#--- [  VSCF  ]
+ &vscf nstate=1 restart=.f.
+       state=0,0,0,
+             1,0,0,
+             0,1,0,
+             0,0,1,
+       Maxitr=20 Ethresh=1.D-03 / 
+
+#--- [  VCI  ]
+ &vci nstate=20 nCUP=3 maxSum=8 /
+
+#--- [  MRPES ]
+ &mrpes mopFile='prop_no_1.mop' mcs_cutoff=-1.0D+00 /
+
+ &prpt infrared=.t. /
+
