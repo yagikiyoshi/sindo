@@ -122,7 +122,7 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
 
       slider = new JSlider(1,50,(int)factor);
       slider.addChangeListener(this);
-      slider.setEnabled(false);
+      slider.setEnabled(true);
       p.add(slider);
       p1.add(p);
 
