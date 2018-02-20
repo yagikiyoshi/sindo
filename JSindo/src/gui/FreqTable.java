@@ -110,6 +110,7 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
       ckbox1 = new JCheckBox("Show vibrational coordinates.");
       p.add(ckbox1);
       ckbox1.addActionListener(this);
+      ckbox1.setSelected(true);
       
       ckbox2 = new JCheckBox("Invert the arrows.");
       p.add(ckbox2);
@@ -342,7 +343,10 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
             slider.setEnabled(false);
             if(scene != null) scene.detach();
          }
-         if(ckbox1.isSelected()) slider.setEnabled(true);
+         if(ckbox1.isSelected()) {
+        	 	slider.setEnabled(true);
+        	 	this.createSceneGraph();
+         }
       }
       if(event.getSource().equals(ckbox2)){
          //System.out.println("ckbox2");
