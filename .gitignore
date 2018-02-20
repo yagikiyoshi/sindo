@@ -1,18 +1,32 @@
 # Fortran object files
 *.o
 *.mod
-# Sindo build files
+
+# Latex files
+*.aux
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.log
+*.synctex.gz
+*.toc
+
+# Configuration files used by Eclipse
+*.project
+*.settings
+*.texlipse
+*.classpath
+
+# FSindo build files
 FSindo/src/make.inc
 FSindo/bin/sindo*
 FSindo/lib/*.a
 
-# Configuration files used by Eclipse
-JSindo/.classpath
-JSindo/.project
-JSindo/.settings
+# JSindo build files
 JSindo/bin
 JSindo/*.jar
-
 # memo used for debug
 JSindo/memo
 
