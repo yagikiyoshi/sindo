@@ -21,6 +21,12 @@ import sys.XMLHandler;
  */
 public class PESInputReader {
 
+   private String xmlFile = "makePES.xml";
+   
+   public void setFilename(String xmlFile) {
+      this.xmlFile = xmlFile;
+   }
+   
    /**
     * Reads the data from makePES.xml
     * @return The data stored in MakePESData.
@@ -33,10 +39,10 @@ public class PESInputReader {
       System.out.println("Launch MakePES module");
       System.out.println();
 
-      System.out.printf("  o Input options read via makePES.xml ... ");
+      System.out.printf("  o Input options read via "+xmlFile+" ... ");
       XMLHandler options = new XMLHandler();
       try{
-         options.readXMLFile("makePES.xml");
+         options.readXMLFile(xmlFile);
       }catch(IOException e){
          System.out.println("Fatal error.");
          System.out.println(e.getMessage());

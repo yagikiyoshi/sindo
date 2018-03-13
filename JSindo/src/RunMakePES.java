@@ -9,10 +9,22 @@ import sys.*;
 public class RunMakePES {
 
    public static void main(String[] args){
+
+      String xmlFile = null;
+      for(int n=0; n<args.length; n++) {
+         if(args[n].equals("-f")) {
+            xmlFile = args[n+1]; 
+         }
+         if(args[n].equals("-h")) {
+            System.out.println("USAGE: java RunMakePES [ -f xmlfile ]");
+            System.exit(0);
+         }
+      }
       
       printtitle();
       
       PESInputReader dr = new PESInputReader();
+      if(xmlFile != null) dr.setFilename(xmlFile);
       PESInputData mkPESData = dr.read();
       MakePES mkpes = new MakePES();
       mkpes.appendPESData(mkPESData);
