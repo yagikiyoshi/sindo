@@ -71,7 +71,7 @@ public class SindoUtil {
          }
       }
       
-      Collections.sort(states_all, new VQDPTComparator());
+      Collections.sort(states_all, new VQDPTComparator(1,true));
       
       VQDPTstate[] vs_array = new VQDPTstate[states_all.size()];
       for(int n=0; n<states_all.size(); n++){

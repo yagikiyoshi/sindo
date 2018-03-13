@@ -1,6 +1,6 @@
 package sindo;
 
-public class VQDPTstate implements Comparable<VQDPTstate>{
+public class VQDPTstate {
 
    private Conf[] pConf;
    private double[] CIcoeff;
@@ -32,14 +32,4 @@ public class VQDPTstate implements Comparable<VQDPTstate>{
       IRintensity = iRintensity;
    }
    
-   public int compareTo(VQDPTstate o) {
-      
-      if(this.Energy > o.Energy){
-         return 1;
-      }else{
-         return -1;
-      }
-      
-   }
-
 }

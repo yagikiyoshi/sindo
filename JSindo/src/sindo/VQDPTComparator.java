@@ -4,16 +4,62 @@ import java.util.*;
 
 public class VQDPTComparator implements Comparator<VQDPTstate>{
 
+   int option;
+   boolean reverse;
+   
+   /**
+    * Default constructor of Comparator. Energy in increasing order.
+    */
+   public VQDPTComparator() {
+      this.option  = 0;
+      this.reverse = false;
+   }
+   
+   /**
+    * Constructor of Comparator of normal (increasing) order. 
+    * @param option 0: Energy, 1: IR intensity
+    */
+   public VQDPTComparator(int option) {
+      this.option  = option;
+      this.reverse = false;
+   }
+   
+   /**
+    * Constructor of Comparator
+    * @param option 0: Energy, 1: IR intensity
+    * @param reverse If true, decreasing order
+    */
+   public VQDPTComparator(int option, boolean reverse) {
+      this.option  = option;
+      this.reverse = reverse;
+   }
+   
    public int compare(VQDPTstate va, VQDPTstate vb){
+      
+      int ii=1, jj=-1;
+      if(reverse) {
+         ii = -1;
+         jj = 1;
+      }
+         
+      double energy_a = va.getEnergy();
+      double energy_b = vb.getEnergy();
       double ir_a = va.getIRintensity();
       double ir_b = vb.getIRintensity();
       
-      if(ir_a > ir_b){
-         return -1;
-//      }else if (Math.abs(ir_a - ir_b) < 1e-5){
-//         return 0;
-      }else{
-         return 1;
+      if(option == 1){
+         if(ir_a > ir_b){
+            return ii;
+         }else{
+            return jj;
+         }
+      }else {
+         if(energy_a > energy_b) {
+            return ii;
+         }else {
+            return jj;
+         }
       }
+         
    }
 }

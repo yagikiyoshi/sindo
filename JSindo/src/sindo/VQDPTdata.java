@@ -24,44 +24,91 @@ public class VQDPTdata {
       groups = new ArrayList<VQDPTgroup>();
    }
    
-   public int getNtarget() {
-      return Ntarget;
-   }
-   public void setNtarget(int ntarget) {
+   void setNtarget(int ntarget) {
       Ntarget = ntarget;
    }
-   public Conf[] getTargetConf() {
-      return targetConf;
-   }
-   public void setTargetConf(Conf[] targetConf) {
+   
+   void setTargetConf(Conf[] targetConf) {
       this.targetConf = targetConf;
    }
-   public int getNgroup() {
-      return Ngroup;
-   }
-   public void setNgroup(int ngroup) {
+   
+   void setNgroup(int ngroup) {
       Ngroup = ngroup;
    }
-   public int[] getNpCnf() {
-      return NpCnf;
-   }
-   public void setNpCnf(int[] npCnf) {
+
+   void setNpCnf(int[] npCnf) {
       NpCnf = npCnf;
    }
-   public double getZPE() {
-      return ZPE;
-   }
-   public void setZPE(double zPE) {
+
+   void setZPE(double zPE) {
       ZPE = zPE;
    }
-   public void setOptions(int maxSum, int nCUP, int pqSum, int pSet){
+
+   void setOptions(int maxSum, int nCUP, int pqSum, int pSet){
       this.maxSum = maxSum;
       this.nCUP = nCUP;
       this.pqSum = pqSum;
       this.pSet = pSet;
    }
+
+   void addGroup(VQDPTgroup group){
+      groups.add(group);
+   }
+
+   void setPspaceOptions(double nGen, double p0, double p1, double p2, double p3){
+      this.nGen = nGen;
+      P0 = p0;
+      P1 = p1;
+      P2 = p2;
+      P3 = p3;
+   }
+
+   void setInfared(boolean isInfared) {
+      this.isInfared = isInfared;
+   }
+
    /**
-    * Returns the options for VQDPT calc.
+    * Returns the number of target configurations
+    * @return the number of target
+    */
+   public int getNtarget() {
+      return Ntarget;
+   }
+   
+   /**
+    * Returns target configurations
+    * @return target configurations
+    */
+   public Conf[] getTargetConf() {
+      return targetConf;
+   }
+   
+   /**
+    * Returns the number of VQDPT groups
+    * @return the number of groups
+    */
+   public int getNgroup() {
+      return Ngroup;
+   }
+   
+   /**
+    * Returns the number of configurations in P space
+    * @return number of P-conf for each group
+    */
+   public int[] getNpCnf() {
+      return NpCnf;
+   }
+   
+   /**
+    * Returns the zero-point energy (in cm-1)
+    * @return zero-point energy
+    */
+   public double getZPE() {
+      return ZPE;
+   }
+   
+   /**
+    * Returns the options used for VQDPT calc.
     * @return options[maxSum,nCUP,pqSum,pSet]
     */
    public int[] getOptions(){
@@ -72,15 +119,9 @@ public class VQDPTdata {
       options[3] = pSet;
       return options;
    }
-   public void setPspaceOptions(double nGen, double p0, double p1, double p2, double p3){
-      this.nGen = nGen;
-      P0 = p0;
-      P1 = p1;
-      P2 = p2;
-      P3 = p3;
-   }
+   
    /**
-    * Returns the options for P space construction 
+    * Returns the options used for P space construction 
     * @return options[nGen,P0,P1,P2,P3]
     */
    public double[] getPspaceOptions(){
@@ -93,21 +134,56 @@ public class VQDPTdata {
       return options;
    }
    
-   public void addGroup(VQDPTgroup group){
-      groups.add(group);
-   }
+   /**
+    * Returns a VQDPT group
+    * @param index an index of the group
+    * @return VQDPT group
+    */
    public VQDPTgroup getGroup(int index){
       return groups.get(index);
    }
+   
+   /**
+    * Returns all VQDPT groups of this data
+    * @return An array of VQDPT group
+    */
    public VQDPTgroup[] getAllGroup(){
       return (VQDPTgroup[]) groups.toArray(new VQDPTgroup[groups.size()]);
    }
-
-   public boolean isInfared() {
-      return isInfared;
+   
+   /**
+    * Returns all VQDPT states. The states are sorted by energy. 
+    * Note that the group information are not retained.
+    * @return An array of VQDPT states
+    */
+   public ArrayList<VQDPTstate> getAllStates() {
+      return this.getAllStates(true);
+   }
+   
+   /**
+    * Returns all VQDPT states. Note that the group information are not retained.
+    * @param sortByEnergy sort the states by energy in an increasing order
+    * @return An array of VQDPT states
+    */
+   public ArrayList<VQDPTstate> getAllStates(boolean sortByEnergy) {
+      
+      ArrayList<VQDPTstate> list = new ArrayList<VQDPTstate>();
+      for(int n=0; n<groups.size(); n++) {
+         list.addAll(groups.get(n).getVQDPTstate());
+      }
+      if(sortByEnergy) {
+         Collections.sort(list, new VQDPTComparator());
+         
+      }
+      
+      return list;
    }
 
-   public void setInfared(boolean isInfared) {
-      this.isInfared = isInfared;
+   /**
+    * Checks whether IR data is set
+    * @return If true, IR data is set 
+    */
+   public boolean isInfared() {
+      return isInfared;
    }
 }
