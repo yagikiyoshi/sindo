@@ -2,7 +2,7 @@ package sindo;
 
 import java.util.*;
 
-public class VQDPTComparator implements Comparator<VQDPTstate>{
+public class VibComparator implements Comparator<VibState>{
 
    int option;
    boolean reverse;
@@ -10,7 +10,7 @@ public class VQDPTComparator implements Comparator<VQDPTstate>{
    /**
     * Default constructor of Comparator. Energy in increasing order.
     */
-   public VQDPTComparator() {
+   public VibComparator() {
       this.option  = 0;
       this.reverse = false;
    }
@@ -19,7 +19,7 @@ public class VQDPTComparator implements Comparator<VQDPTstate>{
     * Constructor of Comparator of normal (increasing) order. 
     * @param option 0: Energy, 1: IR intensity
     */
-   public VQDPTComparator(int option) {
+   public VibComparator(int option) {
       this.option  = option;
       this.reverse = false;
    }
@@ -29,12 +29,12 @@ public class VQDPTComparator implements Comparator<VQDPTstate>{
     * @param option 0: Energy, 1: IR intensity
     * @param reverse If true, decreasing order
     */
-   public VQDPTComparator(int option, boolean reverse) {
+   public VibComparator(int option, boolean reverse) {
       this.option  = option;
       this.reverse = reverse;
    }
    
-   public int compare(VQDPTstate va, VQDPTstate vb){
+   public int compare(VibState va, VibState vb){
       
       int ii=1, jj=-1;
       if(reverse) {

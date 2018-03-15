@@ -62,14 +62,14 @@ public class VQDPTgroup {
       this.idxTarget = idxTarget;
    }
    
-   public ArrayList<VQDPTstate> getVQDPTstate(){
+   public ArrayList<VibState> getVibState(){
       
-      ArrayList<VQDPTstate> state = new ArrayList<VQDPTstate>(Np);      
+      ArrayList<VibState> state = new ArrayList<VibState>(Np);      
       for(int n=0; n<Np; n++){
-         VQDPTstate vs = new VQDPTstate();
+         VibState vs = new VibState();
          vs.setEnergy(Energy[n]);
          vs.setCIcoeff(CIcoeff[n]);
-         vs.setpConf(pConf);
+         vs.setConf(pConf);
          if(IRintensity != null){            
             vs.setIRintensity(IRintensity[n]);
          }

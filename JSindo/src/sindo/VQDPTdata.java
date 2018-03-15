@@ -156,7 +156,7 @@ public class VQDPTdata {
     * Note that the group information are not retained.
     * @return An array of VQDPT states
     */
-   public ArrayList<VQDPTstate> getAllStates() {
+   public ArrayList<VibState> getAllStates() {
       return this.getAllStates(true);
    }
    
@@ -165,14 +165,14 @@ public class VQDPTdata {
     * @param sortByEnergy sort the states by energy in an increasing order
     * @return An array of VQDPT states
     */
-   public ArrayList<VQDPTstate> getAllStates(boolean sortByEnergy) {
+   public ArrayList<VibState> getAllStates(boolean sortByEnergy) {
       
-      ArrayList<VQDPTstate> list = new ArrayList<VQDPTstate>();
+      ArrayList<VibState> list = new ArrayList<VibState>();
       for(int n=0; n<groups.size(); n++) {
-         list.addAll(groups.get(n).getVQDPTstate());
+         list.addAll(groups.get(n).getVibState());
       }
       if(sortByEnergy) {
-         Collections.sort(list, new VQDPTComparator());
+         Collections.sort(list, new VibComparator());
          
       }
       
