@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# create build file for ant
+
+echo ""
+echo " ------ Creating a build file for ant ------ "
+echo ""
+echo ""
+echo -n " Enter the path to JAMA [default=system]: "
+read jama_dir
+if [ -z ${jama_dir} ]; then
+  java_dir=""
+fi
+echo -n " Enter the path to Java3D [default=system]: "
+read j3d_dir
+if [ -z ${j3d_dir} ]; then
+  j3d_dir=""
+fi
+
+xmlfile='build_jar.xml'
+if [ -e ${xmlfile} ]; then
+  rm ${xmlfile}
+fi
+
+TMP=$(mktemp tmp.XXXX)
+sed -e "s#JAMA_DIR#${jama_dir}#" build/build_jar.tmp  > $TMP
+sed -e "s#J3D_DIR#${j3d_dir}#"   $TMP > ${xmlfile}
+rm $TMP
+
+#ant -f build_jar.xml
+echo ""
+echo " Successfully created build_jar.xml. "
+echo ""
+echo " To compile JSindo and create jar file, type:"
+echo "   > ant -f build_jar.xml"
+echo " ------------------------------------------- "
+

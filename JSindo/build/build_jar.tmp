@@ -7,6 +7,9 @@
     <!--define folder properties-->
     <property name="dir.bin" value="./bin"/>
     <property name="jarfile" value="JSindo-4.0_${DATE}.jar"/>
+    <property environment="env"/>
+    <property name="jama_dir" value="JAMA_DIR"/>
+    <property name="j3d_dir"  value="J3D_DIR"/>
 
     <target name="clean">
       <delete dir="${dir.bin}" />
@@ -16,7 +19,8 @@
     <target name="compile" depends="clean">
       <mkdir dir="${dir.bin}" />
       <path id="buildpath">
-        <fileset dir="/Users/kyagi/Work/lib/Jama" includes="*.jar" />
+        <fileset dir="${jama_dir}" includes="*.jar" />
+        <fileset dir="${j3d_dir}"  includes="*.jar" />
       </path>
       <javac srcdir="./src" destdir="${dir.bin}" 
              includeantruntime="false" 
