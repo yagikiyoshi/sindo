@@ -21,7 +21,11 @@ public class JMenuTools extends JMenu implements ActionListener {
    public static String LOCAL    = "Create Local Modes";
    public static String MAKEPES  = "Make PES";
    public static String SINDO    = "Sindo";
-   
+
+   // The system is regarded to be non-isolated system, if 
+   // the translational frequency is larger than this value. 
+   private double UpperTransFreq = 50.0;
+         
    /**
     * Constructs the object for the file menu
     * @param guiData
@@ -82,6 +86,22 @@ public class JMenuTools extends JMenu implements ActionListener {
          vutil.appendMolecule(molecule);
          vutil.setDomain(null);
          vutil.calcNormalModes(false);
+         
+         VibrationalData vdata = molecule.getVibrationalData();
+         double[] omega = vdata.getOmegaT();
+         for(int n=0; n<omega.length; n++) {
+            if(omega[n] > UpperTransFreq) {
+               System.out.printf(" -Translational frequency is too large (> %5.1f cm-1). \n",UpperTransFreq);
+               System.out.printf(" -Creating single domain local normal modes. \n");
+               int[][] domain = new int[1][molecule.getNat()];
+               for(int m=0; m<domain[0].length; m++) {
+                  domain[0][m] = m;
+               }
+               vutil.setDomain(domain);
+               vutil.calcNormalModes(false);
+               break;
+            }
+         }
          
          @SuppressWarnings("unused")
          FreqTable freqtable = new FreqTable(guiData,Canvas.currentID);
