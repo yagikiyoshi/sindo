@@ -471,14 +471,22 @@ public class MakeGrid {
          genEQ();
          
          GenPotfile genpot = new GenPotfile(inputData.getTitle(titleID), gfilename);
-         GenDipolefile gendipole = new GenDipolefile(inputData.getTitle(titleID), gfilename);
-
+         
          if(inputData.isRunQchem()){
             genpot.setDataMode("minfo");
-            gendipole.setDataMode("minfo");
          }else{
             genpot.setDataMode("datfile");
-            gendipole.setDataMode("datfile");
+         }
+         
+         GenDipolefile gendipole = null;
+         if(inputData.isDipole()) {
+            gendipole = new GenDipolefile(inputData.getTitle(titleID), gfilename);
+
+            if(inputData.isRunQchem()){
+               gendipole.setDataMode("minfo");
+            }else{
+               gendipole.setDataMode("datfile");
+            }            
          }
          
          if(mc1.size() > 0){            
