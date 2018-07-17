@@ -1,10 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -46,8 +42,9 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
    private JCheckBox ckbox1, ckbox2, ckbox3;
    private double[][] cOfvib;
    private double[] varVib;
-   private JSlider slider;
-   private float factor;
+   private JSlider sliderHeight, sliderRadius;
+   private float heightValue, radiusValue;
+   private float heightFactor, radiusFactor;
    private BranchGroup scene;
    private Canvas canvas;
    
@@ -58,8 +55,6 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
       
       canvas = guiData.getCanvas(ID);
       Rectangle rv = canvas.getBounds();
-      
-      factor = 10.0f;
       
       this.setBounds(rv.x+rv.width+10, rv.y, 400, 500);
       this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -106,7 +101,7 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
       p1.add(sp);
       
       JPanel p = new JPanel();
-      p.setLayout(new GridLayout(3,1));
+      p.setLayout(new GridLayout(4,1));
       ckbox1 = new JCheckBox("Show vibrational coordinates.");
       p.add(ckbox1);
       ckbox1.addActionListener(this);
@@ -120,12 +115,34 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
       //p.add(ckbox3);
       //ckbox3.addActionListener(this);
 
-      slider = new JSlider(1,50,(int)factor);
-      slider.addChangeListener(this);
-      slider.setEnabled(true);
-      p.add(slider);
+      JPanel pHeight = new JPanel();
+      pHeight.setLayout(new FlowLayout());      
+      JLabel lh = new JLabel("Arrow Length");
+      pHeight.add(lh);
+      
+      heightValue = 3.0f;
+      heightFactor = heightValue/10.0f;
+      sliderHeight = new JSlider(1,50,10);
+      sliderHeight.addChangeListener(this);
+      sliderHeight.setEnabled(true);
+      pHeight.add(sliderHeight);
+      p.add(pHeight);
+      
+      JPanel pRadius = new JPanel();
+      pRadius.setLayout(new FlowLayout());
+      JLabel lr = new JLabel("Arrow Radius");
+      pRadius.add(lr);
+      
+      radiusValue = heightValue/10.0f;
+      radiusFactor = radiusValue/10.0f;
+      sliderRadius = new JSlider(1,50,10);
+      sliderRadius.addChangeListener(this);
+      sliderRadius.setEnabled(true);
+      pRadius.add(sliderRadius);
+      p.add(pRadius);
+      
       p1.add(p);
-
+      
       getContentPane().add(p1,BorderLayout.CENTER);
       this.pack();
       this.setVisible(true);
@@ -285,9 +302,8 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
 
       Color3f arrowColor = new Color3f(Color.GREEN);
       
-      float cyl_height = 0.2f*len*factor*canvas.getScale();
-      float cyl_radius = 0.04f*factor*canvas.getScale();
-      //float cyl_radius = 0.01f*factor*canvas.getScale();
+      float cyl_height = heightValue*len*canvas.getScale();
+      float cyl_radius = radiusValue*canvas.getScale();
       Transform3D t3cyl = new Transform3D();
       t3cyl.setTranslation(new Vector3f(0.0f,cyl_height/2.0f,0.0f));
       TransformGroup tgcyl = new TransformGroup(t3cyl);
@@ -301,9 +317,8 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
       Cylinder cylinder = new Cylinder(cyl_radius,cyl_height,Cylinder.GENERATE_NORMALS,50,1,ap);
       tgcyl.addChild(cylinder);
 
-      //float cn_height = 0.03f*factor*canvas.getScale();
-      //float cn_radius = cyl_radius*2.0f;
-      float cn_height = 0.06f*factor*canvas.getScale();
+      //float cn_height = 0.06f*factor*canvas.getScale();
+      float cn_height = cyl_height*0.5f;
       float cn_radius = cyl_radius*1.5f;
       Transform3D t3cone = new Transform3D();
       t3cone.setTranslation(new Vector3f(0.0f,cyl_height+cn_height/3.0f,0.0f));
@@ -340,11 +355,11 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
       if(event.getSource().equals(ckbox1)){
          //System.out.println("ckbox1");
          if(!ckbox1.isSelected()){
-            slider.setEnabled(false);
+            sliderHeight.setEnabled(false);
             if(scene != null) scene.detach();
          }
          if(ckbox1.isSelected()) {
-        	 	slider.setEnabled(true);
+        	 	sliderHeight.setEnabled(true);
         	 	this.createSceneGraph();
          }
       }
@@ -426,14 +441,20 @@ public class FreqTable extends JFrame implements ListSelectionListener, ActionLi
 
    @Override
    public void stateChanged(ChangeEvent e) {
-      if(!slider.getValueIsAdjusting()){
-         //System.out.println(slider.getValue()); 
-         factor = (float)slider.getValue();
+      if(!sliderHeight.getValueIsAdjusting()){
+         heightValue = heightFactor*(float)sliderHeight.getValue();
          if(scene != null){
             scene.detach();
             this.createSceneGraph();
          }
       }
       
+      if(!sliderRadius.getValueIsAdjusting()){
+         radiusValue = radiusFactor*(float)sliderRadius.getValue();
+         if(scene != null){
+            scene.detach();
+            this.createSceneGraph();
+         }
+      }
    }
 }
