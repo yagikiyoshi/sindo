@@ -33,6 +33,9 @@ public class MDToMol extends MolUtil {
       }
    }
    
+   /**
+    * Renames the label of atoms to a simple name from the periodic table.
+    */
    public void renameAtoms(){
       for(int n=0; n<molecule.getNat(); n++){
          Atom atom = molecule.getAtom(n);
