@@ -14,7 +14,8 @@ import sys.*;
 public class OutputReaderGAUSSIAN extends OutputReader {
 
    private BufferedReader brFchk = null;
-
+   private String logname = null;
+   
    /**
     * Constructor is not directly accessible. Use QuantChem class.
     */
@@ -54,6 +55,15 @@ public class OutputReaderGAUSSIAN extends OutputReader {
       if(Double.isNaN(energy)){
          throw new OutputFileException(basename + ".fchk has an error. The energy is not found.");
       }
+      
+      File logfile = new File(basename+".log");
+      File outfile = new File(basename+".out");
+      if(logfile.exists()) {
+         logname = basename+".log";
+      } else if (outfile.exists()) {
+         logname = basename+".out";
+      }
+
    }
    public double readEnergy(){
       
@@ -264,13 +274,42 @@ public class OutputReaderGAUSSIAN extends OutputReader {
       return atomicNumber;
    }
    
+   /**
+    * Reads the label of atoms from a log file of Gaussian (either basename.log or .out).
+    * If the log file is not found, the atom names from periodic table are taken based 
+    * on the atomic numbers.
+    */
    public String[] readLabel(){
       double[] an = this.readAtomicNumber();
       String[] Label = new String[an.length];
       
-      for(int n=0; n<an.length; n++){
-         Label[n] = PeriodicTable.label[(int)an[n]];
+      if(logname != null) {
+         // Read label from logfile
+         BufferedReader br;
+         try {
+            br = new BufferedReader(new FileReader(logname));
+            while(true) {
+               String line = br.readLine();
+               if (line.indexOf("Symbolic Z-matrix") > 0){
+                  br.readLine();
+                  for(int i=0; i < Label.length; i++) {
+                     Label[i] = Utilities.splitWithSpaceString(br.readLine())[0];
+                  }
+                  break;
+               }
+            }
+            br.close();
+           
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
+         
+      }else {
+         for(int n=0; n<an.length; n++){
+            Label[n] = PeriodicTable.label[(int)an[n]];
+         }
       }
+      
       return Label;
    }
 
