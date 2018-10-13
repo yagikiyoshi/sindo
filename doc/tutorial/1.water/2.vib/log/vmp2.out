@@ -1,0 +1,347 @@
+ -------------------------------------------------------
+                                                      
+    ***   WELCOME TO SINDO PROGRAM                    
+     ***                (  VERSION 4.0 BETA  )        
+      ***                                             
+       ***       COPYRIGHT 2018:                      
+        ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP
+                                                      
+ -------------------------------------------------------
+
+     JOB STARTED AT: Sat Oct 13 15:39:57 2018
+     RUNNING ON kyagi-mac2.local                
+
+
+(  SETUP MEM MODULE  )
+
+   o MAXIMUM MEMORY :       10 MB
+
+
+(  SETUP MOL MODULE  )
+
+
+   READ DATA FROM A MINFO FILE : [ h2o.minfo ]
+
+
+(  ENTER NMA MODULE  )
+
+
+      o ATOMIC MASS
+           15.9949      1.0078      1.0078
+
+      o REFERENCE GEOMETRY
+          0.000000    0.000000    0.127986
+          0.000000    1.429203   -1.015613
+         -0.000000   -1.429203   -1.015613
+
+      o NORMAL DISPLACEMENT VECTOR
+         -0.000000   -0.000000    0.270394
+         -0.000000   -0.416360   -0.538598
+         -0.000000    0.416360   -0.538598
+
+          0.000000    0.000000   -0.196982
+          0.000000   -0.571528    0.392370
+          0.000000    0.571528    0.392370
+
+         -0.000000   -0.267099   -0.000000
+         -0.000000    0.532056   -0.425729
+         -0.000000    0.532056    0.425729
+
+
+      o TRANSLATIONAL VECTOR
+          0.942384    0.000000    0.000000
+          0.236551    0.000000    0.000000
+          0.236551    0.000000    0.000000
+
+          0.000000    0.942384    0.000000
+          0.000000    0.236551    0.000000
+          0.000000    0.236551    0.000000
+
+          0.000000    0.000000    0.942384
+          0.000000    0.000000    0.236551
+          0.000000    0.000000    0.236551
+
+
+      o ROTATIONAL VECTOR
+          0.000000   -0.201414    0.000000
+          0.000000    0.401202    0.564583
+          0.000000    0.401202   -0.564583
+
+          0.334533    0.000000   -0.000000
+         -0.666366    0.000000   -0.000000
+         -0.666366    0.000000    0.000000
+
+         -0.000000    0.000000    0.000000
+         -0.707107    0.000000    0.000000
+          0.707107   -0.000000    0.000000
+
+(  SETUP OF NMA COMPLETED  )
+
+
+
+(  SETUP VIB MODULE  )
+
+   >> RUN OPTIONS
+      VSCF    =     T
+      OC-VSCF =     F
+      VCI     =     F
+      VPT     =     T
+      VQDPT   =     F
+      PRPT    =     F
+
+
+   >> BASIS FUNCTIONS
+      MODE :         1        2        3
+      MAXV :        10       10       10
+      FREQ :   1659.40  3752.61  3853.49
+
+(  SETUP TARGET MODULE  )
+
+   >> TARGET STATES
+       000   : ZERO-POINT STATE
+     001-003 : FUNDAMENTALS
+
+
+(  SETUP MRPES MODULE  )
+
+   >> POTENTIAL
+
+      [  OPTIONS  ]
+
+         MR         =        3
+         MCS_CUTOFF = 0.10E-03
+         MCS_GRID   = -.10E+01
+         POTDIR     = ./
+
+
+         1MR-PEF
+
+         o GRID PEF
+
+           MODE=   1, GRID=  11    B3LYP/cc-pVDZ (11)
+           MODE=   2, GRID=  11    B3LYP/cc-pVDZ (11)
+           MODE=   3, GRID=  11    B3LYP/cc-pVDZ (11)
+
+
+         2MR-PEF
+
+         o GRID PEF
+
+           MODE=   2   1, GRID=  11  11    B3LYP/cc-pVDZ (11)
+           MODE=   3   1, GRID=  11  11    B3LYP/cc-pVDZ (11)
+           MODE=   3   2, GRID=  11  11    B3LYP/cc-pVDZ (11)
+
+
+         3MR-PEF
+
+         o GRID PEF
+
+           MODE=   3   2   1, GRID=  11  11  11    B3LYP/cc-pVDZ (11)
+
+
+(  FINALIZE MRPES MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.05 MB /    10.00 MB (  0.5 % ) ]  -- 
+            -- IN THE LAST STEP [     0.08 MB /    10.00 MB (  0.8 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.01, SYSTEM     0.00 SECS   <----
+
+
+(  ENTER VSCF MODULE  )
+
+  ---  VIBRATIONAL SELF-CONSISTENT FIELD CALCULATIONS   ---
+
+   >> SCF OPTIONS
+       STATE SPECIFIC :        F
+              RESTART :        F
+        MAX ITERATION :       10
+         CONV. THRESH : 0.10E-04
+
+   >> FILES
+       WFN READ/WRITE FILE : vscf_xxx.wfn
+
+   >> STATE 000:   ZERO-POINT STATE
+
+       o INITIAL GUESS FROM (CONTRACTED) HARMONIC OSCILLATOR 
+
+   -- (ITERATION) -------- (EOLD) -------- (ENEW) ----- (DELTA E) --
+                1         4687.67         4589.42      -0.983D+02
+                2         4589.42         4586.72      -0.270D+01
+                3         4586.72         4586.64      -0.809D-01
+                4         4586.64         4586.64      -0.254D-02
+                5         4586.64         4586.64      -0.800D-04
+                6         4586.64         4586.64      -0.252D-05
+   -----------------------------------------------------------------
+       E(VSCF)=     4586.63551924
+
+       o COEFFICIENTS
+
+         -MODES-          1         2         3
+              0    -0.99988   0.98731  -0.99999
+              1    -0.00246  -0.15550   0.00000
+              2    -0.01293   0.01883  -0.00473
+              3     0.00856  -0.02486  -0.00000
+              4    -0.00093   0.00772   0.00249
+              5     0.00011  -0.00146   0.00000
+              6    -0.00018   0.00139   0.00000
+              7     0.00003  -0.00056  -0.00000
+              8    -0.00000   0.00013  -0.00003
+              9     0.00000  -0.00010   0.00000
+             10    -0.00000   0.00005   0.00000
+
+       o VIBRATIONALLY AVERAGED STRUCTURE
+
+         - Q0 -
+              0.037284   -1.718458   -0.000000
+
+         - X0 -
+             -0.000000    0.000000    0.130027
+             -0.000000    1.451755   -1.031812
+             -0.000000   -1.451755   -1.031812
+
+   >> VIRTUAL VSCF ENERGIES
+
+      o VSCF STATES               TOTAL ENERGY         E-E0
+        1_1                       6184.36546079        1597.72994155
+        2_1                       8220.27973432        3633.64421509
+        3_1                       8388.86349576        3802.22797652
+
+(  FINALIZE VSCF MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.05 MB /    10.00 MB (  0.5 % ) ]  -- 
+            -- IN THE LAST STEP [     0.06 MB /    10.00 MB (  0.6 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  ENTER VPT MODULE  )
+
+   >> VPT OPTIONS
+
+       o VPT WITH ZERO-POINT VSCF REFERENCE (VMP)
+         READ VSCF WFN  : vscf-000.wfn
+
+       o VPT LEVEL:
+         NCUP   =    3
+         MAXSUM =    4
+
+       o THRESH_ENE :   0.100E-03
+
+       o DUMP VPT WFN : [ vmp-w.wfn ]
+
+   >> ENTER VPT MAIN ROUTINE
+
+      -----[  LOOP OVER TARGET STATES  ]-----
+
+       o STATE 000:   ZERO-POINT STATE
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :        0
+                  2-MODE :       18
+                  3-MODE :        4
+                   TOTAL :       22
+              ------------------------- 
+
+             E(0th)    =     4509.75410
+             E(1st)    =       76.88145
+             E(2nd)    =      -18.89655
+
+             E(VMP1)   =     4586.63555
+             E(VMP2)   =     4567.73900
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o STATE 001:   1_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       13
+                  2-MODE :       24
+                  3-MODE :        7
+                   TOTAL :       44
+              ------------------------- 
+
+             E(0th)     =     6107.48744
+             E(1st)     =       76.87803
+             E(2nd)     =      -24.52433
+
+             E(VMP1)    =     6184.36547
+             E(VMP2)    =     6159.84114
+
+             E(VMP1)-E0 =     1597.72993
+             E(VMP2)-E0 =     1592.10214
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o STATE 002:   2_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       13
+                  2-MODE :       24
+                  3-MODE :        7
+                   TOTAL :       44
+              ------------------------- 
+
+             E(0th)     =     8143.39847
+             E(1st)     =       76.88129
+             E(2nd)     =      -70.81577
+
+             E(VMP1)    =     8220.27977
+             E(VMP2)    =     8149.46399
+
+             E(VMP1)-E0 =     3633.64422
+             E(VMP2)-E0 =     3581.72499
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o STATE 003:   3_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       13
+                  2-MODE :       24
+                  3-MODE :        7
+                   TOTAL :       44
+              ------------------------- 
+
+             E(0th)     =     8311.97324
+             E(1st)     =       76.89030
+             E(2nd)     =     -164.48118
+
+             E(VMP1)    =     8388.86354
+             E(VMP2)    =     8224.38236
+
+             E(VMP1)-E0 =     3802.22800
+             E(VMP2)-E0 =     3656.64336
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE VPT MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.05 MB /    10.00 MB (  0.5 % ) ]  -- 
+            -- IN THE LAST STEP [     0.06 MB /    10.00 MB (  0.6 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE TARGET MODULE  )
+
+
+(  FINALIZE VIB MODULE  )
+
+
+(  FINALIZE NMA MODULE  )
+
+
+(  FINALIZE MOL MODULE  )
+
+
+
+   (TOTAL MEMORY USAGE)   [     0.08 MB /    10.00 MB (  0.8 % ) ] 
+
+   (CLOCK) ---->  TOTAL CPU-TIME  <----
+            >     USER :   0 DAYS   0 HOURS   0 MINS   0.0 SECS 
+            >    SYSTEM:   0 DAYS   0 HOURS   0 MINS   0.0 SECS 
+

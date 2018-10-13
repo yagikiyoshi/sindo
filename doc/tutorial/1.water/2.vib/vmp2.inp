@@ -1,0 +1,23 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2o.minfo' /
+ &sys maxmem=10 /
+
+#--- [  VIB  ]
+ &vib  
+  MR=3 
+  vmaxALL=10
+  vscf=.t. 
+  vpt=.t.  
+ /
+
+#--- [ TARGET STATES ]
+ &states
+  fund=.t.
+ /
+
+#--- [  VPT  ]
+ &vpt 
+  maxSum=4
+  thresh_ene=1.0e-04
+ /
+

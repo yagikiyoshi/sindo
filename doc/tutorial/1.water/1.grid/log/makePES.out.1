@@ -1,0 +1,1879 @@
+2014.08.26 at 13:04:26 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 1.6 (Kastrup)
+
+                COPYRIGHT 2014:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - RunType = GRID
+     - Molecular info via h2o.minfo ...  [OK] 
+     - MR      = 3
+     - Dipole Moment Surface = true
+     - Settings for Quantum Chemistry Jobs:
+        * Remove Files = true
+        * DryRun       = false
+        * Level-0
+          Type         = Gaussian
+          TemplateFile = GaussianInput.xml
+          ExecCommand  = runGaussian.sh /misc/home/yagi/devel/Kastrup/Doc/tutorial_files/1.water/1.grid basename.com 
+          Title        =  B3LYP/cc-pVDZ (11)
+
+     - Settings for Grid PES:
+        * Grid points = 11       
+        * Full MC = true
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : kushana04.local
+     Ppn      : 6
+     Memory   : 1 GB
+     SCR      : 50 GB
+     Status   : FREE
+     -----
+     ID       : 1
+     Hosts    : kushana04.local
+     Ppn      : 6
+     Memory   : 1 GB
+     SCR      : 50 GB
+     Status   : FREE
+     -----
+     ID       : 2
+     Hosts    : kushana02.local
+     Ppn      : 6
+     Memory   : 1 GB
+     SCR      : 50 GB
+     Status   : FREE
+     -----
+     ID       : 3
+     Hosts    : kushana02.local
+     Ppn      : 6
+     Memory   : 1 GB
+     SCR      : 50 GB
+     Status   : FREE
+     -----
+
+
+MakePES is setup successfully!
+
+Enter MakeGrid module
+
+  o 1MR Grid: 
+      1 2 3 
+  o 2MR Grid: 
+      (1,2) (1,3) (2,3) 
+  o 3MR Grid: 
+      (1,2,3) 
+
+1MR-GridPES generation:
+Execute electronic structure calculations.
+
+Thread1@kushana04.local> Running minfo.files/q1-11-0.com on kushana04 at Tue Aug 26 13:04:27 JST 2014
+Thread0@kushana04.local> Running minfo.files/q0-mkGrid.com on kushana04 at Tue Aug 26 13:04:27 JST 2014
+Thread2@kushana02.local> Running minfo.files/q1-11-1.com on kushana02 at Tue Aug 26 13:07:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q1-11-2.com on kushana02 at Tue Aug 26 13:07:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q1-11-3.com on kushana02 at Tue Aug 26 13:07:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q1-11-4.com on kushana02 at Tue Aug 26 13:07:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q1-11-7.com on kushana04 at Tue Aug 26 13:04:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q1-11-6.com on kushana04 at Tue Aug 26 13:04:32 JST 2014
+Thread3@kushana02.local> Running minfo.files/q1-11-8.com on kushana02 at Tue Aug 26 13:07:49 JST 2014
+Thread2@kushana02.local> Running minfo.files/q1-11-9.com on kushana02 at Tue Aug 26 13:07:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q1-11-10.com on kushana04 at Tue Aug 26 13:04:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2-11-0.com on kushana04 at Tue Aug 26 13:04:34 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2-11-1.com on kushana02 at Tue Aug 26 13:07:51 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2-11-2.com on kushana02 at Tue Aug 26 13:07:51 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2-11-3.com on kushana04 at Tue Aug 26 13:04:35 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2-11-4.com on kushana04 at Tue Aug 26 13:04:35 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2-11-6.com on kushana02 at Tue Aug 26 13:07:52 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2-11-7.com on kushana02 at Tue Aug 26 13:07:52 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2-11-8.com on kushana04 at Tue Aug 26 13:04:37 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2-11-9.com on kushana04 at Tue Aug 26 13:04:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2-11-10.com on kushana02 at Tue Aug 26 13:07:54 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3-11-0.com on kushana02 at Tue Aug 26 13:07:54 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3-11-1.com on kushana04 at Tue Aug 26 13:04:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3-11-2.com on kushana04 at Tue Aug 26 13:04:38 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3-11-3.com on kushana02 at Tue Aug 26 13:07:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3-11-4.com on kushana02 at Tue Aug 26 13:07:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3-11-6.com on kushana04 at Tue Aug 26 13:04:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3-11-7.com on kushana04 at Tue Aug 26 13:04:40 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3-11-8.com on kushana02 at Tue Aug 26 13:07:57 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3-11-9.com on kushana02 at Tue Aug 26 13:07:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3-11-10.com on kushana04 at Tue Aug 26 13:04:41 JST 2014
+
+End of electronic structure calculations.
+
+Generating data files.
+
+   o q1.pot  [OK]
+   o q1.dipole  [OK]
+   o q2.pot  [OK]
+   o q2.dipole  [OK]
+   o q3.pot  [OK]
+   o q3.dipole  [OK]
+
+End of 1MR-GridPES generation:
+
+
+2MR-GridPES generation:
+Execute electronic structure calculations.
+
+Thread0@kushana04.local> Running minfo.files/q2q1-11-0.com on kushana04 at Tue Aug 26 13:04:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-1.com on kushana04 at Tue Aug 26 13:04:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-2.com on kushana02 at Tue Aug 26 13:07:59 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-3.com on kushana02 at Tue Aug 26 13:07:59 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-4.com on kushana02 at Tue Aug 26 13:08:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-6.com on kushana04 at Tue Aug 26 13:04:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-7.com on kushana02 at Tue Aug 26 13:08:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-8.com on kushana04 at Tue Aug 26 13:04:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-9.com on kushana02 at Tue Aug 26 13:08:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-10.com on kushana04 at Tue Aug 26 13:04:46 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-12.com on kushana04 at Tue Aug 26 13:04:46 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-11.com on kushana02 at Tue Aug 26 13:08:07 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-17.com on kushana02 at Tue Aug 26 13:08:13 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-13.com on kushana02 at Tue Aug 26 13:08:18 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-18.com on kushana02 at Tue Aug 26 13:08:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-19.com on kushana02 at Tue Aug 26 13:08:20 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-20.com on kushana02 at Tue Aug 26 13:08:21 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-21.com on kushana02 at Tue Aug 26 13:08:21 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-22.com on kushana02 at Tue Aug 26 13:08:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-23.com on kushana02 at Tue Aug 26 13:08:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-14.com on kushana04 at Tue Aug 26 13:05:08 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-15.com on kushana04 at Tue Aug 26 13:05:08 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-24.com on kushana02 at Tue Aug 26 13:08:24 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-25.com on kushana02 at Tue Aug 26 13:08:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-26.com on kushana04 at Tue Aug 26 13:05:09 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-28.com on kushana04 at Tue Aug 26 13:05:09 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-29.com on kushana02 at Tue Aug 26 13:08:26 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-30.com on kushana02 at Tue Aug 26 13:08:26 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-31.com on kushana04 at Tue Aug 26 13:05:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-32.com on kushana04 at Tue Aug 26 13:05:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-33.com on kushana02 at Tue Aug 26 13:08:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-34.com on kushana02 at Tue Aug 26 13:08:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-35.com on kushana04 at Tue Aug 26 13:05:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-36.com on kushana04 at Tue Aug 26 13:05:12 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-37.com on kushana02 at Tue Aug 26 13:08:29 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-39.com on kushana02 at Tue Aug 26 13:08:29 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-40.com on kushana04 at Tue Aug 26 13:05:13 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-41.com on kushana04 at Tue Aug 26 13:05:14 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-43.com on kushana02 at Tue Aug 26 13:08:31 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-44.com on kushana04 at Tue Aug 26 13:05:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-47.com on kushana04 at Tue Aug 26 13:05:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-48.com on kushana04 at Tue Aug 26 13:05:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-50.com on kushana04 at Tue Aug 26 13:05:29 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-42.com on kushana02 at Tue Aug 26 13:08:50 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-45.com on kushana04 at Tue Aug 26 13:05:35 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-46.com on kushana02 at Tue Aug 26 13:08:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-53.com on kushana04 at Tue Aug 26 13:05:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-54.com on kushana02 at Tue Aug 26 13:08:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-67.com on kushana02 at Tue Aug 26 13:08:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-68.com on kushana02 at Tue Aug 26 13:08:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-51.com on kushana04 at Tue Aug 26 13:05:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-52.com on kushana02 at Tue Aug 26 13:08:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-69.com on kushana02 at Tue Aug 26 13:08:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-70.com on kushana04 at Tue Aug 26 13:05:42 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-72.com on kushana02 at Tue Aug 26 13:08:58 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-73.com on kushana02 at Tue Aug 26 13:08:59 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-74.com on kushana04 at Tue Aug 26 13:05:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-66.com on kushana04 at Tue Aug 26 13:05:43 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-75.com on kushana02 at Tue Aug 26 13:08:59 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-76.com on kushana02 at Tue Aug 26 13:09:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-77.com on kushana04 at Tue Aug 26 13:05:44 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-78.com on kushana04 at Tue Aug 26 13:05:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-79.com on kushana02 at Tue Aug 26 13:09:01 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-80.com on kushana02 at Tue Aug 26 13:09:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-81.com on kushana04 at Tue Aug 26 13:05:56 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-83.com on kushana04 at Tue Aug 26 13:06:06 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-84.com on kushana02 at Tue Aug 26 13:09:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-85.com on kushana02 at Tue Aug 26 13:09:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-86.com on kushana04 at Tue Aug 26 13:06:07 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-87.com on kushana04 at Tue Aug 26 13:06:07 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-88.com on kushana02 at Tue Aug 26 13:09:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-89.com on kushana02 at Tue Aug 26 13:09:29 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-90.com on kushana04 at Tue Aug 26 13:06:13 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-91.com on kushana04 at Tue Aug 26 13:06:14 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-92.com on kushana02 at Tue Aug 26 13:09:30 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-94.com on kushana02 at Tue Aug 26 13:09:30 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-95.com on kushana04 at Tue Aug 26 13:06:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-96.com on kushana04 at Tue Aug 26 13:06:15 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-97.com on kushana02 at Tue Aug 26 13:09:31 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-98.com on kushana02 at Tue Aug 26 13:09:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-99.com on kushana04 at Tue Aug 26 13:06:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-100.com on kushana04 at Tue Aug 26 13:06:22 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-101.com on kushana02 at Tue Aug 26 13:09:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-102.com on kushana02 at Tue Aug 26 13:09:48 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-103.com on kushana04 at Tue Aug 26 13:06:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-105.com on kushana04 at Tue Aug 26 13:06:38 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-106.com on kushana02 at Tue Aug 26 13:09:54 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-107.com on kushana02 at Tue Aug 26 13:09:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-108.com on kushana04 at Tue Aug 26 13:06:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-109.com on kushana02 at Tue Aug 26 13:10:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-110.com on kushana04 at Tue Aug 26 13:06:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-111.com on kushana02 at Tue Aug 26 13:10:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-112.com on kushana04 at Tue Aug 26 13:06:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-113.com on kushana02 at Tue Aug 26 13:10:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-114.com on kushana04 at Tue Aug 26 13:06:46 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-116.com on kushana02 at Tue Aug 26 13:10:03 JST 2014
+Thread0@kushana04.local> Running minfo.files/q2q1-11-117.com on kushana04 at Tue Aug 26 13:06:47 JST 2014
+Thread2@kushana02.local> Running minfo.files/q2q1-11-118.com on kushana02 at Tue Aug 26 13:10:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q2q1-11-119.com on kushana04 at Tue Aug 26 13:06:47 JST 2014
+Thread3@kushana02.local> Running minfo.files/q2q1-11-120.com on kushana02 at Tue Aug 26 13:10:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-0.com on kushana04 at Tue Aug 26 13:06:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-1.com on kushana02 at Tue Aug 26 13:10:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-2.com on kushana04 at Tue Aug 26 13:07:04 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-3.com on kushana02 at Tue Aug 26 13:10:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-4.com on kushana04 at Tue Aug 26 13:07:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-7.com on kushana04 at Tue Aug 26 13:07:10 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-6.com on kushana02 at Tue Aug 26 13:10:26 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-8.com on kushana04 at Tue Aug 26 13:07:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-9.com on kushana04 at Tue Aug 26 13:07:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-12.com on kushana04 at Tue Aug 26 13:07:13 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-10.com on kushana02 at Tue Aug 26 13:10:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-11.com on kushana02 at Tue Aug 26 13:10:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-13.com on kushana04 at Tue Aug 26 13:07:19 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-15.com on kushana02 at Tue Aug 26 13:10:35 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-14.com on kushana04 at Tue Aug 26 13:07:20 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-17.com on kushana02 at Tue Aug 26 13:10:36 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-18.com on kushana04 at Tue Aug 26 13:07:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-19.com on kushana02 at Tue Aug 26 13:10:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-20.com on kushana04 at Tue Aug 26 13:07:21 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-21.com on kushana02 at Tue Aug 26 13:10:37 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-22.com on kushana04 at Tue Aug 26 13:07:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-23.com on kushana04 at Tue Aug 26 13:07:32 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-24.com on kushana02 at Tue Aug 26 13:10:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-26.com on kushana04 at Tue Aug 26 13:07:43 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-25.com on kushana02 at Tue Aug 26 13:10:59 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-29.com on kushana02 at Tue Aug 26 13:11:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-28.com on kushana04 at Tue Aug 26 13:07:44 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-30.com on kushana04 at Tue Aug 26 13:07:44 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-31.com on kushana02 at Tue Aug 26 13:11:00 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-32.com on kushana02 at Tue Aug 26 13:11:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-33.com on kushana04 at Tue Aug 26 13:07:50 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-34.com on kushana04 at Tue Aug 26 13:07:51 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-35.com on kushana02 at Tue Aug 26 13:11:07 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-36.com on kushana02 at Tue Aug 26 13:11:07 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-37.com on kushana04 at Tue Aug 26 13:07:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-40.com on kushana04 at Tue Aug 26 13:07:52 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-39.com on kushana02 at Tue Aug 26 13:11:08 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-41.com on kushana02 at Tue Aug 26 13:11:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-42.com on kushana04 at Tue Aug 26 13:07:53 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-43.com on kushana02 at Tue Aug 26 13:11:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-44.com on kushana04 at Tue Aug 26 13:07:54 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-45.com on kushana02 at Tue Aug 26 13:11:30 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-46.com on kushana04 at Tue Aug 26 13:08:15 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-47.com on kushana02 at Tue Aug 26 13:11:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-48.com on kushana04 at Tue Aug 26 13:08:15 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-50.com on kushana02 at Tue Aug 26 13:11:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-51.com on kushana04 at Tue Aug 26 13:08:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-53.com on kushana04 at Tue Aug 26 13:08:17 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-52.com on kushana02 at Tue Aug 26 13:11:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-54.com on kushana02 at Tue Aug 26 13:11:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-66.com on kushana04 at Tue Aug 26 13:08:22 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-67.com on kushana04 at Tue Aug 26 13:08:23 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-72.com on kushana04 at Tue Aug 26 13:08:25 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-73.com on kushana04 at Tue Aug 26 13:08:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-74.com on kushana04 at Tue Aug 26 13:08:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-70.com on kushana04 at Tue Aug 26 13:08:39 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-76.com on kushana04 at Tue Aug 26 13:08:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-68.com on kushana02 at Tue Aug 26 13:11:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-75.com on kushana04 at Tue Aug 26 13:08:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-77.com on kushana04 at Tue Aug 26 13:08:46 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-80.com on kushana04 at Tue Aug 26 13:08:48 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-69.com on kushana02 at Tue Aug 26 13:12:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-81.com on kushana04 at Tue Aug 26 13:08:49 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-78.com on kushana02 at Tue Aug 26 13:12:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-79.com on kushana04 at Tue Aug 26 13:08:50 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-83.com on kushana02 at Tue Aug 26 13:12:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-84.com on kushana04 at Tue Aug 26 13:08:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-85.com on kushana02 at Tue Aug 26 13:12:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-86.com on kushana04 at Tue Aug 26 13:08:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-87.com on kushana02 at Tue Aug 26 13:12:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-88.com on kushana04 at Tue Aug 26 13:08:56 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-89.com on kushana02 at Tue Aug 26 13:12:18 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-90.com on kushana04 at Tue Aug 26 13:09:03 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-91.com on kushana02 at Tue Aug 26 13:12:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-92.com on kushana04 at Tue Aug 26 13:09:03 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-94.com on kushana02 at Tue Aug 26 13:12:24 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-95.com on kushana04 at Tue Aug 26 13:09:09 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-96.com on kushana02 at Tue Aug 26 13:12:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-97.com on kushana04 at Tue Aug 26 13:09:14 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-98.com on kushana02 at Tue Aug 26 13:12:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-99.com on kushana04 at Tue Aug 26 13:09:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-100.com on kushana02 at Tue Aug 26 13:12:36 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-101.com on kushana04 at Tue Aug 26 13:09:21 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-102.com on kushana02 at Tue Aug 26 13:12:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-103.com on kushana04 at Tue Aug 26 13:09:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-105.com on kushana02 at Tue Aug 26 13:12:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-106.com on kushana04 at Tue Aug 26 13:09:27 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-107.com on kushana04 at Tue Aug 26 13:09:29 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-108.com on kushana04 at Tue Aug 26 13:09:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-109.com on kushana02 at Tue Aug 26 13:12:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-110.com on kushana02 at Tue Aug 26 13:12:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-112.com on kushana04 at Tue Aug 26 13:09:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-111.com on kushana04 at Tue Aug 26 13:09:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-113.com on kushana02 at Tue Aug 26 13:13:02 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-114.com on kushana02 at Tue Aug 26 13:13:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-116.com on kushana04 at Tue Aug 26 13:09:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q1-11-117.com on kushana04 at Tue Aug 26 13:09:47 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q1-11-118.com on kushana02 at Tue Aug 26 13:13:04 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q1-11-119.com on kushana02 at Tue Aug 26 13:13:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q1-11-120.com on kushana04 at Tue Aug 26 13:09:53 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-0.com on kushana04 at Tue Aug 26 13:09:53 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-1.com on kushana02 at Tue Aug 26 13:13:10 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-2.com on kushana02 at Tue Aug 26 13:13:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-3.com on kushana04 at Tue Aug 26 13:10:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-4.com on kushana04 at Tue Aug 26 13:10:00 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-6.com on kushana02 at Tue Aug 26 13:13:16 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-7.com on kushana02 at Tue Aug 26 13:13:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-8.com on kushana04 at Tue Aug 26 13:10:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-9.com on kushana04 at Tue Aug 26 13:10:06 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-10.com on kushana02 at Tue Aug 26 13:13:28 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-11.com on kushana02 at Tue Aug 26 13:13:28 JST 2014
+Thread2@kushana02.local> minfo.files/q3q2-11-10.fchk has an error. The energy is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2-11-10
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Thread3@kushana02.local> Running minfo.files/q3q2-11-15.com on kushana02 at Tue Aug 26 13:13:29 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-13.com on kushana04 at Tue Aug 26 13:10:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-12.com on kushana04 at Tue Aug 26 13:10:17 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-18.com on kushana04 at Tue Aug 26 13:10:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-19.com on kushana04 at Tue Aug 26 13:10:19 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-17.com on kushana02 at Tue Aug 26 13:13:36 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-20.com on kushana04 at Tue Aug 26 13:10:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-21.com on kushana04 at Tue Aug 26 13:10:21 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-22.com on kushana02 at Tue Aug 26 13:13:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-23.com on kushana04 at Tue Aug 26 13:10:27 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-24.com on kushana04 at Tue Aug 26 13:10:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-25.com on kushana02 at Tue Aug 26 13:13:43 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-14.com on kushana02 at Tue Aug 26 13:13:44 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-26.com on kushana04 at Tue Aug 26 13:10:33 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-28.com on kushana04 at Tue Aug 26 13:10:34 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-29.com on kushana02 at Tue Aug 26 13:13:50 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-30.com on kushana02 at Tue Aug 26 13:13:50 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-31.com on kushana04 at Tue Aug 26 13:10:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-32.com on kushana02 at Tue Aug 26 13:14:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-33.com on kushana04 at Tue Aug 26 13:10:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-34.com on kushana02 at Tue Aug 26 13:14:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-35.com on kushana04 at Tue Aug 26 13:10:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-37.com on kushana04 at Tue Aug 26 13:10:48 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-39.com on kushana02 at Tue Aug 26 13:14:05 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-36.com on kushana04 at Tue Aug 26 13:10:52 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-43.com on kushana04 at Tue Aug 26 13:10:53 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-40.com on kushana02 at Tue Aug 26 13:14:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-41.com on kushana04 at Tue Aug 26 13:10:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-44.com on kushana04 at Tue Aug 26 13:10:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-42.com on kushana02 at Tue Aug 26 13:14:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-45.com on kushana02 at Tue Aug 26 13:14:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-46.com on kushana04 at Tue Aug 26 13:10:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-47.com on kushana04 at Tue Aug 26 13:10:56 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-51.com on kushana04 at Tue Aug 26 13:10:58 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-52.com on kushana04 at Tue Aug 26 13:10:58 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-53.com on kushana04 at Tue Aug 26 13:10:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-66.com on kushana04 at Tue Aug 26 13:11:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-67.com on kushana04 at Tue Aug 26 13:11:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-54.com on kushana04 at Tue Aug 26 13:11:05 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-69.com on kushana04 at Tue Aug 26 13:11:06 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-70.com on kushana04 at Tue Aug 26 13:11:07 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-48.com on kushana02 at Tue Aug 26 13:14:28 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-50.com on kushana02 at Tue Aug 26 13:14:33 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-68.com on kushana04 at Tue Aug 26 13:11:23 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-75.com on kushana04 at Tue Aug 26 13:11:24 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-76.com on kushana04 at Tue Aug 26 13:11:26 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-77.com on kushana04 at Tue Aug 26 13:11:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-73.com on kushana02 at Tue Aug 26 13:14:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-72.com on kushana04 at Tue Aug 26 13:11:28 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-74.com on kushana02 at Tue Aug 26 13:14:44 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-78.com on kushana04 at Tue Aug 26 13:11:28 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-83.com on kushana04 at Tue Aug 26 13:11:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-84.com on kushana04 at Tue Aug 26 13:11:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-85.com on kushana04 at Tue Aug 26 13:11:32 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-81.com on kushana02 at Tue Aug 26 13:14:51 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-87.com on kushana02 at Tue Aug 26 13:14:52 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-88.com on kushana02 at Tue Aug 26 13:14:53 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-89.com on kushana02 at Tue Aug 26 13:14:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-86.com on kushana04 at Tue Aug 26 13:11:44 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-79.com on kushana02 at Tue Aug 26 13:15:05 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-80.com on kushana04 at Tue Aug 26 13:11:50 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-90.com on kushana02 at Tue Aug 26 13:15:06 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-91.com on kushana04 at Tue Aug 26 13:11:50 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-92.com on kushana02 at Tue Aug 26 13:15:12 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-94.com on kushana02 at Tue Aug 26 13:15:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-95.com on kushana04 at Tue Aug 26 13:12:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-96.com on kushana04 at Tue Aug 26 13:12:01 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-97.com on kushana02 at Tue Aug 26 13:15:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-99.com on kushana04 at Tue Aug 26 13:12:03 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-98.com on kushana02 at Tue Aug 26 13:15:19 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-100.com on kushana04 at Tue Aug 26 13:12:03 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-101.com on kushana02 at Tue Aug 26 13:15:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-103.com on kushana04 at Tue Aug 26 13:12:09 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-102.com on kushana02 at Tue Aug 26 13:15:25 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-105.com on kushana04 at Tue Aug 26 13:12:09 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-106.com on kushana02 at Tue Aug 26 13:15:26 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-109.com on kushana04 at Tue Aug 26 13:12:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-107.com on kushana04 at Tue Aug 26 13:12:16 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-112.com on kushana04 at Tue Aug 26 13:12:17 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-108.com on kushana02 at Tue Aug 26 13:15:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-110.com on kushana02 at Tue Aug 26 13:15:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-111.com on kushana04 at Tue Aug 26 13:12:22 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-114.com on kushana02 at Tue Aug 26 13:15:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-116.com on kushana02 at Tue Aug 26 13:15:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-113.com on kushana04 at Tue Aug 26 13:12:28 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2-11-117.com on kushana04 at Tue Aug 26 13:12:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2-11-118.com on kushana02 at Tue Aug 26 13:15:49 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2-11-119.com on kushana02 at Tue Aug 26 13:15:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2-11-120.com on kushana04 at Tue Aug 26 13:12:35 JST 2014
+Thread0@kushana04.local> minfo.files/q3q2-11-120.fchk has an error. The energy is not found.
+Thread0@kushana04.local> Quantum Chemitry job ended in error for minfo.files/q3q2-11-120
+Thread0@kushana04.local> Recommended to check the output of qchem run.
+Thread0@kushana04.local> The program continues by suppling the energy by inter/extrapolation.
+
+End of electronic structure calculations.
+
+Generating pot files.
+
+   o q2q1.pot  [OK]
+   o q2q1.dipole  [OK]
+   o q3q1.pot  [OK]
+   o q3q1.dipole  [OK]
+Warning: minfo.files/q3q2-11-10.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2-11-120.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+   o q3q2.pot  [OK]
+Warning: minfo.files/q3q2-11-10.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2-11-120.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+   o q3q2.dipole  [OK]
+
+End of 2MR-GridPES generation:
+
+
+3MR-GridPES generation:
+Execute electronic structure calculations.
+
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-0.com on kushana04 at Tue Aug 26 13:12:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1.com on kushana04 at Tue Aug 26 13:12:41 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-2.com on kushana02 at Tue Aug 26 13:15:57 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-3.com on kushana02 at Tue Aug 26 13:15:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-4.com on kushana04 at Tue Aug 26 13:12:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-6.com on kushana04 at Tue Aug 26 13:12:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-7.com on kushana04 at Tue Aug 26 13:12:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-8.com on kushana04 at Tue Aug 26 13:12:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-9.com on kushana02 at Tue Aug 26 13:16:11 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-10.com on kushana02 at Tue Aug 26 13:16:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-11.com on kushana04 at Tue Aug 26 13:13:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-12.com on kushana04 at Tue Aug 26 13:13:01 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-13.com on kushana02 at Tue Aug 26 13:16:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-14.com on kushana02 at Tue Aug 26 13:16:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-15.com on kushana04 at Tue Aug 26 13:13:08 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-17.com on kushana04 at Tue Aug 26 13:13:08 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-19.com on kushana02 at Tue Aug 26 13:16:24 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-18.com on kushana02 at Tue Aug 26 13:16:24 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-20.com on kushana04 at Tue Aug 26 13:13:14 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-21.com on kushana04 at Tue Aug 26 13:13:15 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-23.com on kushana02 at Tue Aug 26 13:16:31 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-22.com on kushana02 at Tue Aug 26 13:16:31 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-24.com on kushana04 at Tue Aug 26 13:13:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-25.com on kushana04 at Tue Aug 26 13:13:16 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-26.com on kushana02 at Tue Aug 26 13:16:37 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-28.com on kushana02 at Tue Aug 26 13:16:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-29.com on kushana04 at Tue Aug 26 13:13:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-33.com on kushana04 at Tue Aug 26 13:13:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-34.com on kushana04 at Tue Aug 26 13:13:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-35.com on kushana04 at Tue Aug 26 13:13:26 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-30.com on kushana04 at Tue Aug 26 13:13:27 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-37.com on kushana04 at Tue Aug 26 13:13:29 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-39.com on kushana04 at Tue Aug 26 13:13:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-40.com on kushana04 at Tue Aug 26 13:13:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-36.com on kushana04 at Tue Aug 26 13:13:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-31.com on kushana02 at Tue Aug 26 13:16:54 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-32.com on kushana02 at Tue Aug 26 13:16:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-41.com on kushana04 at Tue Aug 26 13:13:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-42.com on kushana04 at Tue Aug 26 13:13:49 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-43.com on kushana02 at Tue Aug 26 13:17:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-44.com on kushana04 at Tue Aug 26 13:13:49 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-45.com on kushana02 at Tue Aug 26 13:17:05 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-46.com on kushana04 at Tue Aug 26 13:13:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-51.com on kushana04 at Tue Aug 26 13:13:51 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-52.com on kushana04 at Tue Aug 26 13:13:58 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-53.com on kushana04 at Tue Aug 26 13:13:59 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-54.com on kushana04 at Tue Aug 26 13:14:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-47.com on kushana04 at Tue Aug 26 13:14:01 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-48.com on kushana02 at Tue Aug 26 13:17:17 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-50.com on kushana02 at Tue Aug 26 13:17:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-66.com on kushana04 at Tue Aug 26 13:14:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-67.com on kushana02 at Tue Aug 26 13:17:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-68.com on kushana04 at Tue Aug 26 13:14:27 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-70.com on kushana04 at Tue Aug 26 13:14:28 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-69.com on kushana02 at Tue Aug 26 13:17:48 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-72.com on kushana02 at Tue Aug 26 13:17:49 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-75.com on kushana02 at Tue Aug 26 13:17:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-77.com on kushana02 at Tue Aug 26 13:17:58 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-78.com on kushana02 at Tue Aug 26 13:17:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-73.com on kushana04 at Tue Aug 26 13:14:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-74.com on kushana04 at Tue Aug 26 13:14:49 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-76.com on kushana02 at Tue Aug 26 13:18:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-79.com on kushana02 at Tue Aug 26 13:18:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-80.com on kushana04 at Tue Aug 26 13:14:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-81.com on kushana04 at Tue Aug 26 13:14:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-83.com on kushana02 at Tue Aug 26 13:18:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-86.com on kushana04 at Tue Aug 26 13:15:02 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-87.com on kushana02 at Tue Aug 26 13:18:18 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-89.com on kushana02 at Tue Aug 26 13:18:25 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-90.com on kushana02 at Tue Aug 26 13:18:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-84.com on kushana02 at Tue Aug 26 13:18:27 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-92.com on kushana02 at Tue Aug 26 13:18:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-88.com on kushana04 at Tue Aug 26 13:15:13 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-95.com on kushana04 at Tue Aug 26 13:15:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-96.com on kushana04 at Tue Aug 26 13:15:16 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-97.com on kushana04 at Tue Aug 26 13:15:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-98.com on kushana04 at Tue Aug 26 13:15:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-99.com on kushana04 at Tue Aug 26 13:15:20 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-94.com on kushana02 at Tue Aug 26 13:18:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-101.com on kushana02 at Tue Aug 26 13:18:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-85.com on kushana04 at Tue Aug 26 13:15:26 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-91.com on kushana02 at Tue Aug 26 13:18:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-100.com on kushana04 at Tue Aug 26 13:15:31 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-102.com on kushana02 at Tue Aug 26 13:18:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-103.com on kushana04 at Tue Aug 26 13:15:33 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-105.com on kushana04 at Tue Aug 26 13:15:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-108.com on kushana04 at Tue Aug 26 13:15:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-110.com on kushana04 at Tue Aug 26 13:15:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-111.com on kushana04 at Tue Aug 26 13:15:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-112.com on kushana04 at Tue Aug 26 13:15:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-106.com on kushana02 at Tue Aug 26 13:18:59 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-107.com on kushana02 at Tue Aug 26 13:18:59 JST 2014
+Thread1@kushana04.local> minfo.files/q3q2q1-11-112.fchk has an error. The energy is not found.
+Thread1@kushana04.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-112
+Thread1@kushana04.local> Recommended to check the output of qchem run.
+Thread1@kushana04.local> The program continues by suppling the energy by inter/extrapolation.
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-113.com on kushana04 at Tue Aug 26 13:15:43 JST 2014
+Thread1@kushana04.local> minfo.files/q3q2q1-11-113.fchk has an error. The energy is not found.
+Thread1@kushana04.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-113
+Thread1@kushana04.local> Recommended to check the output of qchem run.
+Thread1@kushana04.local> The program continues by suppling the energy by inter/extrapolation.
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-114.com on kushana04 at Tue Aug 26 13:15:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-109.com on kushana04 at Tue Aug 26 13:15:44 JST 2014
+Thread1@kushana04.local> minfo.files/q3q2q1-11-114.fchk has an error. The energy is not found.
+Thread1@kushana04.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-114
+Thread1@kushana04.local> Recommended to check the output of qchem run.
+Thread1@kushana04.local> The program continues by suppling the energy by inter/extrapolation.
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-116.com on kushana04 at Tue Aug 26 13:15:45 JST 2014
+Thread1@kushana04.local> minfo.files/q3q2q1-11-116.fchk has an error. The energy is not found.
+Thread1@kushana04.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-116
+Thread1@kushana04.local> Recommended to check the output of qchem run.
+Thread1@kushana04.local> The program continues by suppling the energy by inter/extrapolation.
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-117.com on kushana04 at Tue Aug 26 13:15:46 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-118.com on kushana04 at Tue Aug 26 13:15:51 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-122.com on kushana04 at Tue Aug 26 13:15:57 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-119.com on kushana02 at Tue Aug 26 13:19:14 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-120.com on kushana02 at Tue Aug 26 13:19:14 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-123.com on kushana04 at Tue Aug 26 13:15:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-121.com on kushana04 at Tue Aug 26 13:15:59 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-124.com on kushana02 at Tue Aug 26 13:19:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-128.com on kushana04 at Tue Aug 26 13:16:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-130.com on kushana04 at Tue Aug 26 13:16:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-131.com on kushana04 at Tue Aug 26 13:16:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-132.com on kushana04 at Tue Aug 26 13:16:04 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-125.com on kushana02 at Tue Aug 26 13:19:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-127.com on kushana04 at Tue Aug 26 13:16:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-133.com on kushana04 at Tue Aug 26 13:16:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-129.com on kushana02 at Tue Aug 26 13:19:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-134.com on kushana02 at Tue Aug 26 13:19:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-135.com on kushana04 at Tue Aug 26 13:16:17 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-136.com on kushana04 at Tue Aug 26 13:16:17 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-138.com on kushana02 at Tue Aug 26 13:19:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-139.com on kushana02 at Tue Aug 26 13:19:33 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-141.com on kushana04 at Tue Aug 26 13:16:18 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-144.com on kushana04 at Tue Aug 26 13:16:20 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-140.com on kushana04 at Tue Aug 26 13:16:23 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-142.com on kushana02 at Tue Aug 26 13:19:39 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-143.com on kushana02 at Tue Aug 26 13:19:45 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-146.com on kushana04 at Tue Aug 26 13:16:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-147.com on kushana02 at Tue Aug 26 13:19:51 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-149.com on kushana02 at Tue Aug 26 13:19:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-150.com on kushana04 at Tue Aug 26 13:16:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-151.com on kushana02 at Tue Aug 26 13:19:57 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-145.com on kushana04 at Tue Aug 26 13:16:41 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-152.com on kushana02 at Tue Aug 26 13:19:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-153.com on kushana04 at Tue Aug 26 13:16:42 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-154.com on kushana02 at Tue Aug 26 13:20:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-155.com on kushana04 at Tue Aug 26 13:16:47 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-156.com on kushana02 at Tue Aug 26 13:20:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-157.com on kushana04 at Tue Aug 26 13:16:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-160.com on kushana04 at Tue Aug 26 13:16:54 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-158.com on kushana02 at Tue Aug 26 13:20:10 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-161.com on kushana02 at Tue Aug 26 13:20:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-162.com on kushana04 at Tue Aug 26 13:17:00 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-164.com on kushana02 at Tue Aug 26 13:20:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-163.com on kushana04 at Tue Aug 26 13:17:05 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-165.com on kushana02 at Tue Aug 26 13:20:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-166.com on kushana04 at Tue Aug 26 13:17:06 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-167.com on kushana02 at Tue Aug 26 13:20:27 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-168.com on kushana04 at Tue Aug 26 13:17:11 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-169.com on kushana02 at Tue Aug 26 13:20:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-171.com on kushana04 at Tue Aug 26 13:17:12 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-172.com on kushana02 at Tue Aug 26 13:20:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-173.com on kushana04 at Tue Aug 26 13:17:18 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-187.com on kushana04 at Tue Aug 26 13:17:19 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-174.com on kushana02 at Tue Aug 26 13:20:39 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-175.com on kushana04 at Tue Aug 26 13:17:24 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-188.com on kushana02 at Tue Aug 26 13:20:40 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-190.com on kushana02 at Tue Aug 26 13:20:40 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-191.com on kushana04 at Tue Aug 26 13:17:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-189.com on kushana04 at Tue Aug 26 13:17:30 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-193.com on kushana02 at Tue Aug 26 13:20:46 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-194.com on kushana02 at Tue Aug 26 13:20:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-195.com on kushana04 at Tue Aug 26 13:17:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-196.com on kushana04 at Tue Aug 26 13:17:37 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-197.com on kushana02 at Tue Aug 26 13:20:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-198.com on kushana02 at Tue Aug 26 13:20:58 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-199.com on kushana04 at Tue Aug 26 13:17:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-200.com on kushana04 at Tue Aug 26 13:17:43 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-201.com on kushana02 at Tue Aug 26 13:20:59 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-202.com on kushana02 at Tue Aug 26 13:21:05 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-204.com on kushana04 at Tue Aug 26 13:17:49 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-206.com on kushana04 at Tue Aug 26 13:17:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-207.com on kushana02 at Tue Aug 26 13:21:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-209.com on kushana04 at Tue Aug 26 13:18:01 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-210.com on kushana02 at Tue Aug 26 13:21:17 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-211.com on kushana04 at Tue Aug 26 13:18:02 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-212.com on kushana02 at Tue Aug 26 13:21:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-208.com on kushana04 at Tue Aug 26 13:18:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-213.com on kushana04 at Tue Aug 26 13:18:14 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-215.com on kushana02 at Tue Aug 26 13:21:30 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-205.com on kushana02 at Tue Aug 26 13:21:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-217.com on kushana04 at Tue Aug 26 13:18:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-218.com on kushana02 at Tue Aug 26 13:21:36 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-219.com on kushana02 at Tue Aug 26 13:21:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-220.com on kushana04 at Tue Aug 26 13:18:26 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-216.com on kushana04 at Tue Aug 26 13:18:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-221.com on kushana02 at Tue Aug 26 13:21:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-222.com on kushana04 at Tue Aug 26 13:18:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-226.com on kushana02 at Tue Aug 26 13:21:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-223.com on kushana04 at Tue Aug 26 13:18:33 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-227.com on kushana04 at Tue Aug 26 13:18:34 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-228.com on kushana02 at Tue Aug 26 13:21:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-224.com on kushana02 at Tue Aug 26 13:21:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-229.com on kushana04 at Tue Aug 26 13:18:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-230.com on kushana04 at Tue Aug 26 13:18:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-231.com on kushana02 at Tue Aug 26 13:22:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-232.com on kushana04 at Tue Aug 26 13:18:46 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-233.com on kushana02 at Tue Aug 26 13:22:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-234.com on kushana04 at Tue Aug 26 13:18:52 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-235.com on kushana02 at Tue Aug 26 13:22:08 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-237.com on kushana04 at Tue Aug 26 13:18:52 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-238.com on kushana02 at Tue Aug 26 13:22:14 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-239.com on kushana04 at Tue Aug 26 13:18:58 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-240.com on kushana02 at Tue Aug 26 13:22:14 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-241.com on kushana04 at Tue Aug 26 13:18:59 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-242.com on kushana02 at Tue Aug 26 13:22:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-243.com on kushana04 at Tue Aug 26 13:19:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-245.com on kushana04 at Tue Aug 26 13:19:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-248.com on kushana04 at Tue Aug 26 13:19:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-249.com on kushana04 at Tue Aug 26 13:19:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-250.com on kushana04 at Tue Aug 26 13:19:03 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-251.com on kushana04 at Tue Aug 26 13:19:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-252.com on kushana04 at Tue Aug 26 13:19:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-253.com on kushana04 at Tue Aug 26 13:19:05 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-244.com on kushana02 at Tue Aug 26 13:22:21 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-254.com on kushana04 at Tue Aug 26 13:19:05 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-246.com on kushana02 at Tue Aug 26 13:22:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-255.com on kushana04 at Tue Aug 26 13:19:06 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-256.com on kushana02 at Tue Aug 26 13:22:27 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-257.com on kushana04 at Tue Aug 26 13:19:12 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-259.com on kushana02 at Tue Aug 26 13:22:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-260.com on kushana04 at Tue Aug 26 13:19:12 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-261.com on kushana02 at Tue Aug 26 13:22:33 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-262.com on kushana04 at Tue Aug 26 13:19:18 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-264.com on kushana04 at Tue Aug 26 13:19:19 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-265.com on kushana02 at Tue Aug 26 13:22:35 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-263.com on kushana02 at Tue Aug 26 13:22:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-266.com on kushana04 at Tue Aug 26 13:19:24 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-270.com on kushana02 at Tue Aug 26 13:22:40 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-267.com on kushana04 at Tue Aug 26 13:19:30 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-268.com on kushana02 at Tue Aug 26 13:22:46 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-271.com on kushana04 at Tue Aug 26 13:19:31 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-272.com on kushana02 at Tue Aug 26 13:22:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-273.com on kushana04 at Tue Aug 26 13:19:36 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-274.com on kushana02 at Tue Aug 26 13:22:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-275.com on kushana04 at Tue Aug 26 13:19:37 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-276.com on kushana02 at Tue Aug 26 13:22:53 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-277.com on kushana04 at Tue Aug 26 13:19:38 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-278.com on kushana02 at Tue Aug 26 13:22:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-279.com on kushana04 at Tue Aug 26 13:19:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-281.com on kushana02 at Tue Aug 26 13:23:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-282.com on kushana04 at Tue Aug 26 13:19:44 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-283.com on kushana02 at Tue Aug 26 13:23:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-284.com on kushana04 at Tue Aug 26 13:19:50 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-285.com on kushana02 at Tue Aug 26 13:23:06 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-286.com on kushana04 at Tue Aug 26 13:19:51 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-287.com on kushana02 at Tue Aug 26 13:23:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-288.com on kushana04 at Tue Aug 26 13:19:56 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-289.com on kushana02 at Tue Aug 26 13:23:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-290.com on kushana04 at Tue Aug 26 13:20:02 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-292.com on kushana02 at Tue Aug 26 13:23:18 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-293.com on kushana04 at Tue Aug 26 13:20:03 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-294.com on kushana02 at Tue Aug 26 13:23:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-295.com on kushana04 at Tue Aug 26 13:20:08 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-296.com on kushana02 at Tue Aug 26 13:23:24 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-308.com on kushana04 at Tue Aug 26 13:20:09 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-309.com on kushana02 at Tue Aug 26 13:23:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-310.com on kushana04 at Tue Aug 26 13:20:10 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-311.com on kushana02 at Tue Aug 26 13:23:26 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-312.com on kushana04 at Tue Aug 26 13:20:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-314.com on kushana02 at Tue Aug 26 13:23:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-315.com on kushana04 at Tue Aug 26 13:20:17 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-316.com on kushana02 at Tue Aug 26 13:23:32 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-318.com on kushana02 at Tue Aug 26 13:23:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-317.com on kushana04 at Tue Aug 26 13:20:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-319.com on kushana04 at Tue Aug 26 13:20:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-320.com on kushana02 at Tue Aug 26 13:23:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-321.com on kushana02 at Tue Aug 26 13:23:44 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-322.com on kushana04 at Tue Aug 26 13:20:29 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-323.com on kushana02 at Tue Aug 26 13:23:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-325.com on kushana04 at Tue Aug 26 13:20:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-326.com on kushana02 at Tue Aug 26 13:23:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-327.com on kushana04 at Tue Aug 26 13:20:40 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-328.com on kushana02 at Tue Aug 26 13:23:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-329.com on kushana04 at Tue Aug 26 13:20:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-330.com on kushana02 at Tue Aug 26 13:23:57 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-331.com on kushana04 at Tue Aug 26 13:20:41 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-332.com on kushana02 at Tue Aug 26 13:23:58 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-333.com on kushana04 at Tue Aug 26 13:20:47 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-336.com on kushana02 at Tue Aug 26 13:24:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-334.com on kushana04 at Tue Aug 26 13:20:47 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-337.com on kushana02 at Tue Aug 26 13:24:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-338.com on kushana04 at Tue Aug 26 13:20:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-340.com on kushana04 at Tue Aug 26 13:20:49 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-339.com on kushana02 at Tue Aug 26 13:24:10 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-341.com on kushana02 at Tue Aug 26 13:24:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-342.com on kushana04 at Tue Aug 26 13:20:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-344.com on kushana02 at Tue Aug 26 13:24:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-343.com on kushana04 at Tue Aug 26 13:20:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-345.com on kushana02 at Tue Aug 26 13:24:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-347.com on kushana04 at Tue Aug 26 13:21:06 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-348.com on kushana02 at Tue Aug 26 13:24:22 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-349.com on kushana04 at Tue Aug 26 13:21:07 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-350.com on kushana02 at Tue Aug 26 13:24:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-351.com on kushana04 at Tue Aug 26 13:21:13 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-352.com on kushana02 at Tue Aug 26 13:24:29 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-356.com on kushana02 at Tue Aug 26 13:24:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-353.com on kushana04 at Tue Aug 26 13:21:18 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-355.com on kushana04 at Tue Aug 26 13:21:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-360.com on kushana04 at Tue Aug 26 13:21:20 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-358.com on kushana02 at Tue Aug 26 13:24:41 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-362.com on kushana02 at Tue Aug 26 13:24:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-361.com on kushana04 at Tue Aug 26 13:21:27 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-363.com on kushana02 at Tue Aug 26 13:24:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-364.com on kushana04 at Tue Aug 26 13:21:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-354.com on kushana02 at Tue Aug 26 13:24:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-365.com on kushana04 at Tue Aug 26 13:21:44 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-366.com on kushana02 at Tue Aug 26 13:25:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-359.com on kushana04 at Tue Aug 26 13:21:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-367.com on kushana02 at Tue Aug 26 13:25:01 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-369.com on kushana02 at Tue Aug 26 13:25:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-370.com on kushana04 at Tue Aug 26 13:21:46 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-371.com on kushana04 at Tue Aug 26 13:21:46 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-372.com on kushana02 at Tue Aug 26 13:25:07 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-373.com on kushana02 at Tue Aug 26 13:25:08 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-374.com on kushana04 at Tue Aug 26 13:21:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-375.com on kushana04 at Tue Aug 26 13:21:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-376.com on kushana02 at Tue Aug 26 13:25:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-378.com on kushana04 at Tue Aug 26 13:21:54 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-377.com on kushana02 at Tue Aug 26 13:25:15 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-380.com on kushana02 at Tue Aug 26 13:25:20 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-381.com on kushana04 at Tue Aug 26 13:22:05 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-383.com on kushana02 at Tue Aug 26 13:25:21 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-385.com on kushana02 at Tue Aug 26 13:25:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-382.com on kushana04 at Tue Aug 26 13:22:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-384.com on kushana04 at Tue Aug 26 13:22:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-386.com on kushana02 at Tue Aug 26 13:25:33 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-388.com on kushana04 at Tue Aug 26 13:22:17 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-389.com on kushana04 at Tue Aug 26 13:22:17 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-387.com on kushana02 at Tue Aug 26 13:25:33 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-391.com on kushana02 at Tue Aug 26 13:25:34 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-392.com on kushana04 at Tue Aug 26 13:22:18 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-393.com on kushana02 at Tue Aug 26 13:25:35 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-394.com on kushana04 at Tue Aug 26 13:22:19 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-395.com on kushana02 at Tue Aug 26 13:25:35 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-396.com on kushana04 at Tue Aug 26 13:22:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-397.com on kushana02 at Tue Aug 26 13:25:36 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-398.com on kushana04 at Tue Aug 26 13:22:20 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-403.com on kushana04 at Tue Aug 26 13:22:22 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-404.com on kushana04 at Tue Aug 26 13:22:23 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-405.com on kushana04 at Tue Aug 26 13:22:24 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-406.com on kushana04 at Tue Aug 26 13:22:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-399.com on kushana02 at Tue Aug 26 13:25:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-400.com on kushana04 at Tue Aug 26 13:22:36 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-402.com on kushana02 at Tue Aug 26 13:25:53 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-407.com on kushana04 at Tue Aug 26 13:22:42 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-408.com on kushana02 at Tue Aug 26 13:25:58 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-409.com on kushana04 at Tue Aug 26 13:22:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-410.com on kushana02 at Tue Aug 26 13:26:04 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-411.com on kushana04 at Tue Aug 26 13:22:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-413.com on kushana02 at Tue Aug 26 13:26:04 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-416.com on kushana04 at Tue Aug 26 13:22:50 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-429.com on kushana04 at Tue Aug 26 13:22:51 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-430.com on kushana04 at Tue Aug 26 13:22:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-431.com on kushana04 at Tue Aug 26 13:22:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-432.com on kushana04 at Tue Aug 26 13:22:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-414.com on kushana04 at Tue Aug 26 13:22:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-433.com on kushana04 at Tue Aug 26 13:23:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-436.com on kushana04 at Tue Aug 26 13:23:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-437.com on kushana04 at Tue Aug 26 13:23:04 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-438.com on kushana04 at Tue Aug 26 13:23:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-439.com on kushana04 at Tue Aug 26 13:23:06 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-440.com on kushana04 at Tue Aug 26 13:23:08 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-441.com on kushana04 at Tue Aug 26 13:23:09 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-417.com on kushana02 at Tue Aug 26 13:26:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-443.com on kushana02 at Tue Aug 26 13:26:30 JST 2014
+Thread3@kushana02.local> do_ypcall: clnt_call: RPC: Timed out
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-415.com on kushana02 at Tue Aug 26 13:26:35 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-444.com on kushana02 at Tue Aug 26 13:26:36 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-435.com on kushana04 at Tue Aug 26 13:23:20 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-442.com on kushana04 at Tue Aug 26 13:23:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-446.com on kushana02 at Tue Aug 26 13:26:41 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-447.com on kushana02 at Tue Aug 26 13:26:42 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-448.com on kushana04 at Tue Aug 26 13:23:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-450.com on kushana02 at Tue Aug 26 13:26:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-449.com on kushana04 at Tue Aug 26 13:23:32 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-451.com on kushana02 at Tue Aug 26 13:26:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-455.com on kushana02 at Tue Aug 26 13:26:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-452.com on kushana04 at Tue Aug 26 13:23:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-458.com on kushana04 at Tue Aug 26 13:23:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-457.com on kushana02 at Tue Aug 26 13:26:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-459.com on kushana04 at Tue Aug 26 13:23:41 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-460.com on kushana02 at Tue Aug 26 13:27:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-461.com on kushana04 at Tue Aug 26 13:23:47 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-462.com on kushana02 at Tue Aug 26 13:27:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-463.com on kushana04 at Tue Aug 26 13:23:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-453.com on kushana02 at Tue Aug 26 13:27:09 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-454.com on kushana04 at Tue Aug 26 13:23:53 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-465.com on kushana04 at Tue Aug 26 13:23:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-469.com on kushana04 at Tue Aug 26 13:23:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-470.com on kushana04 at Tue Aug 26 13:23:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-471.com on kushana04 at Tue Aug 26 13:23:58 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-464.com on kushana02 at Tue Aug 26 13:27:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-472.com on kushana04 at Tue Aug 26 13:23:59 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-466.com on kushana02 at Tue Aug 26 13:27:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-468.com on kushana04 at Tue Aug 26 13:24:00 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-473.com on kushana02 at Tue Aug 26 13:27:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-474.com on kushana04 at Tue Aug 26 13:24:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-476.com on kushana04 at Tue Aug 26 13:24:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-479.com on kushana04 at Tue Aug 26 13:24:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-480.com on kushana04 at Tue Aug 26 13:24:03 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-481.com on kushana04 at Tue Aug 26 13:24:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-483.com on kushana04 at Tue Aug 26 13:24:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-482.com on kushana04 at Tue Aug 26 13:24:14 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-485.com on kushana04 at Tue Aug 26 13:24:16 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-484.com on kushana04 at Tue Aug 26 13:24:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-487.com on kushana04 at Tue Aug 26 13:24:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-488.com on kushana04 at Tue Aug 26 13:24:24 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-490.com on kushana04 at Tue Aug 26 13:24:26 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-486.com on kushana04 at Tue Aug 26 13:24:27 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-477.com on kushana02 at Tue Aug 26 13:27:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-475.com on kushana02 at Tue Aug 26 13:27:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-491.com on kushana04 at Tue Aug 26 13:24:32 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-494.com on kushana02 at Tue Aug 26 13:27:48 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-495.com on kushana04 at Tue Aug 26 13:24:33 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-492.com on kushana02 at Tue Aug 26 13:27:54 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-497.com on kushana04 at Tue Aug 26 13:24:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-493.com on kushana04 at Tue Aug 26 13:24:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-501.com on kushana04 at Tue Aug 26 13:24:45 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-499.com on kushana04 at Tue Aug 26 13:24:46 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-502.com on kushana04 at Tue Aug 26 13:24:46 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-503.com on kushana04 at Tue Aug 26 13:24:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-504.com on kushana04 at Tue Aug 26 13:24:48 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-496.com on kushana02 at Tue Aug 26 13:28:10 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-498.com on kushana02 at Tue Aug 26 13:28:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-505.com on kushana04 at Tue Aug 26 13:24:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-506.com on kushana04 at Tue Aug 26 13:25:04 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-507.com on kushana02 at Tue Aug 26 13:28:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-509.com on kushana04 at Tue Aug 26 13:25:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-510.com on kushana04 at Tue Aug 26 13:25:05 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-508.com on kushana02 at Tue Aug 26 13:28:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-512.com on kushana02 at Tue Aug 26 13:28:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-513.com on kushana04 at Tue Aug 26 13:25:07 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-514.com on kushana04 at Tue Aug 26 13:25:07 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-515.com on kushana02 at Tue Aug 26 13:28:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-516.com on kushana02 at Tue Aug 26 13:28:34 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-517.com on kushana04 at Tue Aug 26 13:25:18 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-518.com on kushana04 at Tue Aug 26 13:25:18 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-519.com on kushana02 at Tue Aug 26 13:28:35 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-520.com on kushana02 at Tue Aug 26 13:28:35 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-521.com on kushana04 at Tue Aug 26 13:25:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-525.com on kushana04 at Tue Aug 26 13:25:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-527.com on kushana04 at Tue Aug 26 13:25:22 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-523.com on kushana04 at Tue Aug 26 13:25:25 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-524.com on kushana02 at Tue Aug 26 13:28:41 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-526.com on kushana02 at Tue Aug 26 13:28:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-529.com on kushana04 at Tue Aug 26 13:25:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-530.com on kushana02 at Tue Aug 26 13:28:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-531.com on kushana02 at Tue Aug 26 13:28:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-532.com on kushana04 at Tue Aug 26 13:25:33 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-534.com on kushana02 at Tue Aug 26 13:28:54 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-528.com on kushana04 at Tue Aug 26 13:25:38 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-535.com on kushana02 at Tue Aug 26 13:28:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-536.com on kushana04 at Tue Aug 26 13:25:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-537.com on kushana02 at Tue Aug 26 13:29:06 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-538.com on kushana04 at Tue Aug 26 13:25:50 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-550.com on kushana02 at Tue Aug 26 13:29:06 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-551.com on kushana04 at Tue Aug 26 13:25:50 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-552.com on kushana02 at Tue Aug 26 13:29:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-553.com on kushana04 at Tue Aug 26 13:25:56 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-557.com on kushana02 at Tue Aug 26 13:29:13 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-558.com on kushana04 at Tue Aug 26 13:25:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-560.com on kushana04 at Tue Aug 26 13:25:59 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-554.com on kushana02 at Tue Aug 26 13:29:23 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-559.com on kushana02 at Tue Aug 26 13:29:25 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-563.com on kushana02 at Tue Aug 26 13:29:26 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-561.com on kushana04 at Tue Aug 26 13:26:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-556.com on kushana04 at Tue Aug 26 13:26:17 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-564.com on kushana02 at Tue Aug 26 13:29:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-565.com on kushana04 at Tue Aug 26 13:26:21 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-568.com on kushana02 at Tue Aug 26 13:29:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-569.com on kushana04 at Tue Aug 26 13:26:28 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-567.com on kushana04 at Tue Aug 26 13:26:28 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-562.com on kushana02 at Tue Aug 26 13:29:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-570.com on kushana04 at Tue Aug 26 13:26:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-571.com on kushana02 at Tue Aug 26 13:29:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-572.com on kushana04 at Tue Aug 26 13:26:39 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-573.com on kushana02 at Tue Aug 26 13:29:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-574.com on kushana04 at Tue Aug 26 13:26:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-575.com on kushana04 at Tue Aug 26 13:26:41 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-576.com on kushana02 at Tue Aug 26 13:29:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-580.com on kushana04 at Tue Aug 26 13:26:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-581.com on kushana04 at Tue Aug 26 13:26:42 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-578.com on kushana02 at Tue Aug 26 13:30:02 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-579.com on kushana02 at Tue Aug 26 13:30:08 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-584.com on kushana02 at Tue Aug 26 13:30:08 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-582.com on kushana04 at Tue Aug 26 13:26:54 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-585.com on kushana02 at Tue Aug 26 13:30:10 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-586.com on kushana02 at Tue Aug 26 13:30:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-583.com on kushana04 at Tue Aug 26 13:26:59 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-587.com on kushana04 at Tue Aug 26 13:27:00 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-589.com on kushana02 at Tue Aug 26 13:30:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-591.com on kushana04 at Tue Aug 26 13:27:01 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-590.com on kushana02 at Tue Aug 26 13:30:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-592.com on kushana04 at Tue Aug 26 13:27:02 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-593.com on kushana02 at Tue Aug 26 13:30:18 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-594.com on kushana04 at Tue Aug 26 13:27:02 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-595.com on kushana02 at Tue Aug 26 13:30:18 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-596.com on kushana04 at Tue Aug 26 13:27:08 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-597.com on kushana02 at Tue Aug 26 13:30:29 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-598.com on kushana04 at Tue Aug 26 13:27:14 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-600.com on kushana02 at Tue Aug 26 13:30:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-603.com on kushana04 at Tue Aug 26 13:27:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-601.com on kushana04 at Tue Aug 26 13:27:24 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-602.com on kushana02 at Tue Aug 26 13:30:41 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-604.com on kushana02 at Tue Aug 26 13:30:41 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-727.com on kushana04 at Tue Aug 26 13:27:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-728.com on kushana02 at Tue Aug 26 13:30:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-726.com on kushana04 at Tue Aug 26 13:27:26 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-729.com on kushana02 at Tue Aug 26 13:30:48 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-730.com on kushana04 at Tue Aug 26 13:27:32 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-732.com on kushana02 at Tue Aug 26 13:30:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-733.com on kushana04 at Tue Aug 26 13:27:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-734.com on kushana02 at Tue Aug 26 13:30:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-735.com on kushana04 at Tue Aug 26 13:27:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-736.com on kushana02 at Tue Aug 26 13:30:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-737.com on kushana04 at Tue Aug 26 13:27:44 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-738.com on kushana02 at Tue Aug 26 13:31:01 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-739.com on kushana04 at Tue Aug 26 13:27:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-743.com on kushana02 at Tue Aug 26 13:31:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-744.com on kushana04 at Tue Aug 26 13:27:46 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-746.com on kushana04 at Tue Aug 26 13:27:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-740.com on kushana02 at Tue Aug 26 13:31:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-741.com on kushana04 at Tue Aug 26 13:27:56 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-748.com on kushana02 at Tue Aug 26 13:31:13 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-749.com on kushana04 at Tue Aug 26 13:27:57 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-745.com on kushana02 at Tue Aug 26 13:31:18 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-750.com on kushana02 at Tue Aug 26 13:31:19 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-751.com on kushana04 at Tue Aug 26 13:28:03 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-752.com on kushana02 at Tue Aug 26 13:31:20 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-747.com on kushana04 at Tue Aug 26 13:28:04 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-754.com on kushana04 at Tue Aug 26 13:28:10 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-755.com on kushana02 at Tue Aug 26 13:31:25 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-756.com on kushana02 at Tue Aug 26 13:31:31 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-757.com on kushana04 at Tue Aug 26 13:28:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-758.com on kushana04 at Tue Aug 26 13:28:16 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-759.com on kushana02 at Tue Aug 26 13:31:32 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-760.com on kushana02 at Tue Aug 26 13:31:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-761.com on kushana04 at Tue Aug 26 13:28:22 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-762.com on kushana02 at Tue Aug 26 13:31:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-763.com on kushana04 at Tue Aug 26 13:28:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-765.com on kushana02 at Tue Aug 26 13:31:39 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-766.com on kushana04 at Tue Aug 26 13:28:23 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-767.com on kushana02 at Tue Aug 26 13:31:45 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-768.com on kushana04 at Tue Aug 26 13:28:29 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-769.com on kushana02 at Tue Aug 26 13:31:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-770.com on kushana04 at Tue Aug 26 13:28:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-771.com on kushana02 at Tue Aug 26 13:31:51 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-772.com on kushana04 at Tue Aug 26 13:28:35 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-773.com on kushana02 at Tue Aug 26 13:31:52 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-774.com on kushana04 at Tue Aug 26 13:28:36 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-776.com on kushana02 at Tue Aug 26 13:31:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-777.com on kushana04 at Tue Aug 26 13:28:42 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-778.com on kushana04 at Tue Aug 26 13:28:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-792.com on kushana04 at Tue Aug 26 13:28:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-779.com on kushana02 at Tue Aug 26 13:32:03 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-780.com on kushana02 at Tue Aug 26 13:32:04 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-793.com on kushana04 at Tue Aug 26 13:28:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-795.com on kushana04 at Tue Aug 26 13:28:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-799.com on kushana04 at Tue Aug 26 13:28:52 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-800.com on kushana04 at Tue Aug 26 13:28:53 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-801.com on kushana04 at Tue Aug 26 13:28:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-794.com on kushana04 at Tue Aug 26 13:28:54 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-802.com on kushana04 at Tue Aug 26 13:28:56 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-803.com on kushana04 at Tue Aug 26 13:28:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-796.com on kushana02 at Tue Aug 26 13:32:12 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-798.com on kushana02 at Tue Aug 26 13:32:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-804.com on kushana04 at Tue Aug 26 13:28:57 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-805.com on kushana04 at Tue Aug 26 13:29:02 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-806.com on kushana02 at Tue Aug 26 13:32:18 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-807.com on kushana02 at Tue Aug 26 13:32:18 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-809.com on kushana04 at Tue Aug 26 13:29:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-810.com on kushana04 at Tue Aug 26 13:29:04 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-811.com on kushana02 at Tue Aug 26 13:32:25 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-812.com on kushana02 at Tue Aug 26 13:32:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-813.com on kushana04 at Tue Aug 26 13:29:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-814.com on kushana04 at Tue Aug 26 13:29:15 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-815.com on kushana02 at Tue Aug 26 13:32:31 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-816.com on kushana02 at Tue Aug 26 13:32:31 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-817.com on kushana04 at Tue Aug 26 13:29:21 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-818.com on kushana04 at Tue Aug 26 13:29:26 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-820.com on kushana02 at Tue Aug 26 13:32:43 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-821.com on kushana02 at Tue Aug 26 13:32:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-822.com on kushana04 at Tue Aug 26 13:29:27 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-823.com on kushana04 at Tue Aug 26 13:29:28 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-824.com on kushana02 at Tue Aug 26 13:32:44 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-825.com on kushana02 at Tue Aug 26 13:32:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-826.com on kushana04 at Tue Aug 26 13:29:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-827.com on kushana04 at Tue Aug 26 13:29:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-832.com on kushana04 at Tue Aug 26 13:29:35 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-833.com on kushana04 at Tue Aug 26 13:29:37 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-834.com on kushana04 at Tue Aug 26 13:29:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-835.com on kushana04 at Tue Aug 26 13:29:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-829.com on kushana02 at Tue Aug 26 13:32:56 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-836.com on kushana04 at Tue Aug 26 13:29:41 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-837.com on kushana02 at Tue Aug 26 13:32:57 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-838.com on kushana04 at Tue Aug 26 13:29:42 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-839.com on kushana02 at Tue Aug 26 13:33:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-840.com on kushana04 at Tue Aug 26 13:29:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-842.com on kushana02 at Tue Aug 26 13:33:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-843.com on kushana04 at Tue Aug 26 13:29:54 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-828.com on kushana02 at Tue Aug 26 13:33:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-845.com on kushana04 at Tue Aug 26 13:29:56 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-847.com on kushana04 at Tue Aug 26 13:29:57 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-848.com on kushana04 at Tue Aug 26 13:29:59 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-844.com on kushana02 at Tue Aug 26 13:33:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-849.com on kushana04 at Tue Aug 26 13:30:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-831.com on kushana04 at Tue Aug 26 13:30:00 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-846.com on kushana02 at Tue Aug 26 13:33:22 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-850.com on kushana02 at Tue Aug 26 13:33:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-853.com on kushana04 at Tue Aug 26 13:30:07 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-856.com on kushana04 at Tue Aug 26 13:30:08 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-857.com on kushana04 at Tue Aug 26 13:30:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-858.com on kushana04 at Tue Aug 26 13:30:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-851.com on kushana04 at Tue Aug 26 13:30:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-859.com on kushana04 at Tue Aug 26 13:30:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-861.com on kushana04 at Tue Aug 26 13:30:18 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-862.com on kushana04 at Tue Aug 26 13:30:20 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-864.com on kushana04 at Tue Aug 26 13:30:26 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-854.com on kushana02 at Tue Aug 26 13:33:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-865.com on kushana04 at Tue Aug 26 13:30:27 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-855.com on kushana02 at Tue Aug 26 13:33:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-860.com on kushana04 at Tue Aug 26 13:30:28 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-866.com on kushana02 at Tue Aug 26 13:33:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-867.com on kushana04 at Tue Aug 26 13:30:29 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-869.com on kushana04 at Tue Aug 26 13:30:30 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-871.com on kushana04 at Tue Aug 26 13:30:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-872.com on kushana04 at Tue Aug 26 13:30:31 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-873.com on kushana04 at Tue Aug 26 13:30:37 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-875.com on kushana04 at Tue Aug 26 13:30:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-876.com on kushana04 at Tue Aug 26 13:30:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-877.com on kushana04 at Tue Aug 26 13:30:44 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-868.com on kushana02 at Tue Aug 26 13:34:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-878.com on kushana04 at Tue Aug 26 13:30:44 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-879.com on kushana04 at Tue Aug 26 13:30:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-870.com on kushana02 at Tue Aug 26 13:34:11 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-883.com on kushana02 at Tue Aug 26 13:34:15 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-884.com on kushana02 at Tue Aug 26 13:34:16 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-880.com on kushana02 at Tue Aug 26 13:34:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-882.com on kushana04 at Tue Aug 26 13:31:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-881.com on kushana04 at Tue Aug 26 13:31:06 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-886.com on kushana02 at Tue Aug 26 13:34:22 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-887.com on kushana02 at Tue Aug 26 13:34:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-889.com on kushana04 at Tue Aug 26 13:31:07 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-890.com on kushana02 at Tue Aug 26 13:34:28 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-891.com on kushana02 at Tue Aug 26 13:34:29 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-894.com on kushana02 at Tue Aug 26 13:34:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-888.com on kushana04 at Tue Aug 26 13:31:18 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-895.com on kushana02 at Tue Aug 26 13:34:37 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-898.com on kushana02 at Tue Aug 26 13:34:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-893.com on kushana02 at Tue Aug 26 13:34:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-899.com on kushana02 at Tue Aug 26 13:34:49 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-892.com on kushana04 at Tue Aug 26 13:31:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-897.com on kushana04 at Tue Aug 26 13:31:34 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-901.com on kushana02 at Tue Aug 26 13:34:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-900.com on kushana02 at Tue Aug 26 13:34:56 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-913.com on kushana04 at Tue Aug 26 13:31:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-914.com on kushana04 at Tue Aug 26 13:31:46 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-915.com on kushana02 at Tue Aug 26 13:35:02 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-916.com on kushana04 at Tue Aug 26 13:31:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-919.com on kushana04 at Tue Aug 26 13:31:52 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-920.com on kushana02 at Tue Aug 26 13:35:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-921.com on kushana04 at Tue Aug 26 13:31:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-917.com on kushana02 at Tue Aug 26 13:35:13 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-922.com on kushana04 at Tue Aug 26 13:31:58 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-925.com on kushana02 at Tue Aug 26 13:35:14 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-923.com on kushana02 at Tue Aug 26 13:35:20 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-924.com on kushana04 at Tue Aug 26 13:32:04 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-926.com on kushana04 at Tue Aug 26 13:32:04 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-927.com on kushana02 at Tue Aug 26 13:35:20 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-928.com on kushana02 at Tue Aug 26 13:35:21 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-930.com on kushana04 at Tue Aug 26 13:32:06 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-931.com on kushana02 at Tue Aug 26 13:35:22 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-932.com on kushana04 at Tue Aug 26 13:32:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-933.com on kushana02 at Tue Aug 26 13:35:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-934.com on kushana04 at Tue Aug 26 13:32:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-936.com on kushana04 at Tue Aug 26 13:32:12 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-935.com on kushana02 at Tue Aug 26 13:35:28 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-937.com on kushana04 at Tue Aug 26 13:32:14 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-939.com on kushana04 at Tue Aug 26 13:32:16 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-943.com on kushana04 at Tue Aug 26 13:32:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-944.com on kushana04 at Tue Aug 26 13:32:23 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-938.com on kushana04 at Tue Aug 26 13:32:24 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-945.com on kushana04 at Tue Aug 26 13:32:25 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-946.com on kushana04 at Tue Aug 26 13:32:31 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-942.com on kushana02 at Tue Aug 26 13:35:47 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-941.com on kushana02 at Tue Aug 26 13:35:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-947.com on kushana04 at Tue Aug 26 13:32:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-948.com on kushana04 at Tue Aug 26 13:32:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-952.com on kushana04 at Tue Aug 26 13:32:32 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-949.com on kushana02 at Tue Aug 26 13:35:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-950.com on kushana02 at Tue Aug 26 13:35:53 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-953.com on kushana04 at Tue Aug 26 13:32:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-957.com on kushana04 at Tue Aug 26 13:32:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-958.com on kushana04 at Tue Aug 26 13:32:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-959.com on kushana04 at Tue Aug 26 13:32:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-960.com on kushana04 at Tue Aug 26 13:32:44 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-955.com on kushana02 at Tue Aug 26 13:36:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-954.com on kushana04 at Tue Aug 26 13:32:44 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-956.com on kushana02 at Tue Aug 26 13:36:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-961.com on kushana04 at Tue Aug 26 13:32:50 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-963.com on kushana02 at Tue Aug 26 13:36:11 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-966.com on kushana04 at Tue Aug 26 13:32:56 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-965.com on kushana02 at Tue Aug 26 13:36:16 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-967.com on kushana02 at Tue Aug 26 13:36:17 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-968.com on kushana04 at Tue Aug 26 13:33:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-971.com on kushana04 at Tue Aug 26 13:33:04 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-970.com on kushana02 at Tue Aug 26 13:36:24 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-974.com on kushana02 at Tue Aug 26 13:36:25 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-969.com on kushana02 at Tue Aug 26 13:36:28 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-972.com on kushana04 at Tue Aug 26 13:33:15 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-964.com on kushana04 at Tue Aug 26 13:33:15 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-975.com on kushana02 at Tue Aug 26 13:36:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-977.com on kushana04 at Tue Aug 26 13:33:22 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-978.com on kushana02 at Tue Aug 26 13:36:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-979.com on kushana04 at Tue Aug 26 13:33:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-976.com on kushana02 at Tue Aug 26 13:36:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-980.com on kushana02 at Tue Aug 26 13:36:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-981.com on kushana04 at Tue Aug 26 13:33:23 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-982.com on kushana04 at Tue Aug 26 13:33:28 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-983.com on kushana02 at Tue Aug 26 13:36:45 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-985.com on kushana04 at Tue Aug 26 13:33:30 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-986.com on kushana02 at Tue Aug 26 13:36:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-987.com on kushana04 at Tue Aug 26 13:33:35 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-988.com on kushana02 at Tue Aug 26 13:36:52 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-989.com on kushana04 at Tue Aug 26 13:33:36 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-990.com on kushana02 at Tue Aug 26 13:36:52 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-991.com on kushana04 at Tue Aug 26 13:33:41 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-992.com on kushana02 at Tue Aug 26 13:36:58 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-993.com on kushana04 at Tue Aug 26 13:33:42 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-994.com on kushana02 at Tue Aug 26 13:37:03 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-996.com on kushana04 at Tue Aug 26 13:33:48 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-997.com on kushana02 at Tue Aug 26 13:37:04 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-998.com on kushana04 at Tue Aug 26 13:33:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-999.com on kushana02 at Tue Aug 26 13:37:05 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1000.com on kushana04 at Tue Aug 26 13:33:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1001.com on kushana04 at Tue Aug 26 13:33:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1002.com on kushana02 at Tue Aug 26 13:37:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1004.com on kushana04 at Tue Aug 26 13:34:00 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1003.com on kushana02 at Tue Aug 26 13:37:16 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1005.com on kushana04 at Tue Aug 26 13:34:01 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1007.com on kushana02 at Tue Aug 26 13:37:17 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1008.com on kushana04 at Tue Aug 26 13:34:07 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1010.com on kushana04 at Tue Aug 26 13:34:12 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1012.com on kushana04 at Tue Aug 26 13:34:13 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1014.com on kushana04 at Tue Aug 26 13:34:14 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1013.com on kushana04 at Tue Aug 26 13:34:19 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1016.com on kushana04 at Tue Aug 26 13:34:20 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1018.com on kushana04 at Tue Aug 26 13:34:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1015.com on kushana04 at Tue Aug 26 13:34:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1009.com on kushana02 at Tue Aug 26 13:37:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1011.com on kushana02 at Tue Aug 26 13:37:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1020.com on kushana04 at Tue Aug 26 13:34:27 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1022.com on kushana02 at Tue Aug 26 13:37:46 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1034.com on kushana02 at Tue Aug 26 13:37:46 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1035.com on kushana02 at Tue Aug 26 13:37:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1036.com on kushana02 at Tue Aug 26 13:37:48 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1019.com on kushana04 at Tue Aug 26 13:34:33 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1040.com on kushana04 at Tue Aug 26 13:34:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1041.com on kushana04 at Tue Aug 26 13:34:35 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1042.com on kushana04 at Tue Aug 26 13:34:37 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1043.com on kushana04 at Tue Aug 26 13:34:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1021.com on kushana04 at Tue Aug 26 13:34:38 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1037.com on kushana02 at Tue Aug 26 13:37:54 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1038.com on kushana02 at Tue Aug 26 13:37:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1044.com on kushana04 at Tue Aug 26 13:34:40 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1045.com on kushana04 at Tue Aug 26 13:34:40 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1049.com on kushana04 at Tue Aug 26 13:34:41 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1051.com on kushana04 at Tue Aug 26 13:34:43 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1052.com on kushana04 at Tue Aug 26 13:34:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1053.com on kushana04 at Tue Aug 26 13:34:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1046.com on kushana02 at Tue Aug 26 13:38:06 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1047.com on kushana02 at Tue Aug 26 13:38:06 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1048.com on kushana04 at Tue Aug 26 13:34:51 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1054.com on kushana04 at Tue Aug 26 13:34:51 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1058.com on kushana04 at Tue Aug 26 13:34:53 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1059.com on kushana04 at Tue Aug 26 13:34:54 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1060.com on kushana04 at Tue Aug 26 13:34:56 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1055.com on kushana02 at Tue Aug 26 13:38:13 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1056.com on kushana02 at Tue Aug 26 13:38:18 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1062.com on kushana04 at Tue Aug 26 13:35:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1057.com on kushana04 at Tue Aug 26 13:35:03 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1063.com on kushana02 at Tue Aug 26 13:38:19 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1064.com on kushana02 at Tue Aug 26 13:38:19 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1065.com on kushana04 at Tue Aug 26 13:35:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1066.com on kushana04 at Tue Aug 26 13:35:04 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1067.com on kushana02 at Tue Aug 26 13:38:25 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1068.com on kushana02 at Tue Aug 26 13:38:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1069.com on kushana04 at Tue Aug 26 13:35:10 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1070.com on kushana04 at Tue Aug 26 13:35:10 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1071.com on kushana02 at Tue Aug 26 13:38:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1073.com on kushana04 at Tue Aug 26 13:35:16 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1074.com on kushana02 at Tue Aug 26 13:38:32 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1075.com on kushana04 at Tue Aug 26 13:35:17 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1076.com on kushana02 at Tue Aug 26 13:38:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1077.com on kushana04 at Tue Aug 26 13:35:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1078.com on kushana02 at Tue Aug 26 13:38:49 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1079.com on kushana04 at Tue Aug 26 13:35:33 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1080.com on kushana02 at Tue Aug 26 13:38:50 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1081.com on kushana04 at Tue Aug 26 13:35:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1084.com on kushana04 at Tue Aug 26 13:35:40 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1087.com on kushana04 at Tue Aug 26 13:35:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1088.com on kushana04 at Tue Aug 26 13:35:42 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1089.com on kushana04 at Tue Aug 26 13:35:44 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1082.com on kushana02 at Tue Aug 26 13:39:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1090.com on kushana04 at Tue Aug 26 13:35:50 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1085.com on kushana02 at Tue Aug 26 13:39:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1086.com on kushana04 at Tue Aug 26 13:36:06 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1091.com on kushana02 at Tue Aug 26 13:39:21 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1092.com on kushana04 at Tue Aug 26 13:36:07 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1093.com on kushana02 at Tue Aug 26 13:39:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1095.com on kushana04 at Tue Aug 26 13:36:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1098.com on kushana04 at Tue Aug 26 13:36:13 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1096.com on kushana02 at Tue Aug 26 13:39:33 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1097.com on kushana02 at Tue Aug 26 13:39:39 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1099.com on kushana04 at Tue Aug 26 13:36:23 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1100.com on kushana04 at Tue Aug 26 13:36:24 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1101.com on kushana02 at Tue Aug 26 13:39:41 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1104.com on kushana04 at Tue Aug 26 13:36:26 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1103.com on kushana04 at Tue Aug 26 13:36:30 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1108.com on kushana04 at Tue Aug 26 13:36:31 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1109.com on kushana04 at Tue Aug 26 13:36:32 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1106.com on kushana02 at Tue Aug 26 13:39:53 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1107.com on kushana04 at Tue Aug 26 13:36:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1111.com on kushana02 at Tue Aug 26 13:39:54 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1112.com on kushana04 at Tue Aug 26 13:36:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1110.com on kushana04 at Tue Aug 26 13:36:38 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1113.com on kushana02 at Tue Aug 26 13:39:55 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1102.com on kushana02 at Tue Aug 26 13:40:05 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1114.com on kushana04 at Tue Aug 26 13:36:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1115.com on kushana04 at Tue Aug 26 13:36:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1117.com on kushana02 at Tue Aug 26 13:40:11 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1120.com on kushana04 at Tue Aug 26 13:36:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1122.com on kushana04 at Tue Aug 26 13:36:58 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1118.com on kushana02 at Tue Aug 26 13:40:17 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1121.com on kushana02 at Tue Aug 26 13:40:23 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1124.com on kushana02 at Tue Aug 26 13:40:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1125.com on kushana02 at Tue Aug 26 13:40:24 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1126.com on kushana02 at Tue Aug 26 13:40:24 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1123.com on kushana04 at Tue Aug 26 13:37:09 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1128.com on kushana02 at Tue Aug 26 13:40:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1129.com on kushana02 at Tue Aug 26 13:40:26 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1130.com on kushana04 at Tue Aug 26 13:37:10 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1131.com on kushana02 at Tue Aug 26 13:40:32 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1119.com on kushana04 at Tue Aug 26 13:37:16 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1132.com on kushana02 at Tue Aug 26 13:40:37 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1133.com on kushana04 at Tue Aug 26 13:37:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1134.com on kushana02 at Tue Aug 26 13:40:38 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1135.com on kushana04 at Tue Aug 26 13:37:28 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1136.com on kushana02 at Tue Aug 26 13:40:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1137.com on kushana04 at Tue Aug 26 13:37:33 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1139.com on kushana02 at Tue Aug 26 13:40:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1140.com on kushana04 at Tue Aug 26 13:37:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1141.com on kushana02 at Tue Aug 26 13:40:55 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1142.com on kushana04 at Tue Aug 26 13:37:39 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1143.com on kushana02 at Tue Aug 26 13:40:56 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1155.com on kushana04 at Tue Aug 26 13:37:40 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1156.com on kushana02 at Tue Aug 26 13:40:57 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1157.com on kushana04 at Tue Aug 26 13:37:41 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1158.com on kushana02 at Tue Aug 26 13:40:57 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1159.com on kushana04 at Tue Aug 26 13:37:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1164.com on kushana04 at Tue Aug 26 13:37:48 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1161.com on kushana02 at Tue Aug 26 13:41:08 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1162.com on kushana04 at Tue Aug 26 13:37:52 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1163.com on kushana02 at Tue Aug 26 13:41:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1166.com on kushana04 at Tue Aug 26 13:37:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1165.com on kushana04 at Tue Aug 26 13:37:59 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1167.com on kushana02 at Tue Aug 26 13:41:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1168.com on kushana02 at Tue Aug 26 13:41:20 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1169.com on kushana04 at Tue Aug 26 13:38:05 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1172.com on kushana02 at Tue Aug 26 13:41:26 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1170.com on kushana04 at Tue Aug 26 13:38:11 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1173.com on kushana02 at Tue Aug 26 13:41:27 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1174.com on kushana04 at Tue Aug 26 13:38:11 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1175.com on kushana02 at Tue Aug 26 13:41:27 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1178.com on kushana04 at Tue Aug 26 13:38:13 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1180.com on kushana04 at Tue Aug 26 13:38:14 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1181.com on kushana04 at Tue Aug 26 13:38:15 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1176.com on kushana04 at Tue Aug 26 13:38:17 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1177.com on kushana02 at Tue Aug 26 13:41:33 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1179.com on kushana02 at Tue Aug 26 13:41:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1184.com on kushana04 at Tue Aug 26 13:38:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1185.com on kushana02 at Tue Aug 26 13:41:39 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1187.com on kushana04 at Tue Aug 26 13:38:25 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1189.com on kushana04 at Tue Aug 26 13:38:26 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1186.com on kushana02 at Tue Aug 26 13:41:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1188.com on kushana02 at Tue Aug 26 13:41:51 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1191.com on kushana02 at Tue Aug 26 13:41:51 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1192.com on kushana02 at Tue Aug 26 13:41:52 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1183.com on kushana04 at Tue Aug 26 13:38:37 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1194.com on kushana02 at Tue Aug 26 13:41:53 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1190.com on kushana04 at Tue Aug 26 13:38:37 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1195.com on kushana02 at Tue Aug 26 13:41:59 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1196.com on kushana04 at Tue Aug 26 13:38:43 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1198.com on kushana04 at Tue Aug 26 13:38:44 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1197.com on kushana02 at Tue Aug 26 13:42:00 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1199.com on kushana04 at Tue Aug 26 13:38:45 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1200.com on kushana04 at Tue Aug 26 13:38:45 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1201.com on kushana02 at Tue Aug 26 13:42:07 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1202.com on kushana04 at Tue Aug 26 13:38:51 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1203.com on kushana02 at Tue Aug 26 13:42:12 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1205.com on kushana04 at Tue Aug 26 13:38:57 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1206.com on kushana02 at Tue Aug 26 13:42:13 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1208.com on kushana02 at Tue Aug 26 13:42:14 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1207.com on kushana04 at Tue Aug 26 13:39:03 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1209.com on kushana04 at Tue Aug 26 13:39:03 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1210.com on kushana02 at Tue Aug 26 13:42:20 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1211.com on kushana02 at Tue Aug 26 13:42:20 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1214.com on kushana02 at Tue Aug 26 13:42:22 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1217.com on kushana02 at Tue Aug 26 13:42:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1218.com on kushana02 at Tue Aug 26 13:42:24 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1212.com on kushana04 at Tue Aug 26 13:39:09 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1220.com on kushana04 at Tue Aug 26 13:39:11 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1219.com on kushana02 at Tue Aug 26 13:42:30 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1213.com on kushana04 at Tue Aug 26 13:39:15 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1222.com on kushana02 at Tue Aug 26 13:42:32 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1221.com on kushana04 at Tue Aug 26 13:39:22 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1225.com on kushana04 at Tue Aug 26 13:39:23 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1224.com on kushana02 at Tue Aug 26 13:42:43 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1228.com on kushana02 at Tue Aug 26 13:42:44 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1227.com on kushana04 at Tue Aug 26 13:39:30 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1229.com on kushana02 at Tue Aug 26 13:42:46 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1216.com on kushana02 at Tue Aug 26 13:42:47 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1230.com on kushana04 at Tue Aug 26 13:39:31 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1223.com on kushana04 at Tue Aug 26 13:39:31 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1231.com on kushana02 at Tue Aug 26 13:42:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1235.com on kushana04 at Tue Aug 26 13:39:32 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1236.com on kushana04 at Tue Aug 26 13:39:34 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1238.com on kushana04 at Tue Aug 26 13:39:35 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1239.com on kushana04 at Tue Aug 26 13:39:36 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1232.com on kushana04 at Tue Aug 26 13:39:37 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1233.com on kushana02 at Tue Aug 26 13:42:53 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1234.com on kushana02 at Tue Aug 26 13:42:53 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1240.com on kushana04 at Tue Aug 26 13:39:38 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1241.com on kushana04 at Tue Aug 26 13:39:39 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1242.com on kushana02 at Tue Aug 26 13:42:55 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1243.com on kushana02 at Tue Aug 26 13:42:55 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1244.com on kushana04 at Tue Aug 26 13:39:39 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1245.com on kushana04 at Tue Aug 26 13:39:45 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1246.com on kushana02 at Tue Aug 26 13:43:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1247.com on kushana04 at Tue Aug 26 13:39:46 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1249.com on kushana02 at Tue Aug 26 13:43:02 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1252.com on kushana04 at Tue Aug 26 13:39:47 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1254.com on kushana04 at Tue Aug 26 13:39:49 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1255.com on kushana04 at Tue Aug 26 13:39:50 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1256.com on kushana04 at Tue Aug 26 13:39:51 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1250.com on kushana04 at Tue Aug 26 13:39:57 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1251.com on kushana02 at Tue Aug 26 13:43:13 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1257.com on kushana04 at Tue Aug 26 13:39:57 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1253.com on kushana02 at Tue Aug 26 13:43:13 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1261.com on kushana04 at Tue Aug 26 13:39:59 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1263.com on kushana04 at Tue Aug 26 13:40:00 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1264.com on kushana04 at Tue Aug 26 13:40:01 JST 2014
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1276.com on kushana04 at Tue Aug 26 13:40:03 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1258.com on kushana04 at Tue Aug 26 13:40:08 JST 2014
+Thread2@kushana02.local> Running minfo.files/q3q2q1-11-1260.com on kushana02 at Tue Aug 26 13:43:24 JST 2014
+Thread3@kushana02.local> Running minfo.files/q3q2q1-11-1262.com on kushana02 at Tue Aug 26 13:43:25 JST 2014
+Thread0@kushana04.local> Running minfo.files/q3q2q1-11-1278.com on kushana04 at Tue Aug 26 13:40:09 JST 2014
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1279.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1279
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1280.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1280
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1282.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1282
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1283.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1283
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1284.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1284
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1285.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1285
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1286.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1286
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1287.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1287
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1288.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1288
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1289.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1289
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1290.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1290
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1291.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1291
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1293.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1293
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1294.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1294
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1295.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1295
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1296.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1296
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1297.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1297
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1298.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1298
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1299.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1299
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1300.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1300
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1301.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1301
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1302.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1302
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1304.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1304
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1305.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1305
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1306.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1306
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1307.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1307
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1308.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1308
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1309.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1309
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1310.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1310
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1311.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1311
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1312.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1312
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1313.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1313
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1315.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1315
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1316.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1316
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1317.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1317
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1318.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1318
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1319.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1319
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1320.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1320
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1321.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1321
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1322.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1322
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1323.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1323
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1324.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1324
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1326.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1326
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1327.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1327
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1328.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1328
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1329.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1329
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Error while executing a process.
+Thread2@kushana02.local> minfo.files/q3q2q1-11-1330.fchk is not found.
+Thread2@kushana02.local> Quantum Chemitry job ended in error for minfo.files/q3q2q1-11-1330
+Thread2@kushana02.local> Recommended to check the output of qchem run.
+Thread2@kushana02.local> The program continues by suppling the energy by inter/extrapolation.
+Thread1@kushana04.local> Running minfo.files/q3q2q1-11-1277.com on kushana04 at Tue Aug 26 13:40:14 JST 2014
+
+End of electronic structure calculations.
+
+Generating pot files.
+
+Warning: minfo.files/q3q2q1-11-112.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-113.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-114.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-116.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1279.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1280.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1282.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1283.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1284.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1285.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1286.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1287.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1288.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1289.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1290.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1291.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1293.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1294.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1295.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1296.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1297.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1298.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1299.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1300.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1301.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1302.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1304.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1305.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1306.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1307.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1308.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1309.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1310.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1311.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1312.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1313.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1315.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1316.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1317.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1318.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1319.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1320.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1321.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1322.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1323.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1324.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1326.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1327.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1328.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1329.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1330.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+   o q3q2q1.pot  [OK]
+Warning: minfo.files/q3q2q1-11-112.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-113.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-114.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-116.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1279.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1280.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1282.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1283.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1284.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1285.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1286.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1287.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1288.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1289.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1290.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1291.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1293.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1294.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1295.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1296.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1297.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1298.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1299.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1300.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1301.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1302.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1304.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1305.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1306.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1307.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1308.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1309.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1310.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1311.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1312.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1313.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1315.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1316.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1317.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1318.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1319.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1320.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1321.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1322.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1323.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1324.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1326.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1327.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1328.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1329.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+Warning: minfo.files/q3q2q1-11-1330.minfo is not found.
+Continues by suppling the energy by inter/extrapolation.
+   o q3q2q1.dipole  [OK]
+
+End of 3MR-GridPES generation:
+
