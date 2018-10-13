@@ -34,7 +34,7 @@
           <attribute name="Class-Path" value="."/>
         </manifest>
         <fileset dir="${dir.bin}"
-                 includes="JSindo.class,
+                 includes="*.class
                            */*.class"/>
       </jar>
     </target>

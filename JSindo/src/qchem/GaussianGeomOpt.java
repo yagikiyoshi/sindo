@@ -13,13 +13,22 @@ public class GaussianGeomOpt {
    private Molecule molecule = null;
    private ArrayList<double[][]> traj_min;
    private boolean force_isConv;
-   private int ngeom;
+   private int ngeom, nstep=-1;
    private ArrayList<double[]> forceList;
    private ArrayList<double[]> mulliken_charge;
    private ArrayList<double[]> mulliken_spin;
    
    public void setBaseName(String basename) {
       this.basename = basename;
+   }
+   
+   public int getNumOfIteration() {
+      return traj_min.size();
+   }
+   
+   public void setNstep(int n) {
+      nstep = n;
+      return;
    }
    
    public Molecule readOutput() throws IOException {
@@ -56,7 +65,8 @@ public class GaussianGeomOpt {
       double[][] current_xyz = new double[Nat][];
       traj_min.add(current_xyz);
 
-      while(line.indexOf("Input orientation") == -1){
+      while(line.indexOf("Input orientation") == -1 
+            && line.indexOf("Standard orientation") == -1){
          line = br.readLine();
       }
       
@@ -85,7 +95,8 @@ public class GaussianGeomOpt {
       
       while((line = br.readLine()) != null){
          
-         if(line.indexOf("Input orientation") != -1){
+         if(line.indexOf("Input orientation") != -1 
+               || line.indexOf("Standard orientation") != -1){
          
             current_xyz = new double[Nat][];
             traj_min.add(current_xyz);
@@ -181,10 +192,10 @@ public class GaussianGeomOpt {
     * @return the molecule
     */
    public Molecule getMolecule(){
-      
       if(molecule != null){
+         if(nstep < 0) nstep = ngeom;
          for(int n=0; n<molecule.getNat(); n++){
-            molecule.getAtom(n).setXYZCoordinates(traj_min.get(ngeom)[n]);
+            molecule.getAtom(n).setXYZCoordinates(traj_min.get(nstep)[n]);
          }
       }
       return this.molecule;

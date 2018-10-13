@@ -65,6 +65,10 @@ public class Constants {
     * Hartree to cm-1 (2.19474631E+05)
     */
    public static double Hartree2wvn = Hartree2J/Planck/vlight/100.0;
+   /**
+    * Hartree to eV (27.211386)
+    */
+   public static double Hartree2eV = 27.211386;
    
    /**
     * Bohr to Angstrom (0.52917720859)
