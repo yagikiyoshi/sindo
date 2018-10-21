@@ -87,7 +87,7 @@
          idx=index(minfofile,'.minfo')
          write(Iout,'(3x,''o NEW COORDINATES WRITTEN TO       : [ '',a,'' ]'',/)') &
                minfofile(1:idx-1)//'_ocvscf.minfo'
-         Call System('java OcVSCF '//minfofile(1:idx-1)//' '//trim(u1file))
+         Call Ocvscf_writeMinfo(pfit, minfofile)
       endif
 
       Call Ocvscf_coeff_getOmega(omega)
@@ -102,6 +102,158 @@
       Call Ocvscf_coeff_Finalz()
 
       Write(Iout,'(''(  FINALIZE OCVSCF MODULE  )'',/)') 
+
+   End subroutine
+
+!---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----80
+
+   Subroutine Ocvscf_writeMinfo(order, minfofile)
+
+   USE OptCoord_mod
+   USE Constants_mod
+
+   Implicit None
+
+   Integer :: order
+   Character(80) :: minfofile
+
+   Integer :: nat,nat3, i,j,k, idx, nsize, ni, iminfo, iminfo_new
+   Real(8), allocatable :: mass(:), sqmass(:), dd(:), hess(:,:)
+   Real(8), allocatable :: freq(:), freq_new(:)
+   Real(8), allocatable :: cv(:,:), cv_new(:,:)
+   Real(8) :: scfthresh,Vscf_getEthresh
+   Integer :: scfmaxiter,Vscf_getMaxIteration
+   Character(80) :: minfofile_new
+   Character(130) :: line
+
+      Call Mol_getNat(nat)
+      nat3 = nat*3
+      allocate(mass(nat), freq(nfree), cv(nat3,nfree), hess(nat3,nat3))
+      Call Mol_getMass(mass)
+      Call Mol_getFreq(freq)
+      Call Mol_getL(cv)
+
+      iminfo=10
+      open(iminfo,file=trim(minfofile),status='old')
+      do while(.true.)
+         read(iminfo,'(a)') line
+         if(index(line,'Hessian') > 0) exit
+      end do
+
+      read(iminfo,'(a)') line
+      read(line,*) nsize
+      allocate(dd(nsize))
+      read(iminfo,*) dd
+
+      k=1
+      do i=1,nat3
+      do j=1,i
+         hess(i,j) = dd(k)
+         hess(j,i) = hess(i,j)
+         k = k + 1
+      end do
+      end do
+      deallocate(dd)
+
+      allocate(freq_new(nfree), cv_new(nat3,nfree))
+      do i=1,nfree
+         cv_new(:,i) = 0.0D+00
+         do j=1,nfree
+         do k=1,nat3
+            cv_new(k,i) = cv_new(k,i) + U1(j,i)*cv(k,j)
+         end do
+         end do
+      end do
+
+      allocate(sqmass(nat3))
+      k=1
+      do i=1,nat
+      do j=1,3
+         sqmass(k) = sqrt(mass(i))
+         k=k+1
+      end do
+      end do
+
+      do i=1,nat3
+         do j=1,nat3
+            hess(j,i) = hess(j,i)/sqmass(j)/sqmass(i)
+         end do
+      end do
+      deallocate(sqmass)
+
+      do i=1,nfree
+         freq_new(i)=0.0D+00
+         do j=1,nat3
+         do k=1,nat3
+            freq_new(i) = freq_new(i) + cv_new(j,i)*hess(j,k)*cv_new(k,i)
+         end do
+         end do
+         freq_new(i) = sqrt(freq_new(i))*H2wvn
+      end do
+
+    ! now create new minfo file
+      rewind(iminfo)
+
+      idx=index(minfofile,'.minfo')
+      minfofile_new = minfofile(1:idx-1)//'_ocvscf.minfo'
+      iminfo_new=11
+      open(iminfo_new,file=trim(minfofile_new),status='unknown')
+
+      do while(.true.)
+         read(iminfo,'(a)') line
+         write(iminfo_new,'(a)') trim(line)
+         if(index(line,"Vibrational Data") > 0) exit
+      end do
+
+      read(iminfo,*)
+      scfthresh  = Vscf_getEthresh()
+      scfmaxiter = Vscf_getMaxIteration()
+      if(iscreen == 0) then
+         write(iminfo_new,'('' VSCFeth='',e8.2,'',VSCFmaxIter='',i4,'',Eth='',e8.2, &
+                    '',Gth='',e8.2,'',Fse='',i4)') &
+                    scfthresh,scfmaxiter,ethresh,gthresh,order
+      else
+         write(iminfo_new,'('' VSCFeth='',e8.2,'',VSCFmaxIter='',i4,'',Eth='',e8.2, &
+                    '',Gth='',e8.2,'',Fse='',i4,'',eta12th='',f6.2)') &
+                    scfthresh,scfmaxiter,ethresh,gthresh,order,eta12thresh
+      endif
+
+      do while(.true.)
+         read(iminfo,'(a)') line
+         write(iminfo_new,'(a)') trim(line)
+         if(index(line,"Vibrational Frequency") > 0) exit
+      end do
+
+      write(iminfo_new,'(i0)') nfree
+      do i = 1, nfree-1
+         write(iminfo_new,'(es15.8,$)') freq_new(i)
+         if(mod(i,5)/=0) then
+           write(iminfo_new,'(", ",$)')
+         else
+           write(iminfo_new,*)
+         end if
+      end do
+      write(iminfo_new,'(es15.8)') freq_new(nfree)
+
+      write(iminfo_new,'("Vibrational vector")')
+      do i = 1, nfree
+         write(iminfo_new,'("Mode ",i3)') i
+         write(iminfo_new,'(i0)') nat3
+         do j = 1, nat3-1
+            write(iminfo_new,'(es15.8,$)') cv_new(j,i)
+            if(mod(j,5)/=0) then
+              write(iminfo_new,'(", ",$)')
+            else
+              write(iminfo_new,*)
+            end if
+         end do
+         write(iminfo_new,'(es15.8)') cv_new(nat3,i)
+      end do
+
+      close(iminfo)
+      close(iminfo_new)
+      deallocate(mass, freq, cv, hess)
+      deallocate(freq_new, cv_new)
 
    End subroutine
 

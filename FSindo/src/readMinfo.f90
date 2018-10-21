@@ -2,7 +2,6 @@
 !   Last modified  2017/11/19
 !   Code description by K.Yagi
 !---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----10
-
 Subroutine ReadMinfo(minfoFile,Nat,Nfree,x,mass,omega,L)
 
    USE Constants_mod
@@ -18,6 +17,7 @@ Subroutine ReadMinfo(minfoFile,Nat,Nfree,x,mass,omega,L)
    Integer, allocatable :: ai(:)
    Real(8), allocatable :: L0(:)
    Character*120 :: line
+   Character*4   :: aname
 
       Open(10,file=minfoFile,status='old')
 
@@ -39,17 +39,12 @@ Subroutine ReadMinfo(minfoFile,Nat,Nfree,x,mass,omega,L)
       End do
       Read(10,*) Nat
       Nat3=Nat*3
-      if(version == 1) then
-         Do i=1,Nat
-            Read(10,'(a)') line
-            Read(line(10:),*) mass(i),x(3*i-2),x(3*i-1),x(3*i)
-         End do
-      else
-         Do i=1,Nat
-            Read(10,'(a)') line
-            Read(line(14:),*) mass(i),x(3*i-2),x(3*i-1),x(3*i)
-            mass(i)=mass(i)*elmass
-         End do
+      Do i=1,Nat
+         Read(10,'(a)') line
+         Read(line,*) aname,j,mass(i),x(3*i-2),x(3*i-1),x(3*i)
+      End do
+      if(version == 2) then
+         mass(1:Nat)=mass(1:Nat)*elmass
       endif
 
       !write(6,*) Nat
