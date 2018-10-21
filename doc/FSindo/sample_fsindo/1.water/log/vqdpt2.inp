@@ -1,0 +1,26 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2o.minfo' /
+ &sys maxmem=10 /
+
+#--- [  VIB  ]
+ &vib  
+  MR=3 
+  vmaxALL=10
+  vscf=.t. 
+  vqdpt=.t.  
+ /
+
+ &states
+  fund=.t.
+  nstate=3
+  target_state(2,1)=2
+  target_state(2,2)=1
+  target_state(3,2)=1
+  target_state(3,3)=2
+ /
+
+#--- [  VPT  ]
+ &vqdpt
+  maxSum=4
+ /
+
