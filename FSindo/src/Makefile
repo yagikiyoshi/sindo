@@ -8,7 +8,7 @@ OBJECTS= memory.o \
          modal.o dvr.o ho.o choReader.o \
          pes.o pes_qff.o pes_grid.o \
          mrpes.o mrpes_qff.o mrpes_mcs.o mrpes_grid.o getfname.o lag1.o lag2.o lag3.o lagcore.o \
-         vscf.o ocvscf.o ocvscf_coeff.o optcoord.o kinmat.o vci.o vpt.o vqdpt.o hmat.o \
+         vscf.o ocvscf_coeff.o optcoord.o ocvscf.o kinmat.o vci.o vpt.o vqdpt.o hmat.o \
          grid_surface.o \
          infrared.o vscfprpt.o vciprpt.o vptprpt.o vqdptprpt.o pmat.o \
          calc_vib.o calc_prpt.o \
