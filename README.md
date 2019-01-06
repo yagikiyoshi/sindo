@@ -27,3 +27,16 @@ o SINDO: Solver of vibrational schroedinger equation
   - VQDPT2-(k)
   - Infrared intensities and spectrum
 
+Acknowledgment
+Dr. Hiroya Asami (Gakushuin Univ.)
+Prof. Masaaki Fujii (Tokyo Institute of Technology)
+Prof. Hiroshi Fujisaki (Nippon Medical School)
+Prof. So Hirata (Univ. of Illinois at Urbana-Champaign)
+Dr. Wataru Mizukami (Kyushu Univ.)
+Dr. Hiroki Otaki (Nagasaki Univ.)
+Dr. Yuji Sugita (RIKEN)
+
+Grant-in-aid:
+2007-2012 Scientific Research (KAKENHI) on Priority Areas (477) “Molecular Science for Supra Functional Systems” supported by MEXT, Japan.
+2017-2018 Grant-in-Aid for Scientific Research on Innovative Areas (2503) “Science on Function of Soft Molecular Systems by Cooperation of Theory and Experiment" supported by MEXT, Japan.
+
