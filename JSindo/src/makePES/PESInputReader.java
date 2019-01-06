@@ -1,12 +1,12 @@
 package makePES;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 import jobqueue.QueueMngr;
 
-import molecule.MInfoIO;
-import molecule.ElectronicData;
+import molecule.*;
 import qchem.InputMaker;
 import qchem.QuantChem;
 import qchem.TypeNotSupportedException;
@@ -79,6 +79,22 @@ public class PESInputReader {
          this.errorTermination("Vibrational data is not found in "+filename);
       }
       System.out.println(" [OK] ");
+      
+      Boolean interdomain = false;
+      String intd = options.getValue("interdomain");
+      if(intd == null || intd.equalsIgnoreCase("false")) {
+         interdomain = false;
+      }else if(intd.equalsIgnoreCase("true")){
+         interdomain = true;
+      }else{
+         this.errorTermination("interdomain = "+intd+" is not a valid option.");
+      }
+      System.out.println("     - InterDomain coupling = " + interdomain);
+
+      if(interdomain) {
+         VibUtil vutil = new VibUtil(minfoIO.getMolecule());
+         vutil.combineAllVibData();
+      }
       
       String amode = options.getValue("activemode");
       int nd = minfoIO.getMolecule().getNumOfVibrationalData();
@@ -259,9 +275,38 @@ public class PESInputReader {
          }
          System.out.println();
          System.out.println("          Title        = " +title[0]);
-         System.out.println();
          makePESData.setTitle(title);
 
+         String basename = options.getValue("xyzfile");
+         if(basename == null) {
+            if(runtype.equals("QFF")){
+               basename = "makeQFF";
+            }else {
+               basename = "makeGrid";               
+            }
+         }else {
+            basename = basename.trim();
+         }
+         System.out.println("          xyzfile basename = " + basename);
+         makePESData.setXYZFile_basename(basename);
+         
+         if(runtype.equals("QFF")){
+            File mkqff_eq = new File(MakeQFF.getBasename()+".minfo");
+            if(! mkqff_eq.exists()) {
+               System.out.println("            # " +mkqff_eq.getName()+" is not found. Switching to DryRun=true.");
+               makePESData.setDryRun(true);
+            }
+            
+         }else if(runtype.equals("GRID")){
+            File makeGrid_dat = new File(basename+".dat");
+            if(! makeGrid_dat.exists()) {
+               System.out.println("            # " +basename+".dat is not found. Switching to DryRun=true.");
+               makePESData.setDryRun(true);
+            }
+         }
+         
+         System.out.println();
+         
       }else{
          makePESData.setRunQchem(true);
          
@@ -472,8 +517,10 @@ public class PESInputReader {
             if(! isMc){
                this.errorTermination("Mode coupling term is not given. Specify using [fullmc/mc1/mc2/mc3].");
             }
+
          }
 
+         
          System.out.println();
       }
       

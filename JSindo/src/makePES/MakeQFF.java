@@ -57,19 +57,17 @@ public class MakeQFF {
 
    }
    
-   private static String minfoDirectory = "minfo.files/";
-
    public static String getBasename(){
-       return MakeQFF.minfoDirectory+"mkqff-eq";
+       return PESInputData.MINFO_FOLDER+"mkqff-eq";
    }
    public static String getBasename(int mi){
-       return MakeQFF.minfoDirectory+"mkqff"+mi;
+       return PESInputData.MINFO_FOLDER+"mkqff"+mi;
    }
    public static String getBasename(int mi, int mj){
-      return MakeQFF.minfoDirectory+"mkqff"+mi+"_"+mj;
+      return PESInputData.MINFO_FOLDER+"mkqff"+mi+"_"+mj;
    }
    public static String getBasename(int mi, int mj, int mk){
-      return MakeQFF.minfoDirectory+"mkqff"+mi+"_"+mj+"_"+mk;
+      return PESInputData.MINFO_FOLDER+"mkqff"+mi+"_"+mj+"_"+mk;
    }
    
    /**
@@ -94,8 +92,7 @@ public class MakeQFF {
       System.out.println();
 
       if(inputData.isRunQchem()){
-         MakeQFF.minfoDirectory = "minfo.files/";
-         File minfodir = new File(minfoDirectory);
+         File minfodir = new File(PESInputData.MINFO_FOLDER);
          if(! minfodir.exists()){
             minfodir.mkdir();
          }
@@ -103,8 +100,7 @@ public class MakeQFF {
          queue = QueueMngr.getInstance();
          queue.start();            
       }else{
-         MakeQFF.minfoDirectory = "";
-         grdXYZ = new GrdXYZ("makeQFF");
+         grdXYZ = new GrdXYZ(inputData.getXYZFile_basename());
       }
       
       this.processGrid(null, null, MakeQFF.getBasename());
@@ -132,7 +128,6 @@ public class MakeQFF {
          System.out.println();
          
       }else{
-         MakeQFF.minfoDirectory = "minfo.files/";
          this.workTempfiles("dump");
          if(inputData.isGenhs()) this.calcQFF_hs();
          

@@ -37,9 +37,13 @@ public class PESInputData {
    private int nGrid;
    private boolean fullmc;
    private String[] mc1,mc2,mc3;
+   private String xyz_basename;
    
    // HYBRID Data
    private double thresh_MCS;
+   
+   // Constant values
+   public static String MINFO_FOLDER = "minfo.files/";
    
    /**
     * This is a package private class
@@ -204,6 +208,13 @@ public class PESInputData {
       return mc3;
    }
    /**
+    * Returns the basename of a xyz file for qchem = generic
+    * @return basename
+    */
+   public String getXYZFile_basename() {
+      return this.xyz_basename;
+   }
+   /**
     * Returns the threshold value in MCS to generate grid potentials
     * @return threshold in cm-1
     */
@@ -212,7 +223,7 @@ public class PESInputData {
    }
    /**
     * Returns the active modes
-    * @return active modes
+    * @return active modes[ndomain][nmodes]
     */
    public int[][] getActiveModes() {
       return activeModes;
@@ -347,6 +358,13 @@ public class PESInputData {
     */
    void setMC3(String[] mr3) {
       this.mc3 = mr3;
+   }
+   /**
+    * Sets the basename of a xyz file for qchem = generic
+    * @param basename basename
+    */
+   void setXYZFile_basename(String basename) {
+      this.xyz_basename = basename;
    }
    /**
     * Sets the threshold value in MCS to generate grid potentials

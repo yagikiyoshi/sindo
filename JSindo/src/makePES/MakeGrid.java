@@ -129,7 +129,7 @@ public class MakeGrid {
 
       gfilename = new GridFileName();
       if(inputData.isRunQchem()){
-         String runFolder = "minfo.files";
+         String runFolder = PESInputData.MINFO_FOLDER;
          gfilename.setMinfoDirectoryName(runFolder);
          
          File minfoDir = new File(runFolder);
@@ -432,7 +432,7 @@ public class MakeGrid {
          queue = QueueMngr.getInstance();
          queue.start();         
       }else{
-         grdXYZ = new GrdXYZ("makeGrid");
+         grdXYZ = new GrdXYZ(inputData.getXYZFile_basename());
       }
 
       calcEQ();
@@ -808,11 +808,12 @@ public class MakeGrid {
          
       }
 
-      System.out.println("   Reading the data from makeGrid.dat.");
+      String gridData = inputData.getXYZFile_basename()+".dat";
+      System.out.println("   Reading the data from "+gridData+".");
       System.out.println();
 
       try{
-         BufferedReader br = new BufferedReader(new FileReader("makeGrid.dat"));
+         BufferedReader br = new BufferedReader(new FileReader(gridData));
          String line = null;         
          while((line = br.readLine()) != null){
             String[] data = line.split(",");
