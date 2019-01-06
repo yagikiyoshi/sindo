@@ -122,8 +122,14 @@ public class PDBReader extends FileReaderMD {
             
          }
          
-         if(br.readLine() != null){
-            traj = true;
+         // if ATOM entry exists after "END" syntax, this is a PDB 
+         // file with multiple snapshots, so we setup trajectory.
+         while(line != null && line.indexOf("END") < 0){
+            if(line.substring(0, 4).equalsIgnoreCase("ATOM") ||  line.substring(0, 6).equalsIgnoreCase("HETATM")){
+               traj = true;
+               break;
+            }
+            line = br.readLine();
          }
          
          br.close();
