@@ -71,7 +71,7 @@ public class MakeQFF {
    }
    
    /**
-    * Main module of QFF generation using Hessian
+    * Main module of QFF generation
     */
    public void runMkQFF(){
 
@@ -91,6 +91,7 @@ public class MakeQFF {
       System.out.println("Execute electronic structure calculations.");
       System.out.println();
 
+      String minfo_folder = null;
       if(inputData.isRunQchem()){
          File minfodir = new File(PESInputData.MINFO_FOLDER);
          if(! minfodir.exists()){
@@ -98,9 +99,13 @@ public class MakeQFF {
          }
 
          queue = QueueMngr.getInstance();
-         queue.start();            
+         queue.start();
+         
       }else{
+         minfo_folder = PESInputData.MINFO_FOLDER;
+         PESInputData.MINFO_FOLDER = "";
          grdXYZ = new GrdXYZ(inputData.getXYZFile_basename());
+         
       }
       
       this.processGrid(null, null, MakeQFF.getBasename());
@@ -117,7 +122,8 @@ public class MakeQFF {
       if(inputData.isRunQchem()){
          queue.shutdown();            
       }else{
-         grdXYZ.close();            
+         grdXYZ.close();
+         PESInputData.MINFO_FOLDER = minfo_folder;
       }
       
       System.out.println("End of electronic structure calculations.");
