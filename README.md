@@ -2,7 +2,7 @@
 
 SINDO is a suit of programs for molecular vibrational analysis.
 
-o JSindo: Viewer of molecules and modes  
+- JSindo: Viewer of molecules and modes  
   - Import the output of quantum chemistry program  
   - Harmonic analysis  
      - Harmonic frequencies  
@@ -10,7 +10,7 @@ o JSindo: Viewer of molecules and modes
      - Normal modes  
   - Localized modes  
 
-o RunMakePES: Generator of anharmonic potential
+- RunMakePES: Generator of anharmonic potential
   - nMR expansion (n=1-4)
   - QFF generation
   - Grid-PES based on HO-DVR
@@ -18,7 +18,7 @@ o RunMakePES: Generator of anharmonic potential
   - Implementation for parallel execution
   - Interface with quantum chemistry programs
 
-o SINDO: Solver of vibrational schr&ouml;dinger equation
+- SINDO: Solver of vibrational Schr&ouml;dinger equation
   - Multiresolution PES
   - optimized-coordinate-VSCF
   - VSCF
@@ -27,7 +27,7 @@ o SINDO: Solver of vibrational schr&ouml;dinger equation
   - VQDPT2-(k)
   - Infrared intensities and spectrum
 
-Acknowledgment  
+## Acknowledgment ##
 Dr. Hiroya Asami (Gakushuin Univ.)  
 Prof. Masaaki Fujii (Tokyo Institute of Technology)  
 Prof. Hiroshi Fujisaki (Nippon Medical School)  
@@ -36,7 +36,7 @@ Dr. Wataru Mizukami (Kyushu Univ.)
 Dr. Hiroki Otaki (Nagasaki Univ.)  
 Dr. Yuji Sugita (RIKEN)  
 
-Grant-in-aid:  
+## Grant-in-aid ##  
 2007-2012 Scientific Research (KAKENHI) on Priority Areas (477) “Molecular Science for Supra Functional Systems” supported by MEXT, Japan.  
 2017-2018 Grant-in-Aid for Scientific Research on Innovative Areas (2503) “Science on Function of Soft Molecular Systems by Cooperation of Theory and Experiment" supported by MEXT, Japan.  
 
