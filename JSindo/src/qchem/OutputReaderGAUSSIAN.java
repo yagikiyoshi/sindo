@@ -448,6 +448,7 @@ public class OutputReaderGAUSSIAN extends OutputReader {
       try{
          brFchk = new BufferedReader(new FileReader(basename+".fchk"));
          title = brFchk.readLine();
+         brFchk.close();
       }catch(IOException e){
          super.printError(e.getMessage());         
       }
