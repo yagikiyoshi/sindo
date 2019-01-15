@@ -1,6 +1,6 @@
 package qchem;
 
-import atom.Atom;
+import java.io.*;
 import jobqueue.*;
 import molecule.*;
 import sys.*;
@@ -9,22 +9,14 @@ public class InputMakerTestGaussian {
    
    public static void main(String[] args){
       
-      Molecule molecule = new Molecule();
-            
-      Atom O1 = new Atom(8);
-      double[] O1xyz = {0.0, 0.0, 2.20607458};
-      O1.setXYZCoordinates(O1xyz);
-      molecule.addAtom(O1);
-      
-      Atom C2 = new Atom(6);
-      double[] C2xyz = {0.0, 0.0, 0.0};
-      C2.setXYZCoordinates(C2xyz);
-      molecule.addAtom(C2);
-      
-      Atom O3 = new Atom(8);
-      double[] O3xyz = {0.0, 0.0, -2.20607458};
-      O3.setXYZCoordinates(O3xyz);
-      molecule.addAtom(O3);
+      MInfoIO minfo = new MInfoIO();
+      try{
+         minfo.loadMOL("test/qchem/h2co-freq.minfo");
+      }catch(IOException e){
+         e.printStackTrace();
+         System.exit(-1);
+      }
+      Molecule molecule = minfo.getMolecule();
       
       QuantChem qchem = new QuantChem();
       InputMaker im = null;
@@ -40,7 +32,7 @@ public class InputMakerTestGaussian {
          e.printStackTrace();
          Utilities.terminate();
       }
-      im.setBasename("co2");
+      im.setBasename("test/qchem/g09/h2co");
       im.setMolecule(molecule);
       
       Resource res = new Resource();

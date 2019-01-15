@@ -5,7 +5,7 @@ import jobqueue.*;
 import molecule.*;
 import sys.*;
 
-public class InputMakerTestACESII {
+public class InputMakerTestGaussian2 {
    
    public static void main(String[] args){
       
@@ -21,29 +21,21 @@ public class InputMakerTestACESII {
       QuantChem qchem = new QuantChem();
       InputMaker im = null;
       try{
-         im = qchem.getInputMaker("ACESII");
+         im = qchem.getInputMaker("Gaussian");
       }catch(TypeNotSupportedException e){
          e.printStackTrace();
          System.exit(-1);
       }
       try{
-         im.setOptions("test/qchem/acesII/ACESIIinput.xml");
+         im.setTemplateFile("test/qchem/g09/GaussianTemplate");
       }catch(Exception e){
          e.printStackTrace();
          Utilities.terminate();
       }
-      im.setBasename("test/qchem/acesII/h2co");
+      im.setBasename("test/qchem/g09/h2co");
       im.setMolecule(molecule);
-      
-      Resource res = new Resource();
-      String[] hosts = {"diva01","diva02"};
-      res.setHostnames(hosts);
-      res.setMemory(24);
-      res.setScr(250);
-      res.setPpn(8);
-      
-      im.setResource(res);      
-      im.makeInputFilebyOption();
+
+      im.makeInputFile();
 
    }
 

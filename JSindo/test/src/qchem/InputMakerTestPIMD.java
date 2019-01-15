@@ -9,7 +9,7 @@ public class InputMakerTestPIMD {
       
       MInfoIO minfo = new MInfoIO();
       try{
-         minfo.loadMOL("sample/PIMD/water.minfo");
+         minfo.loadMOL("test/qchem/h2co-freq.minfo");
       }catch(IOException e){
          e.printStackTrace();
          System.exit(-1);
@@ -24,7 +24,7 @@ public class InputMakerTestPIMD {
          e.printStackTrace();
          System.exit(-1);
       }
-      im.setBasename("q1-0");
+      im.setBasename("test/qchem/pimd/q1-0");
       im.setMolecule(molecule);
       
       System.out.println("Generate centroid.dat in q1-0");

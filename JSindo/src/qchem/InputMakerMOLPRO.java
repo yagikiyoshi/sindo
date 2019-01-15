@@ -24,7 +24,7 @@ public class InputMakerMOLPRO extends InputMaker {
    }
 
    @Override
-   public void makeInputFile() {
+   public void makeInputFilebyOption() {
       String inputFile = basename+".inp";
       try{
          FileWriter fw = new FileWriter(inputFile);

@@ -17,9 +17,9 @@ public class InputMakerPIMD extends InputMaker {
     * Constructor is not directly accessible. Use QuantChem class.
     */
    InputMakerPIMD(){
-      
    }
 
+   @Override
    public void makeInputFile() {
       File workdir = new File(basename);
       if(! workdir.exists())  workdir.mkdir();
@@ -42,14 +42,16 @@ public class InputMakerPIMD extends InputMaker {
          e.printStackTrace();
       }
       
-
-
    }
 
    @Override
    protected void checkInputOptions() throws InputOptionException {
-      // TODO Auto-generated method stub
+      // Do nothing
+   }
 
+   @Override
+   protected void makeInputFilebyOption() {
+      // Do nothing
    }
 
 }

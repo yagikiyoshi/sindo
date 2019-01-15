@@ -1,7 +1,6 @@
 package qchem;
 
-import java.io.FileNotFoundException;
-
+import java.io.*;
 import jobqueue.Task;
 import molecule.*;
 
@@ -93,6 +92,14 @@ public class TaskQChem extends Task {
    public void setInputOptions(String fileName) throws FileNotFoundException, InputOptionException{
       InputMaker im = qcpack.getInputMaker();
       im.setOptions(fileName);
+   }
+   /**
+    * Sets the name of template file
+    * @param templateFile the name of a template file
+    */
+   public void setTemplate(String templateFile) throws FileNotFoundException, IOException {
+      InputMaker im = qcpack.getInputMaker();
+      im.setTemplateFile(templateFile);
    }
    /**
     * Sets MinfoIO. 

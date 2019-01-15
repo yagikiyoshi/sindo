@@ -1,0 +1,18 @@
+$MOLECULE
+0 1
+#coordinate#
+$END
+
+$COMMENT
+optimize the geometry
+$END
+
+$REM
+EXCHANGE          B3LYP
+DFT_D             EMPIRICAL_GRIMME
+BASIS             AUG-CC-PVTZ
+JOBTYPE           SP
+GUI          2
+MEM_TOTAL    2000
+$END
+

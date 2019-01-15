@@ -22,7 +22,7 @@ public class InputMakerACESII extends InputMaker {
    InputMakerACESII(){
       
    }
-   public void makeInputFile() {
+   public void makeInputFilebyOption() {
       String inputFile = basename+".zmat";
       try{
          FileWriter fw = new FileWriter(inputFile);

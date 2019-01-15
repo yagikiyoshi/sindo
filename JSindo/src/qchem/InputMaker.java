@@ -5,6 +5,9 @@ import sys.*;
 import jobqueue.*;
 import molecule.Molecule;
 import java.io.*;
+import java.util.ArrayList;
+
+import atom.Atom;
 
 /**
  * Generates the input file for electronic structure calculation. <br>
@@ -49,7 +52,13 @@ public abstract class InputMaker {
     * Basename of the input file
     */
    protected String basename=null;
-
+   /**
+    * True when template file is used for generating the input
+    */
+   private boolean use_template=false;
+   
+   protected String[] template;
+   
    /**
     * Set the basename of the input file 
     * @param base basename
@@ -90,11 +99,29 @@ public abstract class InputMaker {
    /**
     * Set the input options
     * @param inputOptions The input options 
-    * @throws InputOptionException throws when the option is not valid
+    * @throws InputOptionException thrown when the option is not valid
     */
    public void setOptions(XMLHandler inputOptions) throws InputOptionException {
       this.inputOptions = inputOptions;
       this.checkInputOptions();
+      this.use_template = false;
+   }
+   /**
+    * Sets the template file
+    * @param templateFile the name of the template file
+    * @throws IOException thrown when the file does not exist or when error.
+    */
+   public void setTemplateFile(String templateFile) throws FileNotFoundException, IOException {
+      BufferedReader br = new BufferedReader(new FileReader(templateFile));
+      ArrayList<String> array = new ArrayList<String>();
+      
+      String line = null;
+      while((line = br.readLine()) != null) {
+         array.add(line);
+      }
+      br.close();
+      this.template = array.toArray(new String[0]);
+      this.use_template = true;
    }
    /**
     * Returns the input options
@@ -121,7 +148,54 @@ public abstract class InputMaker {
    /**
     * Generates the input file
     */
-   public abstract void makeInputFile();
+   public void makeInputFile() {
+      if (! use_template) {
+         this.makeInputFilebyOption();
+         return;
+      }
+      
+      String inputFile = basename+".inp";
+      try{
+         FileWriter fw = new FileWriter(inputFile);
+         PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+
+         for(String line: template) {
+            String str = line.toLowerCase();
+            if(str.indexOf("#coord") != -1) {
+               this.printCoordinates(pw);;
+            }else {
+               pw.println(line);
+            }
+         }
+
+         pw.close();
+         
+      }catch(IOException e){
+         e.printStackTrace();
+      }
+
+   }
+   
+   protected void printCoordinates(PrintWriter pw) {
+      int Nat = molecule.getNat();
+      
+      for(int i=0; i<Nat; i++){
+         Atom atom_i = molecule.getAtom(i);
+         String label = atom_i.getLabel();
+         double[] xyz = atom_i.getXYZCoordinates();
+         pw.printf("%-4s %12.6f %12.6f %12.6f  ", 
+               label,
+               xyz[0]*Constants.Bohr2Angs, 
+               xyz[1]*Constants.Bohr2Angs, 
+               xyz[2]*Constants.Bohr2Angs);
+         pw.println();
+      }
+   }
+   
+   /**
+    * Generates the input file from option
+    */
+   protected abstract void makeInputFilebyOption();
    /**
     * Checks the input options
     * @throws InputOptionException throws when the option is not valid

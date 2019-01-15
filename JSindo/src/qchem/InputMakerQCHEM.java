@@ -22,7 +22,7 @@ public class InputMakerQCHEM extends InputMaker {
       
    }
    
-   public void makeInputFile() {
+   public void makeInputFilebyOption() {
       String inputFile = basename+".inp";
       try{
          FileWriter fw = new FileWriter(inputFile);
@@ -34,7 +34,7 @@ public class InputMakerQCHEM extends InputMaker {
             String key = (String) keyset.nextElement();
             String key2 = key.trim().toUpperCase();
             
-            System.out.println(key2);
+            //System.out.println(key2);
             pw.println("$"+key2);
             
             String line = inputOptions.getValue(key);

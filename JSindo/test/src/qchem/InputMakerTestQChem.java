@@ -12,7 +12,7 @@ public class InputMakerTestQChem {
       
       MInfoIO minfo = new MInfoIO();
       try{
-         minfo.loadMOL("test/qchem/QChem/h2po4_atz.minfo");
+         minfo.loadMOL("test/qchem/h2co-freq.minfo");
       }catch(IOException e){
          e.printStackTrace();
          System.exit(-1);
@@ -28,12 +28,12 @@ public class InputMakerTestQChem {
          System.exit(-1);
       }
       try{
-         im.setOptions("test/qchem/QChem/QChemInput.xml");
+         im.setOptions("test/qchem/qc/QChemInput.xml");
       }catch(Exception e){
          e.printStackTrace();
          Utilities.terminate();
       }
-      im.setBasename("h2po4");
+      im.setBasename("test/qchem/qc/h2co");
       im.setMolecule(molecule);
       
       Resource res = new Resource();

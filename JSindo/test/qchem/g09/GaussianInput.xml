@@ -5,8 +5,8 @@
 <entry key="title">Frequency at MP2/aug-cc-pVTZ</entry>
 <entry key="charge">0</entry>
 <entry key="multiplicity">1</entry>
-<entry key="oniom"> L, H, H </entry>
-<entry key="command2"> C O 0
+<entry key="oniom"> H, H, L, L </entry>
+<entry key="command2"> C O H 0
 aug-cc-pVDZ
 ****
 1 0

@@ -1,0 +1,17 @@
+memory,24000,m
+
+geomtyp=xyz
+geometry={
+4
+   CARTESIAN COORDINATES
+C     0.000000     0.000000    -0.534156  
+O    -0.000000    -0.000000     0.678750  
+H     0.000000     0.935861    -1.112535  
+H    -0.000000    -0.935861    -1.112535  
+}
+
+
+basis,default=def2-TZVPP,pt=def2-TZVPP
+{ks,PBE0MOL;wf,50,1,0}
+
+

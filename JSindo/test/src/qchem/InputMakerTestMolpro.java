@@ -13,7 +13,7 @@ public class InputMakerTestMolpro {
       
       MInfoIO minfo = new MInfoIO();
       try{
-         minfo.loadMOL("test/qchem/molpro/ArPtCO_2.minfo");
+         minfo.loadMOL("test/qchem/h2co-freq.minfo");
       }catch(IOException e){
          e.printStackTrace();
          System.exit(-1);
@@ -34,7 +34,7 @@ public class InputMakerTestMolpro {
          e.printStackTrace();
          Utilities.terminate();
       }
-      im.setBasename("molpro_test");
+      im.setBasename("test/qchem/molpro/h2co");
       im.setMolecule(molecule);
       
       Resource res = new Resource();
