@@ -10,14 +10,18 @@ public class RunMakePES {
 
    public static void main(String[] args){
 
+      int input_version = 1;
       String xmlFile = null;
       for(int n=0; n<args.length; n++) {
          if(args[n].equals("-f")) {
             xmlFile = args[n+1]; 
          }
-         if(args[n].equals("-h")) {
-            System.out.println("USAGE: java RunMakePES [ -f xmlfile ]");
+         if(args[n].equals("-h") || args[n].equals("--help")) {
+            System.out.println("USAGE: java RunMakePES [ -f xmlfile ] [--input-version 1|2]");
             System.exit(0);
+         }
+         if(args[n].equals("--input-version")) {
+            input_version = Integer.parseInt(args[n+1]);
          }
       }
       
@@ -25,10 +29,29 @@ public class RunMakePES {
       
       PESInputReader dr = new PESInputReader();
       if(xmlFile != null) dr.setFilename(xmlFile);
-      PESInputData mkPESData = dr.read();
+      
+      PESInputData mkPESData = null;
+      switch(input_version){
+      case 1:
+         mkPESData = dr.read();
+         break;
+         
+      case 2:
+         mkPESData = dr.read2();
+         break;
+
+      default:
+         System.out.println("Invalid option:--input-version "+input_version);
+         System.out.println("The version must be 1 or 2.");
+         System.exit(0);
+         break;
+      
+      }
+
       MakePES mkpes = new MakePES();
       mkpes.appendPESData(mkPESData);
       mkpes.genPES();
+      
    }
    
    private static void printtitle(){

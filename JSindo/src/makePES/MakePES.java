@@ -1,6 +1,7 @@
 package makePES;
 
 import molecule.*;
+import java.util.*;
 
 /**
  * Make potential energy surface
@@ -34,22 +35,21 @@ public class MakePES {
       VibTransformer transform = new VibTransformer(molecule);
       inputData.setTransform(transform);
       
-      String type = inputData.getRunType();
-      if(type.equals("QFF")){
-         MakeQFF mkqff = new MakeQFF(inputData);
+      ArrayList<InputDataQFF> qffData_array = inputData.getQFFInfoArray();
+      for(int n=0; n<qffData_array.size() ; n++) {
+         InputDataQFF qffData = qffData_array.get(n);
+         InputDataQC  qcInfo  = inputData.getQCInfo(qffData.getQCindex());
+         MakeQFF mkqff = new MakeQFF(inputData, qffData, qcInfo);
          mkqff.runMkQFF();
       }
-      if(type.equalsIgnoreCase("GRID")){
-         MakeGrid mkgrid = new MakeGrid(inputData);
-         mkgrid.runMakeGrid();
-      }
-      if(type.equalsIgnoreCase("HYBRID")){
-         inputData.setRunType("QFF");
-         MakeQFF mkqff = new MakeQFF(inputData);
-         mkqff.runMkQFF();
-         inputData.setRunType("HYBRID");
-         MakeGrid mkgrid = new MakeGrid(inputData);
+      
+      ArrayList<InputDataGrid> gridData_array = inputData.getGridInfoArray();
+      for(int n=0; n<gridData_array.size(); n++) {
+         InputDataGrid gridData = gridData_array.get(n);
+         InputDataQC  qcInfo  = inputData.getQCInfo(gridData.getQCindex());
+         MakeGrid mkgrid = new MakeGrid(inputData, gridData, qcInfo);
          mkgrid.runMakeGrid();         
+         
       }
 
    }

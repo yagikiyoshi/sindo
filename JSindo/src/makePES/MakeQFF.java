@@ -16,11 +16,12 @@ import molecule.*;
  */
 public class MakeQFF {
    
-   //private int Nfree, MR;
    private int MR;
    private int[][] activeModes;
    private double[] deltaQ;
    private PESInputData inputData;
+   private InputDataQFF qffData;
+   private InputDataQC  qcData;
    private GrdXYZ grdXYZ;
    private QueueMngr queue;
    
@@ -28,20 +29,21 @@ public class MakeQFF {
     * Constructs with the input data
     * @param makePESData Input data
     */
-   public MakeQFF(PESInputData makePESData){
+   public MakeQFF(PESInputData makePESData, InputDataQFF qffData, InputDataQC qcData){
 
       System.out.println("Setup MakeQFF module");
       System.out.println();
       
       this.inputData = makePESData;
+      this.qffData   = qffData;
+      this.qcData    = qcData;
       this.activeModes = makePESData.getActiveModes();
       
       VibrationalData vdata = makePESData.getMolecule().getVibrationalData();
-      //Nfree = vdata.Nfree;
       MR = makePESData.getMR();
 
       deltaQ = Utilities.deepCopy(vdata.getOmegaV());
-      double stepsize = makePESData.getStepsize();
+      double stepsize = qffData.getStepsize();
       {
          int i=0;
          while(deltaQ[i]<0.0d){
@@ -76,7 +78,7 @@ public class MakeQFF {
    public void runMkQFF(){
 
       File hs = new File("001.hs");
-      File mop = new File(inputData.getMopfile());
+      File mop = new File(qffData.getMopfile());
       if(hs.exists() || mop.exists()){
          System.out.println();
          System.out.println("QFF data file already exists. Exit MakeQFF module.");
@@ -104,17 +106,17 @@ public class MakeQFF {
       }else{
          minfo_folder = PESInputData.MINFO_FOLDER;
          PESInputData.MINFO_FOLDER = "";
-         grdXYZ = new GrdXYZ(inputData.getXYZFile_basename());
+         grdXYZ = new GrdXYZ(qffData.getXYZFile_basename());
          
       }
       
       this.processGrid(null, null, MakeQFF.getBasename());
       
-      if(inputData.getNdifftype().equals("HESS")){
+      if(qffData.getNdifftype().equals("HESS")){
          this.runHessian();
-      }else if(inputData.getNdifftype().equals("GRAD")){
+      }else if(qffData.getNdifftype().equals("GRAD")){
          this.runGradient();
-      }else if(inputData.getNdifftype().equals("ENE")){
+      }else if(qffData.getNdifftype().equals("ENE")){
          // TODO
          // this.runEnergy();            
       }
@@ -129,19 +131,19 @@ public class MakeQFF {
       System.out.println("End of electronic structure calculations.");
       System.out.println();
       
-      if(inputData.isDryRun()){
+      if(qcData.isDryrun()){
          System.out.println("DryRun is done!");
          System.out.println();
          
       }else{
          this.workTempfiles("dump");
-         if(inputData.isGenhs()) this.calcQFF_hs();
+         if(qffData.isGenhs()) this.calcQFF_hs();
          
-         if(inputData.getNdifftype().equals("HESS")){
+         if(qffData.getNdifftype().equals("HESS")){
             this.calcQFF_mop_hess();
-         }else if(inputData.getNdifftype().equals("GRAD")){
+         }else if(qffData.getNdifftype().equals("GRAD")){
             this.calcQFF_mop_grad();
-         }else if(inputData.getNdifftype().equals("ENE")){
+         }else if(qffData.getNdifftype().equals("ENE")){
             // TODO
             // this.calcQFF_mop_ene;            
          }
@@ -296,7 +298,8 @@ public class MakeQFF {
    
    private void processGrid(int[] mm, double[] qq, String basename){
       if(inputData.isRunQchem()){
-         TaskGrid task = new TaskGrid(inputData,mm,qq,basename);
+         TaskGrid task = new TaskGrid(inputData,qcData, mm,qq,basename);
+         task.setNdifftype(qffData.getNdifftype());
          queue.submit(task);
          
       }else{
@@ -328,7 +331,7 @@ public class MakeQFF {
          if(activeModes[n] == null) continue;
          
          int Nfree = activeModes[n].length;
-         if(inputData.getNdifftype().equals("HESS")){
+         if(qffData.getNdifftype().equals("HESS")){
             {
                Thread[] thread = new Thread[Nfree];
                for(int i=0; i<Nfree; i++){
@@ -500,7 +503,7 @@ public class MakeQFF {
             if(i%3==2) pw.println();
          }
          
-         pw.println("#1MR "+inputData.getTitle(0));
+         pw.println("#1MR "+qcData.getTitle());
          
          double[] tiii = new double[Nfree];
          double[] uiiii = new double[Nfree];
@@ -528,7 +531,7 @@ public class MakeQFF {
             pw.printf("%4d%20.10e %n", i+1,uiiii[i]*conv4);
          }
 
-         pw.println("#2MR "+inputData.getTitle(0));
+         pw.println("#2MR "+qcData.getTitle());
 
          double[] tiij = new double[Nfree*(Nfree-1)/2];
          double[] tijj = new double[Nfree*(Nfree-1)/2];
@@ -592,7 +595,7 @@ public class MakeQFF {
          }
          
 
-         pw.println("#3MR "+inputData.getTitle(0));
+         pw.println("#3MR "+qcData.getTitle());
 
          double[] tijk = new double[Nfree*(Nfree-1)*(Nfree-2)/6];
          double[] uiijk = new double[Nfree*(Nfree-1)*(Nfree-2)/6];
@@ -662,7 +665,7 @@ public class MakeQFF {
       /* --- Now compute coefficients and print -- */
       
       System.out.println();
-      System.out.printf("Generating "+inputData.getMopfile()+"...");
+      System.out.printf("Generating "+qffData.getMopfile()+"...");
       
       MInfoIO minfo = new MInfoIO();
       VibTransformer trans = inputData.getTransform();
@@ -676,13 +679,13 @@ public class MakeQFF {
       double[][] hess = trans.hx2hq(minfo.getMolecule().getElectronicData().getHessian());
 
       try{
-         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(inputData.getMopfile())));
+         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(qffData.getMopfile())));
          
          double[] sqfreq = this.printMopHeader(pw);
 
          double[]   grad0 = null;
          double[][] hess0 = null;
-         if(inputData.getGradient_and_hessian().equals("INPUT")){
+         if(qffData.getGradient_and_hessian().equals("INPUT")){
             
             ElectronicData edata = inputData.getMolecule().getElectronicData();
             grad0 = trans.gx2gq(edata.getGradient());
@@ -971,7 +974,7 @@ public class MakeQFF {
       /* --- Now compute coefficients and print -- */
       
       System.out.println();
-      System.out.printf("Generating "+inputData.getMopfile()+"...");
+      System.out.printf("Generating "+qffData.getMopfile()+"...");
       
       MInfoIO minfo = new MInfoIO();
       VibTransformer trans = inputData.getTransform();
@@ -986,13 +989,13 @@ public class MakeQFF {
       double[] grad = trans.gx2gq(minfo.getMolecule().getElectronicData().getGradient());
 
       try{
-         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(inputData.getMopfile())));
+         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(qffData.getMopfile())));
 
          double[] sqfreq = this.printMopHeader(pw);
 
          double[] grad0 = null;
          double[][] hess0 = null;
-         if(inputData.getGradient_and_hessian().equals("INPUT")){
+         if(qffData.getGradient_and_hessian().equals("INPUT")){
             ElectronicData edata = inputData.getMolecule().getElectronicData();
             grad0 = trans.gx2gq(edata.getGradient());
             hess0 = trans.hx2hq(edata.getHessian());
@@ -1014,7 +1017,7 @@ public class MakeQFF {
                                   /deltaQ[ii]/deltaQ[ii]/deltaQ[ii]/8.0d/24.0d/sii/sii;
 
                int i1=ii+1;
-               if(inputData.getGradient_and_hessian().equals("INPUT")){
+               if(qffData.getGradient_and_hessian().equals("INPUT")){
                   pw.printf("%29.22e%5d%n",grad0[ii]/si,i1);
                   pw.printf("%29.22e%5d%<5d%n",hess0[ii][ii]/sii*0.5d,i1);               
                }else{
@@ -1070,7 +1073,7 @@ public class MakeQFF {
 
                   int i1=ii+1;
                   int j1=jj+1;
-                  if(inputData.getGradient_and_hessian().equals("INPUT")){
+                  if(qffData.getGradient_and_hessian().equals("INPUT")){
                      pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
                   }else{
                      double hess = ((gj[2][ii] - gj[1][ii])/deltaQ[jj]
@@ -1110,7 +1113,7 @@ public class MakeQFF {
 
                      int i1=ii+1;
                      int j1=jj+1;
-                     if(inputData.getGradient_and_hessian().equals("INPUT")){
+                     if(qffData.getGradient_and_hessian().equals("INPUT")){
                         pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
                      }else{
                         double hess = ((gj[2][ii] - gj[1][ii])/deltaQ[jj]
@@ -1347,7 +1350,7 @@ public class MakeQFF {
          }
       }
             
-      pw.println("DALTON_FOR_MIDAS "+inputData.getTitle(0));
+      pw.println("DALTON_FOR_MIDAS "+qcData.getTitle());
 
       return sqfreq;
       

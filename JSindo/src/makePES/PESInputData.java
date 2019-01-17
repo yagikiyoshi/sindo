@@ -1,6 +1,7 @@
 package makePES;
 
-import sys.XMLHandler;
+import java.util.*;
+//import sys.XMLHandler;
 import molecule.*;
 
 /**
@@ -12,35 +13,23 @@ import molecule.*;
 public class PESInputData {
 
    // General input parameters
-   private String runType;
    private Molecule molecule;
    private String minfofile;
-   private boolean removeFiles;
-   private boolean runqchem;
-   private String[] qchemTypes;
-   private XMLHandler[] qchemInputs;
-   private String[] titles;
    private boolean dipole;
-   private boolean dryrun;
    private VibTransformer transform;
    private int MR;
    private int[][] activeModes;
 
+   private boolean runqchem;
+
+   // QC Data
+   private HashMap<String, InputDataQC>QCInfo_map;
+   
    // QFF Data
-   private double stepsize;
-   private String ndifftype;
-   private String mopfile;
-   private boolean genhs;
-   private String gradient_and_hessian;
+   private ArrayList<InputDataQFF> qffInfo_array;
    
-   // GRID Data
-   private int nGrid;
-   private boolean fullmc;
-   private String[] mc1,mc2,mc3;
-   private String xyz_basename;
-   
-   // HYBRID Data
-   private double thresh_MCS;
+   // Grid Data
+   private ArrayList<InputDataGrid> gridInfo_array;
    
    // Constant values
    public static String MINFO_FOLDER = "minfo.files/";
@@ -49,15 +38,11 @@ public class PESInputData {
     * This is a package private class
     */
    PESInputData(){
-      
+      QCInfo_map = new HashMap<String, InputDataQC>();
+      qffInfo_array  = new ArrayList<InputDataQFF>();
+      gridInfo_array = new ArrayList<InputDataGrid>();
    }
-   /**
-    * Returns the type of calculation
-    * @return the type (QFF/GRID)
-    */
-   public String getRunType(){
-      return runType;
-   }
+
    /**
     * Returns the target molecule
     * @return the molecule
@@ -71,13 +56,6 @@ public class PESInputData {
     */
    public String getMinfofile() {
       return minfofile;
-   }
-   /**
-    * Returns whether or not to remove the output files of electronic structure calculations
-    * @return Remove files if true
-    */
-   public boolean isRemoveFiles() {
-      return removeFiles;
    }
    /**
     * Returns whether or not to create Quantum Chemistry inputs. 
@@ -94,35 +72,11 @@ public class PESInputData {
       return MR;
    }
    /**
-    * Returns the number of types of electronic structure program
-    * @return the number of types
+    * Returns the active modes
+    * @return active modes[ndomain][nmodes]
     */
-   public int getNumOfQchemTypes(){
-      return qchemTypes.length;
-   }
-   /**
-    * Returns the type of electronic structure program
-    * @param ID ID of the program in the order it appeared in makePES.xml 
-    * @return the type of the program
-    */
-   public String getQchemTypes(int ID) {
-      return qchemTypes[ID];
-   }
-   /**
-    * Returns the input options for electronic structure calculation
-    * @param ID ID of the program in the order it appeared in makePES.xml
-    * @return the input options
-    */
-   public XMLHandler getQchemInputs(int ID) {
-      return qchemInputs[ID];
-   }
-   /**
-    * Returns the title of the electronic structure calculation
-    * @param ID ID of the program in the order it appeared in makePES.xml
-    * @return the title
-    */
-   public String getTitle(int ID) {
-      return titles[ID];
+   public int[][] getActiveModes() {
+      return activeModes;
    }
    /**
     * Returns the input option for dipole moment surface
@@ -138,103 +92,30 @@ public class PESInputData {
    public VibTransformer getTransform(){
       return transform;
    }
+   
    /**
-    * Returns the stepsize for numerical differentiations (au)
-    * @return the stepsize
+    * Returns the setting of a QC calc.
+    * @param index Index of the QC calc.
+    * @return QCInfo
     */
-   public double getStepsize() {
-      return stepsize;
-   }
-   /**
-    * Returns the type of numerical differentiation 
-    * @return either "ene", "grad", or "hess"
-    */
-   public String getNdifftype() {
-      return ndifftype;
+   public InputDataQC getQCInfo(String index) {
+      return QCInfo_map.get(index);
    }
    /**
-    * Returns the name of mopfile
-    * @return the name of mopfile (default = prop_no_1.mop)
+    * Returns the information of QFF calc. in an array.
+    * @return
     */
-   public String getMopfile() {
-      return mopfile;
+   public ArrayList<InputDataQFF> getQFFInfoArray(){
+      return qffInfo_array;
    }
    /**
-    * Returns if the generation of hs file is set
-    * @return generate hs file if true (default = false)
+    * Returns the information of GRID calc. in an array.
+    * @return
     */
-   public boolean isGenhs() {
-      return genhs;
+   public ArrayList<InputDataGrid> getGridInfoArray(){
+      return gridInfo_array;
    }
-   /**
-    * Returns where the gradient and Hessian is retrieved from
-    * @return "input" or "current"
-    */
-   public String getGradient_and_hessian() {
-      return gradient_and_hessian;
-   }
-   /**
-    * Returns the number of grid points
-    * @return nGrid
-    */
-   public int getnGrid() {
-      return nGrid;
-   }
-   public boolean isFullMC() {
-      return fullmc;
-   }
-   public boolean isDryRun() {
-      return dryrun;
-   }
-   /**
-    * Returns the modes for 1MR
-    * @return mr1[]
-    */
-   public String[] getMC1() {
-      return mc1;
-   }
-   /**
-    * Returns the modes for 2MR
-    * @return mr2[]
-    */
-   public String[] getMC2() {
-      return mc2;
-   }
-   /**
-    * Returns the modes for 3MR
-    * @return mr3[]
-    */
-   public String[] getMC3() {
-      return mc3;
-   }
-   /**
-    * Returns the basename of a xyz file for qchem = generic
-    * @return basename
-    */
-   public String getXYZFile_basename() {
-      return this.xyz_basename;
-   }
-   /**
-    * Returns the threshold value in MCS to generate grid potentials
-    * @return threshold in cm-1
-    */
-   public double getThresh_MCS() {
-      return thresh_MCS;
-   }
-   /**
-    * Returns the active modes
-    * @return active modes[ndomain][nmodes]
-    */
-   public int[][] getActiveModes() {
-      return activeModes;
-   }
-   /**
-    * Sets the type of calculation
-    * @param runType the type of calculation (QFF/GRID)
-    */
-   void setRunType(String runType){
-      this.runType = runType;
-   }
+
    /**
     * Sets the target molecule
     * @param molecule the target molecule
@@ -250,15 +131,8 @@ public class PESInputData {
       this.minfofile = minfofile;
    }
    /**
-    * Sets whether or not to remove the output files of electronic structure calculations
-    * @param removeFiles Remove files if true
-    */
-   void setRemoveFiles(boolean removeFiles) {
-      this.removeFiles = removeFiles;
-   }
-   /**
     * Sets whether or not to create input files for Quantum Chemistry jobs.
-    * @param qchem create input when true, create .grdxyz file when false
+    * @param qchem create input when true, create .xyz file when false
     */
    void setRunQchem(boolean qchem) {
       this.runqchem = qchem;
@@ -271,25 +145,19 @@ public class PESInputData {
       MR = mR;
    }
    /**
-    * Sets the type of electronic structure program
-    * @param qchemTypes the type of the program
+    * Sets the active modes
+    * @param activeModes active modes
     */
-   void setQchemTypes(String[] qchemTypes) {
-      this.qchemTypes = qchemTypes;
+   void setActiveModes(int[][] activeModes) {
+      this.activeModes = activeModes;
    }
    /**
-    * Sets the input options for electroic structure calculation
-    * @param qchemInputs the input options
+    * Sets the information of QC calc.
+    * @param index The index of this QC calc.
+    * @param qcinfo The information of QC calc.
     */
-   void setQchemInputs(XMLHandler[] qchemInputs) {
-      this.qchemInputs = qchemInputs;
-   }
-   /**
-    * Sets the title of the electronic structure calculation
-    * @param title the title
-    */
-   void setTitle(String[] title) {
-      this.titles = title;
+   void setQCInfo(String index, InputDataQC qcinfo) {
+      this.QCInfo_map.put(index, qcinfo);
    }
    /**
     * Sets the input option for generating the dipole moment surface 
@@ -306,86 +174,18 @@ public class PESInputData {
       this.transform = transform;
    }
    /**
-    * Sets the stepsize for numerical differentiations (au)
-    * @param stepsize the stepsize
+    * Sets the options for QFF calculation
+    * @param qffinfo information of QFF calculations
     */
-   void setStepsize(double stepsize) {
-      this.stepsize = stepsize;
+   void setQFFInfo(InputDataQFF qffinfo) {
+      this.qffInfo_array.add(qffinfo);
    }
    /**
-    * Sets the type of numerical differentiations
-    * @param ndifftype either "ene", "grad", or "hess"
+    * Sets the options for GRID calculation
+    * @param gridinfo information of GRID calculations
     */
-   void setNdifftype(String ndifftype) {
-      this.ndifftype = ndifftype;
-   }
-   void setMopfile(String mopfile) {
-      this.mopfile = mopfile;
-   }
-   void setGenhs(boolean genhs) {
-      this.genhs = genhs;
-   }
-   void setGradient_and_hessian(String gradient_and_hessian) {
-      this.gradient_and_hessian = gradient_and_hessian;
-   }
-   /**
-    * Sets the number of grid points
-    * @param nGrid
-    */
-   void setnGrid(int nGrid) {
-      this.nGrid = nGrid;
-   }
-   void setFullMC(boolean fullmc) {
-      this.fullmc = fullmc;
-   }
-   /**
-    * Sets the modes for 1MR
-    * @param mr1 1MR modes
-    */
-   void setMC1(String[] mr1) {
-      this.mc1 = mr1;
-   }
-   /**
-    * Sets the modes for 2MR
-    * @param mr2 2MR modes
-    */
-   void setMC2(String[] mr2) {
-      this.mc2 = mr2;
-   }
-   /**
-    * Sets the modes for 3MR
-    * @param mr3 3MR modes
-    */
-   void setMC3(String[] mr3) {
-      this.mc3 = mr3;
-   }
-   /**
-    * Sets the basename of a xyz file for qchem = generic
-    * @param basename basename
-    */
-   void setXYZFile_basename(String basename) {
-      this.xyz_basename = basename;
-   }
-   /**
-    * Sets the threshold value in MCS to generate grid potentials
-    * @param thresh_MCS 
-    */
-   void setThresh_MCS(double thresh_MCS) {
-      this.thresh_MCS = thresh_MCS;
-   }
-   /**
-    * Sets the active modes
-    * @param activeModes active modes
-    */
-   void setActiveModes(int[][] activeModes) {
-      this.activeModes = activeModes;
-   }
-   /**
-    * Sets the dryrun mode
-    * @param dryrun dryrun if true
-    */
-   void setDryRun(boolean dryrun){
-      this.dryrun = dryrun;
+   void setGridInfo(InputDataGrid gridinfo) {
+      this.gridInfo_array.add(gridinfo);
    }
 
    

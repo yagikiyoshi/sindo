@@ -14,10 +14,11 @@ import molecule.*;
 public class TaskGrid extends TaskQChem {
 
    private PESInputData makePESData;
+   private InputDataQC  qcData;
    private int[] mm;
    private double[] dq;
    private String basename;
-   public static int level=0;
+   private String ndifftype;
 
    /**
     * Constructs the task for QFF / Grid PES generation
@@ -26,11 +27,17 @@ public class TaskGrid extends TaskQChem {
     * @param dq displacements for each mode (bohr emu^1/2)
     * @param basename Basename of the minfo file.
     */
-   public TaskGrid(PESInputData makePESData, int[] mm, double[] dq, String basename) {
+   public TaskGrid(PESInputData makePESData, InputDataQC qcData, int[] mm, double[] dq, String basename) {
       this.makePESData = makePESData;
+      this.qcData      = qcData;
       this.mm = mm;
       this.dq = dq;
       this.basename = basename;
+      this.ndifftype = null;
+   }
+   
+   public void setNdifftype(String ndifftype) {
+      this.ndifftype = ndifftype;
    }
 
    @Override
@@ -52,13 +59,15 @@ public class TaskGrid extends TaskQChem {
       
       // Setup QuantChem
       try{
-         qcpack = new QuantChem(makePESData.getQchemTypes(level));
+         qcpack = new QuantChem(qcData.getType());
          qcpack.setBasename(basename);
          InputMaker inputMaker = qcpack.getInputMaker();
-         inputMaker.setOptions(makePESData.getQchemInputs(level));
+         if(qcData.isOption()) {
+            inputMaker.setOptions(qcData.getInputOption());
+         }else {
+            inputMaker.setTemplateFile(qcData.getTemplate());
+         }
          inputMaker.setMolecule(currentMol);
-         //inputMaker.setResource(resource);
-         //inputMaker.makeInputFile();
       }catch(Exception e){
          // This exception never happens as it is already checked during setup.
       }
@@ -66,7 +75,7 @@ public class TaskGrid extends TaskQChem {
       // Generate the input
       super.preProcess();
 
-      if(makePESData.isDryRun()){
+      if(qcData.isDryrun()){
          return 1;
       }else{
          return 0;         
@@ -76,7 +85,7 @@ public class TaskGrid extends TaskQChem {
 
    protected int postProcess() {
       
-      if(makePESData.isDryRun()) return 0;
+      if(qcData.isDryrun()) return 0;
 
       int stat = super.postProcess();
       if(stat == -1) {
@@ -91,21 +100,21 @@ public class TaskGrid extends TaskQChem {
          System.out.println(header+"Recommended to check the output of qchem run.");
       }
       
-      if(makePESData.getRunType().equals("QFF") && makePESData.getNdifftype().equals("HESS") &&
-            molecule.getElectronicData().getHessian() == null){
-         System.out.println(header+" Hessian is not found in "+basename);
-         System.out.println(header+" Error termination.");
-         return -1;
+      if(ndifftype != null) {
+         if(ndifftype.equals("HESS") && molecule.getElectronicData().getHessian() == null){
+            System.out.println(header+" Hessian is not found in "+basename);
+            System.out.println(header+" Error termination.");
+            return -1;
+         }
+
+         if(ndifftype.equals("GRAD") &&  molecule.getElectronicData().getGradient() == null){
+            System.out.println(header+" Gradient is not found in "+basename);
+            System.out.println(header+" Error termination.");
+            return -1;
+         }
       }
 
-      if(makePESData.getRunType().equals("QFF") && makePESData.getNdifftype().equals("GRAD") &&
-            molecule.getElectronicData().getGradient() == null){
-         System.out.println(header+" Gradient is not found in "+basename);
-         System.out.println(header+" Error termination.");
-         return -1;
-      }
-
-      if(makePESData.isRemoveFiles()){
+      if(qcData.isRemoveFile()){
          Exec exec = qcpack.getExec();
          exec.removeFiles();
       }

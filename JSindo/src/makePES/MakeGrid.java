@@ -16,10 +16,11 @@ import jobqueue.QueueMngr;
 public class MakeGrid {
 
    private PESInputData inputData;
+   private InputDataGrid gridData;
+   private InputDataQC  qcData;
    private GridFileName gfilename;
    private int[][] activeModes;
    private int nGrid;
-   private int titleID;
    private ArrayList<Integer> mc1 = null;
    private ArrayList<int[]> mc2 = null;
    private ArrayList<int[]> mc3 = null;
@@ -32,41 +33,30 @@ public class MakeGrid {
    private HashMap<String, double[][]> eneData;
    private HashMap<String, double[][]> dipoleData;
    
-   public MakeGrid(PESInputData inputData){
+   public MakeGrid(PESInputData inputData, InputDataGrid gridData, InputDataQC qcData){
       
       System.out.println("Setup MakeGrid module");
       System.out.println();
       
       this.inputData = inputData;
+      this.gridData  = gridData;
+      this.qcData    = qcData;
       
       activeModes = inputData.getActiveModes();
-      nGrid = inputData.getnGrid();
+      nGrid = gridData.getnGrid();
       mc1 = new ArrayList<Integer>();
       mc2 = new ArrayList<int[]>();
       mc3 = new ArrayList<int[]>();
 
-      String runtyp = inputData.getRunType();
-      
-      System.out.println(runtyp);
-      if(runtyp.equals("GRID")){
-         titleID = 0;
-         if(inputData.isFullMC()) {
-            this.setupFullMC();
-         }else{
-            this.setupMC();            
-         }
-         TaskGrid.level = 0;
-         
-      }else if(runtyp.equals("HYBRID")){
-         titleID = 1;
+      if(gridData.getThresh_MCS() > 0.0f) {
          MCStrength mcs = this.setupMCS();
          this.setupMC2(mcs);
          
-         int nn = inputData.getNumOfQchemTypes();
-         if(nn == 1){
-            TaskGrid.level = 0;            
-         }else {
-            TaskGrid.level = 1;            
+      } else {
+         if(gridData.isFullMC()) {
+            this.setupFullMC();
+         }else{
+            this.setupMC();            
          }
          
       }
@@ -146,7 +136,7 @@ public class MakeGrid {
    private MCStrength setupMCS(){
 
       QFFData qff = new QFFData();
-      String mopFilename = inputData.getMopfile();
+      String mopFilename = gridData.getMopfile();
       File mopFile = new File(mopFilename);
 
       if(mopFile.exists()){
@@ -214,7 +204,7 @@ public class MakeGrid {
    private void setupMC(){
 
       // setup mc1
-      String[] temp = inputData.getMC1();
+      String[] temp = gridData.getMC1();
       if(temp != null){
          for(int i=0; i<temp.length; i++){
             
@@ -231,7 +221,7 @@ public class MakeGrid {
          }
       }
 
-      temp = inputData.getMC2();
+      temp = gridData.getMC2();
       if(temp != null){
          for(int i=0; i<temp.length; i++){
             String[] s1 = temp[i].split(",");
@@ -265,7 +255,7 @@ public class MakeGrid {
          }
       }
 
-      temp = inputData.getMC3();
+      temp = gridData.getMC3();
       if(temp != null){
          for(int i=0; i<temp.length; i++){
             String[] s1 = temp[i].split(",");
@@ -327,7 +317,7 @@ public class MakeGrid {
    
    private void setupMC2(MCStrength mcs){
    
-      double mcsth = inputData.getThresh_MCS();
+      double mcsth = gridData.getThresh_MCS();
       
       int nd = activeModes.length;
       for(int n=0; n<nd; n++){
@@ -432,7 +422,7 @@ public class MakeGrid {
          queue = QueueMngr.getInstance();
          queue.start();         
       }else{
-         grdXYZ = new GrdXYZ(inputData.getXYZFile_basename());
+         grdXYZ = new GrdXYZ(gridData.getXYZFile_basename());
       }
 
       calcEQ();
@@ -456,7 +446,7 @@ public class MakeGrid {
       System.out.println("End of electronic structure calculations.");
       System.out.println();
 
-      if(inputData.isDryRun()){
+      if(qcData.isDryrun()){
          System.out.println("DryRun is done!");
          System.out.println();
          
@@ -470,7 +460,7 @@ public class MakeGrid {
 
          genEQ();
          
-         GenPotfile genpot = new GenPotfile(inputData.getTitle(titleID), gfilename);
+         GenPotfile genpot = new GenPotfile(qcData.getTitle(), gfilename);
          
          if(inputData.isRunQchem()){
             genpot.setDataMode("minfo");
@@ -480,7 +470,7 @@ public class MakeGrid {
          
          GenDipolefile gendipole = null;
          if(inputData.isDipole()) {
-            gendipole = new GenDipolefile(inputData.getTitle(titleID), gfilename);
+            gendipole = new GenDipolefile(qcData.getTitle(), gfilename);
 
             if(inputData.isRunQchem()){
                gendipole.setDataMode("minfo");
@@ -509,7 +499,7 @@ public class MakeGrid {
    
    private void setupGrid(){
       int nMC1 = mc1.size();
-      int nGrid = inputData.getnGrid();
+      int nGrid = gridData.getnGrid();
       double[] omegaV = inputData.getMolecule().getVibrationalData().getOmegaV();
       
       grid = new double[nMC1][nGrid];
@@ -808,12 +798,12 @@ public class MakeGrid {
          
       }
 
-      String gridData = inputData.getXYZFile_basename()+".dat";
-      System.out.println("   Reading the data from "+gridData+".");
+      String gridDataFile = gridData.getXYZFile_basename()+".dat";
+      System.out.println("   Reading the data from "+gridDataFile+".");
       System.out.println();
 
       try{
-         BufferedReader br = new BufferedReader(new FileReader(gridData));
+         BufferedReader br = new BufferedReader(new FileReader(gridDataFile));
          String line = null;         
          while((line = br.readLine()) != null){
             String[] data = line.split(",");
@@ -1091,7 +1081,7 @@ public class MakeGrid {
 
    private void processGrid(int[] mm, double[] qq, String basename){
       if(inputData.isRunQchem()){
-         TaskGrid task = new TaskGrid(inputData,mm,qq,basename);
+         TaskGrid task = new TaskGrid(inputData,qcData, mm,qq,basename);
          queue.submit(task);         
       }else{
          grdXYZ.write(inputData,mm,qq,basename);

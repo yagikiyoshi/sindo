@@ -120,7 +120,16 @@ public abstract class InputMaker {
          array.add(line);
       }
       br.close();
-      this.template = array.toArray(new String[0]);
+      
+      this.setTemplateFile(array.toArray(new String[0]));
+      
+   }
+   /**
+    * Sets the template file
+    * @param template The content of a template file, each line in a string.
+    */
+   public void setTemplateFile(String[] template) {
+      this.template = template;
       this.use_template = true;
    }
    /**
@@ -129,6 +138,13 @@ public abstract class InputMaker {
     */
    public XMLHandler getOptions(){
       return this.inputOptions;
+   }
+   /**
+    * Returns the template file in an String array
+    * @return The template file each line in a String
+    */
+   public String[] getTemplateFile() {
+      return this.template;
    }
    /** 
     * Set the information of molecule
@@ -163,6 +179,9 @@ public abstract class InputMaker {
             String str = line.toLowerCase();
             if(str.indexOf("#coord") != -1) {
                this.printCoordinates(pw);;
+            }else if(str.indexOf("#basename#") != -1) {
+               line = str.replaceAll("#basename#", basename);
+               pw.println(line);
             }else {
                pw.println(line);
             }

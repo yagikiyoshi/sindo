@@ -1,7 +1,9 @@
 package makePES;
 
-import java.io.File;
-import java.io.IOException;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.*;
+import java.io.*;
 import java.util.*;
 
 import jobqueue.QueueMngr;
@@ -28,7 +30,7 @@ public class PESInputReader {
    }
    
    /**
-    * Reads the data from makePES.xml
+    * Reads the data from makePES.xml (version 1)
     * @return The data stored in MakePESData.
     */
    public PESInputData read(){
@@ -59,7 +61,20 @@ public class PESInputReader {
          this.errorTermination("runtype = "+ runtype + " is not a valid option.");
       }
       System.out.println("     - RunType = " + runtype);
-      makePESData.setRunType(runtype);
+      InputDataGrid gridData = null;
+      InputDataQFF  qffData  = null;
+      if(runtype.equals("QFF")) {
+         qffData = new InputDataQFF();
+         makePESData.setQFFInfo(qffData);
+      }else if(runtype.equals("GRID")) {
+         gridData = new InputDataGrid();
+         makePESData.setGridInfo(gridData);
+      }else if(runtype.equals("HYBRID")) {
+         qffData = new InputDataQFF();
+         gridData = new InputDataGrid();
+         makePESData.setQFFInfo(qffData);
+         makePESData.setGridInfo(gridData);
+      }
       
       String filename = options.getValue("molecule");
       if(filename == null){
@@ -97,102 +112,25 @@ public class PESInputReader {
       }
       
       String amode = options.getValue("activemode");
-      int nd = minfoIO.getMolecule().getNumOfVibrationalData();
-      int[][] activeModes = new int[nd][];
-      if(amode == null){
-         
-         int ni=0;
-         for(int n=0; n<nd; n++){
-            int Nfree = minfoIO.getMolecule().getVibrationalData(n).Nfree;
-            activeModes[n] = new int[Nfree];
-            for(int i=0; i<Nfree; i++){
-               activeModes[n][i] = ni;
-               ni++;
-            }            
-         }
-         
-      }else{
-         String[] temp = splitline(amode);
-         int j=0;
-         for(int i=0; i<temp.length; i++){
-            if(temp[i].indexOf("-")==-1){
-               j++;
-            }else{
-               String[] mm = temp[i].split("-");
-               int m1 = Integer.parseInt(mm[0]);
-               int m2 = Integer.parseInt(mm[1]);
-               j = j + m2-m1+1;
-            }
-         }
-         
-         int[] modes = new int[j];
-         j=0;
-         for(int i=0; i<temp.length; i++){
-            if(temp[i].indexOf("-")==-1){
-               modes[j] = Integer.parseInt(temp[i])-1;
-               j++;
-            }else{
-               String[] mm = temp[i].split("-");
-               int m1 = Integer.parseInt(mm[0]);
-               int m2 = Integer.parseInt(mm[1]);
-               for(int m=m1; m<=m2; m++){
-                  modes[j] = m-1;
-                  j++;
-               }
-            }
-         }
-         
-         Arrays.sort(modes);
+      int[][] activeModes = this.setupActiveMode(amode, minfoIO.getMolecule());
+      System.out.println("     - Active Modes:");
 
-         int ns=0;
-         int nm=0;
-         for(int n=0; n<nd; n++){
-            int nf=minfoIO.getMolecule().getVibrationalData(n).Nfree;
-            int[] ii = new int[nf];
-
-            int ni=0;
-            if(nm < modes.length){
-               for(int i=0; i<nf; i++){
-                  if(modes[nm] == ns){
-                     ii[ni]=ns;
-                     ni++;
-                     nm++;
-                     if(nm == modes.length) break;
-                  }
-                  ns++;
-               }               
-            }
-            
-            if(ni>0){
-               activeModes[n] = new int[ni];
-               for(int i=0; i<ni; i++){
-                  activeModes[n][i] = ii[i];
-               }
-            }else{
-               activeModes[n] = null;
-            }
-         }
-         
-         System.out.println("     - Active Modes:");
-
-         for(int n=0; n<nd; n++){
-            if(activeModes[n] == null) continue;
-            System.out.println("        * Domain "+(n+1));
-            System.out.print  ("          ");
-            for(int i=0; i<activeModes[n].length-1; i++){
-               System.out.printf("%3d ",activeModes[n][i]+1);
-               if(i%10 == 9) {
-                  System.out.println();
-                  System.out.print  ("          ");
-               }
-            }
-            {
-               int i = activeModes[n].length-1;
-               System.out.printf("%3d ",activeModes[n][i]+1);
+      for(int n=0; n<activeModes.length; n++){
+         if(activeModes[n] == null) continue;
+         System.out.println("        * Domain "+(n+1));
+         System.out.print  ("          ");
+         for(int i=0; i<activeModes[n].length-1; i++){
+            System.out.printf("%3d ",activeModes[n][i]+1);
+            if(i%10 == 9) {
                System.out.println();
-            }     
+               System.out.print  ("          ");
+            }
          }
-
+         {
+            int i = activeModes[n].length-1;
+            System.out.printf("%3d ",activeModes[n][i]+1);
+            System.out.println();
+         }     
       }
       makePESData.setActiveModes(activeModes);
       
@@ -228,7 +166,6 @@ public class PESInputReader {
          this.errorTermination("removefiles = "+rf+" is not a valid option.");
       }
       System.out.println("        * Remove Files = " + removeFiles);
-      makePESData.setRemoveFiles(removeFiles);
       
       boolean dryrun=false;
       String dr = options.getValue("dryrun");
@@ -240,7 +177,6 @@ public class PESInputReader {
          this.errorTermination("dryrun = "+dr+" is not a valid option.");
       }
       System.out.println("        * DryRun       = " + dryrun);
-      makePESData.setDryRun(dryrun);
 
       String temp = options.getValue("qchem");
       /** It seems that the return tag is "\n" when the string is read from 
@@ -262,6 +198,7 @@ public class PESInputReader {
       }
       
       if(lines[0].toUpperCase().indexOf("GENERIC") >= 0){
+         
          makePESData.setRunQchem(false);
          System.out.print("        * Type         = GENERIC");
 
@@ -275,8 +212,16 @@ public class PESInputReader {
          }
          System.out.println();
          System.out.println("          Title        = " +title[0]);
-         makePESData.setTitle(title);
+         
+         InputDataQC qcInfo = new InputDataQC();
+         qcInfo.setDryrun(dryrun);
+         qcInfo.setRemoveFile(removeFiles);
+         qcInfo.setType("GENERIC");
+         qcInfo.setTitle(title[0]);
 
+         String qcindex = "0";
+         makePESData.setQCInfo(qcindex, qcInfo);
+         
          String basename = options.getValue("xyzfile");
          if(basename == null) {
             if(runtype.equals("QFF")){
@@ -288,21 +233,24 @@ public class PESInputReader {
             basename = basename.trim();
          }
          System.out.println("          xyzfile basename = " + basename);
-         makePESData.setXYZFile_basename(basename);
          
          if(runtype.equals("QFF")){
+            qffData.setXYZFile_basename(basename);
             File mkqff_eq = new File(MakeQFF.getBasename()+".minfo");
             if(! mkqff_eq.exists()) {
-               System.out.println("            # " +mkqff_eq.getName()+" is not found. Switching to DryRun=true.");
-               makePESData.setDryRun(true);
+               System.out.println("            # " +MakeQFF.getBasename()+".minfo is not found. Switching to DryRun=true.");
+               qcInfo.setDryrun(true);
             }
+            qffData.setQCindex(qcindex);
             
          }else if(runtype.equals("GRID")){
+            gridData.setXYZFile_basename(basename);
             File makeGrid_dat = new File(basename+".dat");
             if(! makeGrid_dat.exists()) {
                System.out.println("            # " +basename+".dat is not found. Switching to DryRun=true.");
-               makePESData.setDryRun(true);
+               qcInfo.setDryrun(true);
             }
+            gridData.setQCindex(qcindex);
          }
          
          System.out.println();
@@ -352,10 +300,25 @@ public class PESInputReader {
             System.out.println("          Title        = " +titles[n]);
             System.out.println();
             
+            InputDataQC qcInfo = new InputDataQC();
+            qcInfo.setDryrun(dryrun);
+            qcInfo.setRemoveFile(removeFiles);
+            qcInfo.setType(qchemTypes[n]);
+            qcInfo.setInputOption(qchemInputs[n]);
+            qcInfo.setTitle(titles[n]);
+            
+            makePESData.setQCInfo(Integer.toString(n), qcInfo);
+
          }
-         makePESData.setQchemTypes(qchemTypes);
-         makePESData.setQchemInputs(qchemInputs);
-         makePESData.setTitle(titles);
+         
+         if(runtype.equals("QFF")) {
+            qffData.setQCindex("0");
+         }else if(runtype.equals("GRID")) {
+            gridData.setQCindex("0");
+         }else if(runtype.equals("HYBRID")) {
+            qffData.setQCindex("0");
+            gridData.setQCindex("1");
+         }
          
       }
       
@@ -369,7 +332,7 @@ public class PESInputReader {
             stepsize = Double.parseDouble(ss.trim());
          }
          System.out.printf("        * Stepsize   = %-8.3f \n",stepsize);
-         makePESData.setStepsize(stepsize);
+         qffData.setStepsize(stepsize);
          
          String ndifftype = options.getValue("ndifftype");
          if(ndifftype == null){
@@ -383,14 +346,17 @@ public class PESInputReader {
          }         
          System.out.println("        * ndifftype = "+ndifftype);
          ndifftype = ndifftype.toUpperCase();
-         makePESData.setNdifftype(ndifftype);
+         qffData.setNdifftype(ndifftype);
          
          String mopFile = options.getValue("mopfile");
          if(mopFile == null){
             mopFile = "prop_no_1.mop";
          }
          System.out.println("        * mopfile   = "+mopFile);
-         makePESData.setMopfile(mopFile);
+         qffData.setMopfile(mopFile);
+         if(runtype.equals("HYBRID")) {
+            gridData.setMopfile(mopFile);
+         }
          
          boolean genhs = false;
          String hs = options.getValue("genhs");
@@ -402,7 +368,7 @@ public class PESInputReader {
             this.errorTermination("genhs = " + hs + " is not a valid option.");
          }
          System.out.println("        * Generate hs file = " + genhs);
-         makePESData.setGenhs(genhs);
+         qffData.setGenhs(genhs);
 
          String gh = options.getValue("gradient_and_hessian");
          if(gh == null || gh.equalsIgnoreCase("input")){
@@ -413,8 +379,8 @@ public class PESInputReader {
             this.errorTermination("gradient_and_hessian = " + gh + "is not a valid option");
          }
          System.out.println("        * Gradient_and_Hessian = " + gh);
-         makePESData.setGradient_and_hessian(gh);
-         if(makePESData.getGradient_and_hessian().equals("INPUT")){
+         qffData.setGradient_and_hessian(gh);
+         if(gh.equals("INPUT")){
             ElectronicData edata = makePESData.getMolecule().getElectronicData();
             if(edata.getGradient() == null || edata.getHessian() == null){
                this.errorTermination("Gradient and/or Hessian not found in "+ filename + ". \n "
@@ -422,7 +388,6 @@ public class PESInputReader {
             }
             
          }
-
          
          System.out.println();
 
@@ -438,7 +403,7 @@ public class PESInputReader {
             nGrid = Integer.parseInt(ss.trim());
          }
          System.out.printf("        * Grid points = %-8d \n",nGrid);
-         makePESData.setnGrid(nGrid);
+         gridData.setnGrid(nGrid);
          
          boolean fullmc=false;
          String fmc = options.getValue("fullmc");
@@ -450,7 +415,7 @@ public class PESInputReader {
             this.errorTermination("fullmc = "+fmc+" is not a valid option.");
          }
          System.out.println("        * Full MC = " + fullmc);
-         makePESData.setFullMC(fullmc);
+         gridData.setFullMC(fullmc);
 
          if(! fullmc){
             boolean isMc = false;
@@ -465,7 +430,7 @@ public class PESInputReader {
                }
                System.out.print(mr1[mr1.length-1]);
                System.out.println();
-               makePESData.setMC1(mr1);
+               gridData.setMC1(mr1);
             }
 
             ss = options.getValue("mc2");
@@ -488,7 +453,7 @@ public class PESInputReader {
                }
                System.out.print("("+mr2[i]+")");
                System.out.println();
-               makePESData.setMC2(mr2);
+               gridData.setMC2(mr2);
             }
 
             ss = options.getValue("mc3");
@@ -511,7 +476,7 @@ public class PESInputReader {
                }
                System.out.print("("+mr3[i]+")");
                System.out.println();
-               makePESData.setMC3(mr3);
+               gridData.setMC3(mr3);
             }
             
             if(! isMc){
@@ -533,7 +498,7 @@ public class PESInputReader {
             nGrid = Integer.parseInt(ss.trim());
          }
          System.out.printf("        * Grid points = %-8d \n",nGrid);
-         makePESData.setnGrid(nGrid);
+         gridData.setnGrid(nGrid);
          
          double mcs = -1.0;
          ss = options.getValue("mcstrength");
@@ -542,7 +507,7 @@ public class PESInputReader {
          }
          mcs = Double.parseDouble(ss);
          System.out.println("        * MC Strength = "+mcs);
-         makePESData.setThresh_MCS(mcs);
+         gridData.setThresh_MCS(mcs);
 
          System.out.println();
       }
@@ -562,6 +527,258 @@ public class PESInputReader {
       
       return makePESData;
 
+   }
+
+   /**
+    * Reads the data from makePES.xml (version 2)
+    * @return The data stored in MakePESData.
+    */
+   public PESInputData read2() {
+
+      // Default values
+      String filename = null;
+      Boolean interdomain = false;
+      int MR = 3;
+      int[][] activeModes = null;
+
+      // Utilities
+      MInfoIO minfoIO = new MInfoIO();
+
+      System.out.println();
+      System.out.println("Launch MakePES module");
+      System.out.println();
+
+      System.out.printf("  o Input options read via "+xmlFile+" ... ");
+
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+      Document doc = null;
+      try {
+         DocumentBuilder db = dbf.newDocumentBuilder();
+         doc = db.parse(new File(xmlFile));
+      } catch (Exception e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      
+      System.out.println(" [OK] ");
+
+      Element makePES = doc.getDocumentElement();
+      
+      NodeList options = makePES.getChildNodes();
+      
+      // Search for minfofile first.
+      for(int i=0; i<options.getLength(); i++) {
+         Node node = options.item(i);
+         if(node.getNodeType() == Node.ELEMENT_NODE) {
+            String name = node.getNodeName();
+            Element element = (Element)node;
+            if(name.equalsIgnoreCase("minfofile")) {
+               filename = element.getAttribute("value").trim();
+               System.out.printf("     - Molecular info via "+filename+" ... ");
+               try{
+                  minfoIO.loadMOL(filename);
+               }catch(IOException e){
+                  this.errorTermination(e.getMessage());
+               }
+               if(minfoIO.getMolecule().getVibrationalData() == null){
+                  this.errorTermination("Vibrational data is not found in "+filename);
+               }
+               System.out.println(" [OK] ");
+               break;
+            }
+         }
+      }
+      if(filename == null){
+         this.errorTermination("minfofile entry is not found!");
+      }
+
+      // Set up other parameters.
+      String actv = null;
+      
+      for(int i=0; i<options.getLength(); i++) {
+         Node node = options.item(i);
+         if(node.getNodeType() == Node.ELEMENT_NODE) {
+            String name = node.getNodeName();
+            Element element = (Element)node;
+            String value = element.getAttribute("value").trim();
+
+            if(name.equalsIgnoreCase("qchem")) {
+               
+               System.out.println(name +" : id = "+ element.getAttribute("id"));
+               NodeList qchemlist = node.getChildNodes();
+               for(int j=0; j<qchemlist.getLength(); j++) {
+                  Node qchemNode = qchemlist.item(j);
+                  if(qchemNode.getNodeType() == Node.ELEMENT_NODE) {
+                     Element qchemElement = (Element)qchemNode;
+                     System.out.println("  " + qchemNode.getNodeName() + " = " + qchemElement.getAttribute("value"));
+                  }
+               }
+               
+            }else if(name.equalsIgnoreCase("qff")) {
+               System.out.println(name);
+               NodeList qfflist = node.getChildNodes();
+               for(int j=0; j<qfflist.getLength(); j++) {
+                  Node qffNode = qfflist.item(j);
+                  if(qffNode.getNodeType() == Node.ELEMENT_NODE) {
+                     Element qffElement = (Element)qffNode;
+                     System.out.println("  " + qffNode.getNodeName() + " = " + qffElement.getAttribute("value"));
+                  }
+               }
+               
+            }else if(name.equalsIgnoreCase("activemode")) {
+               actv = value;
+               //activeModes = this.setupActiveMode(value, minfoIO.getMolecule());
+               
+            }else if(name.equalsIgnoreCase("mr")) {
+               try {
+                  MR = Integer.parseInt(value);
+               }catch (NumberFormatException e) {
+                  this.errorTermination("MR = "+value+" is not a valid option.");
+               }
+               
+            }else if(name.equalsIgnoreCase("interdomain")) {
+               if(value.equalsIgnoreCase("false")) {
+                  interdomain = false;
+               }else if(value.equalsIgnoreCase("true")){
+                  interdomain = true;
+               }else{
+                  this.errorTermination("interdomain = "+value+" is not a valid option.");
+               }
+
+            }else {
+               System.out.println(name +" = "+ value);
+            }
+            
+         }else {
+            //System.out.println(node.getNodeName());
+         }
+         
+      }
+         
+      if(interdomain) {
+         VibUtil vutil = new VibUtil(minfoIO.getMolecule());
+         vutil.combineAllVibData();
+      }
+      activeModes = this.setupActiveMode(actv, minfoIO.getMolecule());
+      
+      // Print settings
+      System.out.println("     - InterDomain coupling = " + interdomain);
+      System.out.println("     - Active Modes:");
+
+      for(int n=0; n<activeModes.length; n++){
+         if(activeModes[n] == null) continue;
+         System.out.println("        * Domain "+(n+1));
+         System.out.print  ("          ");
+         for(int i=0; i<activeModes[n].length-1; i++){
+            System.out.printf("%3d ",activeModes[n][i]+1);
+            if(i%10 == 9) {
+               System.out.println();
+               System.out.print  ("          ");
+            }
+         }
+         {
+            int i = activeModes[n].length-1;
+            System.out.printf("%3d ",activeModes[n][i]+1);
+            System.out.println();
+         }     
+      }
+      
+      System.out.println("     - MR      = " + MR);
+
+      // Setup makePESData
+      PESInputData makePESData = new PESInputData();
+      makePESData.setMinfofile(filename);
+      makePESData.setMolecule(minfoIO.getMolecule());
+      makePESData.setActiveModes(activeModes);
+      makePESData.setMR(MR);
+      
+      System.exit(0);
+      return makePESData;
+
+   }
+   
+   private int[][] setupActiveMode(String amode, Molecule molecule){
+      
+      int nd = molecule.getNumOfVibrationalData();
+      int[][] activeModes = new int[nd][];
+      if(amode == null){
+         
+         int ni=0;
+         for(int n=0; n<nd; n++){
+            int Nfree = molecule.getVibrationalData(n).Nfree;
+            activeModes[n] = new int[Nfree];
+            for(int i=0; i<Nfree; i++){
+               activeModes[n][i] = ni;
+               ni++;
+            }            
+         }
+         
+      }else{
+         String[] temp = splitline(amode);
+         int j=0;
+         for(int i=0; i<temp.length; i++){
+            if(temp[i].indexOf("-")==-1){
+               j++;
+            }else{
+               String[] mm = temp[i].split("-");
+               int m1 = Integer.parseInt(mm[0]);
+               int m2 = Integer.parseInt(mm[1]);
+               j = j + m2-m1+1;
+            }
+         }
+         
+         int[] modes = new int[j];
+         j=0;
+         for(int i=0; i<temp.length; i++){
+            if(temp[i].indexOf("-")==-1){
+               modes[j] = Integer.parseInt(temp[i])-1;
+               j++;
+            }else{
+               String[] mm = temp[i].split("-");
+               int m1 = Integer.parseInt(mm[0]);
+               int m2 = Integer.parseInt(mm[1]);
+               for(int m=m1; m<=m2; m++){
+                  modes[j] = m-1;
+                  j++;
+               }
+            }
+         }
+         
+         Arrays.sort(modes);
+
+         int ns=0;
+         int nm=0;
+         for(int n=0; n<nd; n++){
+            int nf=molecule.getVibrationalData(n).Nfree;
+            int[] ii = new int[nf];
+
+            int ni=0;
+            if(nm < modes.length){
+               for(int i=0; i<nf; i++){
+                  if(modes[nm] == ns){
+                     ii[ni]=ns;
+                     ni++;
+                     nm++;
+                     if(nm == modes.length) break;
+                  }
+                  ns++;
+               }               
+            }
+            
+            if(ni>0){
+               activeModes[n] = new int[ni];
+               for(int i=0; i<ni; i++){
+                  activeModes[n][i] = ii[i];
+               }
+            }else{
+               activeModes[n] = null;
+            }
+         }
+         
+      }
+
+      return activeModes;
+      
    }
    
    private String[] splitline(String ss){
