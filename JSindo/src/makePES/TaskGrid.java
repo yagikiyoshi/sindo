@@ -101,13 +101,13 @@ public class TaskGrid extends TaskQChem {
       }
       
       if(ndifftype != null) {
-         if(ndifftype.equals("HESS") && molecule.getElectronicData().getHessian() == null){
+         if(ndifftype.equalsIgnoreCase("HESS") && molecule.getElectronicData().getHessian() == null){
             System.out.println(header+" Hessian is not found in "+basename);
             System.out.println(header+" Error termination.");
             return -1;
          }
 
-         if(ndifftype.equals("GRAD") &&  molecule.getElectronicData().getGradient() == null){
+         if(ndifftype.equalsIgnoreCase("GRAD") &&  molecule.getElectronicData().getGradient() == null){
             System.out.println(header+" Gradient is not found in "+basename);
             System.out.println(header+" Error termination.");
             return -1;

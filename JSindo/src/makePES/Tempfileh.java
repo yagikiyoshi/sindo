@@ -26,7 +26,7 @@ public class Tempfileh extends Tempfile implements Runnable {
 
       // System.out.println("Job for "+basename+" "+runmode);
       
-      if(runmode.equals("dump")){
+      if(runmode.equalsIgnoreCase("dump")){
          MInfoIO minfo = new MInfoIO();
          double[][][] hessQ = new double[nn][][];
          
@@ -43,7 +43,7 @@ public class Tempfileh extends Tempfile implements Runnable {
          
          dumpTempfile(basename,hessQ);
          
-      }else if(runmode.equals("remove")){
+      }else if(runmode.equalsIgnoreCase("remove")){
          File tempfile = new File(basename+".tempfile");
          tempfile.delete();
 

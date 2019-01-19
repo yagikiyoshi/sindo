@@ -42,7 +42,7 @@ public class MakePES {
          InputDataQFF qffData = qffData_array.get(n);
          InputDataQC  qcInfo  = inputData.getQCInfo(qffData.getQcID());
          
-         if(! qcInfo.getType().equals(InputDataQC.GENERIC)) {
+         if(! qcInfo.getType().equalsIgnoreCase(InputDataQC.GENERIC)) {
             this.startQueueManager();
          }
          MakeQFF mkqff = new MakeQFF(inputData, qffData, qcInfo);
@@ -54,7 +54,7 @@ public class MakePES {
          InputDataGrid gridData = gridData_array.get(n);
          InputDataQC  qcInfo  = inputData.getQCInfo(gridData.getQcID());
 
-         if(! qcInfo.getType().equals(InputDataQC.GENERIC)) {
+         if(! qcInfo.getType().equalsIgnoreCase(InputDataQC.GENERIC)) {
             this.startQueueManager();
          }
          MakeGrid mkgrid = new MakeGrid(inputData, gridData, qcInfo);

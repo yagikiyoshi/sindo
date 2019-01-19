@@ -146,11 +146,11 @@ public class MakeQFF {
          this.workTempfiles("dump");
          if(qffData.isGenhs()) this.calcQFF_hs();
          
-         if(qffData.getNdifftype().equals("HESS")){
+         if(qffData.getNdifftype().equalsIgnoreCase("HESS")){
             this.calcQFF_mop_hess();
-         }else if(qffData.getNdifftype().equals("GRAD")){
+         }else if(qffData.getNdifftype().equalsIgnoreCase("GRAD")){
             this.calcQFF_mop_grad();
-         }else if(qffData.getNdifftype().equals("ENE")){
+         }else if(qffData.getNdifftype().equalsIgnoreCase("ENE")){
             // TODO
             // this.calcQFF_mop_ene;            
          }
@@ -318,13 +318,13 @@ public class MakeQFF {
    
    private void workTempfiles(String runmode) {
 
-      if(runmode.equals("dump")){
+      if(runmode.equalsIgnoreCase("dump")){
          /* --- Store data in tempfile -- */
          
          System.out.println();
          System.out.printf("Storing electronic structure data in tempfile ...  ");
          
-      }else if(runmode.equals("remove")){
+      }else if(runmode.equalsIgnoreCase("remove")){
          /* --- Remove all tempfiles -- */
          
          System.out.println();
@@ -338,7 +338,7 @@ public class MakeQFF {
          if(activeModes[n] == null) continue;
          
          int Nfree = activeModes[n].length;
-         if(qffData.getNdifftype().equals("HESS")){
+         if(qffData.getNdifftype().equalsIgnoreCase("HESS")){
             {
                Thread[] thread = new Thread[Nfree];
                for(int i=0; i<Nfree; i++){
@@ -692,7 +692,7 @@ public class MakeQFF {
 
          double[]   grad0 = null;
          double[][] hess0 = null;
-         if(qffData.getGradient_and_hessian().equals("INPUT")){
+         if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
             
             ElectronicData edata = inputData.getMolecule().getElectronicData();
             grad0 = trans.gx2gq(edata.getGradient());
@@ -1002,7 +1002,7 @@ public class MakeQFF {
 
          double[] grad0 = null;
          double[][] hess0 = null;
-         if(qffData.getGradient_and_hessian().equals("INPUT")){
+         if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
             ElectronicData edata = inputData.getMolecule().getElectronicData();
             grad0 = trans.gx2gq(edata.getGradient());
             hess0 = trans.hx2hq(edata.getHessian());
@@ -1024,7 +1024,7 @@ public class MakeQFF {
                                   /deltaQ[ii]/deltaQ[ii]/deltaQ[ii]/8.0d/24.0d/sii/sii;
 
                int i1=ii+1;
-               if(qffData.getGradient_and_hessian().equals("INPUT")){
+               if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
                   pw.printf("%29.22e%5d%n",grad0[ii]/si,i1);
                   pw.printf("%29.22e%5d%<5d%n",hess0[ii][ii]/sii*0.5d,i1);               
                }else{
@@ -1080,7 +1080,7 @@ public class MakeQFF {
 
                   int i1=ii+1;
                   int j1=jj+1;
-                  if(qffData.getGradient_and_hessian().equals("INPUT")){
+                  if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
                      pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
                   }else{
                      double hess = ((gj[2][ii] - gj[1][ii])/deltaQ[jj]
@@ -1120,7 +1120,7 @@ public class MakeQFF {
 
                      int i1=ii+1;
                      int j1=jj+1;
-                     if(qffData.getGradient_and_hessian().equals("INPUT")){
+                     if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
                         pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
                      }else{
                         double hess = ((gj[2][ii] - gj[1][ii])/deltaQ[jj]
