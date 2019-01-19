@@ -20,7 +20,7 @@ public class InputMakerGAUSSIAN extends InputMaker {
       
    }
    public void makeInputFilebyOption() {
-      String inputFile = basename+".com";
+      String inputFile = basename+".inp";
       try{
          FileWriter fw = new FileWriter(inputFile);
          PrintWriter pw = new PrintWriter(new BufferedWriter(fw));         

@@ -21,11 +21,11 @@ public class ExecGAUSSIAN extends Exec {
 
    public String[] getCommand() {
       String cdir = System.getProperty("user.dir");
-      String[] command = {"runGaussian.sh",cdir,basename+".com"};
+      String[] command = {"runGaussian.sh",cdir,basename+".inp"};
       return command;
    }
    public void removeFiles(){
-      File inp = new File(basename+".com");
+      File inp = new File(basename+".inp");
       if(inp.exists()) inp.delete();
       File fchk = new File(basename+".fchk");
       if(fchk.exists()) fchk.delete();

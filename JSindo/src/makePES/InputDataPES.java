@@ -58,13 +58,6 @@ public class InputDataPES {
       return minfofile;
    }
    /**
-    * Returns whether or not to create Quantum Chemistry inputs. 
-    * @return Generate input files when true, or .grdxyz file when false.
-    */
-//   public boolean isRunQchem() {
-//      return runqchem;
-//   }
-   /**
     * Returns the mode representation
     * @return mode representation
     */
@@ -137,13 +130,6 @@ public class InputDataPES {
    void setMinfofile(String minfofile) {
       this.minfofile = minfofile;
    }
-   /**
-    * Sets whether or not to create input files for Quantum Chemistry jobs.
-    * @param qchem create input when true, create .xyz file when false
-    */
-//   void setRunQchem(boolean qchem) {
-//      this.runqchem = qchem;
-//   }
    /**
     * Sets the mode representation
     * @param mR mode representation
