@@ -27,10 +27,10 @@ public class RunMakePES {
       
       printtitle();
       
-      PESInputReader dr = new PESInputReader();
+      InputReader dr = new InputReader();
       if(xmlFile != null) dr.setFilename(xmlFile);
       
-      PESInputData mkPESData = null;
+      InputDataPES mkPESData = null;
       switch(input_version){
       case 1:
          mkPESData = dr.read();

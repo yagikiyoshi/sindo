@@ -3,11 +3,10 @@ package makePES;
 public class InputDataGrid {
 
    // GRID Data
-   private String qcindex;
+   private String qcID;
    private int nGrid;
    private boolean fullmc;
    private String[] mc1,mc2,mc3;
-   private String xyz_basename;
    private String mopfile;
    private double thresh_MCS;
    
@@ -19,18 +18,18 @@ public class InputDataGrid {
    }
    
    /**
-    * Returns the index of QC calc for this job
-    * @return index of QC calc.
+    * Returns the ID of QC calc for this job
+    * @return ID of QC calc.
     */
-   public String getQCindex() {
-      return qcindex;
+   public String getQcID() {
+      return qcID;
    }
    /**
-    * Sets the index of QC calc for this job
-    * @param grid_qcindex index of QC calc.
+    * Sets the ID of QC calc for this job
+    * @param grid_qcID ID of QC calc.
     */
-   public void setQCindex(String grid_qcindex) {
-      this.qcindex = grid_qcindex;
+   public void setQcID(String grid_qcID) {
+      this.qcID = grid_qcID;
    }
    /**
     * Returns the number of grid points
@@ -101,20 +100,6 @@ public class InputDataGrid {
     */
    void setMC3(String[] mr3) {
       this.mc3 = mr3;
-   }
-   /**
-    * Returns the basename of a xyz file for qchem = generic
-    * @return basename
-    */
-   public String getXYZFile_basename() {
-      return this.xyz_basename;
-   }
-   /**
-    * Sets the basename of a xyz file for qchem = generic
-    * @param basename basename
-    */
-   void setXYZFile_basename(String basename) {
-      this.xyz_basename = basename;
    }
    /**
     * Returns the threshold value in MCS to generate grid potentials, 

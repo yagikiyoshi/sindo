@@ -41,7 +41,7 @@ public class GrdXYZ {
       pw.close();
    }
    
-   public void write(PESInputData makePESData, int[] mm, double[] dq, String basename){
+   public void write(InputDataPES makePESData, int[] mm, double[] dq, String basename){
       
       File minfo = new File(basename+".minfo");
       if(minfo.exists()) {

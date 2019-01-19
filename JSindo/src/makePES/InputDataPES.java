@@ -10,7 +10,7 @@ import molecule.*;
  * @version 1.3
  * @since Sindo 3.2
  */
-public class PESInputData {
+public class InputDataPES {
 
    // General input parameters
    private Molecule molecule;
@@ -23,13 +23,13 @@ public class PESInputData {
    private boolean runqchem;
 
    // QC Data
-   private HashMap<String, InputDataQC>QCInfo_map;
+   private HashMap<String, InputDataQC>QCInfoMap;
    
    // QFF Data
-   private ArrayList<InputDataQFF> qffInfo_array;
+   private ArrayList<InputDataQFF> qffInfoArray;
    
    // Grid Data
-   private ArrayList<InputDataGrid> gridInfo_array;
+   private ArrayList<InputDataGrid> gridInfoArray;
    
    // Constant values
    public static String MINFO_FOLDER = "minfo.files/";
@@ -37,10 +37,10 @@ public class PESInputData {
    /**
     * This is a package private class
     */
-   PESInputData(){
-      QCInfo_map = new HashMap<String, InputDataQC>();
-      qffInfo_array  = new ArrayList<InputDataQFF>();
-      gridInfo_array = new ArrayList<InputDataGrid>();
+   InputDataPES(){
+      QCInfoMap = new HashMap<String, InputDataQC>();
+      qffInfoArray  = new ArrayList<InputDataQFF>();
+      gridInfoArray = new ArrayList<InputDataGrid>();
    }
 
    /**
@@ -61,9 +61,9 @@ public class PESInputData {
     * Returns whether or not to create Quantum Chemistry inputs. 
     * @return Generate input files when true, or .grdxyz file when false.
     */
-   public boolean isRunQchem() {
-      return runqchem;
-   }
+//   public boolean isRunQchem() {
+//      return runqchem;
+//   }
    /**
     * Returns the mode representation
     * @return mode representation
@@ -99,21 +99,28 @@ public class PESInputData {
     * @return QCInfo
     */
    public InputDataQC getQCInfo(String index) {
-      return QCInfo_map.get(index);
+      return QCInfoMap.get(index);
+   }
+   /**
+    * Returns all keys of QC data
+    * @return keys of QC data
+    */
+   public String[] getQCInfoKeySet() {
+      return QCInfoMap.keySet().toArray(new String[0]);
    }
    /**
     * Returns the information of QFF calc. in an array.
     * @return
     */
    public ArrayList<InputDataQFF> getQFFInfoArray(){
-      return qffInfo_array;
+      return qffInfoArray;
    }
    /**
     * Returns the information of GRID calc. in an array.
     * @return
     */
    public ArrayList<InputDataGrid> getGridInfoArray(){
-      return gridInfo_array;
+      return gridInfoArray;
    }
 
    /**
@@ -134,9 +141,9 @@ public class PESInputData {
     * Sets whether or not to create input files for Quantum Chemistry jobs.
     * @param qchem create input when true, create .xyz file when false
     */
-   void setRunQchem(boolean qchem) {
-      this.runqchem = qchem;
-   }
+//   void setRunQchem(boolean qchem) {
+//      this.runqchem = qchem;
+//   }
    /**
     * Sets the mode representation
     * @param mR mode representation
@@ -157,7 +164,7 @@ public class PESInputData {
     * @param qcinfo The information of QC calc.
     */
    void setQCInfo(String index, InputDataQC qcinfo) {
-      this.QCInfo_map.put(index, qcinfo);
+      this.QCInfoMap.put(index, qcinfo);
    }
    /**
     * Sets the input option for generating the dipole moment surface 
@@ -178,14 +185,14 @@ public class PESInputData {
     * @param qffinfo information of QFF calculations
     */
    void setQFFInfo(InputDataQFF qffinfo) {
-      this.qffInfo_array.add(qffinfo);
+      this.qffInfoArray.add(qffinfo);
    }
    /**
     * Sets the options for GRID calculation
     * @param gridinfo information of GRID calculations
     */
    void setGridInfo(InputDataGrid gridinfo) {
-      this.gridInfo_array.add(gridinfo);
+      this.gridInfoArray.add(gridinfo);
    }
 
    

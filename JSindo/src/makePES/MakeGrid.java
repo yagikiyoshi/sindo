@@ -15,9 +15,10 @@ import jobqueue.QueueMngr;
  */
 public class MakeGrid {
 
-   private PESInputData inputData;
+   private InputDataPES inputData;
    private InputDataGrid gridData;
    private InputDataQC  qcData;
+   private boolean isGeneric;
    private GridFileName gfilename;
    private int[][] activeModes;
    private int nGrid;
@@ -33,7 +34,7 @@ public class MakeGrid {
    private HashMap<String, double[][]> eneData;
    private HashMap<String, double[][]> dipoleData;
    
-   public MakeGrid(PESInputData inputData, InputDataGrid gridData, InputDataQC qcData){
+   public MakeGrid(InputDataPES inputData, InputDataGrid gridData, InputDataQC qcData){
       
       System.out.println("Setup MakeGrid module");
       System.out.println();
@@ -41,8 +42,16 @@ public class MakeGrid {
       this.inputData = inputData;
       this.gridData  = gridData;
       this.qcData    = qcData;
+      this.activeModes = inputData.getActiveModes();
       
-      activeModes = inputData.getActiveModes();
+      if(qcData.getType().equalsIgnoreCase(InputDataQC.GENERIC)) {
+         //inputData.setRunQchem(false);
+         this.isGeneric = true;
+      }else {
+         //inputData.setRunQchem(true);
+         this.isGeneric = false;
+      }
+
       nGrid = gridData.getnGrid();
       mc1 = new ArrayList<Integer>();
       mc2 = new ArrayList<int[]>();
@@ -118,8 +127,9 @@ public class MakeGrid {
       }
 
       gfilename = new GridFileName();
-      if(inputData.isRunQchem()){
-         String runFolder = PESInputData.MINFO_FOLDER;
+      //if(inputData.isRunQchem()){
+      if(! isGeneric) {
+         String runFolder = InputDataPES.MINFO_FOLDER;
          gfilename.setMinfoDirectoryName(runFolder);
          
          File minfoDir = new File(runFolder);
@@ -137,11 +147,18 @@ public class MakeGrid {
 
       QFFData qff = new QFFData();
       String mopFilename = gridData.getMopfile();
-      File mopFile = new File(mopFilename);
 
-      if(mopFile.exists()){
+      if(mopFilename != null){
+         File mopFile = new File(mopFilename);
          System.out.print("  o Setup MCS: Read QFF Data via "+mopFilename+" ... ");
-         qff.readmop(mopFile);
+         if(mopFile.exists()){
+            qff.readmop(mopFile);
+            
+         }else {
+            System.out.println("   "+mopFilename+" is not found! Exit with error.");
+            Utilities.terminate();
+            
+         }
          
       }else{
          System.out.print("  o Setup MCS: Read QFF via 001.hs ... ");
@@ -418,11 +435,12 @@ public class MakeGrid {
       System.out.println("Execute electronic structure calculations.");
       System.out.println();
 
-      if(inputData.isRunQchem()){
+      //if(inputData.isRunQchem()){
+      if(! isGeneric) {
          queue = QueueMngr.getInstance();
          queue.start();         
       }else{
-         grdXYZ = new GrdXYZ(gridData.getXYZFile_basename());
+         grdXYZ = new GrdXYZ(qcData.getXyzBasename());
       }
 
       calcEQ();
@@ -437,7 +455,8 @@ public class MakeGrid {
          calc3MRGrid();
       }
       
-      if(inputData.isRunQchem()){
+      //if(inputData.isRunQchem()){
+      if(! isGeneric) {
          queue.shutdown();            
       }else{
          grdXYZ.close();            
@@ -454,7 +473,8 @@ public class MakeGrid {
          System.out.println("Generating pot files.");
          System.out.println();
          
-         if(! inputData.isRunQchem()){
+         //if(! inputData.isRunQchem()){
+         if(isGeneric){
             readGridData();
          }
 
@@ -462,7 +482,8 @@ public class MakeGrid {
          
          GenPotfile genpot = new GenPotfile(qcData.getTitle(), gfilename);
          
-         if(inputData.isRunQchem()){
+         //if(inputData.isRunQchem()){
+         if(! isGeneric) {
             genpot.setDataMode("minfo");
          }else{
             genpot.setDataMode("datfile");
@@ -472,7 +493,8 @@ public class MakeGrid {
          if(inputData.isDipole()) {
             gendipole = new GenDipolefile(qcData.getTitle(), gfilename);
 
-            if(inputData.isRunQchem()){
+            //if(inputData.isRunQchem()){
+            if(! isGeneric) {
                gendipole.setDataMode("minfo");
             }else{
                gendipole.setDataMode("datfile");
@@ -798,7 +820,7 @@ public class MakeGrid {
          
       }
 
-      String gridDataFile = gridData.getXYZFile_basename()+".dat";
+      String gridDataFile = qcData.getXyzBasename()+".dat";
       System.out.println("   Reading the data from "+gridDataFile+".");
       System.out.println();
 
@@ -830,7 +852,7 @@ public class MakeGrid {
          }
          br.close();
       }catch (FileNotFoundException e){
-         System.out.println("   makeGrid.dat is not found! Exit with error.");
+         System.out.println("   "+gridDataFile+" is not found! Exit with error.");
          Utilities.terminate();
          
       }catch (IOException e){
@@ -849,7 +871,8 @@ public class MakeGrid {
       if(! datafile.exists()){
          double ene = 0.0;
          
-         if(inputData.isRunQchem()){
+         //if(inputData.isRunQchem()){
+         if(! isGeneric) {
             String minfoName = gfilename.getRunNameEQ()+".minfo";
             MInfoIO minfo = new MInfoIO();
             try {
@@ -899,7 +922,8 @@ public class MakeGrid {
 
          double[] dipole = null;
          
-         if(inputData.isRunQchem()){
+         //if(inputData.isRunQchem()){
+         if(! isGeneric) {
             if(molecule == null){
                String minfoName = gfilename.getRunNameEQ()+".minfo";
                MInfoIO minfo = new MInfoIO();
@@ -962,7 +986,8 @@ public class MakeGrid {
          double[][] xgrid = new double[1][];
          xgrid[0] = grid[p];
          
-         if(inputData.isRunQchem()){
+         //if(inputData.isRunQchem()){
+         if(! isGeneric) {
             genpot.genFile(mm, xgrid);
             if(inputData.isDipole()) gendipole.genFile(mm,xgrid);
          }else{
@@ -1010,7 +1035,8 @@ public class MakeGrid {
          }
          */
 
-         if(inputData.isRunQchem()){
+         //if(inputData.isRunQchem()){
+         if(! isGeneric) {
             genpot.genFile(mode, xg);
             if(inputData.isDipole()) gendipole.genFile(mode, xg);
          }else{
@@ -1059,7 +1085,8 @@ public class MakeGrid {
             genfiles.get(tt).genFile(mode, xg);
          }
          */
-         if(inputData.isRunQchem()){
+         //if(inputData.isRunQchem()){
+         if(! isGeneric) {
             genpot.genFile(mode, xg);
             if(inputData.isDipole()) gendipole.genFile(mode, xg);
          }else{
@@ -1080,7 +1107,8 @@ public class MakeGrid {
    }
 
    private void processGrid(int[] mm, double[] qq, String basename){
-      if(inputData.isRunQchem()){
+      //if(inputData.isRunQchem()){
+      if(! isGeneric) {
          TaskGrid task = new TaskGrid(inputData,qcData, mm,qq,basename);
          queue.submit(task);         
       }else{

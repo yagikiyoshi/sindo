@@ -5,9 +5,6 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.*;
-
-import jobqueue.QueueMngr;
-
 import molecule.*;
 import qchem.InputMaker;
 import qchem.QuantChem;
@@ -21,7 +18,7 @@ import sys.XMLHandler;
  * @version 1.2
  * @since Sindo 3.2
  */
-public class PESInputReader {
+public class InputReader {
 
    private String xmlFile = "makePES.xml";
    
@@ -33,9 +30,9 @@ public class PESInputReader {
     * Reads the data from makePES.xml (version 1)
     * @return The data stored in MakePESData.
     */
-   public PESInputData read(){
+   public InputDataPES read(){
       
-      PESInputData makePESData = new PESInputData();
+      InputDataPES makePESData = new InputDataPES();
       
       System.out.println();
       System.out.println("Launch MakePES module");
@@ -199,7 +196,6 @@ public class PESInputReader {
       
       if(lines[0].toUpperCase().indexOf("GENERIC") >= 0){
          
-         makePESData.setRunQchem(false);
          System.out.print("        * Type         = GENERIC");
 
          lines[0] = lines[0].replaceAll(",", " ");
@@ -235,29 +231,28 @@ public class PESInputReader {
          System.out.println("          xyzfile basename = " + basename);
          
          if(runtype.equals("QFF")){
-            qffData.setXYZFile_basename(basename);
+            qcInfo.setXyzBasename(basename);
             File mkqff_eq = new File(MakeQFF.getBasename()+".minfo");
             if(! mkqff_eq.exists()) {
                System.out.println("            # " +MakeQFF.getBasename()+".minfo is not found. Switching to DryRun=true.");
                qcInfo.setDryrun(true);
             }
-            qffData.setQCindex(qcindex);
+            qffData.setQcID(qcindex);
             
          }else if(runtype.equals("GRID")){
-            gridData.setXYZFile_basename(basename);
+            qcInfo.setXyzBasename(basename);
             File makeGrid_dat = new File(basename+".dat");
             if(! makeGrid_dat.exists()) {
                System.out.println("            # " +basename+".dat is not found. Switching to DryRun=true.");
                qcInfo.setDryrun(true);
             }
-            gridData.setQCindex(qcindex);
+            gridData.setQcID(qcindex);
          }
          
          System.out.println();
          
       }else{
-         makePESData.setRunQchem(true);
-         
+
          int nn = lines.length;
          String[] qchemTypes = new String[nn];
          XMLHandler[] qchemInputs = new XMLHandler[nn];
@@ -312,12 +307,12 @@ public class PESInputReader {
          }
          
          if(runtype.equals("QFF")) {
-            qffData.setQCindex("0");
+            qffData.setQcID("0");
          }else if(runtype.equals("GRID")) {
-            gridData.setQCindex("0");
+            gridData.setQcID("0");
          }else if(runtype.equals("HYBRID")) {
-            qffData.setQCindex("0");
-            gridData.setQCindex("1");
+            qffData.setQcID("0");
+            gridData.setQcID("1");
          }
          
       }
@@ -484,8 +479,6 @@ public class PESInputReader {
             }
 
          }
-
-         
          System.out.println();
       }
       
@@ -511,15 +504,6 @@ public class PESInputReader {
 
          System.out.println();
       }
-
-      if(makePESData.isRunQchem()){
-         System.out.printf("  o Queue Manager via resources.info ... ");
-         QueueMngr queue = QueueMngr.getInstance();
-         System.out.println(" [OK] ");
-         queue.printResources("     ");
-         System.out.println();
-         
-      }
       
       System.out.println();
       System.out.println("MakePES is setup successfully!");
@@ -533,14 +517,24 @@ public class PESInputReader {
     * Reads the data from makePES.xml (version 2)
     * @return The data stored in MakePESData.
     */
-   public PESInputData read2() {
+   public InputDataPES read2() {
 
+      // keywords
+      String key_value = "value";
+      String key_id    = "id";
+      
+      // Setup makePESData
+      InputDataPES makePESData = new InputDataPES();
+      
       // Default values
-      String filename = null;
-      Boolean interdomain = false;
-      int MR = 3;
+      String  filename    = null;
       int[][] activeModes = null;
-
+      boolean interdomain = false;
+      int     MR          = 3;
+      boolean dipole      = false;
+      makePESData.setMR(MR);
+      makePESData.setDipole(dipole);
+      
       // Utilities
       MInfoIO minfoIO = new MInfoIO();
 
@@ -556,8 +550,8 @@ public class PESInputReader {
          DocumentBuilder db = dbf.newDocumentBuilder();
          doc = db.parse(new File(xmlFile));
       } catch (Exception e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
+         this.errorTermination(e.getMessage());
       }
       
       System.out.println(" [OK] ");
@@ -591,50 +585,45 @@ public class PESInputReader {
       if(filename == null){
          this.errorTermination("minfofile entry is not found!");
       }
+      makePESData.setMinfofile(filename);
+      makePESData.setMolecule(minfoIO.getMolecule());
 
       // Set up other parameters.
       String actv = null;
+      int num_of_qc   = 0;
+      int num_of_qff  = 0;
+      int num_of_grid = 0;
       
       for(int i=0; i<options.getLength(); i++) {
          Node node = options.item(i);
          if(node.getNodeType() == Node.ELEMENT_NODE) {
-            String name = node.getNodeName();
+            String  name    = node.getNodeName();
             Element element = (Element)node;
-            String value = element.getAttribute("value").trim();
+            String  value   = element.getAttribute(key_value).trim();
 
-            if(name.equalsIgnoreCase("qchem")) {
+            if(name.equalsIgnoreCase("minfofile")) {
+               continue;
                
-               System.out.println(name +" : id = "+ element.getAttribute("id"));
-               NodeList qchemlist = node.getChildNodes();
-               for(int j=0; j<qchemlist.getLength(); j++) {
-                  Node qchemNode = qchemlist.item(j);
-                  if(qchemNode.getNodeType() == Node.ELEMENT_NODE) {
-                     Element qchemElement = (Element)qchemNode;
-                     System.out.println("  " + qchemNode.getNodeName() + " = " + qchemElement.getAttribute("value"));
-                  }
-               }
-               
-            }else if(name.equalsIgnoreCase("qff")) {
-               System.out.println(name);
-               NodeList qfflist = node.getChildNodes();
-               for(int j=0; j<qfflist.getLength(); j++) {
-                  Node qffNode = qfflist.item(j);
-                  if(qffNode.getNodeType() == Node.ELEMENT_NODE) {
-                     Element qffElement = (Element)qffNode;
-                     System.out.println("  " + qffNode.getNodeName() + " = " + qffElement.getAttribute("value"));
-                  }
-               }
-               
-            }else if(name.equalsIgnoreCase("activemode")) {
-               actv = value;
-               //activeModes = this.setupActiveMode(value, minfoIO.getMolecule());
-               
-            }else if(name.equalsIgnoreCase("mr")) {
+            } else if(name.equalsIgnoreCase("mr")) {
                try {
                   MR = Integer.parseInt(value);
                }catch (NumberFormatException e) {
                   this.errorTermination("MR = "+value+" is not a valid option.");
                }
+               makePESData.setMR(MR);
+
+            }else if(name.equalsIgnoreCase("activemode")) {
+               actv = value;
+
+            }else if(name.equalsIgnoreCase("dipole")) {
+               if(value.equalsIgnoreCase("false")) {
+                  dipole = false;
+               }else if(value.equalsIgnoreCase("true")){
+                  dipole = true;
+               }else{
+                  this.errorTermination("dipole = "+value+" is not a valid option.");
+               }
+               makePESData.setDipole(dipole);
                
             }else if(name.equalsIgnoreCase("interdomain")) {
                if(value.equalsIgnoreCase("false")) {
@@ -644,26 +633,331 @@ public class PESInputReader {
                }else{
                   this.errorTermination("interdomain = "+value+" is not a valid option.");
                }
+               
+            } else if(name.equalsIgnoreCase("qchem")) {
+               
+               num_of_qc++;
+               
+               // setup qcdata
+               InputDataQC qcinfo = new InputDataQC();
+               if(! element.getAttribute(key_id).isEmpty()) {
+                  makePESData.setQCInfo(element.getAttribute(key_id), qcinfo);
+               }else{
+                  makePESData.setQCInfo(Integer.toString(num_of_qc), qcinfo);
+               }
+              
+               // default
+               qcinfo.setType(null);
+               qcinfo.setDryrun(false);
+               qcinfo.setRemoveFile(false);
+               qcinfo.setInputFile(null);
+               qcinfo.setXyzBasename(null);
 
-            }else {
-               System.out.println(name +" = "+ value);
+               NodeList qclist = node.getChildNodes();
+               for(int j=0; j<qclist.getLength(); j++) {
+                  Node qcNode = qclist.item(j);
+                  if(qcNode.getNodeType() == Node.ELEMENT_NODE) {
+                     String  qcName    = qcNode.getNodeName();
+                     Element qffElement = (Element)qcNode;
+                     String  qcvalue   = qffElement.getAttribute(key_value).trim();
+                     
+                     if(qcName.equalsIgnoreCase("program")){
+                        qcinfo.setType(qcvalue);
+
+                     } else if(qcName.equalsIgnoreCase("dryrun")) {
+                        if(qcvalue.equalsIgnoreCase("true")) {
+                           qcinfo.setDryrun(true);
+                        } else if(qcvalue.equalsIgnoreCase("false")) {
+                           qcinfo.setDryrun(false);
+                        } else {
+                           this.errorTermination("dryrun = [TRUE|FALSE]. "+qcvalue+" is not a valid option.");
+                        }
+                        
+                     } else if(qcName.equalsIgnoreCase("removefiles")) {
+                        if(qcvalue.equalsIgnoreCase("true")) {
+                           qcinfo.setRemoveFile(true);
+                        } else if(qcvalue.equalsIgnoreCase("false")) {
+                           qcinfo.setRemoveFile(false);
+                        } else {
+                           this.errorTermination("removefiles = [TRUE|FALSE]. "+qcvalue+" is not a valid option.");
+                        }
+                        
+                     } else if(qcName.equalsIgnoreCase("title")) {
+                        qcinfo.setTitle(qcvalue);
+                        
+                     } else if(qcName.equalsIgnoreCase("xyzfile")) {
+                        qcinfo.setXyzBasename(qcvalue);
+                        
+                     } else if(qcName.equalsIgnoreCase("template")) {
+                        qcinfo.setInputFile(qcvalue);
+                        String  xml = qffElement.getAttribute("xml").trim();
+                        if(xml.equalsIgnoreCase("yes") || xml.equalsIgnoreCase("true")) {
+                           qcinfo.setOption(true);
+                        } else {
+                           qcinfo.setOption(false);
+                        }
+
+                     } else {
+                        this.errorTermination("keyword "+qcName+" is not a valid option.");
+                     }
+                     
+                  }
+               }
+
+               if(qcinfo.getType() == null) {
+                  this.errorTermination("program is not specified in a qchem group.");
+                  
+               }else if(qcinfo.getType().equalsIgnoreCase(InputDataQC.GENERIC)) {
+                  if(qcinfo.getXyzBasename() == null) {
+                     this.errorTermination("XYZfile is not specified.");
+                  }
+                  qcinfo.setDryrun(true);
+                  
+               }else {                  
+                  if(qcinfo.getInputFile() == null) {
+                     this.errorTermination("template file is not specified for qchem jobs.");
+                  }
+                  try{
+                     QuantChem qcpack = new QuantChem(qcinfo.getType());
+                     InputMaker im = qcpack.getInputMaker();
+                     if(qcinfo.isOption()) {
+                        im.setOptions(qcinfo.getInputFile());
+                        qcinfo.setInputOption(im.getOptions());
+                     }else {
+                        im.setTemplateFile(qcinfo.getInputFile());
+                        qcinfo.setInputTemplate(im.getTemplateFile());
+                     }
+                     
+                  }catch(Exception e){
+                     this.errorTermination(e.getMessage());
+                  }
+               }
+               
+            }else if(name.equalsIgnoreCase("qff")) {
+               
+               num_of_qff++;
+               
+               if(num_of_qff > 1) {
+                  this.errorTermination("There are more than one entries for QFF. QFF entry must be at most one.");
+               }
+               
+               // setup qffdata
+               InputDataQFF qffdata = new InputDataQFF();
+               makePESData.setQFFInfo(qffdata);
+
+               // default values
+               qffdata.setQcID("1");
+               qffdata.setStepsize(0.5d);
+               qffdata.setNdifftype("hess");
+               qffdata.setMopfile("prop_no_1.mop");
+               qffdata.setGenhs(false);
+               qffdata.setGradient_and_hessian("input");
+               
+               NodeList qfflist = node.getChildNodes();
+               for(int j=0; j<qfflist.getLength(); j++) {
+                  Node qffNode = qfflist.item(j);
+                  if(qffNode.getNodeType() == Node.ELEMENT_NODE) {
+                     String  qffName    = qffNode.getNodeName();
+                     Element qffElement = (Element)qffNode;
+                     String  qffvalue   = qffElement.getAttribute(key_value).trim();
+                     
+                     if(qffName.equalsIgnoreCase("qcid")){
+                        qffdata.setQcID(qffvalue);
+                        
+                     } else if(qffName.equalsIgnoreCase("stepsize")){
+                        double stp = 0.0;
+                        try {
+                           stp = Double.parseDouble(qffvalue);
+                        }catch (NumberFormatException e) {
+                           this.errorTermination("stepsize must be a real number. "+qffvalue+" is not a valid option.");
+                        }
+                        qffdata.setStepsize(stp);
+                        
+                     } else if(qffName.equalsIgnoreCase("ndifftype")) {
+                        if(qffvalue.equalsIgnoreCase("grad") || qffvalue.equalsIgnoreCase("hess")) { 
+                           qffdata.setNdifftype(qffvalue);
+                        } else {
+                           this.errorTermination("ndifftype = [HESS|GRAD]. "+qffvalue+" is not a valid option.");
+                        }
+                        
+                     } else if(qffName.equalsIgnoreCase("mopfile")) {
+                        qffdata.setMopfile(qffvalue);
+                        
+                     } else if(qffName.equalsIgnoreCase("genhs")) {
+                        if(qffvalue.equalsIgnoreCase("true")) {
+                           qffdata.setGenhs(true);
+                        } else if(qffvalue.equalsIgnoreCase("false")) {
+                           qffdata.setGenhs(false);
+                        } else {
+                           this.errorTermination("genhs = [TRUE|FALSE]. "+qffvalue+" is not a valid option.");
+                        }
+                        
+                     } else if(qffName.equalsIgnoreCase("gradient_and_hessian")) {
+                        if(qffvalue.equalsIgnoreCase("input") | qffvalue.equalsIgnoreCase("current")) {
+                           qffdata.setGradient_and_hessian(qffvalue);
+                        } else {
+                           this.errorTermination("gradient_and_hessian = [INPUT|CURRENT]. "+qffvalue+" is not a valid option.");
+                        }
+                     }
+                  }
+               }
+               
+            }else if(name.equalsIgnoreCase("grid")) {
+               
+               num_of_grid++;
+
+               // setup griddata
+               InputDataGrid griddata = new InputDataGrid();
+               makePESData.setGridInfo(griddata);
+
+               // default values
+               griddata.setQcID("1");
+               griddata.setnGrid(11);
+               griddata.setFullMC(false);
+               griddata.setMC1(null);
+               griddata.setMC2(null);
+               griddata.setMC3(null);
+               griddata.setThresh_MCS(-1.0d);
+               griddata.setMopfile("prop_no_1.mop");
+               
+               boolean isMc = false;
+               
+               NodeList gridlist = node.getChildNodes();
+               for(int j=0; j<gridlist.getLength(); j++) {
+                  Node gridNode = gridlist.item(j);
+                  if(gridNode.getNodeType() == Node.ELEMENT_NODE) {
+                     String  gridName    = gridNode.getNodeName();
+                     Element gridElement = (Element)gridNode;
+                     String  gridvalue   = gridElement.getAttribute(key_value).trim();
+                     
+                     if(gridName.equalsIgnoreCase("qcid")){
+                        griddata.setQcID(gridvalue);
+                        
+                     } else if(gridName.equalsIgnoreCase("ngrid")){
+                        int ngrid = 0;
+                        try {
+                           ngrid = Integer.parseInt(gridvalue);
+                        }catch (NumberFormatException e) {
+                           this.errorTermination("ngrid must be an integer number. "+gridvalue+" is not a valid option.");
+                        }
+                        griddata.setnGrid(ngrid);
+                           
+                     } else if(gridName.equalsIgnoreCase("fullmc")) {
+                        isMc = true;
+                        if(gridvalue.equalsIgnoreCase("true")) {
+                           griddata.setFullMC(true);
+                        } else if(gridvalue.equalsIgnoreCase("false")) {
+                           griddata.setFullMC(false);
+                        } else {
+                           this.errorTermination("fullmc= [TRUE|FALSE]. "+gridvalue+" is not a valid option.");
+                        }
+
+                     } else if(gridName.equalsIgnoreCase("mc1")) {
+                        isMc = true;
+                        String[] mr1 = splitline(gridvalue);
+                        griddata.setMC1(mr1);
+
+                     } else if(gridName.equalsIgnoreCase("mc2")) {
+                        isMc = true;
+                        String[] s1 = splitline(gridvalue);
+                        if(s1.length%2 != 0){
+                           errorTermination("Invalid number of input in mr2.");
+                        }
+                        String[] mr2 = new String[s1.length/2];
+                        for(int ii=0; ii<mr2.length; ii++){
+                           mr2[ii] = s1[2*ii]+","+s1[2*ii+1];
+                        }
+                        
+                        griddata.setMC2(mr2);
+                        
+                     } else if(gridName.equalsIgnoreCase("mc3")) {
+                        isMc = true;
+                        String[] s1 = splitline(gridvalue);
+                        if(s1.length%3 != 0){
+                           errorTermination("Invalid number of input in mr3.");
+                        }
+                        String[] mr3 = new String[s1.length/3];
+                        
+                        for(int ii=0; ii<mr3.length; ii++){
+                           mr3[ii] = s1[3*ii]+","+s1[3*ii+1]+","+s1[3*ii+2];
+                        }
+
+                        griddata.setMC3(mr3);
+                        
+                     } else if(gridName.equalsIgnoreCase("mopfile")) {
+                        griddata.setMopfile(gridvalue);
+                        
+                     } else if(gridName.equalsIgnoreCase("mcsstrength")){
+                        double mcs = 0.0;
+                        try {
+                           mcs = Double.parseDouble(gridvalue);
+                        }catch (NumberFormatException e) {
+                           this.errorTermination("stepsize must be a real number. "+gridvalue+" is not a valid option.");
+                        }
+                        griddata.setThresh_MCS(mcs);
+                        isMc = true;
+                     }
+                  }
+               }
+               if(! isMc && griddata.getThresh_MCS() > 0.0d) {
+                  this.errorTermination("keyword for mc is not found! One of fullmc, mc1, mc2, mc3, or mcsstrength must be present.");
+                  
+               }
+               
+            } else {
+               this.errorTermination("keyword "+name+" is not a valid option.");
             }
             
-         }else {
-            //System.out.println(node.getNodeName());
          }
-         
       }
-         
+      
+      // Check for errors
+      if(num_of_qc == 0){
+         this.errorTermination("No qchem is found in the input!");
+      }
+      if(num_of_qff == 0 && num_of_grid == 0){
+         this.errorTermination("No job found! One of qff or grid should be present.");
+      }
+      
+      // final setup
       if(interdomain) {
          VibUtil vutil = new VibUtil(minfoIO.getMolecule());
          vutil.combineAllVibData();
       }
       activeModes = this.setupActiveMode(actv, minfoIO.getMolecule());
+      makePESData.setActiveModes(activeModes);
       
+      String[] qcIDs = makePESData.getQCInfoKeySet();
+      ArrayList<InputDataQFF> qffArray = makePESData.getQFFInfoArray();
+      for(int n=0; n<qffArray.size(); n++) {
+         boolean foundID = false;
+         for(String qcID: qcIDs) {
+            if(qcID.equals(qffArray.get(n).getQcID())) {
+               foundID = true;
+               break;
+            }
+         }
+         if(! foundID) {
+            this.errorTermination("QCID: "+ qffArray.get(n).getQcID()+" for QFF is not found. .");
+         }
+      }
+      ArrayList<InputDataGrid> gridArray = makePESData.getGridInfoArray();
+      for(int n=0; n<gridArray.size(); n++) {
+         boolean foundID = false;
+         for(String qcID: qcIDs) {
+            if(qcID.equals(gridArray.get(n).getQcID())) {
+               foundID = true;
+               break;
+            }
+         }
+         if(! foundID) {
+            this.errorTermination("QCID: "+ gridArray.get(n).getQcID()+" for GRID is not found. .");
+         }
+      }
+
       // Print settings
-      System.out.println("     - InterDomain coupling = " + interdomain);
-      System.out.println("     - Active Modes:");
+      System.out.println("     - InterDomain = " + interdomain);
+      System.out.println("     - ActiveModes:");
 
       for(int n=0; n<activeModes.length; n++){
          if(activeModes[n] == null) continue;
@@ -684,15 +978,129 @@ public class PESInputReader {
       }
       
       System.out.println("     - MR      = " + MR);
-
-      // Setup makePESData
-      PESInputData makePESData = new PESInputData();
-      makePESData.setMinfofile(filename);
-      makePESData.setMolecule(minfoIO.getMolecule());
-      makePESData.setActiveModes(activeModes);
-      makePESData.setMR(MR);
+      System.out.println("     - Dipole  = " + dipole);
+      System.out.println();
       
-      System.exit(0);
+      System.out.printf("  o Options for Quantum Chemistry jobs \n\n");
+      //String[] qcIDs = makePESData.getQCInfoKeySet();
+      for(String qcID: qcIDs) {
+         InputDataQC qcdata = makePESData.getQCInfo(qcID);
+         String program = qcdata.getType();
+
+         System.out.println("    QCID: " + qcID);
+         System.out.println("     - Program      = " + program);
+         System.out.println("     - Title        = " + qcdata.getTitle());
+         
+         if(program.equalsIgnoreCase(InputDataQC.GENERIC)) {
+            System.out.println("     - xyzfile      = " + qcdata.getXyzBasename());
+            
+         }else {
+            System.out.println("     - Removefiles  = " + qcdata.isRemoveFile());
+            System.out.println("     - Dryryn       = " + qcdata.isDryrun());
+            System.out.printf ("     - Template     = " + qcdata.getInputFile());
+            if(qcdata.isOption()) {
+               System.out.println("  [xml formatted options]");
+            }else {
+               System.out.println();
+            }
+            
+            try {
+               QuantChem qcpack = new QuantChem(qcdata.getType());
+               qcpack.getExec().setBasename("basename");
+               System.out.print  ("     - ExecCommand  = ");
+               String[] cmd = qcpack.getExec().getCommand();
+               for(int i=0; i<cmd.length; i++){
+                  System.out.print(cmd[i]+" ");
+               }
+               System.out.println();
+            } catch (TypeNotSupportedException e) {
+               e.printStackTrace();
+            }
+
+
+         }
+         System.out.println();
+         
+      }
+      
+      if(qffArray.size() > 0) {
+         System.out.printf("  o Options for QFF \n\n");
+      }
+      for(int n=0; n<qffArray.size(); n++) {
+         InputDataQFF qffdata = qffArray.get(n);
+         System.out.println("     - QCID         = " + qffdata.getQcID());
+         System.out.printf ("     - stepsize     = %-12.2f \n", qffdata.getStepsize());
+         System.out.println("     - ndifftype    = " + qffdata.getNdifftype());
+         System.out.println("     - mopfile      = " + qffdata.getMopfile());
+         System.out.println("     - gradient_and_hessian = " + qffdata.getGradient_and_hessian());
+         if(qffdata.isGenhs()) {
+            System.out.println("     - genhs        = " + qffdata.isGenhs());
+         }
+         System.out.println();
+
+      }
+      
+      if(gridArray.size() > 0) {
+         System.out.printf("  o Options for Grid \n\n");
+      }
+      for(int n=0; n<gridArray.size(); n++) {
+         InputDataGrid griddata = gridArray.get(n);
+         System.out.println("     - QCID         = " + griddata.getQcID());
+
+         if(griddata.isFullMC()) {
+            System.out.println("     - FullMC       = " + griddata.isFullMC());
+            
+         }else if (griddata.getMC1() != null || 
+                   griddata.getMC2() != null || 
+                   griddata.getMC3() != null) {
+            
+            String[] mr1 = griddata.getMC1();
+            if(mr1 != null) {
+               System.out.print("     - 1-mode coupling = ");
+               for(int i=0; i<mr1.length-1; i++){
+                  System.out.print(mr1[i]+", ");
+               }
+               System.out.print(mr1[mr1.length-1]);
+               System.out.println();
+               
+            }
+
+            String[] mr2 = griddata.getMC2(); 
+            if(mr2 != null) {
+               System.out.print("     - 2-mode coupling = ");
+               int i=0;
+               while(i<mr2.length-1){
+                  System.out.print("("+mr2[i]+"), ");
+                  i++;
+               }
+               System.out.print("("+mr2[i]+")");
+               System.out.println();
+               
+            }
+
+            String[] mr3 = griddata.getMC3();
+            if(mr3 != null) {
+               System.out.print("     - 3-mode coupling = ");
+               int i=0;
+               while(i<mr3.length-1){
+                  System.out.print("("+mr3[i]+"), ");
+                  i++;
+               }
+               System.out.print("("+mr3[i]+")");
+               System.out.println();
+               
+            }
+            
+         }else if (griddata.getThresh_MCS() > 0.0d) {
+            System.out.println("     - mopfile      = " + griddata.getMopfile());
+            System.out.println("     - MCSthresh    = "+griddata.getThresh_MCS());
+            
+         }
+         System.out.println();
+
+
+      }
+      
       return makePESData;
 
    }
@@ -820,7 +1228,7 @@ public class PESInputReader {
 
    private void errorTermination(String message){
       System.out.println();
-      System.out.println("Format error in makePES.xml.");
+      System.out.println("Format error in "+xmlFile+".");
       System.out.println();
       System.out.print("Error:  ");
       System.out.println(message);

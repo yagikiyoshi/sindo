@@ -13,12 +13,16 @@ public class InputDataQC {
    // parameters for QC run
    private String type;
    private String title;
+   private String inputFile;
    private XMLHandler inputOption;
-   private String[] template;
+   private String[] inputTemplate;
    private boolean dryrun;
    private boolean removeFile;
+   private String xyzBasename;
    
    private boolean option;
+   
+   public static String GENERIC="generic";
    
    /**
     * This is a package private class
@@ -27,10 +31,6 @@ public class InputDataQC {
       option = true;
    }
    
-   public boolean isOption() {
-      return option;
-   }
-
    public String getType() {
       return type;
    }
@@ -43,6 +43,18 @@ public class InputDataQC {
    public void setTitle(String title) {
       this.title = title;
    }
+   public boolean isOption() {
+      return option;
+   }
+   public void setOption(boolean option) {
+      this.option = option;
+   }
+   public String getInputFile() {
+      return inputFile;
+   }
+   public void setInputFile(String inputFile) {
+      this.inputFile = inputFile;
+   }
    public XMLHandler getInputOption() {
       return inputOption;
    }
@@ -50,12 +62,12 @@ public class InputDataQC {
       this.option = true;
       this.inputOption = inputOption;
    }
-   public String[] getTemplate() {
-      return template;
+   public String[] getInputTemplate() {
+      return inputTemplate;
    }
-   public void setTemplate(String[] template) {
+   public void setInputTemplate(String[] template) {
       this.option = false;
-      this.template = template;
+      this.inputTemplate = template;
    }
    public boolean isDryrun() {
       return dryrun;
@@ -68,6 +80,21 @@ public class InputDataQC {
    }
    public void setRemoveFile(boolean removeFile) {
       this.removeFile = removeFile;
+   }
+   /**
+    * Returns the basename of a xyz file for qchem = generic
+    * @return basename
+    */
+   public String getXyzBasename() {
+      return xyzBasename;
+   }
+   /**
+    * Sets the basename of a xyz file for qchem = generic
+    * @param basename basename
+    */
+
+   public void setXyzBasename(String xyzBasename) {
+      this.xyzBasename = xyzBasename;
    }
    
 }

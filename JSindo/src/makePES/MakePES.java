@@ -2,6 +2,7 @@ package makePES;
 
 import molecule.*;
 import java.util.*;
+import jobqueue.QueueMngr;
 
 /**
  * Make potential energy surface
@@ -11,13 +12,14 @@ import java.util.*;
  */
 public class MakePES {
    
-   private PESInputData inputData;
+   private InputDataPES inputData;
+   private boolean initialize = false;
    
    /**
     * Append the data for PES generation
     * @param makePESData input data, etc.
     */
-   public void appendPESData(PESInputData makePESData){
+   public void appendPESData(InputDataPES makePESData){
       this.inputData = makePESData;
    }
    
@@ -38,7 +40,11 @@ public class MakePES {
       ArrayList<InputDataQFF> qffData_array = inputData.getQFFInfoArray();
       for(int n=0; n<qffData_array.size() ; n++) {
          InputDataQFF qffData = qffData_array.get(n);
-         InputDataQC  qcInfo  = inputData.getQCInfo(qffData.getQCindex());
+         InputDataQC  qcInfo  = inputData.getQCInfo(qffData.getQcID());
+         
+         if(! qcInfo.getType().equals(InputDataQC.GENERIC)) {
+            this.startQueueManager();
+         }
          MakeQFF mkqff = new MakeQFF(inputData, qffData, qcInfo);
          mkqff.runMkQFF();
       }
@@ -46,12 +52,29 @@ public class MakePES {
       ArrayList<InputDataGrid> gridData_array = inputData.getGridInfoArray();
       for(int n=0; n<gridData_array.size(); n++) {
          InputDataGrid gridData = gridData_array.get(n);
-         InputDataQC  qcInfo  = inputData.getQCInfo(gridData.getQCindex());
+         InputDataQC  qcInfo  = inputData.getQCInfo(gridData.getQcID());
+
+         if(! qcInfo.getType().equals(InputDataQC.GENERIC)) {
+            this.startQueueManager();
+         }
          MakeGrid mkgrid = new MakeGrid(inputData, gridData, qcInfo);
          mkgrid.runMakeGrid();         
          
       }
 
    }
-   
+
+   private void startQueueManager() {
+      if(! initialize) {
+         initialize = true;
+         
+         System.out.printf("  o Queue Manager via resources.info ... ");
+         QueueMngr queue = QueueMngr.getInstance();
+         System.out.println(" [OK] ");
+         queue.printResources("     ");
+         System.out.println();
+         
+      }
+
+   }
 }

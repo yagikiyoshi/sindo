@@ -13,7 +13,7 @@ import molecule.*;
  */
 public class TaskGrid extends TaskQChem {
 
-   private PESInputData makePESData;
+   private InputDataPES makePESData;
    private InputDataQC  qcData;
    private int[] mm;
    private double[] dq;
@@ -27,7 +27,7 @@ public class TaskGrid extends TaskQChem {
     * @param dq displacements for each mode (bohr emu^1/2)
     * @param basename Basename of the minfo file.
     */
-   public TaskGrid(PESInputData makePESData, InputDataQC qcData, int[] mm, double[] dq, String basename) {
+   public TaskGrid(InputDataPES makePESData, InputDataQC qcData, int[] mm, double[] dq, String basename) {
       this.makePESData = makePESData;
       this.qcData      = qcData;
       this.mm = mm;
@@ -65,7 +65,7 @@ public class TaskGrid extends TaskQChem {
          if(qcData.isOption()) {
             inputMaker.setOptions(qcData.getInputOption());
          }else {
-            inputMaker.setTemplateFile(qcData.getTemplate());
+            inputMaker.setTemplateFile(qcData.getInputTemplate());
          }
          inputMaker.setMolecule(currentMol);
       }catch(Exception e){

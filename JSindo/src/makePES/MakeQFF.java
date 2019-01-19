@@ -19,9 +19,10 @@ public class MakeQFF {
    private int MR;
    private int[][] activeModes;
    private double[] deltaQ;
-   private PESInputData inputData;
+   private InputDataPES inputData;
    private InputDataQFF qffData;
    private InputDataQC  qcData;
+   private boolean isGeneric;
    private GrdXYZ grdXYZ;
    private QueueMngr queue;
    
@@ -29,7 +30,7 @@ public class MakeQFF {
     * Constructs with the input data
     * @param makePESData Input data
     */
-   public MakeQFF(PESInputData makePESData, InputDataQFF qffData, InputDataQC qcData){
+   public MakeQFF(InputDataPES makePESData, InputDataQFF qffData, InputDataQC qcData){
 
       System.out.println("Setup MakeQFF module");
       System.out.println();
@@ -38,6 +39,12 @@ public class MakeQFF {
       this.qffData   = qffData;
       this.qcData    = qcData;
       this.activeModes = makePESData.getActiveModes();
+
+      if(qcData.getType().equalsIgnoreCase(InputDataQC.GENERIC)) {
+         this.isGeneric = true;
+      }else {
+         this.isGeneric = false;
+      }
       
       VibrationalData vdata = makePESData.getMolecule().getVibrationalData();
       MR = makePESData.getMR();
@@ -60,16 +67,16 @@ public class MakeQFF {
    }
    
    public static String getBasename(){
-       return PESInputData.MINFO_FOLDER+"mkqff-eq";
+       return InputDataPES.MINFO_FOLDER+"mkqff-eq";
    }
    public static String getBasename(int mi){
-       return PESInputData.MINFO_FOLDER+"mkqff"+mi;
+       return InputDataPES.MINFO_FOLDER+"mkqff"+mi;
    }
    public static String getBasename(int mi, int mj){
-      return PESInputData.MINFO_FOLDER+"mkqff"+mi+"_"+mj;
+      return InputDataPES.MINFO_FOLDER+"mkqff"+mi+"_"+mj;
    }
    public static String getBasename(int mi, int mj, int mk){
-      return PESInputData.MINFO_FOLDER+"mkqff"+mi+"_"+mj+"_"+mk;
+      return InputDataPES.MINFO_FOLDER+"mkqff"+mi+"_"+mj+"_"+mk;
    }
    
    /**
@@ -94,8 +101,8 @@ public class MakeQFF {
       System.out.println();
 
       String minfo_folder = null;
-      if(inputData.isRunQchem()){
-         File minfodir = new File(PESInputData.MINFO_FOLDER);
+      if(! isGeneric) {
+         File minfodir = new File(InputDataPES.MINFO_FOLDER);
          if(! minfodir.exists()){
             minfodir.mkdir();
          }
@@ -104,28 +111,28 @@ public class MakeQFF {
          queue.start();
          
       }else{
-         minfo_folder = PESInputData.MINFO_FOLDER;
-         PESInputData.MINFO_FOLDER = "";
-         grdXYZ = new GrdXYZ(qffData.getXYZFile_basename());
+         minfo_folder = InputDataPES.MINFO_FOLDER;
+         InputDataPES.MINFO_FOLDER = "";
+         grdXYZ = new GrdXYZ(qcData.getXyzBasename());
          
       }
       
       this.processGrid(null, null, MakeQFF.getBasename());
       
-      if(qffData.getNdifftype().equals("HESS")){
+      if(qffData.getNdifftype().equalsIgnoreCase("HESS")){
          this.runHessian();
-      }else if(qffData.getNdifftype().equals("GRAD")){
+      }else if(qffData.getNdifftype().equalsIgnoreCase("GRAD")){
          this.runGradient();
-      }else if(qffData.getNdifftype().equals("ENE")){
+      }else if(qffData.getNdifftype().equalsIgnoreCase("ENE")){
          // TODO
          // this.runEnergy();            
       }
       
-      if(inputData.isRunQchem()){
+      if(! isGeneric) {
          queue.shutdown();            
       }else{
          grdXYZ.close();
-         PESInputData.MINFO_FOLDER = minfo_folder;
+         InputDataPES.MINFO_FOLDER = minfo_folder;
       }
       
       System.out.println("End of electronic structure calculations.");
@@ -297,7 +304,7 @@ public class MakeQFF {
    }
    
    private void processGrid(int[] mm, double[] qq, String basename){
-      if(inputData.isRunQchem()){
+      if(! isGeneric) {
          TaskGrid task = new TaskGrid(inputData,qcData, mm,qq,basename);
          task.setNdifftype(qffData.getNdifftype());
          queue.submit(task);
