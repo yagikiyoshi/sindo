@@ -1,0 +1,39 @@
+#
+#  Resource File version 1:
+#
+#  Describe the resource available for each task in one line.
+#
+#   HOSTNAME ppn=N mem=M scr=K
+#
+#     HOSTNAME  ... hostname(s) of the node separated with colons(:)
+#        ppn    ... process per node
+#        mem    ... memory in GB
+#        scr    ..  scratch disk in GB
+#
+#     (Each parameter must be separated either by commas(,) or spaces.)
+#
+#  IMPORTANT NOTE!
+#   Never specify the total memory of the node in "mem". If you did, the task  
+#   would run using the whole memory of the node, which might cause the node 
+#   to hang up. Always be sure to leave an enough amount of memory for the OS.  
+#
+#  Example:
+#  The following example invokes 5 tasks on diva and kushana. 
+#
+# Task 0: All parameters must be present here.
+diva01 ppn=8 mem=8 scr=400
+
+# Task 1: A missing parameter is assumed to be the same as the first line.
+diva02                              
+
+# Task 2: Parameters are case insensitive and can be separated by camma and/or space.   
+diva03,pPn=8,Mem=8, SCR=400
+
+# Task 3: 12 cores for kushana.
+kushana01 ppn=12
+
+# Task 4: The portion after '#' does not take effect.
+kushana02 ppn=12 # mem=10 scr=400
+
+# Task 5: A task using multiple nodes. The hostnames must be separated by colon(:) without spaces.
+kushana03:kushana04 ppn=12

@@ -42,6 +42,7 @@ public class ResourceMngr {
          res1.setID(ID);
          line = line.replaceAll(",", " ");
          aaa = Utilities.splitWithSpaceString(line);
+         /*
          if(aaa.length != 4) {
             System.out.println();
             System.out.println("Error in ResourceMngr!");
@@ -50,6 +51,7 @@ public class ResourceMngr {
             Utilities.terminate();
             
          }
+         */
          
          bbb = aaa[0].split(":");
          res1.setHostnames(bbb);
