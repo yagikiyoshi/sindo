@@ -1,0 +1,9 @@
+%chk=#basename#.chk
+%mem=1GB
+#P B3LYP/CC-PVDZ FREQ  NOSYMMETRY MAXDISK=240GB
+
+Frequency at B3LYP/cc-pVDZ
+
+0  1  
+#coordinate#
+

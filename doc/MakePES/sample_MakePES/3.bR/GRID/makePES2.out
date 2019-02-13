@@ -1,0 +1,36 @@
+2019.01.16 at 02:01:11 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES2.xml ...  [OK] 
+     - Molecular info via qmmm_harm-dsub-local.minfo ...  [OK] 
+minfoFile = qmmm_harm-dsub-local.minfo
+qchem : id = 01
+  program = gaussian
+  dryrun = false
+  removefiles = true
+  title = B3LYP/cc-pVDZ
+  template = GaussianInput.xml
+qff
+  stepsize = 0.5
+     - InterDomain coupling = false
+     - Active Modes:
+        * Domain 1
+            8  10  11  12  18 
+        * Domain 2
+           28  29  30 
+        * Domain 3
+           37  38  39 
+        * Domain 4
+           46  47  48 
+     - MR      = 4

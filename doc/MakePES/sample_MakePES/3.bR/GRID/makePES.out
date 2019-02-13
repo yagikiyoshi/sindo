@@ -1,0 +1,68 @@
+2019.01.17 at 15:20:06 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - RunType = GRID
+     - Molecular info via ../qmmm_harm-dsub-local.minfo ...  [OK] 
+     - InterDomain coupling = true
+     - Active Modes:
+        * Domain 1
+            8  10  11  12  18  28  29  30  37  38 
+           39  46  47  48 
+     - MR      = 2
+     - Dipole Moment Surface = true
+     - Settings for Quantum Chemistry Jobs:
+        * Remove Files = true
+        * DryRun       = false
+        * Type         = GENERIC
+          Title        =  QMMM/B3LYP-D3/(aug)-cc-pVDZ
+          xyzfile basename = makeGrid
+            # makeGrid.dat is not found. Switching to DryRun=true.
+
+     - Settings for Grid PES:
+        * Grid points = 11       
+        * Full MC = true
+
+
+MakePES is setup successfully!
+
+Setup MakeGrid module
+
+  o 1MR Grid: 
+      8 10 11 12 18 28 29 30 37 38 
+      39 46 47 48 
+  o 2MR Grid: 
+      (8,10) (8,11) (10,11) (8,12) (10,12) (11,12) (8,18) (10,18) (11,18) (12,18) 
+      (8,28) (10,28) (11,28) (12,28) (18,28) (8,29) (10,29) (11,29) (12,29) (18,29) 
+      (28,29) (8,30) (10,30) (11,30) (12,30) (18,30) (28,30) (29,30) (8,37) (10,37) 
+      (11,37) (12,37) (18,37) (28,37) (29,37) (30,37) (8,38) (10,38) (11,38) (12,38) 
+      (18,38) (28,38) (29,38) (30,38) (37,38) (8,39) (10,39) (11,39) (12,39) (18,39) 
+      (28,39) (29,39) (30,39) (37,39) (38,39) (8,46) (10,46) (11,46) (12,46) (18,46) 
+      (28,46) (29,46) (30,46) (37,46) (38,46) (39,46) (8,47) (10,47) (11,47) (12,47) 
+      (18,47) (28,47) (29,47) (30,47) (37,47) (38,47) (39,47) (46,47) (8,48) (10,48) 
+      (11,48) (12,48) (18,48) (28,48) (29,48) (30,48) (37,48) (38,48) (39,48) (46,48) 
+      (47,48) 
+
+Enter GridPES generation:
+
+Execute electronic structure calculations.
+
+   Writing the coordinates to makeGrid.xyz
+
+End of electronic structure calculations.
+
+DryRun is done!
+
+End of GridPES generation:
+

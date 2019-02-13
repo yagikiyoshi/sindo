@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="runtype">HYBRID</entry>
+<entry key="molecule">../h2co-b3lyp-dz.minfo</entry>
+<entry key="MR">3</entry>
+<entry key="removefiles">true</entry>
+<entry key="dipole">true</entry>
+<entry key="dryrun">false</entry>
+<entry key="qchem">
+Gaussian GaussianInput1.xml B3LYP/cc-pVDZ
+Gaussian GaussianInput2.xml B3LYP/cc-pVDZ (11)
+</entry>
+<entry key="stepsize">0.5</entry>
+<entry key="mopfile">prop_no_1.mop</entry>
+<entry key="ngrid">11</entry>
+<entry key="mcstrength">1.0</entry>
+</properties>
+ 
+

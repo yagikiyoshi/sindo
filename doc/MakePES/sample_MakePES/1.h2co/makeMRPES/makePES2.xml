@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<makePES>
+   <minfoFile   value="../h2co-b3lyp-dz.minfo" />
+   <MR          value="3" />
+   <dipole      value="true" />
+   <qchem id="freq">
+      <program     value="gaussian" />
+      <dryrun      value="false"/>
+      <removefiles value="true" />
+      <title       value="B3LYP/cc-pVDZ" />
+      <template    value="GaussianTemplate1" />
+   </qchem>
+   <qchem id="ene">
+      <program     value="gaussian" />
+      <dryrun      value="false"/>
+      <removefiles value="true" />
+      <title       value="B3LYP/cc-pVDZ" />
+      <template    value="GaussianTemplate2" />
+   </qchem>
+   <qff>
+      <QCID      value="freq" />
+      <stepsize  value="0.5" />
+      <ndifftype value="hess"/>
+      <mopfile   value="prop_no_1.mop" />
+   </qff>
+   <grid>
+      <qcID   value="ene" />
+      <ngrid  value="11" />
+      <mcsstrength value="1.0"/>
+      <mopfile     value="prop_no_1.mop"/>
+   </grid>
+</makePES>
+ 
+

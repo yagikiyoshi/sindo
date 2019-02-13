@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<makePES>
+   <minfoFile   value="../qmmm_harm-dsub-local.minfo" />
+   <MR          value="3" />
+   <dipole      value="false" />
+   <activemode  value="8, 10-12, 18, 28-30, 37-39, 46-48" />
+   <!--interdomain value="harmonic" /-->
+   <interdomain value="false" />
+   <qchem id="generic" >
+      <program     value="generic" />
+      <title       value="QMMM/B3LYP-D3/(aug)-cc-pVDZ" />
+      <xyzfile     value="makeQFF" />
+   </qchem>
+   <qff>
+      <qcID      value="generic" />
+      <stepsize  value="0.5" />
+      <ndifftype value="grad"/>
+      <mopfile   value="prop_no_1.mop" />
+   </qff>
+</makePES>
+

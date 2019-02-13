@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<makePES>
+   <minfoFile   value="h2o_6-mp2dz.minfo" />
+   <MR          value="4" />
+   <activemode  value="31-48" />
+   <qchem id="01">
+      <program     value="gaussian" />
+      <dryrun      value="false"/>
+      <removefiles value="true" />
+      <title       value="B3LYP/cc-pVDZ" />
+      <template    value="GaussianInput.xml" />
+   </qchem>
+   <qff>
+      <stepsize value="0.5" />
+   </qff>
+</makePES>
+ 
+
