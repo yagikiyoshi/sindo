@@ -1,4 +1,5 @@
 %chk=#basename#.chk
+%NprocShared=8
 %mem=1GB
 #P MP2/CC-PVDZ FREQ  NOSYMMETRY MAXDISK=240GB
 

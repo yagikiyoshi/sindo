@@ -1,0 +1,129 @@
+2019.02.14 at 17:40:36 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - RunType = QFF
+     - Molecular info via h2o_6-mp2dz.minfo ...  [OK] 
+     - InterDomain coupling = false
+     - Active Modes:
+        * Domain 1
+           31  32  33  34  35  36  37  38  39  40 
+           41  42  43  44  45  46  47  48 
+     - MR      = 3
+     - Dipole Moment Surface = false
+     - Settings for Quantum Chemistry Jobs:
+        * Remove Files = true
+        * DryRun       = false
+        * Level-0
+          Type         = Gaussian
+          TemplateFile = GaussianInput.xml
+          ExecCommand  = runGaussian.sh /home/yagi/devel/sindo/sindo.master/doc/MakePES/sample_MakePES/2.water-hexamer/ver1/QFF_normal basename.inp 
+          Title        =  MP2/cc-pVDZ
+
+     - Settings for QFF:
+        * Stepsize   = 0.500    
+        * ndifftype = hess
+        * mopfile   = prop_no_1.mop
+        * Generate hs file = false
+        * Gradient_and_Hessian = INPUT
+
+
+MakePES is setup successfully!
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : beluga05.local
+     Ppn      : 8
+     Memory   : 3 GB
+     SCR      : 240 GB
+     Status   : FREE
+     -----
+     ID       : 1
+     Hosts    : beluga05.local
+     Ppn      : 8
+     Memory   : 3 GB
+     SCR      : 240 GB
+     Status   : FREE
+     -----
+     ID       : 2
+     Hosts    : beluga08.local
+     Ppn      : 8
+     Memory   : 3 GB
+     SCR      : 240 GB
+     Status   : FREE
+     -----
+     ID       : 3
+     Hosts    : beluga08.local
+     Ppn      : 8
+     Memory   : 3 GB
+     SCR      : 240 GB
+     Status   : FREE
+     -----
+
+Setup MakeQFF module
+
+
+Enter QFF generation:
+
+Execute electronic structure calculations.
+
+Thread0@beluga05.local> Running minfo.files/mkqff-eq.inp on beluga05 at Thu Feb 14 17:40:38 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff30-1.inp on beluga05 at Thu Feb 14 17:40:38 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff31-0.inp on beluga08 at Thu Feb 14 17:40:37 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff30-0.inp on beluga08 at Thu Feb 14 17:40:37 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff31-1.inp on beluga08 at Thu Feb 14 17:42:45 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff32-0.inp on beluga08 at Thu Feb 14 17:42:47 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff32-1.inp on beluga05 at Thu Feb 14 17:43:11 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff33-0.inp on beluga05 at Thu Feb 14 17:43:11 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff33-1.inp on beluga08 at Thu Feb 14 17:44:45 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff34-0.inp on beluga08 at Thu Feb 14 17:44:48 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff34-1.inp on beluga05 at Thu Feb 14 17:45:11 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff35-0.inp on beluga05 at Thu Feb 14 17:45:12 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff35-1.inp on beluga08 at Thu Feb 14 17:46:48 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff36-0.inp on beluga08 at Thu Feb 14 17:46:52 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff36-1.inp on beluga05 at Thu Feb 14 17:47:06 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff37-0.inp on beluga05 at Thu Feb 14 17:47:08 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff37-1.inp on beluga08 at Thu Feb 14 17:48:55 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff38-0.inp on beluga08 at Thu Feb 14 17:48:55 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff38-1.inp on beluga05 at Thu Feb 14 17:49:04 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff39-0.inp on beluga05 at Thu Feb 14 17:49:04 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff39-1.inp on beluga08 at Thu Feb 14 17:50:57 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff40-0.inp on beluga05 at Thu Feb 14 17:50:58 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff40-1.inp on beluga08 at Thu Feb 14 17:51:00 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff41-0.inp on beluga05 at Thu Feb 14 17:51:01 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff41-1.inp on beluga05 at Thu Feb 14 17:52:54 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff42-0.inp on beluga05 at Thu Feb 14 17:52:56 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff42-1.inp on beluga08 at Thu Feb 14 17:53:01 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff43-0.inp on beluga08 at Thu Feb 14 17:53:01 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff43-1.inp on beluga05 at Thu Feb 14 17:54:53 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff44-0.inp on beluga05 at Thu Feb 14 17:54:54 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff44-1.inp on beluga08 at Thu Feb 14 17:55:07 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff45-0.inp on beluga08 at Thu Feb 14 17:55:07 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff45-1.inp on beluga05 at Thu Feb 14 17:56:49 JST 2019
+Thread0@beluga05.local> Running minfo.files/mkqff46-0.inp on beluga05 at Thu Feb 14 17:56:51 JST 2019
+Thread2@beluga08.local> Running minfo.files/mkqff46-1.inp on beluga08 at Thu Feb 14 17:57:12 JST 2019
+Thread3@beluga08.local> Running minfo.files/mkqff47-0.inp on beluga08 at Thu Feb 14 17:57:15 JST 2019
+Thread1@beluga05.local> Running minfo.files/mkqff47-1.inp on beluga05 at Thu Feb 14 17:58:44 JST 2019
+End of electronic structure calculations.
+
+
+Storing electronic structure data in tempfile ...   Done!
+
+Generating prop_no_1.mop... Done!
+
+Removing the tempfiles ...   Done!
+
+End of QFF generation.
+
