@@ -7,6 +7,7 @@ public class InputDataQFF {
    private String ndifftype;
    private String mopfile;
    private boolean genhs;
+   private boolean interdomain_hc;
    private String gradient_and_hessian;
    
    /**
@@ -25,7 +26,7 @@ public class InputDataQFF {
    }
    /**
     * Sets the ID of QC calc for this job
-    * @param qcID index of QC calc.
+    * @param qcID ID of QC calc.
     */
    public void setQcID(String qcID) {
       this.qcID = qcID;
@@ -60,7 +61,7 @@ public class InputDataQFF {
    }
    /**
     * Returns the name of mopfile
-    * @return the name of mopfile (default = prop_no_1.mop)
+    * @return the name of mopfile
     */
    public String getMopfile() {
       return mopfile;
@@ -73,15 +74,35 @@ public class InputDataQFF {
       this.mopfile = mopfile;
    }
    /**
-    * Returns if the generation of hs file is set
-    * @return generate hs file if true (default = false)
+    * Generates hs file if true. 
+    * @return genhs
     */
    public boolean isGenhs() {
       return genhs;
    }
+   /**
+    * Generates hs file if true.
+    * @param genhs true or false
+    */
    void setGenhs(boolean genhs) {
       this.genhs = genhs;
    }
+   /**
+    * Calculates interdomain harmonic coupling if true.
+    * @return interdomain_hc
+    */
+   public boolean isInterdomain_hc() {
+      return interdomain_hc;
+   }
+
+   /**
+    * Calculates interdomain harmonic coupling if true.
+    * @param interdomain_hc true or false
+    */
+   public void setInterdomain_hc(boolean interdomain_hc) {
+      this.interdomain_hc = interdomain_hc;
+   }
+
    /**
     * Returns where the gradient and Hessian is retrieved from
     * @return "input" or "current"
@@ -89,6 +110,10 @@ public class InputDataQFF {
    public String getGradient_and_hessian() {
       return gradient_and_hessian;
    }
+   /**
+    * Sets where the gradient and Hessian is retrieved from
+    * @param gradient_and_hessian "input" or "current"
+    */
    void setGradient_and_hessian(String gradient_and_hessian) {
       this.gradient_and_hessian = gradient_and_hessian;
    }

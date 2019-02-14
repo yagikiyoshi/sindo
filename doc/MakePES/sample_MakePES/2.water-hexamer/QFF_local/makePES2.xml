@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <makePES>
-   <minfoFile   value="h2o_6-mp2dz.minfo" />
+   <minfoFile   value="h2o_6-mp2dz_local.minfo" />
    <MR          value="3" />
-   <activemode  value="31-48" />
+   <activemode  value="7-9 16-19 25-27 34-36 43-45 52-54" />
    <qchem>
       <program     value="gaussian" />
       <dryrun      value="true"/>
@@ -11,9 +11,10 @@
       <template    value="GaussianTemplate" />
    </qchem>
    <qff>
-      <stepsize value="0.5" />
+      <stepsize  value="0.5" />
       <ndifftype value="hess"/>
       <mopfile   value="prop_no_1.mop" />
+      <interdomain_hc value="false" />
    </qff>
 </makePES>
  

@@ -34,3 +34,6 @@ JSindo/memo
 # Interface scripts
 Ext/*.sh
 
+# Misc
+.DS_Store
+

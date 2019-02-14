@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="runtype">QFF</entry>
+<entry key="molecule">h2o_6-mp2dz_local.minfo</entry>
+<entry key="activemode">7-9 16-19 25-27 34-36 43-45 52-54 </entry>
+<entry key="MR">4</entry>
+<entry key="interdomain">false</entry>
+<entry key="removefiles">true</entry>
+<entry key="dipole">false</entry>
+<entry key="dryrun">true</entry>
+<entry key="qchem">
+Gaussian GaussianInput.xml MP2/cc-pVDZ
+</entry>
+<entry key="stepsize">0.5</entry>
+<entry key="ndifftype">hess</entry>
+<entry key="mopfile">prop_no_1.mop</entry>
+<entry key="interdomain_hc">false</entry>
+</properties>
+ 

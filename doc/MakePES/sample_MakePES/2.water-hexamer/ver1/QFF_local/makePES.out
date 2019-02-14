@@ -1,0 +1,77 @@
+2019.02.14 at 14:46:26 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - RunType = QFF
+     - Molecular info via h2o_6-mp2dz_local.minfo ...  [OK] 
+     - InterDomain coupling = false
+     - Active Modes:
+        * Domain 1
+            7   8   9 
+        * Domain 2
+           16  17  18 
+        * Domain 3
+           19  25  26  27 
+        * Domain 4
+           34  35  36 
+        * Domain 5
+           43  44  45 
+        * Domain 6
+           52  53  54 
+     - MR      = 4
+     - Dipole Moment Surface = false
+     - Settings for Quantum Chemistry Jobs:
+        * Remove Files = true
+        * DryRun       = true
+        * Level-0
+          Type         = Gaussian
+          TemplateFile = GaussianInput.xml
+          ExecCommand  = runGaussian.sh /Users/kyagi/Work/devel/sindo/sindo.master/doc/MakePES/sample_MakePES/2.water-hexamer/QFF_local basename.inp 
+          Title        =  MP2/cc-pVDZ
+
+     - Settings for QFF:
+        * Stepsize   = 0.500    
+        * ndifftype = hess
+        * mopfile   = prop_no_1.mop
+        * InterDomain_hc (Harmonic Coupling) = false
+        * Genhs (Generate hs file) = false
+        * Gradient_and_Hessian = INPUT
+
+
+MakePES is setup successfully!
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : hostname
+     Ppn      : 1
+     Memory   : 1 GB
+     SCR      : 240 GB
+     Status   : FREE
+     -----
+
+Setup MakeQFF module
+
+
+Enter QFF generation:
+
+Execute electronic structure calculations.
+
+End of electronic structure calculations.
+
+DryRun is done!
+
+
+End of QFF generation.
+

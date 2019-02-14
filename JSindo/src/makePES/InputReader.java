@@ -353,6 +353,18 @@ public class InputReader {
             gridData.setMopfile(mopFile);
          }
          
+         Boolean interdomain_hc = false;
+         String intd_hc = options.getValue("interdomain_hc");
+         if(intd_hc == null || intd_hc.equalsIgnoreCase("true")) {
+            interdomain_hc = true;
+         }else if(intd_hc.equalsIgnoreCase("false")){
+            interdomain_hc = false;
+         }else{
+            this.errorTermination("interdomain_hc = "+intd_hc+" is not a valid option.");
+         }
+         System.out.println("        * InterDomain_hc (Harmonic Coupling) = " + interdomain_hc);
+         qffData.setInterdomain_hc(interdomain_hc);
+
          boolean genhs = false;
          String hs = options.getValue("genhs");
          if(hs == null || hs.equalsIgnoreCase("false")){
@@ -362,7 +374,7 @@ public class InputReader {
          }else{
             this.errorTermination("genhs = " + hs + " is not a valid option.");
          }
-         System.out.println("        * Generate hs file = " + genhs);
+         System.out.println("        * Genhs (Generate hs file) = " + genhs);
          qffData.setGenhs(genhs);
 
          String gh = options.getValue("gradient_and_hessian");
@@ -383,7 +395,7 @@ public class InputReader {
             }
             
          }
-         
+
          System.out.println();
 
       }
@@ -752,6 +764,7 @@ public class InputReader {
                qffdata.setMopfile("prop_no_1.mop");
                qffdata.setGenhs(false);
                qffdata.setGradient_and_hessian("input");
+               qffdata.setInterdomain_hc(true);
                
                NodeList qfflist = node.getChildNodes();
                for(int j=0; j<qfflist.getLength(); j++) {
@@ -797,6 +810,15 @@ public class InputReader {
                            qffdata.setGradient_and_hessian(qffvalue);
                         } else {
                            this.errorTermination("gradient_and_hessian = [INPUT|CURRENT]. "+qffvalue+" is not a valid option.");
+                        }
+                        
+                     } else if(qffName.equalsIgnoreCase("interdomain_hc")) {
+                        if(qffvalue.equalsIgnoreCase("true")) {
+                           qffdata.setInterdomain_hc(true);
+                        } else if(qffvalue.equalsIgnoreCase("false")) {
+                           qffdata.setInterdomain_hc(false);
+                        } else {
+                           this.errorTermination("interdomain_hc = [TRUE|FALSE]. "+qffvalue+" is not a valid option.");
                         }
                      }
                   }
@@ -1032,6 +1054,7 @@ public class InputReader {
          System.out.printf ("     - stepsize     = %-12.2f \n", qffdata.getStepsize());
          System.out.println("     - ndifftype    = " + qffdata.getNdifftype());
          System.out.println("     - mopfile      = " + qffdata.getMopfile());
+         System.out.println("     - intradomain_hc       = " + qffdata.isInterdomain_hc());
          System.out.println("     - gradient_and_hessian = " + qffdata.getGradient_and_hessian());
          if(qffdata.isGenhs()) {
             System.out.println("     - genhs        = " + qffdata.isGenhs());

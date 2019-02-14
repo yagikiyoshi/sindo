@@ -780,28 +780,30 @@ public class MakeQFF {
          }
          
          // inter-domain harmonic coupling
-         for(int n1=0; n1<activeModes.length; n1++){
-            if(activeModes[n1] == null) continue;
-            
-            int nf1 = activeModes[n1].length;
-            
-            for(int n2=0; n2<n1; n2++){
-               if(activeModes[n2] == null) continue;
+         if(qffData.isInterdomain_hc()) {
+            for(int n1=0; n1<activeModes.length; n1++){
+               if(activeModes[n1] == null) continue;
                
-               int nf2 = activeModes[n2].length;
+               int nf1 = activeModes[n1].length;
                
-               for(int i=0; i<nf1; i++){
-                  int ii = activeModes[n1][i];
+               for(int n2=0; n2<n1; n2++){
+                  if(activeModes[n2] == null) continue;
                   
-                  double si = sqfreq[ii];
+                  int nf2 = activeModes[n2].length;
+                  
+                  for(int i=0; i<nf1; i++){
+                     int ii = activeModes[n1][i];
+                     
+                     double si = sqfreq[ii];
 
-                  for(int j=0; j<nf2; j++){
-                     int jj = activeModes[n2][j];
-                     double sj = sqfreq[jj];
+                     for(int j=0; j<nf2; j++){
+                        int jj = activeModes[n2][j];
+                        double sj = sqfreq[jj];
 
-                     int i1=ii+1;
-                     int j1=jj+1;
-                     pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
+                        int i1=ii+1;
+                        int j1=jj+1;
+                        pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
+                     }
                   }
                }
             }
@@ -1098,40 +1100,40 @@ public class MakeQFF {
          }
          
          // inter-domain harmonic coupling
-         for(int n1=0; n1<activeModes.length; n1++){
-            if(activeModes[n1] == null) continue;
-            
-            int nf1 = activeModes[n1].length;
-            
-            for(int n2=0; n2<n1; n2++){
-               if(activeModes[n2] == null) continue;
+         if(qffData.isInterdomain_hc()) {
+            for(int n1=0; n1<activeModes.length; n1++){
+               if(activeModes[n1] == null) continue;
                
-               int nf2 = activeModes[n2].length;
+               int nf1 = activeModes[n1].length;
                
-               for(int i=0; i<nf1; i++){
-                  int ii = activeModes[n1][i];
-                  double[][] gi = readGradient(ii);
-                  double si = sqfreq[ii];
+               for(int n2=0; n2<n1; n2++){
+                  if(activeModes[n2] == null) continue;
+                  
+                  int nf2 = activeModes[n2].length;
+                  
+                  for(int i=0; i<nf1; i++){
+                     int ii = activeModes[n1][i];
+                     double[][] gi = readGradient(ii);
+                     double si = sqfreq[ii];
 
-                  for(int j=0; j<nf2; j++){
-                     int jj = activeModes[n2][j];
-                     double[][] gj  = readGradient(jj);
-                     double sj = sqfreq[jj];
+                     for(int j=0; j<nf2; j++){
+                        int jj = activeModes[n2][j];
+                        double[][] gj  = readGradient(jj);
+                        double sj = sqfreq[jj];
 
-                     int i1=ii+1;
-                     int j1=jj+1;
-                     if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
-                        pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
-                     }else{
-                        double hess = ((gj[2][ii] - gj[1][ii])/deltaQ[jj]
-                                     + (gi[2][jj] - gi[1][jj])/deltaQ[ii])*0.25d;
-                        pw.printf("%29.22e%5d%5d%n",hess/si/sj,j1,i1);
+                        int i1=ii+1;
+                        int j1=jj+1;
+                        if(qffData.getGradient_and_hessian().equalsIgnoreCase("INPUT")){
+                           pw.printf("%29.22e%5d%5d%n",hess0[ii][jj]/si/sj,j1,i1);
+                        }else{
+                           double hess = ((gj[2][ii] - gj[1][ii])/deltaQ[jj]
+                                        + (gi[2][jj] - gi[1][jj])/deltaQ[ii])*0.25d;
+                           pw.printf("%29.22e%5d%5d%n",hess/si/sj,j1,i1);
+                        }
                      }
-
                   }
                }
             }
-            
          }
          
          double[][] gij=null, gik=null, gjk=null;
