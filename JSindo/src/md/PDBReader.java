@@ -81,22 +81,47 @@ public class PDBReader extends FileReaderMD {
                      if(line.length() > 72){
                         segName = line.substring(72, 76).trim();
                         if(segName.length() == 0){
-                           segName = "PROA";
+                           segName = "PRO";
                         }
                      }else{
-                        segName = "PROA";
+                        segName = "PRO";
                      }
-
-                     if(segName.length() > 0 && ! segName.equals(current_seg.getName())){
-
-                        current_seg = new Segment();
-                        current_seg.setName(segName);
+                     
+                     String chain = line.substring(21,22).trim();
+                     if(chain.length() != 0) {
+                        segName += chain;
+                     }else {
+                        segName += "A";
+                     }
+                     
+                     if(! segName.equals(current_seg.getName())) {
                         
-                        residues = current_seg.getResidueList();
-                        current_res = new Residue();
-                        current_res.setID(-1);
+                        current_seg = null;
+                        ArrayList<Segment> segList = system.getSegmentList();
+                        for(int n=0; n<segList.size(); n++) {
+                           Segment segn = segList.get(n);
+                           if(segn.getName().equals(segName)) {
+                              current_seg = segn;
 
-                        system.addSegmentList(current_seg);
+                              residues = segn.getResidueList();
+                              current_res = new Residue();
+                              current_res.setID(-1);
+                              
+                              break;
+                           }
+                        }
+                        
+                        if(current_seg == null) {
+                           current_seg = new Segment();
+                           current_seg.setName(segName);
+                           
+                           residues = current_seg.getResidueList();
+                           current_res = new Residue();
+                           current_res.setID(-1);
+
+                           system.addSegmentList(current_seg);
+                        }
+                        
                      }
                      
                      resID = Integer.parseInt(line.substring(22,26).trim());

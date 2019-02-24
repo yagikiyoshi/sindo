@@ -154,9 +154,10 @@ public class MDUtil {
             Segment current_seg=segments.get(nseg);
             ArrayList<Residue> residues = current_seg.getResidueList();
             
-            // ILE: CD1 -> CD
             for(int nres=0; nres<residues.size(); nres++){
                Residue current_res = residues.get(nres);
+               
+               // ILE: CD1 -> CD
                if(current_res.getName().equals("ILE")){
                   int Nat = current_res.getAtomList().size();
                   for(int natom=0; natom<Nat; natom++){
@@ -166,6 +167,12 @@ public class MDUtil {
                      }
                   }
                }
+               
+               // HIS -> HSD
+               if(current_res.getName().equals("HIS")){
+                  current_res.setName("HSD");
+               }
+               
             }
             
             // C terminus (COO-): O -> OT1, OXT -> OT2
