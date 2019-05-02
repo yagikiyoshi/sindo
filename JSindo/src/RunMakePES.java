@@ -10,7 +10,7 @@ public class RunMakePES {
 
    public static void main(String[] args){
 
-      int input_version = 1;
+      int input_version = 2;
       String xmlFile = null;
       for(int n=0; n<args.length; n++) {
          if(args[n].equals("-f")) {

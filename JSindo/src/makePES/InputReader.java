@@ -561,6 +561,10 @@ public class InputReader {
       try {
          DocumentBuilder db = dbf.newDocumentBuilder();
          doc = db.parse(new File(xmlFile));
+      } catch (IOException e) {
+         System.out.println("Fatal error.");
+         System.out.println(e.getMessage());
+         Utilities.terminate();
       } catch (Exception e) {
          e.printStackTrace();
          this.errorTermination(e.getMessage());
