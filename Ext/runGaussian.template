@@ -1,0 +1,68 @@
+#!/bin/bash 
+######################################################
+# Batch file for a Gaussian job                      #
+#   Written by K.Yagi                                #
+#   Last modified  :   2011/05/23                    #
+######################################################
+
+    if [ $# -ne 2 ]; then
+       echo USAGE: runGaussian.sh arg[1] arg[2]
+       echo arg[1] : current directory
+       echo arg[2] : input file
+       exit 0
+    fi
+#
+#  arg[1] : current directory
+#  arg[2] : input file
+#
+    cd $1
+    DATADIR=$(pwd)
+
+    echo Running $2 on $(hostname) at $(date)
+    INP=$2
+    MOL=${INP%.*}
+    OUT=$MOL.out
+    CHK=$MOL.chk
+
+#
+# ----------------------------------------------------------
+# General settings for GAUSSIAN
+#
+#   Provide the following information:
+#    1. GAUSS_DIR   : Root directory where Gaussian is located
+#    2. GAUSS_EXEBIN: Executable file of Gaussian (g03 or g09)
+#    3. WORK        : Local working directory
+#
+#   - Gaussian09
+#    export GAUSS_DIR=/home/yagi/pgm/g09.RevC09
+#    export GAUSS_EXEBIN=$GAUSS_DIR/g09
+#    WORK=/scr/$USER
+
+    export GAUSS_DIR=gaussian_dir
+    export GAUSS_EXEBIN=$GAUSS_DIR/g03org09
+    WORK=scratchdir
+
+# ----------------------------------------------------------
+
+    export GAUSS_EXEDIR=$GAUSS_DIR/bsd:$GAUSS_DIR
+    export GAUSS_LEXEDIR=$GAUSS_DIR/linda-exe
+    if  [ $?PATH ]; then
+      export PATH=$GAUSS_EXEDIR:$PATH
+    else
+      export PATH=$GAUSS_EXEDIR
+    fi
+
+    export GAUSS_SCRDIR=$WORK/$MOL.$$
+    mkdir -p $GAUSS_SCRDIR
+
+#
+# ==============================================================
+# Now execute
+    (time $GAUSS_EXEBIN < $DATADIR/$INP) > $DATADIR/$OUT 2>&1
+# ==============================================================
+# Post process
+    rm -r $GAUSS_SCRDIR
+    $GAUSS_DIR/formchk $CHK  > /dev/null 2>&1
+# 
+    exit 0
+#

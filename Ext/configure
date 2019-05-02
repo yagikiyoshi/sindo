@@ -1,0 +1,84 @@
+#!/bin/bash
+
+   echo ""
+   echo "------------------------------------------------------------------------"
+   echo ""
+   echo "        Configure the interface with quantum chemistry programs"
+   echo ""
+   echo "------------------------------------------------------------------------"
+   echo ""
+
+   echo -n "Do you want to configure GAUSSIAN? [y/n]: "
+   read yn
+   echo ""
+
+   # Configuraion of GAUSSIAN
+   if [ $yn = 'y' ] || [ $yn = 'Y' ]; then
+
+      echo -n "Step1/3. Please provide the folder where GAUSSIAN is installed "
+      gauss_dir=$(which g16)
+      if [ -z $gauss_dir ]; then
+         gauss_dir=$(which g09)
+      fi
+      if [ -z $gauss_dir ]; then
+         gauss_dir=$(which g03)
+      fi
+      if [ -z $gauss_dir ]; then
+         echo -n "[Example : /usr/local/pgm/g09 ]: "
+      else
+         gauss_dir=$(dirname $gauss_dir)
+         echo -n "[Default : $gauss_dir ]: "
+      fi
+      read EXEDIR
+      if [ -z $EXEDIR ]; then
+         EXEDIR=$gauss_dir
+      fi
+      echo ""
+
+      BIN="g"
+      while [ $BIN != "g16" ] && [ $BIN != "g09" ] && [ $BIN != "g03" ]; do
+         echo -n "Step2/3. Which version do you use? [g16/g09/g03]: "
+         read aaa
+         if [ -z $aaa ]; then
+            BIN=g09
+         else
+            if [ $aaa = "g16" ] || [ $aaa = "G16" ] || [ $aaa = "16" ]; then
+               BIN=g16
+            elif [ $aaa = "g09" ] || [ $aaa = "G09" ] || [ $aaa = "09" ]; then
+               BIN=g09
+            elif [ $aaa = "g03" ] || [ $aaa = "G03" ] || [ $aaa = "03" ]; then
+               BIN=g03
+            else
+               echo ""
+               echo "   Sorry, your input is not understood. Provide either g16, g09 or g03."
+               echo ""
+            fi
+         fi
+      done
+      echo ""
+
+      echo -n "Step3/3. Please provide the local scratch folder: "
+      read WORK
+      echo ""
+
+      echo "GAUSSIAN runscript is configured with:"
+      echo ""
+      echo "   1= $EXEDIR"
+      echo "   2= $BIN"
+      echo "   3= $WORK"
+      echo ""
+      echo "and written to runGaussian.sh"
+      echo ""
+
+      sed -e "s@gaussian_dir@$EXEDIR@" runGaussian.template > aa
+      sed -e "s@g03org09@$BIN@"        aa  > bb
+      sed -e "s@scratchdir@$WORK@"     bb  > runGaussian.sh
+      chmod +x runGaussian.sh
+      rm aa bb
+
+      echo "End of GAUSSIAN configuration"
+      echo ""
+
+   fi
+
+
