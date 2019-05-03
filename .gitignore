@@ -27,12 +27,12 @@ FSindo/lib/*.a
 # JSindo build files
 JSindo/bin
 JSindo/build_jar.xml
-#JSindo/*.jar
+JSindo/*.jar
 # memo used for debug
 JSindo/memo
 
 # Interface scripts
-Ext/*.sh
+script/*.sh
 
 # Misc
 .DS_Store
