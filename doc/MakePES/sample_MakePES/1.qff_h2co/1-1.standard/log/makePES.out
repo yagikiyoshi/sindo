@@ -1,0 +1,83 @@
+2019.05.03 at 15:31:00 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - Molecular info via ../../0.harmonic_h2co/h2co-b3lyp-dz.minfo ...  [OK] 
+     - InterDomain = false
+     - ActiveModes:
+        * Domain 1
+            1   2   3   4   5   6 
+     - MR      = 3
+     - Dipole  = false
+
+  o Options for Quantum Chemistry jobs 
+
+    QCID: 1
+     - Program      = gaussian
+     - Title        = B3LYP/cc-pVDZ
+     - Removefiles  = true
+     - Dryryn       = false
+     - Template     = GaussianTemplate
+     - ExecCommand  = runGaussian.sh /Users/kyagi/Work/devel/sindo/sindo.master/doc/MakePES/sample_MakePES/1.qff_h2co/1-1.standard basename.inp 
+
+  o Options for QFF 
+
+     - QCID         = 1
+     - stepsize     = 0.50         
+     - ndifftype    = hess
+     - mopfile      = prop_no_1.mop
+     - intradomain_hc       = true
+     - gradient_and_hessian = input
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : hostname
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+
+Setup MakeQFF module
+
+
+Enter QFF generation:
+
+Execute electronic structure calculations.
+
+Thread0> Running minfo.files/mkqff-eq.inp on kyagi-mac3.local at Fri May 3 15:31:00 JST 2019
+Thread0> Running minfo.files/mkqff0-0.inp on kyagi-mac3.local at Fri May 3 15:31:30 JST 2019
+Thread0> Running minfo.files/mkqff0-1.inp on kyagi-mac3.local at Fri May 3 15:31:53 JST 2019
+Thread0> Running minfo.files/mkqff1-0.inp on kyagi-mac3.local at Fri May 3 15:32:15 JST 2019
+Thread0> Running minfo.files/mkqff1-1.inp on kyagi-mac3.local at Fri May 3 15:32:36 JST 2019
+Thread0> Running minfo.files/mkqff2-0.inp on kyagi-mac3.local at Fri May 3 15:32:58 JST 2019
+Thread0> Running minfo.files/mkqff2-1.inp on kyagi-mac3.local at Fri May 3 15:33:18 JST 2019
+Thread0> Running minfo.files/mkqff3-0.inp on kyagi-mac3.local at Fri May 3 15:33:40 JST 2019
+Thread0> Running minfo.files/mkqff3-1.inp on kyagi-mac3.local at Fri May 3 15:34:01 JST 2019
+Thread0> Running minfo.files/mkqff4-0.inp on kyagi-mac3.local at Fri May 3 15:34:22 JST 2019
+Thread0> Running minfo.files/mkqff4-1.inp on kyagi-mac3.local at Fri May 3 15:34:43 JST 2019
+Thread0> Running minfo.files/mkqff5-0.inp on kyagi-mac3.local at Fri May 3 15:35:04 JST 2019
+Thread0> Running minfo.files/mkqff5-1.inp on kyagi-mac3.local at Fri May 3 15:35:25 JST 2019
+End of electronic structure calculations.
+
+
+Storing electronic structure data in tempfile ...   Done!
+
+Generating prop_no_1.mop... Done!
+
+Removing the tempfiles ...   Done!
+
+End of QFF generation.
+
