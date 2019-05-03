@@ -108,17 +108,17 @@ public class ResourceMngr {
       */
       
       Constants.remoteShell = System.getenv("SINDO_RSH");
-      if(this.getNumOfResource() > 2 && Constants.remoteShell == null) {
+      if(this.getNumOfResource() > 1 && Constants.remoteShell == null) {
          System.out.println();
          System.out.println();
-         System.out.println("       Error in ResourceMngr! SINDO_RSH is null!");
-         System.out.println("       Set the environment variable SINDO_RSH to ssh or rsh. You can do this by typing in sh/bash ");
+         System.out.println("       Warning in ResourceMngr. SINDO_RSH is null. All processes run on this localhost.");
+         System.out.println("       If you want to run the processes in different nodes,");
+         System.out.println("       set the environment variable SINDO_RSH to ssh or rsh. You can do this by typing in sh/bash ");
          System.out.println("          export SINDO_RSH=ssh");
          System.out.println("       or in csh/tcsh");
          System.out.println("          setenv SINDO_RSH ssh");
          System.out.println();
          System.out.println();
-         Utilities.terminate();         
       }
       
    }
