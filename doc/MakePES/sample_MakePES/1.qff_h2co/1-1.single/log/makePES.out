@@ -29,7 +29,7 @@ Launch MakePES module
      - Removefiles  = true
      - Dryryn       = false
      - Template     = GaussianTemplate
-     - ExecCommand  = runGaussian.sh /Users/kyagi/Work/devel/sindo/sindo.master/doc/MakePES/sample_MakePES/1.qff_h2co/1-1.standard basename.inp 
+     - ExecCommand  = runGaussian.sh /Users/kyagi/Work/devel/sindo/sindo.master/doc/MakePES/sample_MakePES/1.qff_h2co/1-1.single basename.inp 
 
   o Options for QFF 
 

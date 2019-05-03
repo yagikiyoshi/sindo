@@ -1,0 +1,13 @@
+%chk=minfo.files/mkqff4-0.chk
+%NprocShared=2
+%mem=1GB
+#P B3LYP/CC-PVDZ FREQ  NOSYMMETRY MAXDISK=240GB
+
+Frequency at B3LYP/cc-pVDZ
+
+0  1  
+C        0.000000    -0.000000    -0.604568  
+O       -0.000000     0.000000     0.602667  
+H       -0.000000     0.913602    -1.183142  
+H       -0.000000    -0.913602    -1.183142  
+

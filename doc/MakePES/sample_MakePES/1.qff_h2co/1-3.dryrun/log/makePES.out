@@ -1,0 +1,66 @@
+2019.05.04 at 00:47:42 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - Molecular info via ../../0.harmonic_h2co/h2co-b3lyp-dz.minfo ...  [OK] 
+     - InterDomain = false
+     - ActiveModes:
+        * Domain 1
+            1   2   3   4   5   6 
+     - MR      = 3
+     - Dipole  = false
+
+  o Options for Quantum Chemistry jobs 
+
+    QCID: 1
+     - Program      = gaussian
+     - Title        = B3LYP/cc-pVDZ
+     - Removefiles  = true
+     - Dryryn       = true
+     - Template     = GaussianTemplate
+     - ExecCommand  = runGaussian.sh /Users/kyagi/Work/devel/sindo/sindo.master/doc/MakePES/sample_MakePES/1.qff_h2co/1-3.dryrun basename.inp 
+
+  o Options for QFF 
+
+     - QCID         = 1
+     - stepsize     = 0.50         
+     - ndifftype    = hess
+     - mopfile      = prop_no_1.mop
+     - intradomain_hc       = true
+     - gradient_and_hessian = input
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : hostname
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+
+Setup MakeQFF module
+
+
+Enter QFF generation:
+
+Execute electronic structure calculations.
+
+End of electronic structure calculations.
+
+DryRun is done!
+
+
+End of QFF generation.
+
