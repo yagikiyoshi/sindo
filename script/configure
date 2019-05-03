@@ -24,14 +24,15 @@
       fi
 
       echo -n "Step1/3. Please provide the folder where GAUSSIAN is installed "
-      gauss_dir=$(which g16)
+      gauss_dir=$(which g16 2> /dev/null)
       gauss_bin=g16
       if [ -z $gauss_dir ]; then
-         gauss_dir=$(which g09)
+         #gauss_dir=$((which g09) >& /dev/null)
+         gauss_dir=$(which g09 2> /dev/null)
          gauss_bin=g09
       fi
       if [ -z $gauss_dir ]; then
-         gauss_dir=$(which g03)
+         gauss_dir=$(which g03 2> /dev/null)
          gauss_bin=g03
       fi
       if [ -z $gauss_dir ]; then
