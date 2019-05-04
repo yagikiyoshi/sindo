@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <makePES>
-   <minfoFile   value="../h2co-b3lyp-dz.minfo" />
+   <minfoFile   value="../0.harmonic_h2co/h2co-b3lyp-dz.minfo" />
    <MR          value="3" />
    <dipole      value="true" />
    <qchem id="freq">
@@ -24,9 +24,14 @@
       <mopfile   value="prop_no_1.mop" />
    </qff>
    <grid>
-      <qcID   value="ene" />
+      <QCID   value="ene" />
       <ngrid  value="11" />
-      <mcsstrength value="1.0"/>
+      <mc1    value="1-6"/>
+   </grid>
+   <grid>
+      <QCID   value="ene" />
+      <ngrid  value="11" />
+      <mcsstrength value="10"/>
       <mopfile     value="prop_no_1.mop"/>
    </grid>
 </makePES>
