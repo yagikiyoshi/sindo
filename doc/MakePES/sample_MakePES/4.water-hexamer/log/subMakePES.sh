@@ -1,13 +1,15 @@
 ######################################################
 # Batch file for a Sindo job (SMP Parallel)          #
+#   Written by K.Yagi                                #
+#   Last modified  :   2011/06/21                    #
 #
 #$ -S /bin/bash
 #$ -V
 #$ -cwd
-#$ -N makeQFF
+#$ -N w6mp2
 #$ -j y
-#$ -pe ompi 32
-#$ -q y4.q
+#$ -pe ompi 64
+#$ -q y2.q
 ######################################################
 
     if [ -e resources.info ]; then
@@ -18,12 +20,15 @@
     FILE=$(cat $PE_HOSTFILE | awk '{print $1}')
     #cat $PE_HOSTFILE
 
+    num=0
     for ihost in ${FILE[@]}; do
        echo "$ihost" >> resources.info
        echo "$ihost" >> resources.info
     done
 
-    java RunMakePES -f makePES2.xml --input-version 2 >& makePES2.out
+    export SINDO_RSH=ssh
+    sindo_jar=${HOME}/pgm/sindo-4.0.beta/jar
+    java -cp "$sindo_jar/*" RunMakePES -f makePES.xml >& makePES.out
 
     exit 0
 #
