@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<makePES>
+   <minfoFile   value="../../0.harmonic_h2co/h2co-b3lyp-dz.minfo" />
+   <MR          value="1" />
+   <dipole      value="true" />
+   <qchem>
+      <program     value="gaussian" />
+      <dryrun      value="false"/>
+      <removefiles value="true" />
+      <title       value="B3LYP/cc-pVDZ" />
+      <template    value="GaussianTemplate" />
+   </qchem>
+   <grid>
+      <ngrid  value="11" />
+      <fullmc value="true"/>
+   </grid>
+</makePES>
+ 
+

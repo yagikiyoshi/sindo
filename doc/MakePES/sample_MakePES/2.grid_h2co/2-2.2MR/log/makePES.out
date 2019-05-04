@@ -1,0 +1,255 @@
+2019.05.04 at 11:27:10 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2018:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - Molecular info via ../../0.harmonic_h2co/h2co-b3lyp-dz.minfo ...  [OK] 
+     - InterDomain = false
+     - ActiveModes:
+        * Domain 1
+            1   2   3   4   5   6 
+     - MR      = 2
+     - Dipole  = true
+
+  o Options for Quantum Chemistry jobs 
+
+    QCID: 1
+     - Program      = gaussian
+     - Title        = B3LYP/cc-pVDZ
+     - Removefiles  = true
+     - Dryryn       = false
+     - Template     = GaussianTemplate
+     - ExecCommand  = runGaussian.sh /home/yagi/pgm/sindo-4.0.beta/doc/MakePES/sample_MakePES/2.grid_h2co/2-2.2MR basename.inp 
+
+  o Options for Grid 
+
+     - QCID         = 1
+     - 2-mode coupling = (1,2), (5,6)
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : beluga02.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 1
+     Hosts    : beluga02.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 2
+     Hosts    : beluga01.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 3
+     Hosts    : beluga01.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 4
+     Hosts    : beluga03.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 5
+     Hosts    : beluga03.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 6
+     Hosts    : beluga04.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 7
+     Hosts    : beluga04.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+
+Setup MakeGrid module
+
+  o 1MR Grid: 
+      1 2 5 6 
+  o 2MR Grid: 
+      (1,2) (5,6) 
+
+Enter GridPES generation:
+
+Execute electronic structure calculations.
+
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-3.inp on beluga01 at Sat May 4 11:27:11 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q2q1-9-6.inp on beluga03 at Sat May 4 11:27:11 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-1.inp on beluga02 at Sat May 4 11:27:11 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-2.inp on beluga01 at Sat May 4 11:27:11 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-0.inp on beluga02 at Sat May 4 11:27:11 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-7.inp on beluga04 at Sat May 4 11:27:10 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-8.inp on beluga04 at Sat May 4 11:27:10 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-5.inp on beluga03 at Sat May 4 11:27:11 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-9.inp on beluga03 at Sat May 4 11:27:16 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-11.inp on beluga04 at Sat May 4 11:27:15 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-12.inp on beluga04 at Sat May 4 11:27:15 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-15.inp on beluga01 at Sat May 4 11:27:17 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-14.inp on beluga01 at Sat May 4 11:27:18 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-16.inp on beluga03 at Sat May 4 11:27:19 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-17.inp on beluga04 at Sat May 4 11:27:18 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-18.inp on beluga04 at Sat May 4 11:27:18 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-20.inp on beluga02 at Sat May 4 11:27:19 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-19.inp on beluga02 at Sat May 4 11:27:19 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-21.inp on beluga01 at Sat May 4 11:27:20 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-23.inp on beluga01 at Sat May 4 11:27:20 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q2q1-9-10.inp on beluga03 at Sat May 4 11:27:21 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-24.inp on beluga03 at Sat May 4 11:27:21 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-25.inp on beluga02 at Sat May 4 11:27:21 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-26.inp on beluga02 at Sat May 4 11:27:21 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-27.inp on beluga04 at Sat May 4 11:27:21 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-28.inp on beluga04 at Sat May 4 11:27:21 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-29.inp on beluga01 at Sat May 4 11:27:23 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-30.inp on beluga01 at Sat May 4 11:27:23 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-33.inp on beluga03 at Sat May 4 11:27:24 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-34.inp on beluga02 at Sat May 4 11:27:24 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q2q1-9-32.inp on beluga03 at Sat May 4 11:27:24 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-35.inp on beluga02 at Sat May 4 11:27:24 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-45.inp on beluga04 at Sat May 4 11:27:23 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-46.inp on beluga04 at Sat May 4 11:27:23 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-47.inp on beluga01 at Sat May 4 11:27:26 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-48.inp on beluga01 at Sat May 4 11:27:26 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-50.inp on beluga02 at Sat May 4 11:27:26 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-51.inp on beluga02 at Sat May 4 11:27:26 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-52.inp on beluga03 at Sat May 4 11:27:27 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-53.inp on beluga04 at Sat May 4 11:27:26 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q2q1-9-54.inp on beluga03 at Sat May 4 11:27:27 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-55.inp on beluga04 at Sat May 4 11:27:26 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-59.inp on beluga02 at Sat May 4 11:27:29 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-56.inp on beluga01 at Sat May 4 11:27:29 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-60.inp on beluga02 at Sat May 4 11:27:29 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-61.inp on beluga03 at Sat May 4 11:27:29 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-57.inp on beluga01 at Sat May 4 11:27:29 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-62.inp on beluga04 at Sat May 4 11:27:28 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-63.inp on beluga04 at Sat May 4 11:27:28 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q2q1-9-64.inp on beluga03 at Sat May 4 11:27:30 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-65.inp on beluga01 at Sat May 4 11:27:31 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q2q1-9-66.inp on beluga01 at Sat May 4 11:27:32 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-70.inp on beluga02 at Sat May 4 11:27:31 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-69.inp on beluga02 at Sat May 4 11:27:31 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-68.inp on beluga03 at Sat May 4 11:27:32 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-71.inp on beluga04 at Sat May 4 11:27:31 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q2q1-9-73.inp on beluga03 at Sat May 4 11:27:32 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-72.inp on beluga04 at Sat May 4 11:27:31 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q2q1-9-74.inp on beluga01 at Sat May 4 11:27:34 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q2q1-9-77.inp on beluga02 at Sat May 4 11:27:34 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q2q1-9-78.inp on beluga02 at Sat May 4 11:27:34 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q2q1-9-75.inp on beluga04 at Sat May 4 11:27:33 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q2q1-9-80.inp on beluga04 at Sat May 4 11:27:34 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q2q1-9-79.inp on beluga03 at Sat May 4 11:27:35 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-0.inp on beluga01 at Sat May 4 11:27:35 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-1.inp on beluga03 at Sat May 4 11:27:35 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-2.inp on beluga01 at Sat May 4 11:27:36 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-3.inp on beluga04 at Sat May 4 11:27:36 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-5.inp on beluga01 at Sat May 4 11:27:37 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-6.inp on beluga04 at Sat May 4 11:27:36 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-7.inp on beluga02 at Sat May 4 11:27:37 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-8.inp on beluga02 at Sat May 4 11:27:37 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-9.inp on beluga03 at Sat May 4 11:27:38 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q6q5-9-10.inp on beluga03 at Sat May 4 11:27:38 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-11.inp on beluga01 at Sat May 4 11:27:38 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-12.inp on beluga01 at Sat May 4 11:27:39 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-14.inp on beluga04 at Sat May 4 11:27:38 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-15.inp on beluga04 at Sat May 4 11:27:38 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-16.inp on beluga02 at Sat May 4 11:27:39 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-17.inp on beluga02 at Sat May 4 11:27:39 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-18.inp on beluga03 at Sat May 4 11:27:40 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q6q5-9-19.inp on beluga03 at Sat May 4 11:27:41 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-20.inp on beluga01 at Sat May 4 11:27:41 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-21.inp on beluga01 at Sat May 4 11:27:41 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-23.inp on beluga04 at Sat May 4 11:27:41 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-24.inp on beluga02 at Sat May 4 11:27:42 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-26.inp on beluga04 at Sat May 4 11:27:41 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-25.inp on beluga02 at Sat May 4 11:27:42 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-27.inp on beluga01 at Sat May 4 11:27:43 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-29.inp on beluga03 at Sat May 4 11:27:44 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-30.inp on beluga01 at Sat May 4 11:27:44 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-32.inp on beluga04 at Sat May 4 11:27:43 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-33.inp on beluga04 at Sat May 4 11:27:44 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-34.inp on beluga02 at Sat May 4 11:27:45 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-35.inp on beluga02 at Sat May 4 11:27:45 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-45.inp on beluga03 at Sat May 4 11:27:46 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-46.inp on beluga01 at Sat May 4 11:27:46 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-47.inp on beluga01 at Sat May 4 11:27:46 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-48.inp on beluga02 at Sat May 4 11:27:47 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-50.inp on beluga02 at Sat May 4 11:27:47 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-51.inp on beluga04 at Sat May 4 11:27:46 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-52.inp on beluga04 at Sat May 4 11:27:46 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-53.inp on beluga01 at Sat May 4 11:27:48 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q6q5-9-28.inp on beluga03 at Sat May 4 11:27:49 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-54.inp on beluga03 at Sat May 4 11:27:49 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-55.inp on beluga01 at Sat May 4 11:27:49 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-57.inp on beluga04 at Sat May 4 11:27:49 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-56.inp on beluga04 at Sat May 4 11:27:49 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-59.inp on beluga02 at Sat May 4 11:27:50 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-60.inp on beluga02 at Sat May 4 11:27:50 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q6q5-9-61.inp on beluga03 at Sat May 4 11:27:51 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-63.inp on beluga01 at Sat May 4 11:27:51 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-62.inp on beluga03 at Sat May 4 11:27:52 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-64.inp on beluga01 at Sat May 4 11:27:51 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-65.inp on beluga04 at Sat May 4 11:27:51 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-66.inp on beluga04 at Sat May 4 11:27:51 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-70.inp on beluga01 at Sat May 4 11:27:54 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q6q5-9-71.inp on beluga03 at Sat May 4 11:27:54 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-72.inp on beluga03 at Sat May 4 11:27:54 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-73.inp on beluga01 at Sat May 4 11:27:54 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkg-q6q5-9-74.inp on beluga04 at Sat May 4 11:27:53 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkg-q6q5-9-75.inp on beluga04 at Sat May 4 11:27:54 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkg-q6q5-9-77.inp on beluga01 at Sat May 4 11:27:56 JST 2019
+Thread4@beluga03.local> Running minfo.files/mkg-q6q5-9-78.inp on beluga03 at Sat May 4 11:27:56 JST 2019
+Thread5@beluga03.local> Running minfo.files/mkg-q6q5-9-79.inp on beluga03 at Sat May 4 11:27:57 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkg-q6q5-9-80.inp on beluga01 at Sat May 4 11:27:57 JST 2019
+Thread1@beluga02.local> Running minfo.files/mkg-q6q5-9-68.inp on beluga02 at Sat May 4 11:27:57 JST 2019
+Thread0@beluga02.local> Running minfo.files/mkg-q6q5-9-69.inp on beluga02 at Sat May 4 11:27:58 JST 2019
+End of electronic structure calculations.
+
+Generating pot files.
+
+   o q1.pot  [OK]
+   o q1.dipole  [OK]
+   o q2.pot  [OK]
+   o q2.dipole  [OK]
+   o q5.pot  [OK]
+   o q5.dipole  [OK]
+   o q6.pot  [OK]
+   o q6.dipole  [OK]
+   o q2q1.pot  [OK]
+   o q2q1.dipole  [OK]
+   o q6q5.pot  [OK]
+   o q6q5.dipole  [OK]
+
+End of GridPES generation:
+
