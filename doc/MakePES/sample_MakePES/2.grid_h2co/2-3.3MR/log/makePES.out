@@ -5,7 +5,7 @@
                          Version 4.0
                          Release beta
 
-                COPYRIGHT 2018:  
+                COPYRIGHT 2019:  
                    Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
 
 -------------------------------------------------------
@@ -97,6 +97,7 @@ Launch MakePES module
 
 Setup MakeGrid module
 
+  o ngrid =     9 
   o 1MR Grid: 
       4 5 6 
   o 2MR Grid: 

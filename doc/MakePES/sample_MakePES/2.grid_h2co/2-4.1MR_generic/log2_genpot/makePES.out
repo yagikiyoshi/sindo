@@ -1,4 +1,4 @@
-2019.05.04 at 14:40:08 JST
+2019.05.04 at 15:01:29 JST
 -------------------------------------------------------
 
       Make Potential Energy Surface for SINDO
@@ -18,38 +18,51 @@ Launch MakePES module
      - ActiveModes:
         * Domain 1
             1   2   3   4   5   6 
-     - MR      = 3
-     - Dipole  = false
+     - MR      = 1
+     - Dipole  = true
 
   o Options for Quantum Chemistry jobs 
 
     QCID: 1
      - Program      = generic
      - Title        = B3LYP/cc-pVDZ
-     - xyzfile      = makeQFF
+     - xyzfile      = makeGrid
 
-  o Options for QFF 
+  o Options for Grid 
 
      - QCID         = 1
-     - stepsize     = 0.50         
-     - ndifftype    = hess
-     - mopfile      = prop_no_1.mop
-     - intradomain_hc       = true
-     - gradient_and_hessian = input
+     - FullMC       = true
 
-Setup MakeQFF module
+Setup MakeGrid module
 
+  o ngrid =    11 
+  o 1MR Grid: 
+      1 2 3 4 5 6 
 
-Enter QFF generation:
+Enter GridPES generation:
 
 Execute electronic structure calculations.
 
-   Writing the coordinates to makeQFF.xyz
+   Writing the coordinates to makeGrid.xyz
 
 End of electronic structure calculations.
 
-DryRun is done!
+Generating pot files.
 
+   Reading the data from makeGrid.dat.
 
-End of QFF generation.
+   o q1.pot  [OK]
+   o q1.dipole  [OK]
+   o q2.pot  [OK]
+   o q2.dipole  [OK]
+   o q3.pot  [OK]
+   o q3.dipole  [OK]
+   o q4.pot  [OK]
+   o q4.dipole  [OK]
+   o q5.pot  [OK]
+   o q5.dipole  [OK]
+   o q6.pot  [OK]
+   o q6.dipole  [OK]
+
+End of GridPES generation:
 
