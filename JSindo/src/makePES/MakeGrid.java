@@ -33,6 +33,7 @@ public class MakeGrid {
    private boolean[] done3MR;
    private HashMap<String, double[][]> eneData;
    private HashMap<String, double[][]> dipoleData;
+   private String gridDataFile;
    
    public MakeGrid(InputDataPES inputData, InputDataGrid gridData, InputDataQC qcData){
       
@@ -68,6 +69,7 @@ public class MakeGrid {
          
       }
 
+      System.out.printf ("  o ngrid = %5d \n",nGrid);
       System.out.println("  o 1MR Grid: ");
       System.out.print("      ");
       int ret = 0;
@@ -136,6 +138,12 @@ public class MakeGrid {
 
       }else{
          gfilename.setMinfoDirectoryName("");
+         gridDataFile = qcData.getXyzBasename()+".dat";
+         
+         File f = new File(gridDataFile);
+         if(f.exists()) {
+            qcData.setDryrun(false);
+         }
       }
 
    }
@@ -812,7 +820,7 @@ public class MakeGrid {
          
       }
 
-      String gridDataFile = qcData.getXyzBasename()+".dat";
+      //String gridDataFile = qcData.getXyzBasename()+".dat";
       System.out.println("   Reading the data from "+gridDataFile+".");
       System.out.println();
 

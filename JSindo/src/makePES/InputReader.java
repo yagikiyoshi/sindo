@@ -727,7 +727,6 @@ public class InputReader {
                   if(qcinfo.getXyzBasename() == null) {
                      this.errorTermination("XYZfile is not specified.");
                   }
-                  qcinfo.setDryrun(true);
                   
                }else {                  
                   if(qcinfo.getInputFile() == null) {

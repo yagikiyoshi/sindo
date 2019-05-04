@@ -46,6 +46,17 @@ public class MakeQFF {
          this.isGeneric = false;
       }
       
+      if(isGeneric) {
+         // Check if mkqff-eq.minfo exists
+         File f = new File(MakeQFF.getBasename()+".minfo");
+         if(f.exists()) {
+            qcData.setDryrun(false);
+         }else {
+            qcData.setDryrun(true);
+            
+         }
+      }
+      
       VibrationalData vdata = makePESData.getMolecule().getVibrationalData();
       MR = makePESData.getMR();
 
@@ -63,6 +74,8 @@ public class MakeQFF {
             i++;
          }         
       }
+
+      
 
    }
    
@@ -133,6 +146,7 @@ public class MakeQFF {
       }else{
          grdXYZ.close();
          InputDataPES.MINFO_FOLDER = minfo_folder;
+         
       }
       
       System.out.println("End of electronic structure calculations.");
