@@ -6,7 +6,7 @@ SINDO is a suit of programs for molecular vibrational analysis.
   - Import the output of quantum chemistry program  
   - Harmonic analysis  
      - Harmonic frequencies  
-     - IR/Raman intensity  
+     - IR intensity  
      - Normal modes  
   - Localized modes  
 
