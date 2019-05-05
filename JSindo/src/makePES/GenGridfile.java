@@ -99,7 +99,12 @@ public abstract class GenGridfile {
       if(datafile.exists()){
          gridData = new GridData(nDim,basename+ext);
          gridData.readData();
-         gridData.savefile();
+         if(gridData.getGrid(0).length < nGrid) {
+            gridData.savefile();
+         }else {
+            gridData = null;
+            return;
+         }
          gridData.setupInterpolater();
       }
       
@@ -124,7 +129,8 @@ public abstract class GenGridfile {
       newData.writeData(title, mode, label);
       
       System.out.println("   o "+basename+ext+"  [OK]");
-
+      
+      gridData = null;
    }
    
    private void genFile1(){
@@ -206,7 +212,12 @@ public abstract class GenGridfile {
       GridData yfunc = new GridData(1,gfilename.getGridFileName(my)+ext);
       yfunc.readData();
       yfunc.setupInterpolater();
-   
+
+      /* debug
+      System.out.println(gfilename.getGridFileName(mx)+ext);
+      System.out.println(gfilename.getGridFileName(my)+ext);
+      */
+      
       if(data_from_minfo){
          
          value = new double[nData][nGrid*nGrid];
@@ -226,7 +237,7 @@ public abstract class GenGridfile {
             
             double[] yy = {xgy};
             double[] vy = yfunc.getIntValue(yy); 
-            
+
             for(int ix=0; ix<nGrid; ix++){
                double xgx = xg[0][ix];
                if(Math.abs(xgx) < 1.e-10) {
@@ -252,6 +263,23 @@ public abstract class GenGridfile {
                double[] xx = {xgx};
                double[] vx = xfunc.getIntValue(xx);
 
+               /* debug
+               for(int n=0; n<xx.length; n++) {
+                  System.out.printf("%12.4f ", xx[n]);
+               }
+               for(int n=0; n<yy.length; n++) {
+                  System.out.printf("%12.4f ", yy[n]);
+               }
+               System.out.printf(",  ");
+               for(int n=0; n<vx.length; n++) {
+                  System.out.printf("%12.6f ", vx[n]);
+               }
+               for(int n=0; n<vy.length; n++) {
+                  System.out.printf("%12.6f ", vy[n]);
+               }
+               System.out.println();
+               */
+               
                Molecule molecule = readminfo(gfilename.getRunNameGrid(mode, nGrid, kk));
                if(molecule != null){
                  double[] dd = this.getProperty(molecule.getElectronicData());

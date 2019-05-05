@@ -248,10 +248,17 @@ public class GridData {
       return vv;
    }
    /**
-    * Save the current data file with ".org" extension.
+    * Save the current data file adding the size of grid points to a file.
     */
    public void savefile(){
-      File savefile = new File(file.getName()+".org");
+      String original = file.getName();
+      int idx = original.lastIndexOf(".");
+      String ss = "_"+nGrid[0];
+      for(int n=0; n<nGrid.length-1; n++) {
+         ss += "-"+nGrid[n]; 
+      }
+      String new_name = original.substring(0, idx)+ss+original.substring(idx);
+      File savefile = new File(new_name);
       if(savefile.exists()){
          System.out.println("Error while making backup of the original pot file. "+savefile.getName()+" already exists.");
          Utilities.terminate();
