@@ -30,7 +30,7 @@
    </grid>
    <grid>
       <QCID   value="ene" />
-      <ngrid  value="11" />
+      <ngrid  value="9" />
       <mcsstrength value="10"/>
       <mopfile     value="prop_no_1.mop"/>
    </grid>
