@@ -980,6 +980,17 @@ public class InputReader {
          }
       }
 
+      String qcID0 = gridArray.get(0).getQcID();
+      for(int n=1; n<gridArray.size(); n++) {
+         if(! qcID0.equals(gridArray.get(n).getQcID())) {
+            String ss = "";
+            for(int nn=0; nn<gridArray.size(); nn++) {
+               ss += "    grid-"+nn+": QCID = "+ gridArray.get(nn).getQcID()+"\n";
+            }
+            this.errorTermination("QCID for GRID must be the same for all. \n"+ ss);
+         }
+      }
+      
       // Print settings
       System.out.println("     - InterDomain = " + interdomain);
       System.out.println("     - ActiveModes:");
