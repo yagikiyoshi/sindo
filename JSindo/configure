@@ -17,21 +17,25 @@ if [ -z ${j3d_dir} ]; then
   j3d_dir=""
 fi
 
-xmlfile='build_jar.xml'
+xmlfile='build_JSindo.xml'
 if [ -e ${xmlfile} ]; then
   rm ${xmlfile}
 fi
 
 TMP=$(mktemp tmp.XXXX)
-sed -e "s#JAMA_DIR#${jama_dir}#" build/build_jar.tmp  > $TMP
-sed -e "s#J3D_DIR#${j3d_dir}#"   $TMP > ${xmlfile}
-rm $TMP
+ver=$(cat ../VERSION)
+sed -e "s#VERSION#${ver}#"  build/build_JSindo.tmp  > ${xmlfile}
 
-#ant -f build_jar.xml
+mv ${xmlfile} ${TMP}
+sed -e "s#JAMA_DIR#${jama_dir}#" ${TMP} > ${xmlfile}
+mv ${xmlfile} ${TMP}
+sed -e "s#J3D_DIR#${j3d_dir}#"   ${TMP} > ${xmlfile}
+rm ${TMP}
+
 echo ""
-echo " Successfully created build_jar.xml. "
+echo " Successfully created ${xmlfile}. "
 echo ""
 echo " To compile JSindo and create jar file, type:"
-echo "   > ant -f build_jar.xml"
+echo "   > ant -f ${xmlfile}"
 echo " ------------------------------------------- "
 

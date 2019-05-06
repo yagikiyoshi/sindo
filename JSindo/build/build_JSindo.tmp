@@ -6,7 +6,7 @@
 
     <!--define folder properties-->
     <property name="dir.bin" value="./bin"/>
-    <property name="jarfile" value="JSindo-4.0.beta.jar"/>
+    <property name="jarfile" value="JSindo-VERSION.jar"/>
     <property environment="env"/>
     <property name="jama_dir" value="JAMA_DIR"/>
     <property name="j3d_dir"  value="J3D_DIR"/>

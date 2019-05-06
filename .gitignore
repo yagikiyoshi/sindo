@@ -26,7 +26,7 @@ FSindo/lib/*.a
 
 # JSindo build files
 JSindo/bin
-JSindo/build_jar.xml
+JSindo/build_JSindo.xml
 JSindo/*.jar
 # memo used for debug
 JSindo/memo

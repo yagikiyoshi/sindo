@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Version=4.0.beta
+Version=$(cat ../VERSION)
 TarFile=FSindo-${Version}.tar.gz
 
 if [ -e $TarFile ]; then
