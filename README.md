@@ -1,6 +1,6 @@
 # SINDO
 
-SINDO is a suit of programs for molecular vibrational analysis.
+SINDO is a suite of programs for molecular vibrational analysis.
 
 - JSindo: Viewer of molecules and modes  
   - Import the output of quantum chemistry program  
