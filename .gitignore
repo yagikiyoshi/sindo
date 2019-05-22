@@ -1,6 +1,7 @@
 # Fortran object files
 *.o
 *.mod
+*.exe
 
 # Latex files
 *.aux
