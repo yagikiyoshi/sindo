@@ -1034,7 +1034,7 @@ public class InputReader {
             
          }else {
             System.out.println("     - Removefiles  = " + qcdata.isRemoveFile());
-            System.out.println("     - Dryryn       = " + qcdata.isDryrun());
+            System.out.println("     - Dryrun       = " + qcdata.isDryrun());
             System.out.printf ("     - Template     = " + qcdata.getInputFile());
             if(qcdata.isOption()) {
                System.out.println("  [xml formatted options]");

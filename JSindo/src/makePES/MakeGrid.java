@@ -143,6 +143,8 @@ public class MakeGrid {
          File f = new File(gridDataFile);
          if(f.exists()) {
             qcData.setDryrun(false);
+         }else {
+            qcData.setDryrun(true);
          }
       }
 
