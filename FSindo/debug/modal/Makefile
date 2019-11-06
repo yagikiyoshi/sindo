@@ -1,7 +1,7 @@
 
 include ../../src/make.inc
 
-LIB= ../../../lib/libsindo_$(TARGET).a
+LIB= ../../lib/libsindo_$(TARGET).a
 MOD= ../../src
 
 all: main.o
