@@ -1,0 +1,59 @@
+2019.11.07 at 01:56:31 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2019:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - Molecular info via ../4_qmmm-min/qmmm_vib.minfo ...  [OK] 
+     - InterDomain = false
+     - ActiveModes:
+        * Domain 1
+            5   6   7   8   9  10  11  12 
+     - MR      = 3
+     - Dipole  = false
+
+  o Options for Quantum Chemistry jobs 
+
+    QCID: 1
+     - Program      = generic
+     - Title        = B3LYP-D3/cc-pVDZ
+     - xyzfile      = makeQFF
+
+  o Options for QFF 
+
+     - QCID         = 1
+     - stepsize     = 0.50         
+     - ndifftype    = grad
+     - mopfile      = prop_no_1.mop
+     - intradomain_hc       = true
+     - gradient_and_hessian = input
+
+Setup MakeQFF module
+
+
+Enter QFF generation:
+
+Execute electronic structure calculations.
+
+   Writing the coordinates to makeQFF.xyz
+
+End of electronic structure calculations.
+
+
+Storing electronic structure data in tempfile ...   Done!
+
+Generating prop_no_1.mop... Done!
+
+Removing the tempfiles ...   Done!
+
+End of QFF generation.
+

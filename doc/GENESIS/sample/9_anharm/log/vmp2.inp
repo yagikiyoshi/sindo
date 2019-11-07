@@ -1,0 +1,27 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='../5_qmmm-vib/qmmm_vib.minfo' /
+ &sys maxmem=10 /
+
+#--- [  MRPES ]
+ &mrpes mopFile='../6_mkqff/prop_no_1.mop' mcs_cutoff=-1.0D-03 /
+
+#--- [  VIB  ]
+ &vib  
+  MR=3 
+  vmaxALL=10
+  vmax(1)=-1 vmax(2)=-1 vmax(3)=-1 vmax(4)=-1
+  vscf=.t. 
+  vpt=.t.  
+  prpt=.f.
+ /
+
+#--- [ TARGET STATES ]
+ &states
+  fund=.t.
+ /
+
+#--- [  VPT  ]
+ &vpt 
+  maxSum=4
+ /
+

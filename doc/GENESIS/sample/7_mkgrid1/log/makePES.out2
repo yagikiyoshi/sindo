@@ -1,0 +1,72 @@
+2019.11.07 at 02:14:21 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2019:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - Molecular info via ../4_qmmm-min/qmmm_vib.minfo ...  [OK] 
+     - InterDomain = false
+     - ActiveModes:
+        * Domain 1
+            5   6   7   8   9  10  11  12 
+     - MR      = 1
+     - Dipole  = true
+
+  o Options for Quantum Chemistry jobs 
+
+    QCID: 1
+     - Program      = generic
+     - Title        = B3LYP-D3/cc-pVDZ
+     - xyzfile      = makeGrid
+
+  o Options for Grid 
+
+     - QCID         = 1
+     - FullMC       = true
+
+Setup MakeGrid module
+
+  o ngrid =    11 
+  o 1MR Grid: 
+      5 6 7 8 9 10 11 12 
+
+Enter GridPES generation:
+
+Execute electronic structure calculations.
+
+   Writing the coordinates to makeGrid.xyz
+
+End of electronic structure calculations.
+
+Generating pot files.
+
+   Reading the data from makeGrid.dat.
+
+   o q5.pot  [OK]
+   o q5.dipole  [OK]
+   o q6.pot  [OK]
+   o q6.dipole  [OK]
+   o q7.pot  [OK]
+   o q7.dipole  [OK]
+   o q8.pot  [OK]
+   o q8.dipole  [OK]
+   o q9.pot  [OK]
+   o q9.dipole  [OK]
+   o q10.pot  [OK]
+   o q10.dipole  [OK]
+   o q11.pot  [OK]
+   o q11.dipole  [OK]
+   o q12.pot  [OK]
+   o q12.dipole  [OK]
+
+End of GridPES generation:
+

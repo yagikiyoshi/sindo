@@ -1,0 +1,48 @@
+[INPUT]
+topfile = ../toppar/top_all36_prot.rtf     # topology file
+parfile = ../toppar/par_all36m_prot.prm    # parameter file
+strfile = ../toppar/toppar_water_ions.str  # stream file
+psffile = ../2_setup/snapshot50.psf        # protein structure file
+crdfile = ../2_setup/snapshot50.crd        # CRD file
+reffile = ../2_setup/snapshot50.pdb        # PDB file
+rstfile = ../4_qmmm-min/qmmm_min.rst
+
+[OUTPUT]
+
+[ENERGY]
+forcefield          = CHARMM # [CHARMM]
+electrostatic       = CUTOFF # [CUTOFF,PME]
+switchdist          = 16.0   # switch distance
+cutoffdist          = 18.0   # cutoff distance
+pairlistdist        = 19.5   # pair-list distance
+water_model         = NONE
+vdw_force_switch    = YES
+
+[VIBRATION]
+runmode             = GRID
+nreplica            = 4
+vibatm_select_index = 2
+output_minfo_atm    = 3
+gridfile            = makeGrid.xyz
+datafile            = makeGrid.dat
+
+[BOUNDARY]
+type                = NOBC
+
+[QMMM]
+qmtyp               = gaussian
+qmcnt               = gaussian.com
+#qmexe               = runGau.sh
+qmexe               = runGau_wako.sh
+qmatm_select_index  = 1
+workdir             = qmmm_grid
+basename            = job
+qmsave_period       = 10
+qmmaxtrial          = 1
+exclude_charge      = group
+
+[SELECTION]
+group1  = atomno:1-14
+group2  = atomno:5-8
+group3  = segid:PROA
+

@@ -1,0 +1,392 @@
+****************************************************
+*                                                  *
+*                  GENESIS ATDYN                   *
+*                                                  *
+*        A Molecular Dynamics Simulator with       *
+*            Atomic Decomposition Scheme           *
+*                                                  *
+*               Developed by RIKEN                 *
+*                                                  *
+****************************************************
+ 
+[STEP0] Architecture and Compiler Information
+ 
+GENESIS_Information> GENESIS Information
+  version      = 1.3.0
+  commit ID    = $GENESIS_VERSION$
+  precision    = double
+  nonbonding   = CPU
+
+Build_Information> Compiler Information
+  build host   = yagi@beluga
+  fortran      = ifort (IFORT) 18.0.1 20171018
+  option       = -xHost -O3 -ip -mkl=parallel  -assume byterecl -qopenmp 
+  C            = icc (ICC) 18.0.1 20171018
+  option       = -O3 -ip -axCORE-AVX2  -qopenmp
+  defined var. =  -DMPI -DOMP -DFFTE -DLAPACK -DDSFMT_MEXP=19937 -DINTEL
+  link option  = 
+  -assume byterecl -qopenmp -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_l
+ apack95_lp64 
+
+Runtime_Information> Machine and Library Information
+  date       = 2019/11/07 02:11:34
+  cpu model    = Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+  exec. host   = yagi@beluga01
+  LD library   = 
+ /home/mdsoft/mpi/mpi_cent-v7_intel64/openmpi-v3.1.2_intel_v18.0.1/lib:/opt/inte
+ l/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64_lin:/opt/intel/
+ compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64_lin:/opt/intel/compile
+ rs_and_libraries_2018.1.163/linux/compiler/lib/intel64:/opt/intel/compilers_and
+ _libraries_2018.1.163/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_l
+ ibraries_2018.1.163/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_20
+ 18.1.163/linux/mpi/mic/lib:/opt/intel/compilers_and_libraries_2018.1.163/linux/
+ ipp/lib/intel64:/opt/intel/compilers_and_libraries_2018.1.163/linux/compiler/li
+ b/intel64_lin:/opt/intel/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel
+ 64_lin:/opt/intel/compilers_and_libraries_2018.1.163/linux/tbb/lib/intel64/gcc4
+ .7:/opt/intel/compilers_and_libraries_2018.1.163/linux/tbb/lib/intel64/gcc4.7:/
+ opt/intel/compilers_and_libraries_2018.1.163/linux/daal/lib/intel64_lin:/home/y
+ agi/pgm/terachem1.93P/TeraChem/lib:/home/yagi/pgm/amber16_beluga/lib:/home/mdso
+ ft/mpi/mpi_cent-v7_intel64/openmpi-v4.0.0_intel_v18.0.1/lib:/opt/intel/compiler
+ s_and_libraries_2018.1.163/linux/compiler/lib/intel64_lin:/opt/intel/compilers_
+ and_libraries_2018.1.163/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_lib
+ raries_2018.1.163/linux/compiler/lib/intel64:/opt/intel/compilers_and_libraries
+ _2018.1.163/linux/compiler/lib/intel64_lin:/opt/intel/compilers_and_libraries_2
+ 018.1.163/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2018.1.163/
+
+[STEP1] Read Control Parameters
+ 
+Read_Ctrl_Input> Input Files
+  topfile = ../toppar/top_all36_prot.rtf
+  parfile = ../toppar/par_all36m_prot.prm
+  strfile = ../toppar/toppar_water_ions.str
+  psffile = ../2_setup/snapshot50.psf
+  crdfile = ../2_setup/snapshot50.crd
+  rstfile = ../4_qmmm-min/qmmm_min.rst
+  reffile = ../2_setup/snapshot50.pdb
+ 
+Read_Ctrl_Output> Output Files
+ 
+Read_Ctrl_Energy> Parameters of Energy Calculations
+  forcefield      =     CHARMM
+  switchdist      =     16.000  cutoffdist      =     18.000
+  pairlistdist    =     19.500  dielec_const    =      1.000
+  vdW force_switch=        yes
+  electrostatic   =  CUTOFF
+  implicit_solvent=       none
+  table_order     =          3
+  table_density   =     20.000
+  water_model     =       NONE
+  output_style    =    GENESIS
+  dispersion_corr =       none
+  nonb_limiter    =      no
+ 
+Read_Ctrl_Vibration> Parameters of VIBRATION
+  runmode             =       GRID
+  nreplica            =          4
+  vibatm_select_index = 2
+  output_minfo_atm    = 3
+  minfo_folder        = minfo.files
+  gridfile            = makeGrid.xyz
+  datafile            = makeGrid.dat
+  gridfolderID        =          a
+ 
+Read_Ctrl_Boundary> Parameters of Boundary Condition
+  type            =       NOBC
+  spherical_pot   =         no  restart         =          T
+ 
+Read_Ctrl_Selection> Parameters of Selection
+  # of groups     =          3
+    group 1 = atomno:1-14
+    group 2 = atomno:5-8
+    group 3 = segid:PROA
+  # of mole names =          0
+ 
+Read_Ctrl_Restraints> No restraint in the system
+
+Read_Ctrl_QMMM> Parameters of QM/MM
+  qmtyp              = gaussian
+  qmcnt              = gaussian.com
+  qmexe              = runGau_wako.sh
+  workdir            = qmmm_grid
+  savedir            = none
+  basename           = job
+  qmsave_period      = 10
+  qmmaxtrial         = 1
+  qmatm_select_index = 1
+  exclude_charge     = GROUP
+ 
+[STEP2] Setup MPI
+ 
+Setup_Mpi_Vib> Summary of Setup MPI
+  number of MPI processes                =          4
+  number of MPI processes in one replica =          1
+  number of OpenMP threads               =          8
+  total number of CPU cores              =         32
+     world_rank     country_no   country_rank
+              0              0              0  REAL        MASTER
+              1              1              0  REAL        MASTER
+              2              2              0  REAL        MASTER
+              3              3              0  REAL        MASTER
+
+[STEP3] Set Relevant Variables and Structures
+ 
+Input_Top> Summary of Topfile
+  num_atom_class  =         53  num_resi_type   =         50
+ 
+Input_Par> Summary of Parfile
+  num_bonds       =        132  num_angles      =        364
+  num_dihedrals   =        706  num_impropers   =         35
+  num_atom_cls    =         53  num_nbfix       =          1
+  num_cmap_terms  =          6
+ 
+Input_Str> Summary of Top information
+  num_atom_class  =         68  num_resi_type   =         64
+ 
+Input_Str> Summary of Par information
+  num_bonds       =        135  num_angles      =        365
+  num_dihedrals   =        706  num_impropers   =         35
+  num_atom_cls    =         68  num_nbfix       =         16
+  num_cmap_terms  =          6
+ 
+Read_Psf> Summary of Psffile
+  psftype         =      xplor
+  num_atoms       =       6039  num_bonds       =       6038
+  num_angles      =       2071  num_dihedrals   =         91
+  num_impropers   =          8  num_cmap_terms  =          3
+  num_HB_donors   =       4002  num_HB_acceptors=       2003
+  num_NB_exclusion=          0  num_groups      =       2011
+  total_charge    =      0.000
+ 
+Read_Crd> Summary of CRD file
+  num_atoms       =       6039
+ 
+Read_Rst_Binary> Summary of RST file
+  num_atoms       =       6039  iseed           =          0
+  boxsize (x,y,z) =      0.000     0.000     0.000
+
+Read_Pdb> Summary of Data in PDB file
+  num_atoms       =       6039
+ 
+Define_Molecule> Summary of molecules
+  num_atoms       =       6039  num_bonds       =       6038
+  num_angles      =       2071  num_dihedrals   =         91
+  num_impropers   =          8  num_cmap_terms  =          3
+  num_residues    =       2002  num_molecules   =       2000
+  num_segments    =          2  num_deg_freedom =      18117
+  total_charge    =      0.000
+ 
+Setup_Boundary> Setup Variables for Boundary Condition
+  origin(x,y,z)   =      0.000     0.000     0.000
+ 
+ 
+Setup_QMMM> Setup QM region
+ 
+  Check the control file for Gaussian [ gaussian.com ]
+  Passed the check!
+  QM assignment info
+     1 PROA      1 ALA    CAY  CT3    assigned to QM atom    1 of element: C     6
+     2 PROA      1 ALA    HY1  HA3    assigned to QM atom    2 of element: H     1
+     3 PROA      1 ALA    HY2  HA3    assigned to QM atom    3 of element: H     1
+     4 PROA      1 ALA    HY3  HA3    assigned to QM atom    4 of element: H     1
+     5 PROA      1 ALA    CY   C      assigned to QM atom    5 of element: C     6
+     6 PROA      1 ALA    OY   O      assigned to QM atom    6 of element: O     8
+     7 PROA      1 ALA    N    NH1    assigned to QM atom    7 of element: N     7
+     8 PROA      1 ALA    HN   H      assigned to QM atom    8 of element: H     1
+     9 PROA      1 ALA    CA   CT1    assigned to QM atom    9 of element: C     6
+    10 PROA      1 ALA    HA   HB1    assigned to QM atom   10 of element: H     1
+    11 PROA      1 ALA    CB   CT3    assigned to QM atom   11 of element: C     6
+    12 PROA      1 ALA    HB1  HA3    assigned to QM atom   12 of element: H     1
+    13 PROA      1 ALA    HB2  HA3    assigned to QM atom   13 of element: H     1
+    14 PROA      1 ALA    HB3  HA3    assigned to QM atom   14 of element: H     1
+  number of QM atoms = 14
+ 
+
+Generate_LinkAtoms> QM-MM interface info. Link hydrogen is set between:
+              [ QM atom ]             -             [ MM atom ]
+     9 PROA      1 ALA    CA   CT1    -     15 PROA      1 ALA    C    C     
+                                            16 PROA      1 ALA    O    O      excluded
+
+  number of link atoms           = 1
+  number of external MM charges  = 6023
+
+Setup_Enefunc_Cmap_Par> Natural spline is used to derive cmap coefs.
+
+Setup_Enefunc_Table> Setup Variables for LookupTable
+  num_solutes     =       6039  num_waters      =          0
+
+Define_Enefunc_CHARMM> Number of Interactions in Each Term
+  bond_ene        =       6025  angle_ene       =       2050
+  urey_ene        =         15
+  torsion_ene     =         69  improper_ene    =          6
+  cmap_ene        =          2
+  restraint_groups=          0  restraint_funcs =          0
+ 
+Setup_Vibration_Atoms> Atoms subject to vibrational analysis
+     1     5 PROA      1 ALA    CY   C     
+     2     6 PROA      1 ALA    OY   O     
+     3     7 PROA      1 ALA    N    NH1   
+     4     8 PROA      1 ALA    HN   H     
+  number of VIB atoms = 4
+ 
+Setup_Vibration_Atoms> Atoms punched to minfo file in addition
+     1     1 PROA      1 ALA    CAY  CT3   
+     2     2 PROA      1 ALA    HY1  HA3   
+     3     3 PROA      1 ALA    HY2  HA3   
+     4     4 PROA      1 ALA    HY3  HA3   
+     5     5 PROA      1 ALA    CY   C     
+     6     6 PROA      1 ALA    OY   O     
+     7     7 PROA      1 ALA    N    NH1   
+     8     8 PROA      1 ALA    HN   H     
+     9     9 PROA      1 ALA    CA   CT1   
+    10    10 PROA      1 ALA    HA   HB1   
+    11    11 PROA      1 ALA    CB   CT3   
+    12    12 PROA      1 ALA    HB1  HA3   
+    13    13 PROA      1 ALA    HB2  HA3   
+    14    14 PROA      1 ALA    HB3  HA3   
+    15    15 PROA      1 ALA    C    C     
+    16    16 PROA      1 ALA    O    O     
+    17    17 PROA      2 ALA    N    NH1   
+    18    18 PROA      2 ALA    HN   H     
+    19    19 PROA      2 ALA    CA   CT1   
+    20    20 PROA      2 ALA    HA   HB1   
+    21    21 PROA      2 ALA    CB   CT3   
+    22    22 PROA      2 ALA    HB1  HA3   
+    23    23 PROA      2 ALA    HB2  HA3   
+    24    24 PROA      2 ALA    HB3  HA3   
+    25    25 PROA      2 ALA    C    C     
+    26    26 PROA      2 ALA    O    O     
+    27    27 PROA      3 ALA    N    NH1   
+    28    28 PROA      3 ALA    HN   H     
+    29    29 PROA      3 ALA    CA   CT1   
+    30    30 PROA      3 ALA    HA   HB1   
+    31    31 PROA      3 ALA    CB   CT3   
+    32    32 PROA      3 ALA    HB1  HA3   
+    33    33 PROA      3 ALA    HB2  HA3   
+    34    34 PROA      3 ALA    HB3  HA3   
+    35    35 PROA      3 ALA    C    C     
+    36    36 PROA      3 ALA    O    O     
+    37    37 PROA      3 ALA    NT   NH1   
+    38    38 PROA      3 ALA    HNT  H     
+    39    39 PROA      3 ALA    CAT  CT3   
+    40    40 PROA      3 ALA    HT1  HA3   
+    41    41 PROA      3 ALA    HT2  HA3   
+    42    42 PROA      3 ALA    HT3  HA3   
+  number of atoms = 42
+ 
+[STEP4] Compute Single Point Energy for Molecules
+ 
+SKIPPED: Energy calculation is omitted when QMMM is performed
+ 
+[STEP5] Perform Vibrational Analysis
+ 
+ Compute energy at grid points: data written to [ makeGrid.dat ]
+      Done for                    mkg-q5-11-0 :    replicaID =     3
+      Done for                    mkg-q5-11-2 :    replicaID =     1
+      Done for                         mkg-eq :    replicaID =     2
+      Done for                    mkg-q5-11-1 :    replicaID =     4
+      Done for                    mkg-q5-11-7 :    replicaID =     1
+      Done for                    mkg-q5-11-4 :    replicaID =     3
+      Done for                    mkg-q5-11-3 :    replicaID =     2
+      Done for                    mkg-q5-11-6 :    replicaID =     4
+      Done for                    mkg-q6-11-0 :    replicaID =     1
+      Done for                    mkg-q5-11-9 :    replicaID =     3
+      Done for                    mkg-q5-11-8 :    replicaID =     2
+      Done for                   mkg-q5-11-10 :    replicaID =     4
+      Done for                    mkg-q6-11-4 :    replicaID =     1
+      Done for                    mkg-q6-11-2 :    replicaID =     3
+      Done for                    mkg-q6-11-1 :    replicaID =     2
+      Done for                    mkg-q6-11-3 :    replicaID =     4
+      Done for                    mkg-q6-11-9 :    replicaID =     1
+      Done for                    mkg-q6-11-7 :    replicaID =     3
+      Done for                    mkg-q6-11-6 :    replicaID =     2
+      Done for                    mkg-q6-11-8 :    replicaID =     4
+      Done for                    mkg-q7-11-2 :    replicaID =     1
+      Done for                    mkg-q7-11-0 :    replicaID =     3
+      Done for                   mkg-q6-11-10 :    replicaID =     2
+      Done for                    mkg-q7-11-1 :    replicaID =     4
+      Done for                    mkg-q7-11-7 :    replicaID =     1
+      Done for                    mkg-q7-11-4 :    replicaID =     3
+      Done for                    mkg-q7-11-3 :    replicaID =     2
+      Done for                    mkg-q7-11-6 :    replicaID =     4
+      Done for                    mkg-q8-11-0 :    replicaID =     1
+      Done for                    mkg-q7-11-9 :    replicaID =     3
+      Done for                    mkg-q7-11-8 :    replicaID =     2
+      Done for                   mkg-q7-11-10 :    replicaID =     4
+      Done for                    mkg-q8-11-4 :    replicaID =     1
+      Done for                    mkg-q8-11-2 :    replicaID =     3
+      Done for                    mkg-q8-11-3 :    replicaID =     4
+      Done for                    mkg-q8-11-1 :    replicaID =     2
+      Done for                    mkg-q8-11-9 :    replicaID =     1
+      Done for                    mkg-q8-11-7 :    replicaID =     3
+      Done for                    mkg-q8-11-8 :    replicaID =     4
+      Done for                    mkg-q8-11-6 :    replicaID =     2
+      Done for                    mkg-q9-11-2 :    replicaID =     1
+      Done for                    mkg-q9-11-0 :    replicaID =     3
+      Done for                    mkg-q9-11-1 :    replicaID =     4
+      Done for                   mkg-q8-11-10 :    replicaID =     2
+      Done for                    mkg-q9-11-4 :    replicaID =     3
+      Done for                    mkg-q9-11-7 :    replicaID =     1
+      Done for                    mkg-q9-11-6 :    replicaID =     4
+      Done for                    mkg-q9-11-3 :    replicaID =     2
+      Done for                    mkg-q9-11-9 :    replicaID =     3
+      Done for                   mkg-q10-11-0 :    replicaID =     1
+      Done for                   mkg-q9-11-10 :    replicaID =     4
+      Done for                    mkg-q9-11-8 :    replicaID =     2
+      Done for                   mkg-q10-11-2 :    replicaID =     3
+      Done for                   mkg-q10-11-4 :    replicaID =     1
+      Done for                   mkg-q10-11-3 :    replicaID =     4
+      Done for                   mkg-q10-11-1 :    replicaID =     2
+      Done for                   mkg-q10-11-7 :    replicaID =     3
+      Done for                   mkg-q10-11-9 :    replicaID =     1
+      Done for                   mkg-q10-11-8 :    replicaID =     4
+      Done for                   mkg-q10-11-6 :    replicaID =     2
+      Done for                   mkg-q11-11-0 :    replicaID =     3
+      Done for                   mkg-q11-11-2 :    replicaID =     1
+      Done for                   mkg-q11-11-1 :    replicaID =     4
+      Done for                  mkg-q10-11-10 :    replicaID =     2
+      Done for                   mkg-q11-11-4 :    replicaID =     3
+      Done for                   mkg-q11-11-7 :    replicaID =     1
+      Done for                   mkg-q11-11-6 :    replicaID =     4
+      Done for                   mkg-q11-11-3 :    replicaID =     2
+      Done for                   mkg-q11-11-9 :    replicaID =     3
+      Done for                   mkg-q12-11-0 :    replicaID =     1
+      Done for                  mkg-q11-11-10 :    replicaID =     4
+      Done for                   mkg-q11-11-8 :    replicaID =     2
+      Done for                   mkg-q12-11-2 :    replicaID =     3
+      Done for                   mkg-q12-11-4 :    replicaID =     1
+      Done for                   mkg-q12-11-1 :    replicaID =     2
+      Done for                   mkg-q12-11-3 :    replicaID =     4
+      Done for                   mkg-q12-11-7 :    replicaID =     3
+      Done for                   mkg-q12-11-9 :    replicaID =     1
+      Done for                   mkg-q12-11-6 :    replicaID =     2
+      Done for                   mkg-q12-11-8 :    replicaID =     4
+      Done for                  mkg-q12-11-10 :    replicaID =     2
+ 
+[STEP6] Deallocate Arrays
+ 
+Output_Time> Averaged timer profile (Min, Max)
+  total time      =     166.245
+    setup         =       0.591
+    dynamics      =     165.654
+      energy      =     158.411
+      integrator  =       0.000
+      pairlist    =       0.092 (       0.088,       0.096)
+  energy           
+    bond          =       0.005 (       0.002,       0.007)
+    angle         =       0.002 (       0.001,       0.002)
+    dihedral      =       0.001 (       0.000,       0.002)
+    nonbond       =       1.084 (       1.043,       1.154)
+      pme real    =       1.083 (       1.042,       1.154)
+      pme recip   =       0.000 (       0.000,       0.000)
+    solvation     =       0.000 (       0.000,       0.000)
+      polar       =       0.000 (       0.000,       0.000)
+      non-polar   =       0.000 (       0.000,       0.000)
+    restraint     =       0.000 (       0.000,       0.000)
+    qmmm          =     157.317 (     153.557,     164.378)
+  integrator       
+    constraint    =       0.000 (       0.000,       0.000)
+    update        =       0.000 (       0.000,       0.000)
+    comm_coord    =       0.000 (       0.000,       0.000)
+    comm_force    =       0.000 (       0.000,       0.000)
+    comm_migrate  =       0.000 (       0.000,       0.000)
+
