@@ -1,8 +1,10 @@
 package makePES;
 
 import java.io.*;
+import java.util.Arrays;
 
 import sys.Constants;
+import sys.Utilities;
 
 /**
  * Reads and provides the data of QFF.
@@ -195,6 +197,230 @@ public class QFFData {
     * @param mopFile The mop file 
     */
    public void readmop(File mopFile){
+      
+      try{
+         BufferedReader br = new BufferedReader(new FileReader(mopFile));
+         
+         String line = br.readLine();
+         Nfree = Integer.parseInt(line.substring(27).trim());
+         
+         double[] sqomg = new double[Nfree];
+         for(int i=0; i<Nfree; i++){
+            sqomg[i] = Double.parseDouble(br.readLine());
+            //System.out.println(sqomg[i]*Constants.Hartree2wvn);
+            sqomg[i] = Math.sqrt(sqomg[i]);
+         }
+         br.readLine();
+         
+         while((line = br.readLine()) != null) {
+            String[] ss = Utilities.splitWithSpaceString(line);
+            
+            if (ss.length == 2) {
+               
+               // ci
+               if (ci == null) {
+                  ci = new double[Nfree];
+               }
+               int mi = Integer.parseInt(ss[1])-1;
+               ci[mi] = Double.parseDouble(ss[0])*sqomg[mi];
+               
+            } else if (ss.length == 3) {
+               
+               int mi = Integer.parseInt(ss[1])-1;
+               int mj = Integer.parseInt(ss[2])-1;
+               double sqomg2 = sqomg[mi]*sqomg[mj];
+               
+               if (mi == mj) {
+                  // cii
+                  if (cii == null) {
+                     cii = new double[Nfree];
+                  }
+                  cii[mi] = Double.parseDouble(ss[0])*sqomg2;
+                  
+               } else {
+                  // cij
+                  if (cij == null) {
+                     int nn = Nfree*(Nfree-1)/2;
+                     cij = new double[nn];
+                  }
+                  if (mj > mi) {
+                     int tmp = mi;
+                     mi = mj;
+                     mj = tmp;
+                  }
+                  
+                  int n1 = mi*(mi-1)/2 + mj;
+                  cij[n1] = Double.parseDouble(ss[0])*sqomg2;
+               }
+
+            } else if (ss.length == 4) {
+               
+               int mi = Integer.parseInt(ss[1])-1;
+               int mj = Integer.parseInt(ss[2])-1;
+               int mk = Integer.parseInt(ss[3])-1;
+               double sqomg3 = sqomg[mi]*sqomg[mj]*sqomg[mk];
+               
+               int[] mm = {mi, mj, mk};
+               Arrays.sort(mm);
+               
+               // mi >= mj >= mk
+               mk = mm[0];
+               mj = mm[1];
+               mi = mm[2];
+               
+               if (mi == mj && mj == mk) {
+                  // ciii
+                  if (ciii == null) {
+                     ciii = new double[Nfree];
+                  }
+                  ciii[mi] = Double.parseDouble(ss[0])*sqomg3;
+
+               } else if (mi == mj) {
+                  // ciij
+                  if (ciij == null) {
+                     int nn = Nfree*(Nfree-1)/2;
+                     ciij = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)/2 + mk;
+                  ciij[n1] = Double.parseDouble(ss[0])*sqomg3;
+
+               } else if (mj == mk) {
+                  // cijj
+                  if (cijj == null) {
+                     int nn = Nfree*(Nfree-1)/2;
+                     cijj = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)/2 + mj;
+                  cijj[n1] = Double.parseDouble(ss[0])*sqomg3;
+
+               } else {
+                  // cijk
+                  if (cijk == null) {
+                     int nn = Nfree*(Nfree-1)*(Nfree-2)/6;
+                     cijk = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)*(mi-2)/6 + mj*(mj-1)/2 + mk;
+                  cijk[n1] = Double.parseDouble(line.substring(0, 29))*sqomg3;
+
+               }
+               
+            } else if (ss.length == 5) {
+               int mi = Integer.parseInt(ss[1])-1;
+               int mj = Integer.parseInt(ss[2])-1;
+               int mk = Integer.parseInt(ss[3])-1;
+               int ml = Integer.parseInt(ss[4])-1;
+               double sqomg4 = sqomg[mi]*sqomg[mj]*sqomg[mk]*sqomg[ml];
+               
+               int[] mm = {mi, mj, mk, ml};
+               Arrays.sort(mm);
+               
+               // mi >= mj >= mk >= ml
+               ml = mm[0];
+               mk = mm[1];
+               mj = mm[2];
+               mi = mm[3];
+               
+               if (mi == mj && mj == mk && mk == ml) {
+                  // ciiii
+                  if (ciiii == null) {
+                     ciiii = new double[Nfree];
+                  }
+                  ciiii[mi] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else if (mi == mj && mk == ml) {
+                  // ciijj
+                  if (ciijj == null) {
+                     int nn = Nfree*(Nfree-1)/2;
+                     ciijj = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)/2 + mk;
+                  ciijj[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else if (mi == mj && mi == mk) {
+                  // ciiij
+                  if (ciiij == null) {
+                     int nn = Nfree*(Nfree-1)/2;
+                     ciiij = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)/2 + ml;
+                  ciiij[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else if (mj == mk && mj == ml) {
+                  // cijjj
+                  if (cijjj == null) {
+                     int nn = Nfree*(Nfree-1)/2;
+                     cijjj = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)/2 + mj;
+                  cijjj[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else if (mi == mj) {
+                  // ciijk
+                  if (ciijk == null) {
+                     int nn = Nfree*(Nfree-1)*(Nfree-2)/6;
+                     ciijk = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)*(mi-2)/6 + mk*(mk-1)/2 + ml;
+                  ciijk[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else if (mj == mk) {
+                  // cijjk
+                  if (cijjk == null) {
+                     int nn = Nfree*(Nfree-1)*(Nfree-2)/6;
+                     cijjk = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)*(mi-2)/6 + mj*(mj-1)/2 + ml;
+                  cijjk[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else if (mk == ml) {
+                  // cijkk
+                  if (cijkk == null) {
+                     int nn = Nfree*(Nfree-1)*(Nfree-2)/6;
+                     cijkk = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)*(mi-2)/6 + mj*(mj-1)/2 + ml;
+                  cijkk[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               } else {
+                  // cijkl
+                  if (cijkl == null) {
+                     int nn = Nfree*(Nfree-1)*(Nfree-2)*(Nfree-3)/24;
+                     cijkl = new double[nn];
+                  }
+                  int n1 = mi*(mi-1)*(mi-2)*(mi-3)/24 + mj*(mj-1)*(mj-2)/6
+                         + mk*(mk-1)/2 + ml;
+                  cijkl[n1] = Double.parseDouble(ss[0])*sqomg4;
+                  
+               }
+
+            }
+         }
+         
+         br.close();
+         
+         if(cijkl != null) {
+            MR = 4;
+         } else if (cijk != null) {
+            MR = 3;
+         } else if (cij != null) {
+            MR = 2;
+         } else {
+            MR = 1;
+         }
+         
+         return;
+
+      }catch(IOException e){
+         System.out.println(e.getMessage());
+      }
+      
+   }
+   
+   /**
+    * Read QFF data in mop format from a given File (old version)
+    * @param mopFile The mop file 
+    */
+   public void readmop_v1(File mopFile){
       try{
          BufferedReader br = new BufferedReader(new FileReader(mopFile));
          
@@ -223,7 +449,7 @@ public class QFFData {
             cii[i] = Double.parseDouble(br.readLine().substring(0, 29))*sii;
             ciii[i] = Double.parseDouble(br.readLine().substring(0, 29))*sii*si;
             ciiii[i] = Double.parseDouble(br.readLine().substring(0, 29))*sii*sii;
-            //System.out.println(hii[i]);
+            //System.out.println(cii[i]);
          }
          
          line = br.readLine();    
