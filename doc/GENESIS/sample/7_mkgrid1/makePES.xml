@@ -2,7 +2,7 @@
 <makePES>
    <minfoFile    value="../5_qmmm-vib/qmmm_vib.minfo" />
    <MR           value="1" />
-   <activemode   value="5-12" />
+   <activemode   value="9-12" />
    <dipole       value="true" />
    <qchem>
       <program   value="generic" />

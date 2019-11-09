@@ -1,4 +1,4 @@
-2019.11.07 at 02:11:28 JST
+2019.11.09 at 21:25:31 JST
 -------------------------------------------------------
 
       Make Potential Energy Surface for SINDO
@@ -13,11 +13,11 @@
 Launch MakePES module
 
   o Input options read via makePES.xml ...  [OK] 
-     - Molecular info via ../4_qmmm-min/qmmm_vib.minfo ...  [OK] 
+     - Molecular info via ../5_qmmm-vib/qmmm_vib.minfo ...  [OK] 
      - InterDomain = false
      - ActiveModes:
         * Domain 1
-            5   6   7   8   9  10  11  12 
+            9  10  11  12 
      - MR      = 1
      - Dipole  = true
 
@@ -37,7 +37,7 @@ Setup MakeGrid module
 
   o ngrid =    11 
   o 1MR Grid: 
-      5 6 7 8 9 10 11 12 
+      9 10 11 12 
 
 Enter GridPES generation:
 

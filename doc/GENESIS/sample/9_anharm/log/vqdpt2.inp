@@ -3,13 +3,13 @@
  &sys maxmem=500 /
 
 #--- [  MRPES ]
- &mrpes mopFile='../6_mkqff/prop_no_1.mop' mcs_cutoff=-1.0D-03 /
+ &mrpes mopFile='prop_no_1.mop' mcs_cutoff=-1.0D-03 /
 
 #--- [  VIB  ]
  &vib 
   MR=3 
   vmaxall=10 
-  vmax(1)=-1 vmax(2)=-1 vmax(3)=-1 vmax(4)=-1
+  vmax(1)=-1 vmax(2)=-1 vmax(3)=-1 vmax(4)=-1 vmax(5)=-1 vmax(6)=-1 vmax(7)=-1 vmax(8)=-1
   vscf=.t. 
   vqdpt=.t.  
   prpt=.f. 

@@ -29,9 +29,9 @@ Build_Information> Compiler Information
  apack95_lp64 
 
 Runtime_Information> Machine and Library Information
-  date       = 2019/11/07 02:11:34
+  date       = 2019/11/09 21:25:37
   cpu model    = Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
-  exec. host   = yagi@beluga01
+  exec. host   = yagi@beluga03
   LD library   = 
  /home/mdsoft/mpi/mpi_cent-v7_intel64/openmpi-v3.1.2_intel_v18.0.1/lib:/opt/inte
  l/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64_lin:/opt/intel/
@@ -280,109 +280,69 @@ SKIPPED: Energy calculation is omitted when QMMM is performed
 [STEP5] Perform Vibrational Analysis
  
  Compute energy at grid points: data written to [ makeGrid.dat ]
-      Done for                    mkg-q5-11-0 :    replicaID =     3
-      Done for                    mkg-q5-11-2 :    replicaID =     1
       Done for                         mkg-eq :    replicaID =     2
-      Done for                    mkg-q5-11-1 :    replicaID =     4
-      Done for                    mkg-q5-11-7 :    replicaID =     1
-      Done for                    mkg-q5-11-4 :    replicaID =     3
-      Done for                    mkg-q5-11-3 :    replicaID =     2
-      Done for                    mkg-q5-11-6 :    replicaID =     4
-      Done for                    mkg-q6-11-0 :    replicaID =     1
-      Done for                    mkg-q5-11-9 :    replicaID =     3
-      Done for                    mkg-q5-11-8 :    replicaID =     2
-      Done for                   mkg-q5-11-10 :    replicaID =     4
-      Done for                    mkg-q6-11-4 :    replicaID =     1
-      Done for                    mkg-q6-11-2 :    replicaID =     3
-      Done for                    mkg-q6-11-1 :    replicaID =     2
-      Done for                    mkg-q6-11-3 :    replicaID =     4
-      Done for                    mkg-q6-11-9 :    replicaID =     1
-      Done for                    mkg-q6-11-7 :    replicaID =     3
-      Done for                    mkg-q6-11-6 :    replicaID =     2
-      Done for                    mkg-q6-11-8 :    replicaID =     4
-      Done for                    mkg-q7-11-2 :    replicaID =     1
-      Done for                    mkg-q7-11-0 :    replicaID =     3
-      Done for                   mkg-q6-11-10 :    replicaID =     2
-      Done for                    mkg-q7-11-1 :    replicaID =     4
-      Done for                    mkg-q7-11-7 :    replicaID =     1
-      Done for                    mkg-q7-11-4 :    replicaID =     3
-      Done for                    mkg-q7-11-3 :    replicaID =     2
-      Done for                    mkg-q7-11-6 :    replicaID =     4
-      Done for                    mkg-q8-11-0 :    replicaID =     1
-      Done for                    mkg-q7-11-9 :    replicaID =     3
-      Done for                    mkg-q7-11-8 :    replicaID =     2
-      Done for                   mkg-q7-11-10 :    replicaID =     4
-      Done for                    mkg-q8-11-4 :    replicaID =     1
-      Done for                    mkg-q8-11-2 :    replicaID =     3
-      Done for                    mkg-q8-11-3 :    replicaID =     4
-      Done for                    mkg-q8-11-1 :    replicaID =     2
-      Done for                    mkg-q8-11-9 :    replicaID =     1
-      Done for                    mkg-q8-11-7 :    replicaID =     3
-      Done for                    mkg-q8-11-8 :    replicaID =     4
-      Done for                    mkg-q8-11-6 :    replicaID =     2
-      Done for                    mkg-q9-11-2 :    replicaID =     1
-      Done for                    mkg-q9-11-0 :    replicaID =     3
       Done for                    mkg-q9-11-1 :    replicaID =     4
-      Done for                   mkg-q8-11-10 :    replicaID =     2
+      Done for                    mkg-q9-11-0 :    replicaID =     3
+      Done for                    mkg-q9-11-2 :    replicaID =     1
+      Done for                    mkg-q9-11-3 :    replicaID =     2
+      Done for                    mkg-q9-11-6 :    replicaID =     4
       Done for                    mkg-q9-11-4 :    replicaID =     3
       Done for                    mkg-q9-11-7 :    replicaID =     1
-      Done for                    mkg-q9-11-6 :    replicaID =     4
-      Done for                    mkg-q9-11-3 :    replicaID =     2
+      Done for                    mkg-q9-11-8 :    replicaID =     2
+      Done for                   mkg-q9-11-10 :    replicaID =     4
       Done for                    mkg-q9-11-9 :    replicaID =     3
       Done for                   mkg-q10-11-0 :    replicaID =     1
-      Done for                   mkg-q9-11-10 :    replicaID =     4
-      Done for                    mkg-q9-11-8 :    replicaID =     2
+      Done for                   mkg-q10-11-1 :    replicaID =     2
+      Done for                   mkg-q10-11-3 :    replicaID =     4
       Done for                   mkg-q10-11-2 :    replicaID =     3
       Done for                   mkg-q10-11-4 :    replicaID =     1
-      Done for                   mkg-q10-11-3 :    replicaID =     4
-      Done for                   mkg-q10-11-1 :    replicaID =     2
+      Done for                   mkg-q10-11-6 :    replicaID =     2
+      Done for                   mkg-q10-11-8 :    replicaID =     4
       Done for                   mkg-q10-11-7 :    replicaID =     3
       Done for                   mkg-q10-11-9 :    replicaID =     1
-      Done for                   mkg-q10-11-8 :    replicaID =     4
-      Done for                   mkg-q10-11-6 :    replicaID =     2
+      Done for                  mkg-q10-11-10 :    replicaID =     2
+      Done for                   mkg-q11-11-1 :    replicaID =     4
       Done for                   mkg-q11-11-0 :    replicaID =     3
       Done for                   mkg-q11-11-2 :    replicaID =     1
-      Done for                   mkg-q11-11-1 :    replicaID =     4
-      Done for                  mkg-q10-11-10 :    replicaID =     2
-      Done for                   mkg-q11-11-4 :    replicaID =     3
-      Done for                   mkg-q11-11-7 :    replicaID =     1
       Done for                   mkg-q11-11-6 :    replicaID =     4
       Done for                   mkg-q11-11-3 :    replicaID =     2
-      Done for                   mkg-q11-11-9 :    replicaID =     3
-      Done for                   mkg-q12-11-0 :    replicaID =     1
+      Done for                   mkg-q11-11-7 :    replicaID =     1
+      Done for                   mkg-q11-11-4 :    replicaID =     3
       Done for                  mkg-q11-11-10 :    replicaID =     4
       Done for                   mkg-q11-11-8 :    replicaID =     2
+      Done for                   mkg-q11-11-9 :    replicaID =     3
+      Done for                   mkg-q12-11-0 :    replicaID =     1
+      Done for                   mkg-q12-11-3 :    replicaID =     4
+      Done for                   mkg-q12-11-1 :    replicaID =     2
       Done for                   mkg-q12-11-2 :    replicaID =     3
       Done for                   mkg-q12-11-4 :    replicaID =     1
-      Done for                   mkg-q12-11-1 :    replicaID =     2
-      Done for                   mkg-q12-11-3 :    replicaID =     4
-      Done for                   mkg-q12-11-7 :    replicaID =     3
-      Done for                   mkg-q12-11-9 :    replicaID =     1
-      Done for                   mkg-q12-11-6 :    replicaID =     2
       Done for                   mkg-q12-11-8 :    replicaID =     4
+      Done for                   mkg-q12-11-6 :    replicaID =     2
+      Done for                   mkg-q12-11-9 :    replicaID =     1
+      Done for                   mkg-q12-11-7 :    replicaID =     3
       Done for                  mkg-q12-11-10 :    replicaID =     2
  
 [STEP6] Deallocate Arrays
  
 Output_Time> Averaged timer profile (Min, Max)
-  total time      =     166.245
-    setup         =       0.591
-    dynamics      =     165.654
-      energy      =     158.411
+  total time      =      85.998
+    setup         =       0.473
+    dynamics      =      85.525
+      energy      =      83.484
       integrator  =       0.000
-      pairlist    =       0.092 (       0.088,       0.096)
+      pairlist    =       0.092 (       0.088,       0.095)
   energy           
-    bond          =       0.005 (       0.002,       0.007)
-    angle         =       0.002 (       0.001,       0.002)
+    bond          =       0.004 (       0.002,       0.005)
+    angle         =       0.001 (       0.000,       0.002)
     dihedral      =       0.001 (       0.000,       0.002)
-    nonbond       =       1.084 (       1.043,       1.154)
-      pme real    =       1.083 (       1.042,       1.154)
+    nonbond       =       0.541 (       0.518,       0.581)
+      pme real    =       0.541 (       0.518,       0.581)
       pme recip   =       0.000 (       0.000,       0.000)
     solvation     =       0.000 (       0.000,       0.000)
       polar       =       0.000 (       0.000,       0.000)
       non-polar   =       0.000 (       0.000,       0.000)
     restraint     =       0.000 (       0.000,       0.000)
-    qmmm          =     157.317 (     153.557,     164.378)
+    qmmm          =      82.937 (      77.729,      84.929)
   integrator       
     constraint    =       0.000 (       0.000,       0.000)
     update        =       0.000 (       0.000,       0.000)

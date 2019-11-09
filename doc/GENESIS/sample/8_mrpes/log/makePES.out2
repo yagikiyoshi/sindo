@@ -1,4 +1,4 @@
-2019.11.07 at 12:07:05 JST
+2019.11.09 at 21:35:38 JST
 -------------------------------------------------------
 
       Make Potential Energy Surface for SINDO
@@ -17,7 +17,7 @@ Launch MakePES module
      - InterDomain = false
      - ActiveModes:
         * Domain 1
-            5   6   7   8   9  10  11  12 
+            9  10  11  12 
      - MR      = 2
      - Dipole  = true
 
@@ -39,9 +39,9 @@ Setup MakeGrid module
   o Setup MCS: Read QFF Data via ../6_mkqff/prop_no_1.mop ...  [OK]
   o ngrid =     9 
   o 1MR Grid: 
-      6 5 12 9 10 
+      12 9 10 
   o 2MR Grid: 
-      (5,6) (5,12) (6,12) (9,12) (10,12) 
+      (9,12) (10,12) 
 
 Enter GridPES generation:
 
@@ -55,12 +55,6 @@ Generating pot files.
 
    Reading the data from makeGrid.dat.
 
-   o q6q5.pot  [OK]
-   o q6q5.dipole  [OK]
-   o q12q5.pot  [OK]
-   o q12q5.dipole  [OK]
-   o q12q6.pot  [OK]
-   o q12q6.dipole  [OK]
    o q12q9.pot  [OK]
    o q12q9.dipole  [OK]
    o q12q10.pot  [OK]

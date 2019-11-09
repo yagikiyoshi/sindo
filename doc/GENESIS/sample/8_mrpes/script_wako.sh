@@ -13,6 +13,10 @@
 #$ -q y2.q
 ######################################################
 
+# Copy the QFF and 1MR-Grid data
+cp ../6_mkqff/prop_no_1.mop .
+cp ../7_mkgrid1/*pot ./
+cp ../7_mkgrid1/*dipole ./
 
 # Run MakePES in generic mode and generate makeQFF.xyz
 #
