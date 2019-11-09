@@ -8,7 +8,7 @@
 #--- [  VIB  ]
  &vib  
   MR=3 
-  vmaxAll=10 
+  vmaxall=10 
   vmax(1)=-1 vmax(2)=-1 vmax(3)=-1 vmax(4)=-1
   vscf=.t. 
   vci=.t. 
@@ -16,7 +16,7 @@
 
 #--- [  VCI  ]
  &vci 
-  nstate=100 
+  nstate=500 
   nCUP=3 
   maxSum=6
  /

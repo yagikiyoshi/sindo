@@ -16,7 +16,7 @@
 
 #--- [  VCI  ]
  &vci 
-  nstate=100 
+  nstate=500 
   nCUP=3 
   maxSum=6
  /
