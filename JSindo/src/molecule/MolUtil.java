@@ -79,9 +79,33 @@ public class MolUtil {
    /**
     * Returns the center of mass of the molecule (bohr).
     * @return Center of mass coordinates 
-    */
    public double[] getCenterOfMass(){
       Atom[] atomList = molecule.getAtomList().toArray(new Atom[0]);
+      AtomUtil autil = new AtomUtil();
+      return autil.getCenterOfMass(atomList).getXYZCoordinates();
+   }
+    */
+   public double[] getCenterOfMass(){
+      return this.getCenterOfMass(false);
+   }
+   /**
+    * Returns the center of mass of the molecule (bohr).
+    * @return Center of mass coordinates 
+    */
+   public double[] getCenterOfMass(boolean withSubatoms){
+
+      Atom[] atomList = null;
+      if (withSubatoms) {
+         atomList = new Atom[molecule.getNat()+molecule.getNat_subatom()];
+         for(int n=0; n<molecule.getNat(); n++) {
+            atomList[n] = molecule.getAtom(n);
+         }
+         for(int n=0; n<molecule.getNat_subatom(); n++) {
+            atomList[molecule.getNat()+n] = molecule.getSubAtom(n);
+         }
+      }else {
+         atomList = molecule.getAtomList().toArray(new Atom[0]);
+      }
       AtomUtil autil = new AtomUtil();
       return autil.getCenterOfMass(atomList).getXYZCoordinates();
    }
