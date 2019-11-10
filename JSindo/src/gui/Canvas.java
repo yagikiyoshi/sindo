@@ -167,6 +167,13 @@ public class Canvas extends JFrame implements WindowListener {
          if(xyz[1]>ymax) ymax = xyz[1];
          if(xyz[1]<ymin) ymin = xyz[1];
       }
+      for(int i=0; i<molecule.getNat_subatom(); i++){
+         double[] xyz = molecule.getSubAtom(i).getXYZCoordinates();
+         if(xyz[0]>xmax) xmax = xyz[0];
+         if(xyz[0]<xmin) xmin = xyz[0];
+         if(xyz[1]>ymax) ymax = xyz[1];
+         if(xyz[1]<ymin) ymin = xyz[1];
+      }
       double xlen = xmax - xmin;
       double ylen = ymax - ymin;
       double zz=0.0;
@@ -314,7 +321,7 @@ public class Canvas extends JFrame implements WindowListener {
       
       MolUtil mutil = new MolUtil();
       mutil.appendMolecule(molecule);
-      double[] com = mutil.getCenterOfMass();
+      double[] com = mutil.getCenterOfMass(true);
       
       xyz_org = molecule.getXYZCoordinates2();
       
