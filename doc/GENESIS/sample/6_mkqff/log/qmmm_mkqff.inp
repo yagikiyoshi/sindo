@@ -22,7 +22,6 @@ vdw_force_switch    = YES
 runmode             = QFF
 nreplica            = 4
 vibatm_select_index = 2
-output_minfo_atm    = 3
 gridfile            = makeQFF.xyz
 
 [BOUNDARY]
@@ -43,5 +42,4 @@ exclude_charge      = group
 [SELECTION]
 group1  = atomno:1-14
 group2  = atomno:5-8
-group3  = segid:PROA
 

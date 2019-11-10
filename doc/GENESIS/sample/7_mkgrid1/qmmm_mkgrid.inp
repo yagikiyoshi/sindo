@@ -22,7 +22,6 @@ vdw_force_switch    = YES
 runmode             = GRID
 nreplica            = 4
 vibatm_select_index = 2
-output_minfo_atm    = 3
 gridfile            = makeGrid.xyz
 datafile            = makeGrid.dat
 
@@ -44,5 +43,4 @@ exclude_charge      = group
 [SELECTION]
 group1  = atomno:1-14
 group2  = atomno:5-8
-group3  = segid:PROA
 
