@@ -38,8 +38,13 @@ End module
   100 Format(6x,'o VCI PROPERTY OPTIONS')
 
       Nst=Nstate
-      write(iout,110) Nstate
+      if (Nst > 1) then
+         write(iout,110) Nstate
+      else
+         write(iout,120) 
+      end if
   110 Format(9x,'VCI_STATES       = ',i12,/)
+  120 Format(9x,'VCI_STATES       =  ALL',/)
 
    End subroutine
 
@@ -71,6 +76,10 @@ End module
          write(Iout,'(6x,''WARNING:  VCI STATES = '',i5)') Nstate
          write(Iout,'(6x,''WARNING:  # OF STATES IS RESET'')') 
          Nst = Nstate
+
+      else if(Nst == 1) then
+         Nst = Nstate
+
       endif
 
       Call Mem_alloc(-1,i,'D',nCI*nCI*nData)
