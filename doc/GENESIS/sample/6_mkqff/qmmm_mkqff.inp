@@ -30,8 +30,7 @@ type                = NOBC
 [QMMM]
 qmtyp               = gaussian
 qmcnt               = gaussian.com
-#qmexe               = runGau.sh
-qmexe               = runGau_wako.sh
+qmexe               = runGau.sh
 qmatm_select_index  = 1
 workdir             = qmmm_qff
 basename            = job
