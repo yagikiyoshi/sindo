@@ -8,8 +8,8 @@
                                                       
  -------------------------------------------------------
 
-     JOB STARTED AT: Sat Nov  9 21:41:22 2019
-     RUNNING ON beluga01                        
+     JOB STARTED AT: Mon Nov 11 18:12:28 2019
+     RUNNING ON beluga04                        
 
 
 (  SETUP MEM MODULE  )
@@ -142,7 +142,7 @@
       VCI     =     F
       VPT     =     F
       VQDPT   =     T
-      PRPT    =     F
+      PRPT    =     T
 
 
    >> BASIS FUNCTIONS
@@ -171,7 +171,7 @@
          MR         =        3
          MCS_CUTOFF = -.10E-02
          MCS_GRID   = -.10E+01
-         POTDIR     = ../8_mrpes/
+         POTDIR     = ../8_mrpes/log/
          MOPFILE    = prop_no_1.mop
 
 
@@ -499,6 +499,55 @@
 
 
 (  FINALIZE TARGET MODULE  )
+
+
+(  ENTER PROPERTY MODULE  )
+
+   >> RUN OPTIONS
+      MR    =      2
+      NPRPT =      0
+      VSCF  =      F
+      VCI   =      F
+      VPT   =      F
+      VQDPT =      T
+
+   >> INFRARED SPECTRUM
+      MIN_OMEGA =      800.00
+      MAX_OMEGA =     4000.00
+      DEL_OMEGA =        1.00
+      FWHM      =        5.00
+
+      >> PROPERTY SURFACE
+         MR         =        2
+         EXT        = .dipole   
+         POTDIR     = ../8_mrpes/log/
+
+         1MR-PRPT SURFACE
+
+           MODE=   9, GRID=  11   B3LYP-D3/cc-pVDZ
+           MODE=  10, GRID=  11   B3LYP-D3/cc-pVDZ
+           MODE=  11, GRID=  11   B3LYP-D3/cc-pVDZ
+           MODE=  12, GRID=  11   B3LYP-D3/cc-pVDZ
+ 
+
+         2MR-PRPT SURFACE
+
+           MODE=  12   9, GRID=   9   9   B3LYP-D3/cc-pVDZ
+           MODE=  12  10, GRID=   9   9   B3LYP-D3/cc-pVDZ
+ 
+
+         3MR-PRPT SURFACE
+
+      -> DONE FOR VQDPT SPECTRUM : [ vqdpt-IR.data / vqdpt-IR.spectrum ]
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.08 MB /   500.00 MB (  0.0 % ) ]  -- 
+            -- IN THE LAST STEP [     0.08 MB /   500.00 MB (  0.0 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.01, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE PROPERTY MODULE  )
 
 
 (  FINALIZE VIB MODULE  )

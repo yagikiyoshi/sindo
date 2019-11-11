@@ -12,7 +12,7 @@
   vmax(1)=-1 vmax(2)=-1 vmax(3)=-1 vmax(4)=-1 vmax(5)=-1 vmax(6)=-1 vmax(7)=-1 vmax(8)=-1
   vscf=.t. 
   vpt=.t.  
-  prpt=.f.
+  prpt=.t.
  /
 
 #--- [ TARGET STATES ]
@@ -25,3 +25,16 @@
   maxSum=4
  /
 
+#--- [  PRPT  ]
+ &prpt
+  MR=2
+  vptprpt=.t.
+  infrared=.t.
+ /
+
+ &IRspectrum
+  minOmega=800.0
+  maxOmega=4000.0
+  delOmega=1.0
+  fwhm=5.0
+ /

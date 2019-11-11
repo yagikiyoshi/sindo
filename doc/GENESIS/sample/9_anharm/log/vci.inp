@@ -12,6 +12,7 @@
   vmax(1)=-1 vmax(2)=-1 vmax(3)=-1 vmax(4)=-1 vmax(5)=-1 vmax(6)=-1 vmax(7)=-1 vmax(8)=-1
   vscf=.t. 
   vci=.t. 
+  prpt=.t.
  /
 
 #--- [  VCI  ]
@@ -21,3 +22,20 @@
   maxSum=8
  /
 
+#--- [  PRPT  ]
+ &prpt
+  MR=2
+  vciprpt=.t.
+  infrared=.t.
+ /
+
+ &prptvci
+  nstate=400
+ /
+
+ &IRspectrum
+  minOmega=800.0
+  maxOmega=4000.0
+  delOmega=1.0
+  fwhm=5.0
+ /

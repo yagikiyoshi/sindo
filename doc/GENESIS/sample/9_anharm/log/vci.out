@@ -8,8 +8,8 @@
                                                       
  -------------------------------------------------------
 
-     JOB STARTED AT: Sat Nov  9 21:41:22 2019
-     RUNNING ON beluga01                        
+     JOB STARTED AT: Mon Nov 11 17:54:08 2019
+     RUNNING ON beluga02                        
 
 
 (  SETUP MEM MODULE  )
@@ -142,7 +142,7 @@
       VCI     =     T
       VPT     =     F
       VQDPT   =     F
-      PRPT    =     F
+      PRPT    =     T
 
 
    >> BASIS FUNCTIONS
@@ -170,7 +170,7 @@
          MR         =        3
          MCS_CUTOFF = -.10E-02
          MCS_GRID   = -.10E+01
-         POTDIR     = ../8_mrpes/
+         POTDIR     = ../8_mrpes/log/
          MOPFILE    = prop_no_1.mop
 
 
@@ -225,7 +225,7 @@
             -- CURRENT USAGE    [     0.08 MB /  1200.00 MB (  0.0 % ) ]  -- 
             -- IN THE LAST STEP [     0.10 MB /  1200.00 MB (  0.0 % ) ]  -- 
 
-            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+            (CLOCK) ---->  LAST STEP: USER     0.01, SYSTEM     0.00 SECS   <----
 
 
 (  ENTER VSCF MODULE  )
@@ -329,7 +329,7 @@
 
       o FORMING HAMILTONIAN MATRIX     ... DONE
 
-            (CLOCK) ---->  LAST STEP: USER     0.02, SYSTEM     0.00 SECS   <----
+            (CLOCK) ---->  LAST STEP: USER     0.04, SYSTEM     0.00 SECS   <----
 
       o DIAGONALIZING HAMILTONIAN MATRIX     ... DONE
 
@@ -27083,6 +27083,58 @@
 (  FINALIZE TARGET MODULE  )
 
 
+(  ENTER PROPERTY MODULE  )
+
+   >> RUN OPTIONS
+      MR    =      2
+      NPRPT =      0
+      VSCF  =      F
+      VCI   =      T
+      VPT   =      F
+      VQDPT =      F
+
+   >> INFRARED SPECTRUM
+      MIN_OMEGA =      800.00
+      MAX_OMEGA =     4000.00
+      DEL_OMEGA =        1.00
+      FWHM      =        5.00
+
+      >> PROPERTY SURFACE
+         MR         =        2
+         EXT        = .dipole   
+         POTDIR     = ../8_mrpes/log/
+
+         1MR-PRPT SURFACE
+
+           MODE=   9, GRID=  11   B3LYP-D3/cc-pVDZ
+           MODE=  10, GRID=  11   B3LYP-D3/cc-pVDZ
+           MODE=  11, GRID=  11   B3LYP-D3/cc-pVDZ
+           MODE=  12, GRID=  11   B3LYP-D3/cc-pVDZ
+ 
+
+         2MR-PRPT SURFACE
+
+           MODE=  12   9, GRID=   9   9   B3LYP-D3/cc-pVDZ
+           MODE=  12  10, GRID=   9   9   B3LYP-D3/cc-pVDZ
+ 
+
+         3MR-PRPT SURFACE
+
+      o VCI PROPERTY OPTIONS
+         VCI_STATES       =          400
+
+      -> DONE FOR VCI SPECTRUM : [ vci-IR.data / vci-IR.spectrum ]
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.09 MB /  1200.00 MB (  0.0 % ) ]  -- 
+            -- IN THE LAST STEP [     7.97 MB /  1200.00 MB (  0.7 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.13, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE PROPERTY MODULE  )
+
+
 (  FINALIZE VIB MODULE  )
 
 
@@ -27093,9 +27145,9 @@
 
 
 
-   (TOTAL MEMORY USAGE)   [     3.20 MB /  1200.00 MB (  0.3 % ) ] 
+   (TOTAL MEMORY USAGE)   [     7.97 MB /  1200.00 MB (  0.7 % ) ] 
 
    (CLOCK) ---->  TOTAL CPU-TIME  <----
-            >     USER :   0 DAYS   0 HOURS   0 MINS   0.3 SECS 
+            >     USER :   0 DAYS   0 HOURS   0 MINS   0.4 SECS 
             >    SYSTEM:   0 DAYS   0 HOURS   0 MINS   0.0 SECS 
 
