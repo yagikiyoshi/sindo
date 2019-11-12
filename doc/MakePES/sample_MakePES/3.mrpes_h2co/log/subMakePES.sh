@@ -26,19 +26,25 @@
        echo "$ihost" >> resources.info
     done
 
+    b3lypdir=pes_b3lyp
+    ccsdtdir=pes_ccsdt
+    mrpesdir=pes_mrpes
+
     java RunMakePES -f makePES1.xml >& makePES1.out
-    mkdir b3lyp_pes
-    mv minfo.files *pot *dipole b3lyp_pes
+    mkdir $b3lypdir
+    mv minfo.files *pot *dipole $b3lypdir
+
+    sleep 30 
 
     java RunMakePES -f makePES2.xml >& makePES2.out
-    mkdir ccsdt_pes
-    mv minfo.files *pot ccsdt_pes
+    mkdir $ccsdtdir
+    mv minfo.files *pot $ccsdtdir
 
-    mkdir mrpes
-    mv prop_no_1.mop     mrpes
-    cp b3lyp_pes/*pot    mrpes
-    cp b3lyp_pes/*dipole mrpes
-    cp ccsdt_pes/*pot    mrpes
+    mkdir $mrpesdir
+    mv prop_no_1.mop     $mrpesdir
+    cp $b3lypdir/*pot    $mrpesdir
+    cp $b3lypdir/*dipole $mrpesdir
+    cp $ccsdtdir/*pot    $mrpesdir
 
     exit 0
 #

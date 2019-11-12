@@ -3,7 +3,7 @@
 %mem=1GB
 #P B3LYP/CC-PVDZ SCF=TIGHT  NOSYMMETRY MAXDISK=240GB
 
-Frequency at B3LYP/cc-pVDZ
+Energy at B3LYP/cc-pVDZ
 
 0   1  
 #coordinate#
