@@ -29,10 +29,6 @@
   infrared=.t.
  /
 
- &prptvci
-  nstate=400
- /
-
  &IRspectrum
   minOmega=800.0
   maxOmega=4000.0
