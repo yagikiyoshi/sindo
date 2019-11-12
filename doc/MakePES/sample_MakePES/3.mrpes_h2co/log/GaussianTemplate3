@@ -1,0 +1,10 @@
+%chk=#basename#.chk
+%NprocShared=8
+%mem=1GB
+#P CCSD(T)/CC-PVTZ SCF=TIGHT  NOSYMMETRY MAXDISK=240GB
+
+Frequency at CCSD(T)/cc-pVTZ
+
+0  1  
+#coordinate#
+
