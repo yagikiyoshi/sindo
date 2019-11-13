@@ -912,7 +912,7 @@ public class InputReader {
                      } else if(gridName.equalsIgnoreCase("mopfile")) {
                         griddata.setMopfile(gridvalue);
                         
-                     } else if(gridName.equalsIgnoreCase("mcsstrength")){
+                     } else if(gridName.equalsIgnoreCase("mcstrength")){
                         double mcs = 0.0;
                         try {
                            mcs = Double.parseDouble(gridvalue);
@@ -1132,7 +1132,7 @@ public class InputReader {
             
          }else if (griddata.getThresh_MCS() > 0.0d) {
             System.out.println("     - mopfile      = " + griddata.getMopfile());
-            System.out.println("     - MCSthresh    = "+griddata.getThresh_MCS());
+            System.out.println("     - MCStrength   = "+griddata.getThresh_MCS());
             
          }
          System.out.println();
