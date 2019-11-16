@@ -1,0 +1,616 @@
+ -------------------------------------------------------
+                                                      
+    ***   WELCOME TO SINDO PROGRAM                    
+     ***                (  VERSION 4.0 BETA  )        
+      ***                                             
+       ***       COPYRIGHT 2019:                      
+        ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP
+                                                      
+ -------------------------------------------------------
+
+     JOB STARTED AT: Wed Nov 13 23:39:54 2019
+     RUNNING ON kyagi-mac3.local                
+
+
+(  SETUP MEM MODULE  )
+
+   o MAXIMUM MEMORY :      500 MB
+
+
+(  SETUP MOL MODULE  )
+
+
+   READ DATA FROM A MINFO FILE : [ h2co-b3lyp-dz.minfo ]
+
+
+(  ENTER NMA MODULE  )
+
+
+      o ATOMIC MASS
+           12.0000     15.9949      1.0078      1.0078
+
+      o REFERENCE GEOMETRY
+          0.000000    0.000000   -1.136621
+          0.000000   -0.000000    1.138985
+          0.000000    1.787614   -2.271484
+         -0.000000   -1.787614   -2.271484
+
+      o NORMAL DISPLACEMENT VECTOR
+         -0.517531   -0.000000   -0.000000
+          0.149164    0.000000    0.000000
+          0.595782    0.000000    0.000000
+          0.595782    0.000000   -0.000000
+
+         -0.000000    0.444574   -0.000000
+          0.000000   -0.276038   -0.000000
+          0.000000   -0.217190   -0.562056
+          0.000000   -0.217190    0.562056
+
+         -0.000000   -0.000000    0.008742
+          0.000000    0.000000   -0.300148
+          0.000000    0.339532    0.582783
+          0.000000   -0.339532    0.582783
+
+         -0.000000    0.000000    0.749028
+          0.000000   -0.000000   -0.613936
+          0.000000   -0.161871   -0.069408
+          0.000000    0.161871   -0.069408
+
+          0.000000   -0.000000   -0.197537
+         -0.000000    0.000000   -0.004228
+         -0.000000   -0.598762    0.349234
+         -0.000000    0.598762    0.349234
+
+          0.000000   -0.332423    0.000000
+         -0.000000    0.003361   -0.000000
+         -0.000000    0.566839   -0.351333
+         -0.000000    0.566839    0.351333
+
+
+      o TRANSLATIONAL VECTOR
+          0.632345    0.000000    0.000000
+          0.730053    0.000000    0.000000
+          0.183253    0.000000    0.000000
+          0.183253    0.000000    0.000000
+
+          0.000000    0.632345    0.000000
+          0.000000    0.730053    0.000000
+          0.000000    0.183253    0.000000
+          0.000000    0.183253    0.000000
+
+          0.000000    0.000000    0.632345
+          0.000000    0.000000    0.730053
+          0.000000    0.000000    0.183253
+          0.000000    0.000000    0.183253
+
+
+      o ROTATIONAL VECTOR
+          0.000000    0.540364    0.000000
+          0.000000   -0.625153    0.000000
+          0.000000    0.312951    0.246286
+          0.000000    0.312951   -0.246286
+
+         -0.576460    0.000000   -0.000000
+          0.666913    0.000000   -0.000000
+         -0.333856    0.000000   -0.000000
+         -0.333856    0.000000    0.000000
+
+          0.000000    0.000000    0.000000
+          0.000000    0.000000    0.000000
+         -0.707107    0.000000    0.000000
+          0.707107   -0.000000    0.000000
+
+(  SETUP OF NMA COMPLETED  )
+
+
+
+(  SETUP VIB MODULE  )
+
+   >> RUN OPTIONS
+      VSCF    =     T
+      OC-VSCF =     F
+      VCI     =     F
+      VPT     =     F
+      VQDPT   =     T
+      PRPT    =     T
+
+
+   >> BASIS FUNCTIONS
+      MODE :         1        2        3        4        5        6
+      MAXV :        10       10       10       10       10       10
+      FREQ :   1186.93  1254.03  1515.12  1831.80  2863.06  2916.27
+
+
+(  SETUP TARGET MODULE  )
+
+   >> TARGET STATES
+       000   : ZERO-POINT STATE
+     001-006 : FUNDAMENTALS
+
+
+(  SETUP MRPES MODULE  )
+
+   >> POTENTIAL
+
+      [  OPTIONS  ]
+
+         MR         =        3
+         MCS_CUTOFF = -.10E-02
+         MCS_GRID   = -.10E+01
+         POTDIR     = ./pes_mrpes/
+         MOPFILE    = prop_no_1.mop
+
+
+         1MR-PEF
+
+         o GRID PEF
+
+           MODE=   1, GRID=  11   CCSD(T)/cc-pVTZ
+           MODE=   2, GRID=  11   CCSD(T)/cc-pVTZ
+           MODE=   3, GRID=  11   CCSD(T)/cc-pVTZ
+           MODE=   4, GRID=  11   CCSD(T)/cc-pVTZ
+           MODE=   5, GRID=  11   CCSD(T)/cc-pVTZ
+           MODE=   6, GRID=  11   CCSD(T)/cc-pVTZ
+
+
+         2MR-PEF
+
+         o GRID PEF
+
+           MODE=   2   1, GRID=   7   7   B3LYP/cc-pVDZ
+           MODE=   3   2, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   4   2, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   4   3, GRID=   7   7   B3LYP/cc-pVDZ
+           MODE=   5   1, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   5   2, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   5   3, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   5   4, GRID=   7   7   B3LYP/cc-pVDZ
+           MODE=   6   1, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   6   2, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   6   3, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   6   4, GRID=   9   9   CCSD(T)/cc-pVTZ
+           MODE=   6   5, GRID=   9   9   CCSD(T)/cc-pVTZ
+
+         o QFF  B3LYP/cc-pVDZ
+
+           MODE=   3   1
+           MODE=   4   1
+
+
+         3MR-PEF
+
+         o GRID PEF
+
+           MODE=   5   4   3, GRID=   7   7   7   B3LYP/cc-pVDZ
+           MODE=   6   3   2, GRID=   9   9   9   CCSD(T)/cc-pVTZ
+           MODE=   6   4   2, GRID=   9   9   9   CCSD(T)/cc-pVTZ
+
+         o QFF  B3LYP/cc-pVDZ
+
+           MODE=   3   2   1
+           MODE=   4   2   1
+           MODE=   4   3   1
+           MODE=   4   3   2
+           MODE=   5   2   1
+           MODE=   5   3   1
+           MODE=   5   3   2
+           MODE=   5   4   1
+           MODE=   5   4   2
+           MODE=   6   2   1
+           MODE=   6   3   1
+           MODE=   6   4   1
+           MODE=   6   4   3
+           MODE=   6   5   1
+           MODE=   6   5   2
+           MODE=   6   5   3
+           MODE=   6   5   4
+
+
+(  FINALIZE MRPES MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.16 MB /   500.00 MB (  0.0 % ) ]  -- 
+            -- IN THE LAST STEP [     0.22 MB /   500.00 MB (  0.0 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.01, SYSTEM     0.01 SECS   <----
+
+
+(  ENTER VSCF MODULE  )
+
+  ---  VIBRATIONAL SELF-CONSISTENT FIELD CALCULATIONS   ---
+
+   >> SCF OPTIONS
+       STATE SPECIFIC :        F
+              RESTART :        F
+        MAX ITERATION :       20
+         CONV. THRESH : 0.10E-04
+
+   >> FILES
+       WFN READ/WRITE FILE : vscf_xxx.wfn
+
+   >> STATE 000:   ZERO-POINT STATE
+
+       o INITIAL GUESS FROM (CONTRACTED) HARMONIC OSCILLATOR 
+
+   -- (ITERATION) -------- (EOLD) -------- (ENEW) ----- (DELTA E) --
+                1         5757.61         5722.54      -0.351D+02
+                2         5722.54         5722.41      -0.128D+00
+                3         5722.41         5722.41      -0.440D-02
+                4         5722.41         5722.41      -0.171D-03
+                5         5722.41         5722.41      -0.668D-05
+   -----------------------------------------------------------------
+       E(VSCF)=     5722.40716440
+
+       o COEFFICIENTS
+
+         -MODES-          1         2         3         4         5         6
+              0     0.99999  -1.00000  -0.99992   0.99183   0.99951  -1.00000
+              1     0.00000  -0.00000  -0.01230  -0.12428   0.02195   0.00000
+              2     0.00518   0.00054  -0.00023   0.02124   0.00404   0.00091
+              3    -0.00000   0.00000  -0.00140  -0.01857  -0.02207  -0.00000
+              4    -0.00137   0.00069  -0.00004   0.00450  -0.00052   0.00252
+              5     0.00000  -0.00000  -0.00000  -0.00115  -0.00026  -0.00000
+              6     0.00008  -0.00004  -0.00001   0.00077   0.00110  -0.00006
+              7    -0.00000   0.00000  -0.00000  -0.00023   0.00000   0.00000
+              8     0.00000  -0.00000  -0.00000   0.00007   0.00002  -0.00002
+              9    -0.00000   0.00000   0.00000  -0.00004  -0.00007   0.00000
+             10    -0.00000   0.00000   0.00000   0.00002  -0.00001   0.00000
+
+       o VIBRATIONALLY AVERAGED STRUCTURE
+
+         - Q0 -
+              0.000000    0.000000    0.209448
+             -1.979352    0.271523   -0.000000
+
+         - X0 -
+             -0.000000    0.000000   -1.146995
+              0.000000   -0.000000    1.145726
+              0.000000    1.792955   -2.263218
+              0.000000   -1.792955   -2.263218
+
+   >> VIRTUAL VSCF ENERGIES
+
+      o VSCF STATES               TOTAL ENERGY         E-E0
+        1_1                       6892.07893192        1169.67176752
+        2_1                       6978.34538397        1255.93821957
+        3_1                       7236.81060583        1514.40344143
+        4_1                       7476.25566997        1753.84850557
+        5_1                       8537.11012361        2814.70295921
+        6_1                       8645.94692434        2923.53975994
+
+(  FINALIZE VSCF MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.16 MB /   500.00 MB (  0.0 % ) ]  -- 
+            -- IN THE LAST STEP [     0.20 MB /   500.00 MB (  0.0 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  ENTER VQDPT MODULE  )
+
+   >> VQDPT OPTIONS
+
+       o VQDPT WITH ZERO-POINT VSCF REFERENCE
+         READ VSCF WFN  : vscf-000.wfn
+
+       o P-SPACE CONSTRUCTION
+         NGEN =    3
+         THRESH_P0  = 0.50E+03
+         THRESH_P1  = 0.10E+00
+         THRESH_P2  = 0.50E-01
+         THRESH_P3  = 0.90E+00
+         P SET      =        0
+
+       o Q-SPACE CONSTRUCTION
+         NCUP   =    3
+         MAXSUM =    4
+
+       o P/Q INTERACTION =   1
+
+       o THRESH_ENE =   0.100E-03
+
+       o DUMP VQDPT WFN : [ vqdpt-w.wfn ]
+
+   >> ENTER VQDPT MAIN ROUTINE
+
+       o FOUND    6 GROUPS FROM THE TARGET STATES
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+    [ LOOP OVER THE GROUPS ]
+
+       o STATE 000:   ZERO-POINT STATE
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :        0
+                  2-MODE :       90
+                  3-MODE :       80
+                   TOTAL :      170
+              ------------------------- 
+
+             E(0th)    =     5684.08471
+             E(1st)    =       38.32245
+             E(2nd)    =      -19.56133
+
+             E(VMP1)   =     5722.40716
+             E(VMP2)   =     5702.84583
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o GROUP 001:   1_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       25
+                  2-MODE :      105
+                  3-MODE :      110
+                   TOTAL :      240
+              ------------------------- 
+
+             E(0th)     =     6853.76732
+             E(1st)     =       38.31161
+             E(2nd)     =      -26.17322
+
+             E(VMP1)    =     6892.07892
+             E(VMP2)    =     6865.90571
+
+             E(VMP1)-E0 =     1169.67176
+             E(VMP2)-E0 =     1163.05988
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o GROUP 002:   2_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       25
+                  2-MODE :      105
+                  3-MODE :      110
+                   TOTAL :      240
+              ------------------------- 
+
+             E(0th)     =     6940.03001
+             E(1st)     =       38.31536
+             E(2nd)     =      -25.67392
+
+             E(VMP1)    =     6978.34537
+             E(VMP2)    =     6952.67145
+
+             E(VMP1)-E0 =     1255.93821
+             E(VMP2)-E0 =     1249.82562
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o GROUP 003:   3_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       25
+                  2-MODE :      105
+                  3-MODE :      110
+                   TOTAL :      240
+              ------------------------- 
+
+             E(0th)     =     7198.49126
+             E(1st)     =       38.31934
+             E(2nd)     =      -25.43679
+
+             E(VMP1)    =     7236.81060
+             E(VMP2)    =     7211.37381
+
+             E(VMP1)-E0 =     1514.40344
+             E(VMP2)-E0 =     1508.52798
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o GROUP 004:   4_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       25
+                  2-MODE :      105
+                  3-MODE :      110
+                   TOTAL :      240
+              ------------------------- 
+
+             E(0th)     =     7437.93556
+             E(1st)     =       38.32011
+             E(2nd)     =      -23.66609
+
+             E(VMP1)    =     7476.25567
+             E(VMP2)    =     7452.58958
+
+             E(VMP1)-E0 =     1753.84851
+             E(VMP2)-E0 =     1749.74375
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o GROUP 005:   5_1
+
+          --- P-SPACE COMPONENTS -----------------------------------------
+          *    1)   5_1
+               2)   1_2
+               3)   2_2
+          ----------------------------------------------------------------
+                                                     * IS THE TARGET STATE
+
+         o Q-SPACE COMPONENTS:          563
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+         > STATE 001:   1_2
+
+             E(VQDPT2)   =     8026.78426
+             E(VQDPT2)-E0=     2323.93843
+
+             COEFF.  WEIGHT      CONFIG.
+
+              0.987   0.975        1_2
+              0.156   0.024        5_1
+             -0.034   0.001        2_2
+
+         > STATE 002:   2_2
+
+             E(VQDPT2)   =     8199.32230
+             E(VQDPT2)-E0=     2496.47647
+
+             COEFF.  WEIGHT      CONFIG.
+
+              0.985   0.971        2_2
+             -0.159   0.025        5_1
+              0.059   0.004        1_2
+
+         > STATE 003:   5_1
+
+             E(VQDPT2)   =     8473.61169
+             E(VQDPT2)-E0=     2770.76586
+
+             COEFF.  WEIGHT      CONFIG.
+
+              0.975   0.950        5_1
+              0.166   0.028        2_2
+             -0.148   0.022        1_2
+
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o GROUP 006:   6_1
+
+          --- P-SPACE COMPONENTS -----------------------------------------
+          *    1)   6_1
+               2)   2_1    3_1
+               3)   2_1    4_1
+          ----------------------------------------------------------------
+                                                     * IS THE TARGET STATE
+
+         o Q-SPACE COMPONENTS:          555
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+         > STATE 001:   2_1    3_1
+
+             E(VQDPT2)   =     8415.98263
+             E(VQDPT2)-E0=     2713.13680
+
+             COEFF.  WEIGHT      CONFIG.
+
+             -0.778   0.605        2_1    3_1
+             -0.617   0.381        6_1
+             -0.115   0.013        2_1    4_1
+
+         > STATE 002:   6_1
+
+             E(VQDPT2)   =     8531.40426
+             E(VQDPT2)-E0=     2828.55843
+
+             COEFF.  WEIGHT      CONFIG.
+
+              0.757   0.572        6_1
+             -0.628   0.394        2_1    3_1
+              0.184   0.034        2_1    4_1
+
+         > STATE 003:   2_1    4_1
+
+             E(VQDPT2)   =     8704.23892
+             E(VQDPT2)-E0=     3001.39308
+
+             COEFF.  WEIGHT      CONFIG.
+
+              0.976   0.953        2_1    4_1
+             -0.215   0.046        6_1
+
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE VQDPT MODULE  )
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.16 MB /   500.00 MB (  0.0 % ) ]  -- 
+            -- IN THE LAST STEP [     2.19 MB /   500.00 MB (  0.4 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+
+(  FINALIZE TARGET MODULE  )
+
+
+(  ENTER PROPERTY MODULE  )
+
+   >> RUN OPTIONS
+      MR    =      3
+      NPRPT =      0
+      VSCF  =      F
+      VCI   =      F
+      VPT   =      F
+      VQDPT =      T
+
+   >> INFRARED SPECTRUM
+      MIN_OMEGA =      800.00
+      MAX_OMEGA =     4000.00
+      DEL_OMEGA =        1.00
+      FWHM      =        5.00
+
+      >> PROPERTY SURFACE
+         MR         =        3
+         EXT        = .dipole   
+         POTDIR     = ./pes_mrpes/
+
+         1MR-PRPT SURFACE
+
+           MODE=   1, GRID=  11   B3LYP/cc-pVDZ
+           MODE=   2, GRID=  11   B3LYP/cc-pVDZ
+           MODE=   3, GRID=  11   B3LYP/cc-pVDZ
+           MODE=   4, GRID=  11   B3LYP/cc-pVDZ
+           MODE=   5, GRID=  11   B3LYP/cc-pVDZ
+           MODE=   6, GRID=  11   B3LYP/cc-pVDZ
+
+
+         2MR-PRPT SURFACE
+
+           MODE=   2   1, GRID=   7   7   B3LYP/cc-pVDZ
+           MODE=   3   2, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   4   2, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   4   3, GRID=   7   7   B3LYP/cc-pVDZ
+           MODE=   5   1, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   5   2, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   5   3, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   5   4, GRID=   7   7   B3LYP/cc-pVDZ
+           MODE=   6   1, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   6   2, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   6   3, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   6   4, GRID=   9   9   B3LYP/cc-pVDZ
+           MODE=   6   5, GRID=   9   9   B3LYP/cc-pVDZ
+
+
+         3MR-PRPT SURFACE
+
+           MODE=   5   4   3, GRID=   7   7   7   B3LYP/cc-pVDZ
+           MODE=   6   3   2, GRID=   9   9   9   B3LYP/cc-pVDZ
+           MODE=   6   4   2, GRID=   9   9   9   B3LYP/cc-pVDZ
+
+      -> DONE FOR VQDPT SPECTRUM : [ vqdpt-IR.data / vqdpt-IR.spectrum ]
+
+            (MEMORY INFO)
+            -- CURRENT USAGE    [     0.21 MB /   500.00 MB (  0.0 % ) ]  -- 
+            -- IN THE LAST STEP [     0.21 MB /   500.00 MB (  0.0 % ) ]  -- 
+
+            (CLOCK) ---->  LAST STEP: USER     0.02, SYSTEM     0.01 SECS   <----
+
+
+(  FINALIZE PROPERTY MODULE  )
+
+
+(  FINALIZE VIB MODULE  )
+
+
+(  FINALIZE NMA MODULE  )
+
+
+(  FINALIZE MOL MODULE  )
+
+
+
+   (TOTAL MEMORY USAGE)   [     2.19 MB /   500.00 MB (  0.4 % ) ] 
+
+   (CLOCK) ---->  TOTAL CPU-TIME  <----
+            >     USER :   0 DAYS   0 HOURS   0 MINS   0.0 SECS 
+            >    SYSTEM:   0 DAYS   0 HOURS   0 MINS   0.0 SECS 
+

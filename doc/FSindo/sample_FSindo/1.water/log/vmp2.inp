@@ -13,6 +13,11 @@
 #--- [ TARGET STATES ]
  &states
   fund=.t.
+  nstate=3
+  target_state(2,1)=2
+  target_state(2,2)=1
+  target_state(3,2)=1
+  target_state(3,3)=2
  /
 
 #--- [  VPT  ]

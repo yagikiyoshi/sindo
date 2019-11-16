@@ -1,0 +1,23 @@
+set terminal pdf size 3.5,2.5
+
+set xlabel font "Arial,16"
+set xtics  font "Arial,16"
+set xlabel "wavenumber / cm^{-1}"
+
+set ylabel font "Arial,16"
+set ytics  font "Arial,16"
+set ylabel 'IR intensity / km mol^{-1}'
+
+set xrange [1000:4000]
+set xtics  500
+set mxtics 2
+set yrange [0:15]
+set ytics  5,5
+set out "plotIR.pdf"
+plot "vci-IR.spectrum" w l t "VCI", "vqdpt-IR.spectrum" w l t "VQDPT2"
+
+set xrange [2500:3500]
+set xtics  200
+set mxtics 2
+set out "plotIR2.pdf"
+plot "vci-IR.spectrum" w l t "VCI", "vqdpt-IR.spectrum" w l t "VQDPT2"

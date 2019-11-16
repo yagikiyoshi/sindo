@@ -3,13 +3,13 @@
     ***   WELCOME TO SINDO PROGRAM                    
      ***                (  VERSION 4.0 BETA  )        
       ***                                             
-       ***       COPYRIGHT 2018:                      
+       ***       COPYRIGHT 2019:                      
         ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP
                                                       
  -------------------------------------------------------
 
-     JOB STARTED AT: Sat Oct 13 15:39:57 2018
-     RUNNING ON kyagi-mac2.local                
+     JOB STARTED AT: Thu Nov 14 01:13:59 2019
+     RUNNING ON kyagi-mac3.local                
 
 
 (  SETUP MEM MODULE  )
@@ -100,6 +100,9 @@
    >> TARGET STATES
        000   : ZERO-POINT STATE
      001-003 : FUNDAMENTALS
+       004   :  2_2
+       005   :  2_1    3_1
+       006   :  3_2
 
 
 (  SETUP MRPES MODULE  )
@@ -145,7 +148,7 @@
             -- CURRENT USAGE    [     0.05 MB /    10.00 MB (  0.5 % ) ]  -- 
             -- IN THE LAST STEP [     0.08 MB /    10.00 MB (  0.8 % ) ]  -- 
 
-            (CLOCK) ---->  LAST STEP: USER     0.01, SYSTEM     0.00 SECS   <----
+            (CLOCK) ---->  LAST STEP: USER     0.01, SYSTEM     0.01 SECS   <----
 
 
 (  ENTER VSCF MODULE  )
@@ -206,6 +209,9 @@
         1_1                       6184.36546079        1597.72994155
         2_1                       8220.27973432        3633.64421509
         3_1                       8388.86349576        3802.22797652
+        2_2                      11771.62813041        7184.99261117
+        2_1  3_1                 11999.01384232        7412.37832308
+        3_2                      12283.34611932        7696.71060008
 
 (  FINALIZE VSCF MODULE  )
 
@@ -313,6 +319,69 @@
 
              E(VMP1)-E0 =     3802.22800
              E(VMP2)-E0 =     3656.64336
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o STATE 004:   2_2
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       14
+                  2-MODE :       28
+                  3-MODE :        8
+                   TOTAL :       50
+              ------------------------- 
+
+             E(0th)     =    11694.74694
+             E(1st)     =       76.88126
+             E(2nd)     =     -141.66817
+
+             E(VMP1)    =    11771.62820
+             E(VMP2)    =    11629.96003
+
+             E(VMP1)-E0 =     7184.99266
+             E(VMP2)-E0 =     7062.22103
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o STATE 005:   2_1    3_1
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       14
+                  2-MODE :       31
+                  3-MODE :       12
+                   TOTAL :       57
+              ------------------------- 
+
+             E(0th)     =    11945.61762
+             E(1st)     =       53.39628
+             E(2nd)     =     -331.60969
+
+             E(VMP1)    =    11999.01390
+             E(VMP2)    =    11667.40421
+
+             E(VMP1)-E0 =     7412.37835
+             E(VMP2)-E0 =     7099.66521
+
+            (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
+
+       o STATE 006:   3_2
+
+              --- Q-SPACE COMPONENTS--- 
+                  1-MODE :       14
+                  2-MODE :       28
+                  3-MODE :        8
+                   TOTAL :       50
+              ------------------------- 
+
+             E(0th)     =    12206.44698
+             E(1st)     =       76.89907
+             E(2nd)     =     -469.80137
+
+             E(VMP1)    =    12283.34605
+             E(VMP2)    =    11813.54468
+
+             E(VMP1)-E0 =     7696.71050
+             E(VMP2)-E0 =     7245.80568
 
             (CLOCK) ---->  LAST STEP: USER     0.00, SYSTEM     0.00 SECS   <----
 

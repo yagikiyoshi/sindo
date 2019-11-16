@@ -1,0 +1,23 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='eq-mp2dz_ocvscf.minfo' /
+ &sys maxmem=500 /
+
+#--- [  MRPES ]
+ &mrpes mopFile='prop_no_1.mop_ocvscf' mcs_cutoff=-1.0D-03 /
+
+#--- [  VIB  ]
+ &vib MR=4 vmaxall=10 vscf=.t. vqdpt=.t. prpt=.f. /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=20 Ethresh=1.D-03 / 
+
+ &states
+  fund=.t.
+ /
+
+#--- [  VQDPT  ]
+ &vqdpt 
+  maxSum=4
+  nGen=1 
+ /
+

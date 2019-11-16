@@ -1,0 +1,14 @@
+#--- [  INPUT PARAMETER  ]
+&mol minfoFile = 'eq-mp2dz.minfo' /
+&sys maxmem=1000 /
+
+#--- [  VIB  ]
+ &vib MR=4 ocvscf=.t. vscf=.f. vci=.f. vpt=.f.  
+  vmaxAll = 10 
+ /
+
+#--- [  OCVSCF  ]
+ &ocvscf mopfile='prop_no_1.mop' icff=0 /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=50 Ethresh=1.D-03 /

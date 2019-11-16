@@ -1,0 +1,36 @@
+#--- [  INPUT PARAMETER  ]
+ &mol minfofile='h2co-b3lyp-dz.minfo' /
+ &sys maxmem=1200 /
+
+#--- [  MRPES ]
+ &mrpes mopFile='prop_no_1.mop' mcs_cutoff=-1.0D-03 /
+
+#--- [  VIB  ]
+ &vib  
+  MR=3 
+  vmaxAll=10 
+  vscf=.t. 
+  vci=.t. 
+  prpt=.t.
+ /
+
+#--- [  VCI  ]
+ &vci 
+  nstate=100 
+  nCUP=3 
+  maxSum=6
+ /
+
+#--- [  PRPT  ]
+ &prpt
+  MR=3
+  vciprpt=.t.
+  infrared=.t.
+ /
+
+ &IRspectrum
+  minOmega=800.0
+  maxOmega=4000.0
+  delOmega=1.0
+  fwhm=5.0
+ /
