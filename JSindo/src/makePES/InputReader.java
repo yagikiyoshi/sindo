@@ -175,9 +175,9 @@ public class InputReader {
       }
       System.out.println("        * DryRun       = " + dryrun);
 
-      String minfofolder = options.getValue("minfofolder");
+      String minfofolder = options.getValue("minfo_folder");
       if(minfofolder == null) {
-         makePESData.setMinfoFolder("minfo.files");
+         makePESData.setMinfoFolder("minfo.files/");
       } else {
          makePESData.setMinfoFolder(minfofolder);
       }
@@ -240,7 +240,7 @@ public class InputReader {
          
          if(runtype.equals("QFF")){
             qcInfo.setXyzBasename(basename);
-            File mkqff_eq = new File("minfo.files/mkqff-eq.minfo");
+            File mkqff_eq = new File(makePESData.getMinfofolder()+"mkqff-eq.minfo");
             if(! mkqff_eq.exists()) {
                System.out.println("            # mkqff-eq.minfo is not found. Switching to DryRun=true.");
                qcInfo.setDryrun(true);
@@ -552,7 +552,7 @@ public class InputReader {
       boolean interdomain = false;
       int     MR          = 3;
       boolean dipole      = false;
-      String  minfofolder = "minfo.files";
+      String  minfofolder = "minfo.files/";
       makePESData.setMR(MR);
       makePESData.setDipole(dipole);
       makePESData.setMinfoFolder(minfofolder);
