@@ -737,7 +737,7 @@ public class InputReader {
                         }
 
                      } else {
-                        this.errorTermination("keyword "+qcName+" is not a valid option.");
+                        this.errorTermination("keyword "+qcName+" is not a valid option in qchem.");
                      }
                      
                   }
@@ -846,6 +846,8 @@ public class InputReader {
                         } else {
                            this.errorTermination("interdomain_hc = [TRUE|FALSE]. "+qffvalue+" is not a valid option.");
                         }
+                     } else {
+                        this.errorTermination("keyword "+qffName+" is not a valid option in qff.");
                      }
                   }
                }
@@ -940,10 +942,12 @@ public class InputReader {
                         try {
                            mcs = Double.parseDouble(gridvalue);
                         }catch (NumberFormatException e) {
-                           this.errorTermination("stepsize must be a real number. "+gridvalue+" is not a valid option.");
+                           this.errorTermination("mcsstrength must be a real number. "+gridvalue+" is not a valid option.");
                         }
                         griddata.setThresh_MCS(mcs);
                         isMc = true;
+                     } else {
+                        this.errorTermination("keyword "+gridName+" is not a valid option in grid.");
                      }
                   }
                }
@@ -1160,7 +1164,6 @@ public class InputReader {
             
          }
          System.out.println();
-
 
       }
       
