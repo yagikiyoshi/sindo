@@ -33,7 +33,7 @@ JSindo/*.jar
 JSindo/memo
 
 # Interface scripts
-script/*.sh
+script/runGaussian.sh
 
 # Misc
 .DS_Store
