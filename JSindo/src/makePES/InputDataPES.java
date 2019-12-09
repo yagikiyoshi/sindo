@@ -15,6 +15,7 @@ public class InputDataPES {
    // General input parameters
    private Molecule molecule;
    private String minfofile;
+   private String minfofolder;
    private boolean dipole;
    private VibTransformer transform;
    private int MR;
@@ -32,7 +33,7 @@ public class InputDataPES {
    private ArrayList<InputDataGrid> gridInfoArray;
    
    // Constant values
-   public static String MINFO_FOLDER = "minfo.files/";
+   //public static String MINFO_FOLDER = "minfo.files/";
    
    /**
     * This is a package private class
@@ -56,6 +57,13 @@ public class InputDataPES {
     */
    public String getMinfofile() {
       return minfofile;
+   }
+   /**
+    * Returns the name of minfo folder
+    * @return the name of minfo folder
+    */
+   public String getMinfofolder() {
+      return minfofolder;
    }
    /**
     * Returns the mode representation
@@ -129,6 +137,13 @@ public class InputDataPES {
     */
    void setMinfofile(String minfofile) {
       this.minfofile = minfofile;
+   }
+   /**
+    * Sets the name of minfo folder
+    * @param minfofolder name of the minfo folder
+    */
+   void setMinfoFolder(String minfofolder) {
+      this.minfofolder = minfofolder;
    }
    /**
     * Sets the mode representation

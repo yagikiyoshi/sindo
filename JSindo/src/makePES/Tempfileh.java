@@ -15,8 +15,8 @@ import sys.Utilities;
  */
 public class Tempfileh extends Tempfile implements Runnable {
 
-   Tempfileh(int[] mm, int nn){
-      super(mm,nn);
+   Tempfileh(int[] mm, int nn, MakeQFF makeQFF){
+      super(mm,nn,makeQFF);
    }
    
    /**

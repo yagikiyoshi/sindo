@@ -175,6 +175,14 @@ public class InputReader {
       }
       System.out.println("        * DryRun       = " + dryrun);
 
+      String minfofolder = options.getValue("minfofolder");
+      if(minfofolder == null) {
+         makePESData.setMinfoFolder("minfo.files");
+      } else {
+         makePESData.setMinfoFolder(minfofolder);
+      }
+      System.out.println("        * MinfoFolder  = " + minfofolder);
+
       String temp = options.getValue("qchem");
       /** It seems that the return tag is "\n" when the string is read from 
        *  XML loader no matter what the OS is!? **/
@@ -232,9 +240,9 @@ public class InputReader {
          
          if(runtype.equals("QFF")){
             qcInfo.setXyzBasename(basename);
-            File mkqff_eq = new File(MakeQFF.getBasename()+".minfo");
+            File mkqff_eq = new File("minfo.files/mkqff-eq.minfo");
             if(! mkqff_eq.exists()) {
-               System.out.println("            # " +MakeQFF.getBasename()+".minfo is not found. Switching to DryRun=true.");
+               System.out.println("            # mkqff-eq.minfo is not found. Switching to DryRun=true.");
                qcInfo.setDryrun(true);
             }
             qffData.setQcID(qcindex);
@@ -544,8 +552,10 @@ public class InputReader {
       boolean interdomain = false;
       int     MR          = 3;
       boolean dipole      = false;
+      String  minfofolder = "minfo.files";
       makePESData.setMR(MR);
       makePESData.setDipole(dipole);
+      makePESData.setMinfoFolder(minfofolder);
       
       // Utilities
       MInfoIO minfoIO = new MInfoIO();
@@ -649,6 +659,12 @@ public class InputReader {
                }else{
                   this.errorTermination("interdomain = "+value+" is not a valid option.");
                }
+               
+            } else if(name.equalsIgnoreCase("minfo_folder")) {
+               if(value.lastIndexOf("/") != value.length()) {
+                  value += "/";
+               }
+               makePESData.setMinfoFolder(value);
                
             } else if(name.equalsIgnoreCase("qchem")) {
                

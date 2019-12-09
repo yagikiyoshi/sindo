@@ -128,7 +128,7 @@ public class MakeGrid {
 
       gfilename = new GridFileName();
       if(! isGeneric) {
-         String runFolder = InputDataPES.MINFO_FOLDER;
+         String runFolder = inputData.getMinfofolder();
          gfilename.setMinfoDirectoryName(runFolder);
          
          File minfoDir = new File(runFolder);

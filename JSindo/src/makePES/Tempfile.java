@@ -26,18 +26,18 @@ public class Tempfile {
     * @param mm mode combination (mm[0] > mm[1] > ..)
     * @param nn number of deviation points
     */
-   Tempfile(int[] mm, int nn){
+   Tempfile(int[] mm, int nn, MakeQFF makeQFF){
       switch(mm.length){
       case 1:
-         basename = MakeQFF.getBasename(mm[0]);         
+         basename = makeQFF.getBasename(mm[0]);         
          break;
          
       case 2:
-         basename = MakeQFF.getBasename(mm[0],mm[1]);
+         basename = makeQFF.getBasename(mm[0],mm[1]);
          break;
          
       case 3:
-         basename = MakeQFF.getBasename(mm[0],mm[1],mm[2]);         
+         basename = makeQFF.getBasename(mm[0],mm[1],mm[2]);         
          break;
       }
       this.nn = nn;

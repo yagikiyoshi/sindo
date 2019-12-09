@@ -48,7 +48,7 @@ public class MakeQFF {
       
       if(isGeneric) {
          // Check if mkqff-eq.minfo exists
-         File f = new File(MakeQFF.getBasename()+".minfo");
+         File f = new File(this.getBasename()+".minfo");
          if(f.exists()) {
             qcData.setDryrun(false);
          }else {
@@ -79,6 +79,7 @@ public class MakeQFF {
 
    }
    
+   /*
    public static String getBasename(){
        return InputDataPES.MINFO_FOLDER+"mkqff-eq";
    }
@@ -90,6 +91,20 @@ public class MakeQFF {
    }
    public static String getBasename(int mi, int mj, int mk){
       return InputDataPES.MINFO_FOLDER+"mkqff"+mi+"_"+mj+"_"+mk;
+   }
+   */
+   
+   public String getBasename(){
+      return inputData.getMinfofolder()+"mkqff-eq";
+   }
+   public String getBasename(int mi){
+      return inputData.getMinfofolder()+"mkqff"+mi;
+   }
+   public String getBasename(int mi, int mj){
+      return inputData.getMinfofolder()+"mkqff"+mi+"_"+mj;
+   }
+   public String getBasename(int mi, int mj, int mk){
+      return inputData.getMinfofolder()+"mkqff"+mi+"_"+mj+"_"+mk;
    }
    
    /**
@@ -115,7 +130,7 @@ public class MakeQFF {
 
       String minfo_folder = null;
       if(! isGeneric) {
-         File minfodir = new File(InputDataPES.MINFO_FOLDER);
+         File minfodir = new File(inputData.getMinfofolder());
          if(! minfodir.exists()){
             minfodir.mkdir();
          }
@@ -124,13 +139,13 @@ public class MakeQFF {
          queue.start();
          
       }else{
-         minfo_folder = InputDataPES.MINFO_FOLDER;
-         InputDataPES.MINFO_FOLDER = "";
+         minfo_folder = inputData.getMinfofolder();
+         inputData.setMinfoFolder("");
          grdXYZ = new GrdXYZ(qcData.getXyzBasename());
          
       }
       
-      this.processGrid(null, null, MakeQFF.getBasename());
+      this.processGrid(null, null, this.getBasename());
       
       if(qffData.getNdifftype().equalsIgnoreCase("HESS")){
          this.runHessian();
@@ -145,7 +160,7 @@ public class MakeQFF {
          queue.shutdown();            
       }else{
          grdXYZ.close();
-         InputDataPES.MINFO_FOLDER = minfo_folder;
+         inputData.setMinfoFolder(minfo_folder);
          
       }
       
@@ -186,7 +201,7 @@ public class MakeQFF {
          int Nfree = activeModes[n].length;
          for(int i=0; i<Nfree; i++){
             int ii = activeModes[n][i];
-            String   si = MakeQFF.getBasename(ii);
+            String   si = this.getBasename(ii);
             int[]    mi = {ii};
             
             double[] qi0 = {-3.0d*deltaQ[ii]};
@@ -207,7 +222,7 @@ public class MakeQFF {
             int ii = activeModes[n][i];
             for(int j=0; j<i; j++){
                int jj = activeModes[n][j];
-               String sij = MakeQFF.getBasename(ii, jj);
+               String sij = this.getBasename(ii, jj);
                int[] mij = {ii,jj};
                
                double[] qij0 = {deltaQ[ii],deltaQ[jj]};
@@ -234,7 +249,7 @@ public class MakeQFF {
                   for(int k=0; k<j; k++){
                      int kk = activeModes[n][k];
                      
-                     String sijk = MakeQFF.getBasename(ii, jj, kk);
+                     String sijk = this.getBasename(ii, jj, kk);
                      
                      int[] mijk = {ii,jj,kk};
                      
@@ -278,7 +293,7 @@ public class MakeQFF {
          for(int i=0; i<Nfree; i++){
             int ii = activeModes[n][i];
 
-            String   si = MakeQFF.getBasename(ii);
+            String   si = this.getBasename(ii);
             int[]    mi = {ii};
             
             double[] qi0 = {deltaQ[ii]};
@@ -295,7 +310,7 @@ public class MakeQFF {
                for(int j=0; j<i; j++){
                   int jj = activeModes[n][j];
 
-                  String sij = MakeQFF.getBasename(ii, jj);
+                  String sij = this.getBasename(ii, jj);
                   int[] mij = {ii,jj};
                   
                   double[] qij0 = {deltaQ[ii],deltaQ[jj]};
@@ -358,7 +373,7 @@ public class MakeQFF {
                for(int i=0; i<Nfree; i++){
                   int[] mode = new int[1];
                   mode[0] = activeModes[n][i];
-                  Tempfileh tempfile = new Tempfileh(mode,2);
+                  Tempfileh tempfile = new Tempfileh(mode,2,this);
                   tempfile.appendTransform(trans);
                   tempfile.setRunMode(runmode);
                   thread[i] = new Thread(tempfile);
@@ -380,7 +395,7 @@ public class MakeQFF {
                      int[] mode = new int[2];
                      mode[0] = activeModes[n][i];
                      mode[1] = activeModes[n][j];
-                     Tempfileh tempfile = new Tempfileh(mode,4);
+                     Tempfileh tempfile = new Tempfileh(mode,4,this);
                      tempfile.appendTransform(trans);
                      tempfile.setRunMode(runmode);
                      thread[j] = new Thread(tempfile);
@@ -403,7 +418,7 @@ public class MakeQFF {
                for(int i=0; i<Nfree; i++){
                   int[] mode = new int[1];
                   mode[0] = activeModes[n][i];
-                  Tempfileg tempfile = new Tempfileg(mode,4);
+                  Tempfileg tempfile = new Tempfileg(mode,4, this);
                   tempfile.appendTransform(trans);
                   tempfile.setRunMode(runmode);
                   thread[i] = new Thread(tempfile);
@@ -424,7 +439,7 @@ public class MakeQFF {
                   int[] mode = new int[2];
                   mode[0] = activeModes[n][i];
                   mode[1] = activeModes[n][j];
-                  Tempfileg tempfile = new Tempfileg(mode,4);
+                  Tempfileg tempfile = new Tempfileg(mode,4, this);
                   tempfile.appendTransform(trans);
                   tempfile.setRunMode(runmode);
                   thread[j] = new Thread(tempfile);
@@ -449,7 +464,7 @@ public class MakeQFF {
                         mode[0] = activeModes[n][i];
                         mode[1] = activeModes[n][j];
                         mode[2] = activeModes[n][k];
-                        Tempfileg tempfile = new Tempfileg(mode,8);
+                        Tempfileg tempfile = new Tempfileg(mode,8,this);
                         tempfile.appendTransform(trans);
                         tempfile.setRunMode(runmode);
                         //tempfile.run();
@@ -491,9 +506,9 @@ public class MakeQFF {
       VibTransformer trans = inputData.getTransform();
 
       try{
-         minfo.loadMOL(MakeQFF.getBasename()+".minfo");
+         minfo.loadMOL(this.getBasename()+".minfo");
       }catch(IOException e){
-         System.out.println("Error while reading "+MakeQFF.getBasename()+".minfo.");
+         System.out.println("Error while reading "+this.getBasename()+".minfo.");
          System.out.println(e.getMessage());
          Utilities.terminate();
       }
@@ -691,9 +706,9 @@ public class MakeQFF {
       MInfoIO minfo = new MInfoIO();
       VibTransformer trans = inputData.getTransform();
       try{
-         minfo.loadMOL(MakeQFF.getBasename()+".minfo");         
+         minfo.loadMOL(this.getBasename()+".minfo");         
       }catch(IOException e){
-         System.out.println("Error while reading "+MakeQFF.getBasename()+".minfo.");
+         System.out.println("Error while reading "+this.getBasename()+".minfo.");
          System.out.println(e.getMessage());
          Utilities.terminate();
       }
@@ -1003,9 +1018,9 @@ public class MakeQFF {
       VibTransformer trans = inputData.getTransform();
 
       try{
-         minfo.loadMOL(MakeQFF.getBasename()+".minfo");         
+         minfo.loadMOL(this.getBasename()+".minfo");         
       }catch(IOException e){
-         System.out.println("Error while reading "+MakeQFF.getBasename()+".minfo.");
+         System.out.println("Error while reading "+this.getBasename()+".minfo.");
          System.out.println(e.getMessage());
          Utilities.terminate();
       }
