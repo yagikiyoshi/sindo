@@ -3,6 +3,7 @@
    <minfoFile    value="../5_qmmm-vib/qmmm_vib.minfo" />
    <MR           value="3" />
    <activemode   value="9-12" />
+   <minfo_folder value="minfo" />
    <qchem>
       <program   value="generic" />
       <title     value="B3LYP-D3/cc-pVDZ" />

@@ -23,6 +23,7 @@ runmode             = QFF
 nreplica            = 4
 vibatm_select_index = 2
 gridfile            = makeQFF.xyz
+minfo_folder        = minfo
 
 [BOUNDARY]
 type                = NOBC

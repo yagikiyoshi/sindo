@@ -25,13 +25,13 @@ Build_Information> Compiler Information
   option       = -O3 -ip -axCORE-AVX2  -qopenmp
   defined var. =  -DMPI -DOMP -DFFTE -DLAPACK -DDSFMT_MEXP=19937 -DINTEL
   link option  = 
-  -assume byterecl -qopenmp -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_l
- apack95_lp64 
+  -assume byterecl -qopenmp  -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_
+ lapack95_lp64 
 
 Runtime_Information> Machine and Library Information
-  date       = 2019/11/09 21:25:10
+  date       = 2019/12/09 17:06:25
   cpu model    = Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
-  exec. host   = yagi@beluga04
+  exec. host   = yagi@beluga02
   LD library   = 
  /home/mdsoft/mpi/mpi_cent-v7_intel64/openmpi-v3.1.2_intel_v18.0.1/lib:/opt/inte
  l/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64_lin:/opt/intel/
@@ -84,20 +84,17 @@ Read_Ctrl_Vibration> Parameters of VIBRATION
   runmode             =        QFF
   nreplica            =          4
   vibatm_select_index = 2
-  output_minfo_atm    = 3
-  minfo_folder        = minfo.files
+  minfo_folder        = minfo
   gridfile            = makeQFF.xyz
-  gridfolderID        =          a
  
 Read_Ctrl_Boundary> Parameters of Boundary Condition
   type            =       NOBC
   spherical_pot   =         no  restart         =          T
  
 Read_Ctrl_Selection> Parameters of Selection
-  # of groups     =          3
+  # of groups     =          2
     group 1 = atomno:1-14
     group 2 = atomno:5-8
-    group 3 = segid:PROA
   # of mole names =          0
  
 Read_Ctrl_Restraints> No restraint in the system
@@ -106,7 +103,7 @@ Read_Ctrl_QMMM> Parameters of QM/MM
   qmtyp              = gaussian
   qmcnt              = gaussian.com
   qmexe              = runGau_wako.sh
-  workdir            = qmmm_vib
+  workdir            = qmmm_qff
   savedir            = none
   basename           = job
   qmsave_period      = 10
@@ -227,50 +224,12 @@ Setup_Vibration_Atoms> Atoms subject to vibrational analysis
      4     8 PROA      1 ALA    HN   H     
   number of VIB atoms = 4
  
-Setup_Vibration_Atoms> Atoms punched to minfo file in addition
-     1     1 PROA      1 ALA    CAY  CT3   
-     2     2 PROA      1 ALA    HY1  HA3   
-     3     3 PROA      1 ALA    HY2  HA3   
-     4     4 PROA      1 ALA    HY3  HA3   
-     5     5 PROA      1 ALA    CY   C     
-     6     6 PROA      1 ALA    OY   O     
-     7     7 PROA      1 ALA    N    NH1   
-     8     8 PROA      1 ALA    HN   H     
-     9     9 PROA      1 ALA    CA   CT1   
-    10    10 PROA      1 ALA    HA   HB1   
-    11    11 PROA      1 ALA    CB   CT3   
-    12    12 PROA      1 ALA    HB1  HA3   
-    13    13 PROA      1 ALA    HB2  HA3   
-    14    14 PROA      1 ALA    HB3  HA3   
-    15    15 PROA      1 ALA    C    C     
-    16    16 PROA      1 ALA    O    O     
-    17    17 PROA      2 ALA    N    NH1   
-    18    18 PROA      2 ALA    HN   H     
-    19    19 PROA      2 ALA    CA   CT1   
-    20    20 PROA      2 ALA    HA   HB1   
-    21    21 PROA      2 ALA    CB   CT3   
-    22    22 PROA      2 ALA    HB1  HA3   
-    23    23 PROA      2 ALA    HB2  HA3   
-    24    24 PROA      2 ALA    HB3  HA3   
-    25    25 PROA      2 ALA    C    C     
-    26    26 PROA      2 ALA    O    O     
-    27    27 PROA      3 ALA    N    NH1   
-    28    28 PROA      3 ALA    HN   H     
-    29    29 PROA      3 ALA    CA   CT1   
-    30    30 PROA      3 ALA    HA   HB1   
-    31    31 PROA      3 ALA    CB   CT3   
-    32    32 PROA      3 ALA    HB1  HA3   
-    33    33 PROA      3 ALA    HB2  HA3   
-    34    34 PROA      3 ALA    HB3  HA3   
-    35    35 PROA      3 ALA    C    C     
-    36    36 PROA      3 ALA    O    O     
-    37    37 PROA      3 ALA    NT   NH1   
-    38    38 PROA      3 ALA    HNT  H     
-    39    39 PROA      3 ALA    CAT  CT3   
-    40    40 PROA      3 ALA    HT1  HA3   
-    41    41 PROA      3 ALA    HT2  HA3   
-    42    42 PROA      3 ALA    HT3  HA3   
-  number of atoms = 42
+Setup_Vibration> 
+  WARNING: qmmaxtrial in [QMMM] is non-zero: qmmaxtrial =    1
+  WARNING: QM retry causes problems in numerical differentiations, and thus
+  WARNING: not recommended. If you encounter SCF convergence problems,
+  WARNING: try instead with increased SCF maximum iteration in a QM input.
+  WARNING: qmmaxtrial is reset to zero.
  
 [STEP4] Compute Single Point Energy for Molecules
  
@@ -278,23 +237,23 @@ SKIPPED: Energy calculation is omitted when QMMM is performed
  
 [STEP5] Perform Vibrational Analysis
  
- Compute energy at grid points: minfo files created in [ minfo.files ]
-      Done for                       mkqff8-0 :    replicaID =     3
-      Done for                       mkqff8-2 :    replicaID =     1
+ Compute energy at grid points: minfo files created in [ minfo ]
       Done for                       mkqff-eq :    replicaID =     2
       Done for                       mkqff8-1 :    replicaID =     4
+      Done for                       mkqff8-2 :    replicaID =     1
+      Done for                       mkqff8-0 :    replicaID =     3
       Done for                       mkqff9-1 :    replicaID =     4
       Done for                       mkqff8-3 :    replicaID =     2
-      Done for                       mkqff9-0 :    replicaID =     3
       Done for                       mkqff9-2 :    replicaID =     1
+      Done for                       mkqff9-0 :    replicaID =     3
       Done for                      mkqff10-1 :    replicaID =     4
       Done for                       mkqff9-3 :    replicaID =     2
       Done for                      mkqff10-2 :    replicaID =     1
       Done for                      mkqff10-0 :    replicaID =     3
       Done for                      mkqff11-1 :    replicaID =     4
       Done for                      mkqff10-3 :    replicaID =     2
-      Done for                      mkqff11-2 :    replicaID =     1
       Done for                      mkqff11-0 :    replicaID =     3
+      Done for                      mkqff11-2 :    replicaID =     1
       Done for                     mkqff9_8-1 :    replicaID =     4
       Done for                      mkqff11-3 :    replicaID =     2
       Done for                     mkqff9_8-2 :    replicaID =     1
@@ -309,39 +268,39 @@ SKIPPED: Energy calculation is omitted when QMMM is performed
       Done for                    mkqff10_9-0 :    replicaID =     3
       Done for                    mkqff11_8-1 :    replicaID =     4
       Done for                    mkqff10_9-3 :    replicaID =     2
-      Done for                    mkqff11_8-2 :    replicaID =     1
       Done for                    mkqff11_8-0 :    replicaID =     3
+      Done for                    mkqff11_8-2 :    replicaID =     1
       Done for                    mkqff11_9-1 :    replicaID =     4
       Done for                    mkqff11_8-3 :    replicaID =     2
-      Done for                    mkqff11_9-0 :    replicaID =     3
       Done for                    mkqff11_9-2 :    replicaID =     1
+      Done for                    mkqff11_9-0 :    replicaID =     3
       Done for                   mkqff11_10-1 :    replicaID =     4
       Done for                    mkqff11_9-3 :    replicaID =     2
-      Done for                   mkqff11_10-0 :    replicaID =     3
       Done for                   mkqff11_10-2 :    replicaID =     1
+      Done for                   mkqff11_10-0 :    replicaID =     3
       Done for                   mkqff11_10-3 :    replicaID =     2
  
 [STEP6] Deallocate Arrays
  
 Output_Time> Averaged timer profile (Min, Max)
-  total time      =     119.374
-    setup         =       0.863
-    dynamics      =     118.512
-      energy      =     113.104
+  total time      =     105.597
+    setup         =       0.412
+    dynamics      =     105.185
+      energy      =      99.426
       integrator  =       0.000
-      pairlist    =       0.092 (       0.088,       0.094)
+      pairlist    =       0.090 (       0.078,       0.099)
   energy           
-    bond          =       0.002 (       0.000,       0.003)
-    angle         =       0.002 (       0.000,       0.003)
+    bond          =       0.002 (       0.002,       0.003)
+    angle         =       0.002 (       0.000,       0.002)
     dihedral      =       0.000 (       0.000,       0.001)
-    nonbond       =       0.535 (       0.503,       0.588)
-      pme real    =       0.535 (       0.503,       0.588)
+    nonbond       =       0.542 (       0.520,       0.582)
+      pme real    =       0.542 (       0.520,       0.582)
       pme recip   =       0.000 (       0.000,       0.000)
     solvation     =       0.000 (       0.000,       0.000)
       polar       =       0.000 (       0.000,       0.000)
       non-polar   =       0.000 (       0.000,       0.000)
     restraint     =       0.000 (       0.000,       0.000)
-    qmmm          =     112.565 (     107.677,     117.666)
+    qmmm          =      98.879 (      96.223,     104.585)
   integrator       
     constraint    =       0.000 (       0.000,       0.000)
     update        =       0.000 (       0.000,       0.000)

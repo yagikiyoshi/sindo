@@ -1,4 +1,4 @@
-2019.11.09 at 21:25:01 JST
+2019.12.09 at 17:06:19 JST
 -------------------------------------------------------
 
       Make Potential Energy Surface for SINDO
@@ -14,7 +14,8 @@ Launch MakePES module
 
   o Input options read via makePES.xml ...  [OK] 
      - Molecular info via ../5_qmmm-vib/qmmm_vib.minfo ...  [OK] 
-     - InterDomain = false
+     - Minfo_folder = minfo/
+     - InterDomain  = false
      - ActiveModes:
         * Domain 1
             9  10  11  12 
