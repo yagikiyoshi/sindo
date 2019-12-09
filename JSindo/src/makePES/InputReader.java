@@ -179,6 +179,9 @@ public class InputReader {
       if(minfofolder == null) {
          makePESData.setMinfoFolder("minfo.files/");
       } else {
+         if(minfofolder.lastIndexOf("/") != minfofolder.length()) {
+            minfofolder += "/";
+         }
          makePESData.setMinfoFolder(minfofolder);
       }
       System.out.println("        * MinfoFolder  = " + minfofolder);
@@ -661,10 +664,14 @@ public class InputReader {
                }
                
             } else if(name.equalsIgnoreCase("minfo_folder")) {
+               if(value.isEmpty()) {
+                  this.errorTermination("minfo_folder = "+value+" is not a valid option.");
+               }
                if(value.lastIndexOf("/") != value.length()) {
                   value += "/";
                }
-               makePESData.setMinfoFolder(value);
+               minfofolder = value;
+               makePESData.setMinfoFolder(minfofolder);
                
             } else if(name.equalsIgnoreCase("qchem")) {
                
@@ -1010,7 +1017,8 @@ public class InputReader {
       }
       
       // Print settings
-      System.out.println("     - InterDomain = " + interdomain);
+      System.out.println("     - Minfo_folder = " + minfofolder);
+      System.out.println("     - InterDomain  = " + interdomain);
       System.out.println("     - ActiveModes:");
 
       for(int n=0; n<activeModes.length; n++){
