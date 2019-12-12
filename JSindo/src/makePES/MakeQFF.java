@@ -46,17 +46,6 @@ public class MakeQFF {
          this.isGeneric = false;
       }
       
-      if(isGeneric) {
-         // Check if mkqff-eq.minfo exists
-         File f = new File(this.getBasename()+".minfo");
-         if(f.exists()) {
-            qcData.setDryrun(false);
-         }else {
-            qcData.setDryrun(true);
-            
-         }
-      }
-      
       VibrationalData vdata = makePESData.getMolecule().getVibrationalData();
       MR = makePESData.getMR();
 
@@ -95,16 +84,20 @@ public class MakeQFF {
    */
    
    public String getBasename(){
-      return inputData.getMinfofolder()+"mkqff-eq";
+      return "mkqff-eq";
    }
    public String getBasename(int mi){
-      return inputData.getMinfofolder()+"mkqff"+mi;
+      return "mkqff"+mi;
    }
    public String getBasename(int mi, int mj){
-      return inputData.getMinfofolder()+"mkqff"+mi+"_"+mj;
+      return "mkqff"+mi+"_"+mj;
    }
    public String getBasename(int mi, int mj, int mk){
-      return inputData.getMinfofolder()+"mkqff"+mi+"_"+mj+"_"+mk;
+      return "mkqff"+mi+"_"+mj+"_"+mk;
+   }
+   
+   public InputDataPES getInputDataPES() {
+      return inputData;
    }
    
    /**
@@ -125,10 +118,7 @@ public class MakeQFF {
       System.out.println();
       System.out.println("Enter QFF generation:");
       System.out.println();
-      System.out.println("Execute electronic structure calculations.");
-      System.out.println();
 
-      String minfo_folder = null;
       if(! isGeneric) {
          File minfodir = new File(inputData.getMinfofolder());
          if(! minfodir.exists()){
@@ -138,10 +128,20 @@ public class MakeQFF {
          queue = QueueMngr.getInstance();
          queue.start();
          
+         if (qcData.isDryrun()) {
+            System.out.println("   Dryrun: Generate input files for QM jobs.");
+            System.out.println();
+            
+         } else {
+            System.out.println("   Execute electronic structure calculations.");
+            System.out.println();
+            
+         }
+         
       }else{
-         minfo_folder = inputData.getMinfofolder();
-         inputData.setMinfoFolder("");
          grdXYZ = new GrdXYZ(qcData.getXyzBasename());
+         System.out.println("   Writing the coordinates of grid points to "+qcData.getXyzBasename()+".xyz");
+         System.out.println();
          
       }
       
@@ -156,22 +156,36 @@ public class MakeQFF {
          // this.runEnergy();            
       }
       
+      boolean genQFF = false;
       if(! isGeneric) {
-         queue.shutdown();            
+         queue.shutdown();
+
+         if(qcData.isDryrun()){
+            System.out.println("   DryRun is done!");
+            System.out.println();
+            genQFF = false;
+            
+         } else {
+            System.out.println("   End of electronic structure calculations.");
+            System.out.println();
+            genQFF = true;
+         }
+         
       }else{
          grdXYZ.close();
-         inputData.setMinfoFolder(minfo_folder);
+         System.out.println("   Done! Number of grid points:  "+grdXYZ.getNumOfGrid());
+         System.out.println();
+
+         if(grdXYZ.getNumOfGrid() == 0) {
+            genQFF = true;
+         } else {
+            genQFF = false;
+         }
          
       }
       
-      System.out.println("End of electronic structure calculations.");
-      System.out.println();
-      
-      if(qcData.isDryrun()){
-         System.out.println("DryRun is done!");
-         System.out.println();
+      if(genQFF){
          
-      }else{
          this.workTempfiles("dump");
          if(qffData.isGenhs()) this.calcQFF_hs();
          
@@ -506,9 +520,9 @@ public class MakeQFF {
       VibTransformer trans = inputData.getTransform();
 
       try{
-         minfo.loadMOL(this.getBasename()+".minfo");
+         minfo.loadMOL(inputData.getMinfofolder()+this.getBasename()+".minfo");
       }catch(IOException e){
-         System.out.println("Error while reading "+this.getBasename()+".minfo.");
+         System.out.println("Error while reading "+inputData.getMinfofolder()+this.getBasename()+".minfo.");
          System.out.println(e.getMessage());
          Utilities.terminate();
       }
@@ -706,9 +720,9 @@ public class MakeQFF {
       MInfoIO minfo = new MInfoIO();
       VibTransformer trans = inputData.getTransform();
       try{
-         minfo.loadMOL(this.getBasename()+".minfo");         
+         minfo.loadMOL(inputData.getMinfofolder()+this.getBasename()+".minfo");         
       }catch(IOException e){
-         System.out.println("Error while reading "+this.getBasename()+".minfo.");
+         System.out.println("Error while reading "+inputData.getMinfofolder()+this.getBasename()+".minfo.");
          System.out.println(e.getMessage());
          Utilities.terminate();
       }
@@ -968,7 +982,8 @@ public class MakeQFF {
       
       double[][][] hess = new double[2][Nfree][Nfree];
       try{
-         DataInputStream dos = new DataInputStream(new BufferedInputStream(new FileInputStream(getBasename(mi)+".tempfile")));
+         DataInputStream dos = new DataInputStream(new BufferedInputStream(
+               new FileInputStream(inputData.getMinfofolder()+getBasename(mi)+".tempfile")));
          for(int n=0; n<2; n++){
             for(int i=0; i<Nfree; i++){
                for(int j=0; j<=i; j++){
@@ -990,7 +1005,8 @@ public class MakeQFF {
       
       double[][][] hess = new double[4][Nfree][Nfree];
       try{
-         DataInputStream dos = new DataInputStream(new BufferedInputStream(new FileInputStream(getBasename(mi,mj)+".tempfile")));
+         DataInputStream dos = new DataInputStream(new BufferedInputStream(
+               new FileInputStream(inputData.getMinfofolder()+getBasename(mi,mj)+".tempfile")));
          for(int n=0; n<4; n++){
             for(int i=0; i<Nfree; i++){
                for(int j=0; j<=i; j++){
@@ -1018,9 +1034,9 @@ public class MakeQFF {
       VibTransformer trans = inputData.getTransform();
 
       try{
-         minfo.loadMOL(this.getBasename()+".minfo");         
+         minfo.loadMOL(inputData.getMinfofolder()+this.getBasename()+".minfo");         
       }catch(IOException e){
-         System.out.println("Error while reading "+this.getBasename()+".minfo.");
+         System.out.println("Error while reading "+inputData.getMinfofolder()+this.getBasename()+".minfo.");
          System.out.println(e.getMessage());
          Utilities.terminate();
       }
@@ -1311,7 +1327,8 @@ public class MakeQFF {
 
       double[][] grad = new double[4][Nfree];
       try{
-         DataInputStream dos = new DataInputStream(new BufferedInputStream(new FileInputStream(getBasename(mi)+".tempfile")));
+         DataInputStream dos = new DataInputStream(new BufferedInputStream(
+               new FileInputStream(inputData.getMinfofolder()+getBasename(mi)+".tempfile")));
          for(int n=0; n<4; n++){
             for(int i=0; i<Nfree; i++){
                grad[n][i] = dos.readDouble();
@@ -1330,7 +1347,8 @@ public class MakeQFF {
       
       double[][] grad = new double[4][Nfree];
       try{
-         DataInputStream dos = new DataInputStream(new BufferedInputStream(new FileInputStream(getBasename(mi,mj)+".tempfile")));
+         DataInputStream dos = new DataInputStream(new BufferedInputStream
+               (new FileInputStream(inputData.getMinfofolder()+getBasename(mi,mj)+".tempfile")));
          for(int n=0; n<4; n++){
             for(int i=0; i<Nfree; i++){
                grad[n][i] = dos.readDouble();
@@ -1349,7 +1367,8 @@ public class MakeQFF {
 
       double[][] grad = new double[8][Nfree];
       try{
-         DataInputStream dos = new DataInputStream(new BufferedInputStream(new FileInputStream(getBasename(mi,mj,mk)+".tempfile")));
+         DataInputStream dos = new DataInputStream(new BufferedInputStream
+               (new FileInputStream(inputData.getMinfofolder()+getBasename(mi,mj,mk)+".tempfile")));
          for(int n=0; n<8; n++){
             for(int i=0; i<Nfree; i++){
                grad[n][i] = dos.readDouble();

@@ -32,7 +32,7 @@ public class TaskGrid extends TaskQChem {
       this.qcData      = qcData;
       this.mm = mm;
       this.dq = dq;
-      this.basename = basename;
+      this.basename  = makePESData.getMinfofolder()+basename;
       this.ndifftype = null;
    }
    

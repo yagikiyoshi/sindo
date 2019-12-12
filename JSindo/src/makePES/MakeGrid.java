@@ -128,10 +128,7 @@ public class MakeGrid {
 
       gfilename = new GridFileName();
       if(! isGeneric) {
-         String runFolder = inputData.getMinfofolder();
-         gfilename.setMinfoDirectoryName(runFolder);
-         
-         File minfoDir = new File(runFolder);
+         File minfoDir = new File(inputData.getMinfofolder());
          if(! minfoDir.exists()){
             minfoDir.mkdir();
          }
@@ -439,14 +436,30 @@ public class MakeGrid {
       System.out.println();
       System.out.println("Enter GridPES generation:");
       System.out.println();
-      System.out.println("Execute electronic structure calculations.");
-      System.out.println();
 
       if(! isGeneric) {
          queue = QueueMngr.getInstance();
-         queue.start();         
+         queue.start();
+         
+         gfilename.setMinfoDirectoryName("");
+         
+
+         
+         if (qcData.isDryrun()) {
+            System.out.println("   Dryrun: Generate input files for QM jobs.");
+            System.out.println();
+            
+         } else {
+            System.out.println("   Execute electronic structure calculations.");
+            System.out.println();
+            
+         }
+
       }else{
          grdXYZ = new GrdXYZ(qcData.getXyzBasename());
+         System.out.println("   Writing the coordinates of grid points to "+qcData.getXyzBasename()+".xyz");
+         System.out.println();
+         
       }
 
       calcEQ();
@@ -461,25 +474,42 @@ public class MakeGrid {
          calc3MRGrid();
       }
       
+      boolean genPES = false;
       if(! isGeneric) {
-         queue.shutdown();            
+         queue.shutdown();
+         
+         if(qcData.isDryrun()){
+            System.out.println("   DryRun is done!");
+            System.out.println();
+            genPES = false;
+            
+         } else {
+            System.out.println("   End of electronic structure calculations.");
+            System.out.println();
+            genPES = true;
+         }
+
       }else{
          grdXYZ.close();            
+         System.out.println("   Done! Number of grid points:  "+grdXYZ.getNumOfGrid());
+         System.out.println();
+
+         if(grdXYZ.getNumOfGrid() == 0) {
+            genPES = true;
+         } else {
+            genPES = false;
+         }
+         
       }
       
-      System.out.println("End of electronic structure calculations.");
-      System.out.println();
-
-      if(qcData.isDryrun()){
-         System.out.println("DryRun is done!");
-         System.out.println();
-         
-      }else{
+      if(genPES){
          System.out.println("Generating pot files.");
          System.out.println();
          
          if(isGeneric){
-            readGridData();
+            readGridData();            
+         }else {
+            gfilename.setMinfoDirectoryName(inputData.getMinfofolder());
          }
 
          genEQ();
@@ -516,6 +546,7 @@ public class MakeGrid {
          
       }
       
+      System.out.println();
       System.out.println("End of GridPES generation:");
       System.out.println();
       

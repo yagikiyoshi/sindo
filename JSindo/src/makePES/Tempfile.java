@@ -27,17 +27,18 @@ public class Tempfile {
     * @param nn number of deviation points
     */
    Tempfile(int[] mm, int nn, MakeQFF makeQFF){
+      String minfo_folder = makeQFF.getInputDataPES().getMinfofolder();
       switch(mm.length){
       case 1:
-         basename = makeQFF.getBasename(mm[0]);         
+         basename = minfo_folder+makeQFF.getBasename(mm[0]);         
          break;
          
       case 2:
-         basename = makeQFF.getBasename(mm[0],mm[1]);
+         basename = minfo_folder+makeQFF.getBasename(mm[0],mm[1]);
          break;
          
       case 3:
-         basename = makeQFF.getBasename(mm[0],mm[1],mm[2]);         
+         basename = minfo_folder+makeQFF.getBasename(mm[0],mm[1],mm[2]);         
          break;
       }
       this.nn = nn;
