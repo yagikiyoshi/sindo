@@ -25,5 +25,8 @@ Then, `build_JSindo.xml` will be created in the folder. Run ant using this file,
 
     $ ant -f build_JSindo.xml
 
-This command compiles all source codes in `src`, creates class files in `bin`, and creates a jar file, `JSindo-$version.jar`.
+This command compiles all source codes in `src`, creates class files in `bin`, creates a jar file, `jar/JSindo-$version.jar`, and copies all necessary jar files in `jar`.
 
+To clean up the build,
+
+    $ ant -f build_JSindo.xml clean

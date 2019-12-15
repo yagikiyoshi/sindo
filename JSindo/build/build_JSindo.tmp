@@ -6,6 +6,7 @@
 
     <!--define folder properties-->
     <property name="dir.bin" value="./bin"/>
+    <property name="dir.jar" value="./jar"/>
     <property name="jarfile" value="JSindo-VERSION.jar"/>
     <property environment="env"/>
     <property name="jama_dir" value="JAMA_DIR"/>
@@ -13,10 +14,10 @@
 
     <target name="clean">
       <delete dir="${dir.bin}" />
-      <delete file="${jarfile}" />
+      <delete dir="${dir.jar}" />
     </target>
 
-    <target name="compile" depends="clean">
+    <target name="compile">
       <mkdir dir="${dir.bin}" />
       <path id="buildpath">
         <fileset dir="${jama_dir}" includes="*.jar" />
@@ -28,7 +29,8 @@
     </target>
 
     <target name="create_jar" depends="compile">
-      <jar destfile="${jarfile}" filesetmanifest="mergewithoutmain">
+      <mkdir dir="${dir.jar}" />
+      <jar destfile="${dir.jar}/${jarfile}" filesetmanifest="mergewithoutmain">
         <manifest>
           <attribute name="Main-Class" value="JSindo"/>
           <attribute name="Class-Path" value="."/>
@@ -37,6 +39,10 @@
                  includes="*.class
                            */*.class"/>
       </jar>
+      <copy todir="${dir.jar}" >
+        <fileset dir="${jama_dir}" includes="*.jar" />
+        <fileset dir="${j3d_dir}"  includes="*.jar" />
+      </copy>
     </target>
 
 </project>
