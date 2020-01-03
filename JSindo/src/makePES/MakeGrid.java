@@ -872,8 +872,12 @@ public class MakeGrid {
 
             if(! eneData.containsKey(mc)) continue;
             
-            double[][] ene = eneData.get(mc);               
-            ene[0][index] = Double.parseDouble(data[1]);            
+            double[][] ene = eneData.get(mc);
+            try {
+               ene[0][index] = Double.parseDouble(data[1]);
+            }catch(NumberFormatException e) {
+               continue;
+            }
             
             if(inputData.isDipole()){
                double[][] dipole = dipoleData.get(mc);
