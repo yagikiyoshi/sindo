@@ -40,14 +40,14 @@ public class HBanalysis {
    }
    
    /**
-    * Set the hydrogen bond distance
+    * Set the hydrogen bond distance. Default = 3.5 Angs.
     * @param distance the HB distance in Angs
     */
    public void setHBdistance(double distance){
       HBdistance = distance/Constants.Bohr2Angs;
    }
    /**
-    * Set the hydrogen bond angle (H-D..A angle)
+    * Set the hydrogen bond angle (H-D..A angle). Default = 20.0
     * @param angle the HB angle in degree
     */
    public void setHBangle(double angle){
