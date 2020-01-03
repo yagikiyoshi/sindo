@@ -26,8 +26,7 @@
        echo "$ihost" >> resources.info
     done
 
-    export SINDO_RSH=ssh
-    sindo_jar=${HOME}/pgm/sindo-4.0.beta/jar
+    . ../../sindovars.sh
     java -cp "$sindo_jar/*" RunMakePES -f makePES.xml >& makePES.out
 
     exit 0

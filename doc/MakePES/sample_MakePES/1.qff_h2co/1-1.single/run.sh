@@ -1,5 +1,6 @@
 #!/bin/bash
 
-sindo_jar=/path/to/sindo-4.0/jar
+. ../../sindovars.sh
+unset SINDO_RSH
 java -cp "$sindo_jar/*" RunMakePES -f makePES.xml >& makePES.out
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-export SINDO_RSH=ssh
-sindo_jar=/path/to/sindo-4.0/jar
+. ../sindovars.sh
 
 b3lypdir=pes_b3lyp
 ccsdtdir=pes_ccsdt
