@@ -357,12 +357,13 @@ END MODULE
   Subroutine qff_readMop()
 
   USE qff_mod
+  USE constants_mod
 
   Implicit None
 
     Integer :: i,j,k,l,m,k2,l2
 
-    Real(8) :: sqomg(Nfree),H2wvn,aa
+    Real(8) :: sqomg(Nfree),aa
     Real(8) :: si,sj,sk,sl,sii,sjj,skk
     Integer :: mm(4),no,mtmp, mi,mj,mk,ml
     Character :: line*80
@@ -372,7 +373,7 @@ END MODULE
       read(10,*)
       Do i=1,Nfree
          read(10,*) sqomg(i)
-         !aa=sqomg(i)*H2wvn()
+         !aa=sqomg(i)*H2wvn
          !write(6,'(f12.4)') aa
          sqomg(i)=sqrt(sqomg(i))
       End do
