@@ -521,6 +521,93 @@ END MODULE
 !---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----80
 !
 !
+  Subroutine cff_PES(QQ,V)
+!
+  USE qff_mod
+!
+  Implicit None
+!
+!--------------------------------------------------------------------------------
+!
+! Geometry in normal coordinate (Bohr(emu)^1/2)
+!
+    Real(8), dimension(Nfree), intent(in):: QQ
+    Real(8), intent(out):: V
+
+!--------------------------------------------------------------------------------
+!
+!
+    Integer :: i,j,k,l,n,a1,a2
+
+    Real(8) :: Di,Dj,Dk,Dl,G1,H1,T1,H2,T2,T3
+!
+!--------------------------------------------------------------------------------
+!
+!   >>  initialize  <<
+!
+!
+        G1=0.D+00; H1=0.D+00; T1=0.D+00
+        H2=0.D+00; T2=0.D+00
+        T3=0.D+00
+
+        Do i=1,Nfree
+           Di=QQ(i) - EC(i)
+
+           G1 = G1 + Di * Gi(i)
+           H1 = H1 + Di*Di * Hii(i)
+           T1 = T1 + Di*Di*Di * Tiii(i)
+
+        End do
+        V = E0 + G1 + H1 + T1
+        if(MR==1) return
+
+        a1=1
+        a2=1
+        Do i=2,Nfree
+           Di=QQ(i) - EC(i)
+           Do j=1,i-1
+              Dj = QQ(j) - EC(j)
+
+              H2 = H2 + Di*Dj * Hij(a1)
+              a1=a1+1
+              T2 = T2 + Di*Di*Dj * Tiij(a2)
+              T2 = T2 + Dj*Dj*Di * Tiij(a2+1)
+              a2=a2+2
+
+           End do
+        End do
+        V = V + H2 + T2
+        if(MR==2) return
+
+        a1=1
+        Do i=3,Nfree
+           Di=QQ(i) - EC(i)
+           Do j=2,i-1
+              Dj=QQ(j) - EC(j)
+              Do k=1,j-1
+                 Dk=QQ(k) - EC(k)
+
+                 T3 = T3 + Di*Dj*Dk * Tijk(a1)
+                 a1=a1+1
+
+              End do
+           End do
+        End do
+        V = V + T3
+        if(MR==3) return
+
+!
+!--------------------------------------------------------------------------------
+!
+     return
+!
+!
+  End subroutine cff_PES
+!
+!
+!---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----80
+!
+!
   Subroutine qff_PES(QQ,V)
 !
   USE qff_mod
