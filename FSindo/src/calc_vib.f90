@@ -69,10 +69,7 @@
    Integer :: Vib_getMRforPES,MR
    Logical :: activemodes(Nfree),PES_isQFF,PES_isGrid
 
-      !MR=Vib_getMRforPES()
-      !Call Vib_getActiveModes(activemodes)
-
-      Call mrpes_Construct(Nfree,MR,activemodes)
+      Call mrpes_Construct(Nfree, activemodes, MR)
       Call mrpes_printSettings()
 
       Call PES_construct(Nfree,MR)

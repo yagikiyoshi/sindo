@@ -1,0 +1,10 @@
+#--- [  MOL  ]
+ &mol minfofile='h2co-b3lyp-dz.minfo' /
+ &sys maxmem=500 /
+
+#--- [  VIB  ]
+ &vib vmaxall=10 vscf=.t. vci=.f. / 
+
+#--- [  PES  ]
+ &mrpes MR=1 mopFile='prop_no_1.mop' mcs_cutoff=-1.0D-03 /
+

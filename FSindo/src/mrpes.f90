@@ -81,14 +81,15 @@ End Module
 
 !---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----80
 
-Subroutine mrpes_construct(NNfree,MR0,ActiveMode)
+Subroutine mrpes_construct(NNfree, ActiveMode, MRin)
 
 USE Constants_mod
 USE mrpes_mod
 
 Implicit None
 
-   Integer :: NNfree,MR0
+   Integer :: NNfree
+   Integer, optional :: MRin
    Logical :: ActiveMode(NNfree)
 
    Integer :: ierr,ifl,ifw1(maxtype),ifw2(maxtype),ifw3(maxtype),ifw4(maxtype)
@@ -105,7 +106,11 @@ Implicit None
       Nfree=NNfree
 
     ! - Mode coupling representation (default is the input arguement)
-      MR=MR0
+      if(present(MRin)) then
+         MR=MRin
+      else
+         MR=-1
+      end if
     ! - Cutoff value for the mode coupling term
       mcs_cutoff = 1.D-04
       mcs_grid = -1.D+00
@@ -116,6 +121,13 @@ Implicit None
       Rewind(inp)
       Read(inp,mrpes,end=5)
     5 Continue
+
+    ! Check MR
+      if (MR < 0) then
+         write(Iout,*) 'ERROR WHILE CONSTRUCTING MRPES MODULE'
+         write(Iout,*) '   MR IS NOT PRESENT IN THE INPUT'
+         Stop
+      end if
 
     ! Initialize
       nMR_type=0
