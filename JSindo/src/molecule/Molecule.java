@@ -56,7 +56,7 @@ public class Molecule {
     * Sets ElectronicData
     * @param edata the data of electronic structure calculations
     */
-   void setElectronicData(ElectronicData edata){
+   public void setElectronicData(ElectronicData edata){
       this.edata = edata;
    }
    /**
@@ -92,7 +92,7 @@ public class Molecule {
     * Sets VibrationalData to the first position of a list
     * @param vibrationaldata the data of vibrational modes
     */
-   void setVibrationalData(VibrationalData vibrationaldata){
+   public void setVibrationalData(VibrationalData vibrationaldata){
       if(vdata.size() == 0){
          vdata.add(vibrationaldata);
       }else{         
@@ -100,37 +100,45 @@ public class Molecule {
       }
    }
    /**
+    * Sets(replaces) Vibrational data to a specified position of a list
+    * @param the index of data which is replaced
+    * @param vibrationaldata new vibrational data at this position
+    */
+   public void setVibrationalData(int index, VibrationalData vibrationaldata) {
+      vdata.set(index, vibrationaldata);
+   }
+   /**
     * Adds VibrationalData to a list
     * @param vibrationaldata the data of vibrational modes
     */
-   void addVibrationalData(VibrationalData vibrationaldata){
+   public void addVibrationalData(VibrationalData vibrationaldata){
       vdata.add(vibrationaldata);
    }
    /**
     * Removes the n-th data from the list
     * @param n the index of the list
     */
-   void removeVibrationalData(int n){
+   public void removeVibrationalData(int n){
       vdata.remove(n);
    }
    /**
     * Remove the whole list of VibrationalData
     */
-   void clearVibrationalData(){
+   public void clearVibrationalData(){
       vdata.clear();;
    }
    /**
     * Returns the ArrayList of Atom
     * @return all the atoms
     */
-   ArrayList<Atom> getAtomList(){
+   public ArrayList<Atom> getAtomList(){
       return atomList;
    }
    /**
     * Returns the ArrayList of subAtom
     * @return all the subatoms
     */
-   ArrayList<Atom> getSubAtomList(){
+   public ArrayList<Atom> getSubAtomList(){
       return subatomList;
    }
    /**
