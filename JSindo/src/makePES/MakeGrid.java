@@ -150,24 +150,27 @@ public class MakeGrid {
    private MCStrength setupMCS(){
 
       QFFData qff = new QFFData();
+      QFFUtil qffutil = new QFFUtil();
+      qffutil.setQFFData(qff);
       String mopFilename = gridData.getMopfile();
 
       if(mopFilename != null){
          File mopFile = new File(mopFilename);
          System.out.print("  o Setup MCS: Read QFF Data via "+mopFilename+" ... ");
-         if(mopFile.exists()){
-            qff.readmop(mopFile);
-            
-         }else {
-            System.out.println("   "+mopFilename+" is not found! Exit with error.");
+         try {
+            qffutil.readmop(mopFile);
+         } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
             Utilities.terminate();
-            
+         } catch (IOException e) {
+            e.printStackTrace();
+            Utilities.terminate();
          }
          
       }else{
          System.out.print("  o Setup MCS: Read QFF via 001.hs ... ");
          try{
-            qff.readhs();
+            qffutil.readhs();
          }catch(FileNotFoundException e){
             System.out.println("   001.hs is not found! Exit with error.");
             Utilities.terminate();

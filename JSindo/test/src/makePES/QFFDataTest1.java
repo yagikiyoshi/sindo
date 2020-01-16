@@ -6,18 +6,22 @@ public class QFFDataTest1 {
 
    public static void main(String[] args){
       QFFData data = new QFFData();
-      /*
-      try{
-         data.readhs();
-      }catch(FileNotFoundException e){
+      QFFUtil qutil = new QFFUtil();
+      qutil.setQFFData(data);
+      try {
+         qutil.readmop(new File("test/makePES/prop_no_1.mop"));
+      } catch (FileNotFoundException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IOException e) {
+         // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      */
-      
-      data.readmop(new File("test/makePES/prop_no_1.mop"));
       
       int Nfree = data.getNfree();
       int MR = data.getMR();
+      String title = data.getTitle();
+      System.out.println(title);
 
       MCStrength mcs = new MCStrength();
       mcs.appendQFF(data);
@@ -25,7 +29,7 @@ public class QFFDataTest1 {
          for(int j=0; j<i; j++){
             double aa = mcs.get2mrMCS(i, j);
             if(aa>1.0){
-               System.out.printf("%4d %4d           %15.4f %n",i,j,aa);               
+               System.out.printf("%4d %4d           %15.4f %n",i,j,aa);        
             }
          }
       }

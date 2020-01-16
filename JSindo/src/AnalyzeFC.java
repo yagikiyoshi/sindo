@@ -4,9 +4,9 @@ import vibration.CoordProperty;
 import vibration.CoordinateData;
 import vibration.MolToVib;
 
-import makePES.MCStrength;
-import makePES.QFFData;
+import makePES.*;
 import molecule.MInfoIO;
+import sys.Utilities;
 
 
 public class AnalyzeFC {
@@ -41,8 +41,16 @@ public class AnalyzeFC {
       }
 
       QFFData data = new QFFData();
+      QFFUtil qffutil = new QFFUtil();
+      qffutil.setQFFData(data);
+      
       File mopFile = new File(args[0]);
-      data.readmop(mopFile);
+      try {
+         qffutil.readmop(mopFile);
+      } catch (IOException e) {
+         System.out.println(e.getMessage());
+         Utilities.terminate();
+      }
       int MR = data.getMR();
       int Nfree = data.getNfree();
 
