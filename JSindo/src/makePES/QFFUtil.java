@@ -3,6 +3,7 @@ package makePES;
 import java.io.*;
 import java.util.*;
 import sys.*;
+import molecule.*;
 
 public class QFFUtil {
 
@@ -650,19 +651,91 @@ public class QFFUtil {
     * @param qffdata1 input data
     */
    public void merge(QFFData qffdata1) {
-      this.merge(qffdata1, true);
+      this.merge(qffdata1, true, null);
    }
    /**
-    * Merge an input qffdata into current one
+    * Merge an input qffdata into current one. Note that current data 
+    * are overwritten by input coefficients. The off-diagonal harmonic 
+    * couplings are computed if Molecule is present. The electronic 
+    * data (Hessian) and the vibrational data (frequencies and modes) 
+    * must be provided. The vibrational degrees of freedom in molecule 
+    * must coincide with that of the the current QFF data.
+    * @param qffdata1 input data
+    * @param molecule electronic and vibrational data
+    */
+   public void merge(QFFData qffdata1, Molecule molecule) {
+      this.merge(qffdata1, true, molecule);
+   }
+   /**
+   /**
+    * Merge an input qffdata into current one. The off-diagonal harmonic 
+    * couplings are computed if Molecule is present. The electronic 
+    * data (Hessian) and the vibrational data (frequencies and modes) 
+    * must be provided. The vibrational degrees of freedom in molecule 
+    * must coincide with that of the the current QFF data.
     * @param qffdata1 input data
     * @param overwrite if true, the coefficients are overwritten
+    * @param molecule electronic and vibrational data
     */
-   public void merge(QFFData qffdata1, boolean overwrite) {
+   public void merge(QFFData qffdata1, boolean overwrite, Molecule molecule) {
+      
       HashMap<String, Double> coeff1 = qffdata1.getCoeff();
       HashMap<String, Double> coeff2 = this.qffdata.getCoeff();
       
       if(qffdata1.getMR() > this.qffdata.getMR()) {
          this.qffdata.setMR(qffdata1.getMR());
+      }
+      
+      if (molecule != null) {
+         int nd = molecule.getNumOfVibrationalData();
+         if(nd > 1){
+            VibUtil vutil = new VibUtil(molecule);
+            vutil.combineAllVibData();
+         }
+         if(molecule.getVibrationalData().Nfree != this.qffdata.getNfree()) {
+            System.out.println("Error in QFFUtil.merge ");
+               System.out.println("The number of vibrational degrees of freedom don't match.");
+               System.out.println(" Nfree (QFF) = "+this.qffdata.getNfree());
+               System.out.println(" Nfree (Minfo) = "+molecule.getVibrationalData().Nfree);
+            System.out.println("Abort merge.");
+            return;
+         }
+         VibTransformer trans = new VibTransformer(molecule);
+         double[][] hess = trans.hx2hq(molecule.getElectronicData().getHessian());
+         double[] sqfreq = Utilities.deepCopy(molecule.getVibrationalData().getOmegaV());
+         {
+            int i=0;
+            while(sqfreq[i]<0.0d){
+               sqfreq[i] = -sqfreq[i]/Constants.Hartree2wvn;
+               sqfreq[i] = Math.sqrt(sqfreq[i]);
+               i++;
+            }
+            while(i<sqfreq.length){
+               sqfreq[i] = sqfreq[i]/Constants.Hartree2wvn;
+               sqfreq[i] = Math.sqrt(sqfreq[i]);
+               i++;            
+            }
+         }
+
+         for(int i=0; i<qffdata1.getNfree(); i++) {
+            Integer [] m1 = {i,i};
+            if(qffdata1.getCoeff(m1) != null && 
+                  qffdata.getCoeff(m1) == null) {
+
+               for(int j=0; j<this.qffdata.getNfree(); j++) {
+                  Integer [] m2 = {j,j};
+                  if(qffdata.getCoeff(m2) != null &&
+                        qffdata1.getCoeff(m2) == null) {
+
+                     double cij = hess[i][j]/sqfreq[i]/sqfreq[j];
+                     Integer [] mm = {i,j};
+                     qffdata.putCoeff(mm, cij);
+                     
+                  }
+               }
+            }
+         }
+         
       }
       
       if(overwrite) {
@@ -678,6 +751,8 @@ public class QFFUtil {
             coeff2.put(key, cc);
          }
       }
+
       
+
    }
 }
