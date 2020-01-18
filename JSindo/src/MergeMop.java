@@ -9,8 +9,8 @@ public class MergeMop {
 
    public void printUsage() {
       System.out.println("Usage: java MergeMop -mop1 mopfile1 -mop2 mopfile2 [-o newmop] --with-hc/--wo-hc -minfo minfofile");
-      System.out.println("   mopfile1  : name of mop files with higher priority");
-      System.out.println("   mopfile2  : name of mop files with lower priority");
+      System.out.println("   mopfile1  : name of mop files");
+      System.out.println("   mopfile2  : name of mop files (overlapping coeff. will be overwritten)");
       System.out.println("   newmop    : name of the merged mop file");
       System.out.println("   --with-hc/--without-hc: with or without harmonic coupling");
       System.out.println("   minfofile : name of minfo file");
@@ -72,8 +72,8 @@ public class MergeMop {
          mergemop.printUsage();
       }
       if(newmop == null) {
-         int idx = mop1.lastIndexOf(".");
-         newmop = mop1.substring(0, idx)+"_merge"+mop1.substring(idx);
+         int idx = mop2.lastIndexOf(".");
+         newmop = mop2.substring(0, idx)+"_merge"+mop2.substring(idx);
       }
       if(with_hc && minfo == null) {
          System.out.println("Error: minfo is needed when --with-hc.");

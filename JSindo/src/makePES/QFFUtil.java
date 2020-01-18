@@ -702,6 +702,7 @@ public class QFFUtil {
          }
          VibTransformer trans = new VibTransformer(molecule);
          double[][] hess = trans.hx2hq(molecule.getElectronicData().getHessian());
+         /*
          double[] sqfreq = Utilities.deepCopy(molecule.getVibrationalData().getOmegaV());
          {
             int i=0;
@@ -712,10 +713,12 @@ public class QFFUtil {
             }
             while(i<sqfreq.length){
                sqfreq[i] = sqfreq[i]/Constants.Hartree2wvn;
+               System.out.printf("%28.22e \n",sqfreq[i]);
                sqfreq[i] = Math.sqrt(sqfreq[i]);
                i++;            
             }
          }
+         */
 
          for(int i=0; i<qffdata1.getNfree(); i++) {
             Integer [] m1 = {i,i};
@@ -727,7 +730,7 @@ public class QFFUtil {
                   if(qffdata.getCoeff(m2) != null &&
                         qffdata1.getCoeff(m2) == null) {
 
-                     double cij = hess[i][j]/sqfreq[i]/sqfreq[j];
+                     double cij = hess[i][j];
                      Integer [] mm = {i,j};
                      qffdata.putCoeff(mm, cij);
                      
@@ -737,7 +740,7 @@ public class QFFUtil {
          }
          
       }
-      
+
       if(overwrite) {
          for(String key : coeff1.keySet()) {
             Double cc = coeff1.get(key);
@@ -751,8 +754,6 @@ public class QFFUtil {
             coeff2.put(key, cc);
          }
       }
-
-      
 
    }
 }
