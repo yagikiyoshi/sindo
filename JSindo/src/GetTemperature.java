@@ -43,7 +43,7 @@ public class GetTemperature {
          
          int idx = log.lastIndexOf(".");
          if (idx > 0) {
-            dat = log.substring(0, idx)+".dat";
+            dat = log.substring(0, idx)+"_temp.dat";
          }else {
             dat = log+".dat";
          }

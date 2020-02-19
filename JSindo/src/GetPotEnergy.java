@@ -2,12 +2,12 @@
 import md.*;
 import java.io.*;
 
-public class GetTotalEnergy {
+public class GetPotEnergy {
 
    public static void main(String[] args) {
       
       if (args.length == 0) {
-         System.out.println("Usage: java GetTotalEnergy [--throw N] [--average 10] log1 log2 ");
+         System.out.println("Usage: java GetPotEnergy [--throw N] [--average 10] log1 log2 ");
          System.out.println(" log1 log2 : logfiles");
          System.out.println(" (optional) --throw N: Throw the first N steps for calculating the average and RMSD");
          System.out.println(" (optional) --average N: Also obtain averaged value over N windows");
@@ -43,7 +43,7 @@ public class GetTotalEnergy {
          
          int idx = log.lastIndexOf(".");
          if (idx > 0) {
-            dat = log.substring(0, idx)+"_tote.dat";
+            dat = log.substring(0, idx)+"_pot.dat";
          }else {
             dat = log+".dat";
          }
@@ -53,7 +53,7 @@ public class GetTotalEnergy {
          glog.readInfo(log);
          
          Double[] time = glog.getData("TIME");
-         Double[] total_ene = glog.getData("TOTAL_ENE");
+         Double[] total_ene = glog.getData("POTENTIAL_ENE");
          
          ave[n] = 0.D+00;
          for(int i=nthrow; i<time.length; i++) {
