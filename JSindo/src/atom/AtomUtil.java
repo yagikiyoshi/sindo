@@ -26,7 +26,16 @@ public class AtomUtil {
     * @return bond length (bohr)
    */
    public double getBondLength(Atom atomi, Atom atomj){
-      return Utilities.getNorm(atomi.getXYZCoordinates(), atomj.getXYZCoordinates());
+      return this.getBondLength(atomi.getXYZCoordinates(), atomj.getXYZCoordinates());
+   }
+   /**
+    * Returns the bond length (bohr)
+    * @param atomi coordinates of atom i
+    * @param atomj coordinates of atom j
+    * @return bond length (bohr)
+   */
+   public double getBondLength(double[] atomi, double[] atomj){
+      return Utilities.getNorm(atomi, atomj);
    }
    /**
     * Returns the bond angle of i-j-k  (degree)
@@ -39,6 +48,7 @@ public class AtomUtil {
       double[] dd = new double[2];
       return getBondAngle(atomi, atomj, atomk, dd);
    }
+
    /**
     * Returns the bond angle of i-j-k  (degree) and the bond lengths dji and djk (bohr)
     * @param atomi atom i
@@ -51,6 +61,30 @@ public class AtomUtil {
       double[] ai = atomi.getXYZCoordinates();
       double[] aj = atomj.getXYZCoordinates();
       double[] ak = atomk.getXYZCoordinates();
+      return this.getBondAngle(ai, aj, ak, dd);
+   }
+   
+   /**
+    * Returns the bond angle of i-j-k  (degree)
+    * @param ai xyz coordinates of atom i
+    * @param aj xyz coordinates of atom j
+    * @param ak xyz coordinates of atom k
+    * @return bond angle i-j-k (degree)
+    */
+   public double getBondAngle(double[] ai, double[] aj, double[] ak){
+      double[] dd = new double[2];
+      return getBondAngle(ai, aj, ak, dd);
+   }
+   
+   /**
+    * Returns the bond angle of i-j-k  (degree) and the bond lengths dji and djk (bohr)
+    * @param ai xyz coordinates of atom i
+    * @param aj xyz coordinates of atom j
+    * @param ak xyz coordinates of atom k
+    * @param dd Distance between j-i and j-k: [0] dji, [1] djk
+    * @return bond angle i-j-k (degree)
+    */
+   public double getBondAngle(double[] ai, double[] aj, double[] ak, double[] dd){
       double[] rji = new double[3];
       double[] rjk = new double[3];
       for(int n=0; n<3; n++){
@@ -62,6 +96,7 @@ public class AtomUtil {
       double ovlp = Utilities.dotProduct(rji, rjk);
       return Math.acos(ovlp)/Math.PI*180.0d;      
    }
+   
    /**
     * Returns the dihedral angle between i-j-k and j-k-l
     * @param atomi atom i
@@ -75,6 +110,19 @@ public class AtomUtil {
       double[] aj = atomj.getXYZCoordinates();
       double[] ak = atomk.getXYZCoordinates();
       double[] al = atoml.getXYZCoordinates();
+
+      return this.getDihedralAngle(ai, aj, ak, al);
+   }
+   
+   /**
+    * Returns the dihedral angle between i-j-k and j-k-l
+    * @param ai xyz coordinates of atom i
+    * @param aj xyz coordinates of atom j
+    * @param ak xyz coordinates of atom k
+    * @param al xyz coordinates of atom l
+    * @return dihedral angle ijk-jkl (degree). NaN if either ijk or jkl are in line.
+    */
+   public double getDihedralAngle(double[] ai, double[] aj, double[] ak, double[] al){
       
       double[] vji = new double[3]; 
       double[] vjk = new double[3];
