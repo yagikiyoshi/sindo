@@ -135,7 +135,7 @@ public class DCDReader {
       //System.out.println(natALL);
 
       // Now read trajectory
-      for(int n=0; n<icntrl[0]; n++){
+      while(true) {
          if(icntrl[10] == 1){
             bl = this.readLine(inchannel);
             if(bl == null) break;

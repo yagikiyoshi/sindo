@@ -79,7 +79,7 @@ public class PDBReader extends FileReaderMD {
                   
                   if(atom != null){ 
                      if(line.length() > 72){
-                        segName = line.substring(72, 76).trim();
+                        segName = line.substring(72, line.length()).trim();
                         if(segName.length() == 0){
                            segName = "PRO";
                         }

@@ -53,23 +53,23 @@ public class GetPotEnergy {
          glog.readInfo(log);
          
          Double[] time = glog.getData("TIME");
-         Double[] total_ene = glog.getData("POTENTIAL_ENE");
+         Double[] pot_ene = glog.getData("POTENTIAL_ENE");
          
          ave[n] = 0.D+00;
          for(int i=nthrow; i<time.length; i++) {
-            ave[n] += total_ene[i];
+            ave[n] += pot_ene[i];
          }
-         ave[n] = ave[n] / (double)(total_ene.length - nthrow);
+         ave[n] = ave[n] / (double)(pot_ene.length - nthrow);
 
          rmsd[n] = 0.D+00;
-         for (int i=nthrow; i< total_ene.length; i++) {
-            rmsd[n] += (total_ene[i] - ave[n])*(total_ene[i] - ave[n]);
+         for (int i=nthrow; i< pot_ene.length; i++) {
+            rmsd[n] += (pot_ene[i] - ave[n])*(pot_ene[i] - ave[n]);
          }
-         rmsd[n] = Math.sqrt(rmsd[n]/(double)(total_ene.length - nthrow));
+         rmsd[n] = Math.sqrt(rmsd[n]/(double)(pot_ene.length - nthrow));
   
 
          for(int i=0; i<time.length; i++) {
-            total_ene[i] = total_ene[i] - ave[n];
+            pot_ene[i] = pot_ene[i] - ave[n];
          }
          
          try {
@@ -82,16 +82,16 @@ public class GetPotEnergy {
                   if(ist < 0) ist = 0;
                   Double eave = 0.0d;
                   for(int j=ist; j<=i; j++) {
-                     eave += total_ene[j];
+                     eave += pot_ene[j];
                   }
                   eave = eave / (double)(i - ist +1);
-                  pw.printf("%12.4f  %15.4f   %15.4f \n", time[i], total_ene[i], eave);
+                  pw.printf("%12.4f  %15.4f   %15.4f \n", time[i], pot_ene[i], eave);
                }
                
                
             }else {
                for(int i=0; i<time.length; i++) {
-                  pw.printf("%12.4f  %15.4f \n", time[i], total_ene[i]);
+                  pw.printf("%12.4f  %15.4f \n", time[i], pot_ene[i]);
                }
                
             }
