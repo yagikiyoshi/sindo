@@ -9,6 +9,7 @@ public class InputDataGrid {
    private String[] mc1,mc2,mc3;
    private String mopfile;
    private double thresh_MCS;
+   private int MR;
    
    /**
     * This is a package private class
@@ -31,6 +32,22 @@ public class InputDataGrid {
    public void setQcID(String grid_qcID) {
       this.qcID = grid_qcID;
    }
+   /**
+    * Returns the order of mode coupling (1-3)
+    * @return the order of mode coupling
+    */
+   public int getMR() {
+      return this.MR;
+   }
+
+   /**
+    * Sets the order of mode coupling (1-3)
+    * @param MR the order of mode coupling
+    */
+   void setMR(int MR) {
+      this.MR = MR;
+   }
+
    /**
     * Returns the number of grid points
     * @return nGrid

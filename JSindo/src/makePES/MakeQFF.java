@@ -47,7 +47,8 @@ public class MakeQFF {
       }
       
       VibrationalData vdata = makePESData.getMolecule().getVibrationalData();
-      MR = makePESData.getMR();
+      //MR = makePESData.getMR();
+      MR = qffData.getMR();
 
       deltaQ = Utilities.deepCopy(vdata.getOmegaV());
       double stepsize = qffData.getStepsize();

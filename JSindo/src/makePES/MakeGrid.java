@@ -196,7 +196,7 @@ public class MakeGrid {
             mc1.add(activeModes[n][i]);
          }
          
-         int MR = inputData.getMR();
+         int MR = gridData.getMR();
          if(MR>1){
             for(int i=0; i<Nfree; i++){
                for(int j=0; j<i; j++){
@@ -367,7 +367,7 @@ public class MakeGrid {
             }
          }
          
-         int MR = inputData.getMR();
+         int MR = gridData.getMR();
          if(MR>2){
             for(int i=0; i<Nfree; i++){
                int mi = activeModes[n][i];

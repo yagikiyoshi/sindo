@@ -9,6 +9,7 @@ public class InputDataQFF {
    private boolean genhs;
    private boolean interdomain_hc;
    private String gradient_and_hessian;
+   private int MR;
    
    /**
     * This is a package private class
@@ -31,6 +32,23 @@ public class InputDataQFF {
    public void setQcID(String qcID) {
       this.qcID = qcID;
    }
+   
+   /**
+    * Returns the order of mode coupling (1-4)
+    * @return the order of mode coupling
+    */
+   public int getMR() {
+      return this.MR;
+   }
+
+   /**
+    * Sets the order of mode coupling (1-4)
+    * @param MR the order of mode coupling
+    */
+   void setMR(int MR) {
+      this.MR = MR;
+   }
+
    /**
     * Returns the stepsize for numerical differentiations (au)
     * @return the stepsize

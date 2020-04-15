@@ -791,6 +791,7 @@ public class InputReader {
                qffdata.setGenhs(false);
                qffdata.setGradient_and_hessian("input");
                qffdata.setInterdomain_hc(true);
+               qffdata.setMR(makePESData.getMR());
                
                NodeList qfflist = node.getChildNodes();
                for(int j=0; j<qfflist.getLength(); j++) {
@@ -802,6 +803,14 @@ public class InputReader {
                      
                      if(qffName.equalsIgnoreCase("qcid")){
                         qffdata.setQcID(qffvalue);
+                        
+                     } else if(qffName.equalsIgnoreCase("mr")) {
+                        try {
+                           MR = Integer.parseInt(qffvalue);
+                        }catch (NumberFormatException e) {
+                           this.errorTermination("MR = "+qffvalue+" is not a valid option.");
+                        }
+                        qffdata.setMR(MR);
                         
                      } else if(qffName.equalsIgnoreCase("stepsize")){
                         double stp = 0.0;
@@ -869,6 +878,7 @@ public class InputReader {
                griddata.setMC3(null);
                griddata.setThresh_MCS(-1.0d);
                griddata.setMopfile("prop_no_1.mop");
+               griddata.setMR(makePESData.getMR());
                
                boolean isMc = false;
                
@@ -882,6 +892,14 @@ public class InputReader {
                      
                      if(gridName.equalsIgnoreCase("qcid")){
                         griddata.setQcID(gridvalue);
+                        
+                     } else if(gridName.equalsIgnoreCase("mr")) {
+                        try {
+                           MR = Integer.parseInt(gridvalue);
+                        }catch (NumberFormatException e) {
+                           this.errorTermination("MR = "+gridvalue+" is not a valid option.");
+                        }
+                        griddata.setMR(MR);
                         
                      } else if(gridName.equalsIgnoreCase("ngrid")){
                         int ngrid = 0;
@@ -1043,7 +1061,7 @@ public class InputReader {
          }     
       }
       
-      System.out.println("     - MR      = " + MR);
+      //System.out.println("     - MR      = " + MR);
       System.out.println("     - Dipole  = " + dipole);
       System.out.println();
       
@@ -1095,6 +1113,7 @@ public class InputReader {
       for(int n=0; n<qffArray.size(); n++) {
          InputDataQFF qffdata = qffArray.get(n);
          System.out.println("     - QCID         = " + qffdata.getQcID());
+         System.out.println("     - MR           = " + qffdata.getMR());
          System.out.printf ("     - stepsize     = %-12.2f \n", qffdata.getStepsize());
          System.out.println("     - ndifftype    = " + qffdata.getNdifftype());
          System.out.println("     - mopfile      = " + qffdata.getMopfile());
@@ -1113,6 +1132,7 @@ public class InputReader {
       for(int n=0; n<gridArray.size(); n++) {
          InputDataGrid griddata = gridArray.get(n);
          System.out.println("     - QCID         = " + griddata.getQcID());
+         System.out.println("     - MR           = " + griddata.getMR());
 
          if(griddata.isFullMC()) {
             System.out.println("     - FullMC       = " + griddata.isFullMC());
