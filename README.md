@@ -27,16 +27,72 @@ SINDO is a suite of programs for molecular vibrational analysis.
   - VQDPT2-(k)
   - Infrared intensities and spectrum
 
+## Author
+Kiyoshi Yagi  
+Theoretical Molecular Science Laboratory,  
+RIKEN  
+kiyoshi.yagi@riken.jp  
+
+
+## Copyright Notice
+SINDO is distributed under the GNU General Public License version 3.
+
+Copyright 2009 - 2020
+
+SINDO is free software; you can redistribute it and/or  
+modify it under the terms of the GNU Lesser General Public  
+License as published by the Free Software Foundation; either  
+version 3 of the License, or (at your option) any later version.  
+
+SINDO is distributed in the hope that it will be useful,  
+but WITHOUT ANY WARRANTY; without even the implied warranty of  
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+See the GNU General Public License for more details.  
+
+You should have received a copy of the GNU General Public  
+License along with SINDO -- see the file COPYING   
+If not, see https://www.gnu.org/licenses/.
+
 ## Acknowledgment ##
 Dr. Hiroya Asami (Gakushuin Univ.)  
 Prof. Masaaki Fujii (Tokyo Institute of Technology)  
 Prof. Hiroshi Fujisaki (Nippon Medical School)  
 Prof. So Hirata (Univ. of Illinois at Urbana-Champaign)  
-Dr. Wataru Mizukami (Kyushu Univ.)  
-Dr. Hiroki Otaki (Nagasaki Univ.)  
+Prof. Wataru Mizukami (Osaka Univ.)  
+Prof. Hiroki Otaki (Nagasaki Univ.)  
 Dr. Yuji Sugita (RIKEN)  
 
+## References
+
+#### Review
+1. (Japanese) Development of Molecular Vibrational Structure Theory with an Explicit Account of Anharmonicity,
+K. Yagi, Mol. Sci. 10, A0085 (2016). [PDF]
+
+#### Vibrational Theories
+1. Vibrational quasi-degenerate perturbation theory with optimized coordinates: Applications to ethylene and trans-1,3-butadiene,
+K. Yagi and H. Otaki, J. Chem. Phys. 140, 084113 (2014). [13 pages]
+1. Optimized coordinates for anharmonic vibrational structure theories,
+K. Yagi, M. Keçeli, and S. Hirata, J. Chem. Phys. 137, 204118 (2012). [16 pages]
+1. Vibrational quasi-degenerate perturbation theory: Applications to Fermi resonance in CO2, H2CO, and C6H6,
+K. Yagi, S. Hirata, and K. Hirao, Phys. Chem. Chem. Phys. 10, 1781-1788 (2008).
+
+#### PES Generation
+1. Multiresolution potential energy surfaces for vibrational state calculations,
+K. Yagi, S. Hirata, and K. Hirao, Theor. Chem. Acc. 118, 681-691 (2007).
+1. Ab initio vibrational state calculations with a quartic force field: Applications to H2CO, C2H4, CH3OH, CH3CCH, and C6H6,
+K. Yagi, K. Hirao, T. Taketsugu, M. W. Schmidt, and M. S. Gordon, J. Chem. Phys. 121, 1383-1389 (2004).
+1. Direct vibrational self-consistent field method: Application to H2O and H2CO,
+K. Yagi, T. Taketsugu, K. Hirao, and M. S. Gordon, J. Chem. Phys. 113, 1005-1017 (2000).
+
+#### Complex Systems
+1. Anharmonic Vibrational Analysis of Biomolecules and Solvated Molecules Using Hybrid QM/MM Computations,
+K. Yagi, K. Yamada, C. Kobayashi, and Y. Sugita, J. Chem. Theory Comput. 15, 1924 (2019).
+
+
 ## Grant-in-aid ##  
-2007-2012 Scientific Research (KAKENHI) on Priority Areas (477) “Molecular Science for Supra Functional Systems” supported by MEXT, Japan.  
-2017-2018 Grant-in-Aid for Scientific Research on Innovative Areas (2503) “Science on Function of Soft Molecular Systems by Cooperation of Theory and Experiment" supported by MEXT, Japan.  
+2007-2012 Scientific Research (KAKENHI) on Priority Areas (477)   
+“Molecular Science for Supra Functional Systems” supported by MEXT, Japan.  
+2017-2018 Grant-in-Aid for Scientific Research on Innovative Areas (2503)   
+“Science on Function of Soft Molecular Systems by Cooperation of Theory   
+and Experiment" supported by MEXT, Japan.  
 
