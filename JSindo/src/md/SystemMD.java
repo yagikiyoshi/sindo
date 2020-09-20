@@ -226,6 +226,15 @@ public class SystemMD implements AtomList, ResidueList, SegmentList {
       return segments[index];
    }
    
+   public Segment getSegment(String segname) {
+      for(int n=0; n<segments.length; n++) {
+         if(segments[n].getName().equals(segname)) {
+            return segments[n];
+         }
+      }
+      return null;
+   }
+
    /**
     * Returns a segment in which an atom belongs to.
     * @param atomindex Index of the atom

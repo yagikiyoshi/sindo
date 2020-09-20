@@ -21,4 +21,10 @@ public interface SegmentList {
     */
    public Segment getSegment(int index);
 
+   /**
+    * Returns a segment by name
+    * @param segname name of the segment
+    * @return the segment
+    */
+   public Segment getSegment(String segname);
 }
