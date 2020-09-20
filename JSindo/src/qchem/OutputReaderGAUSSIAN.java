@@ -284,12 +284,15 @@ public class OutputReaderGAUSSIAN extends OutputReader {
       String[] Label = new String[an.length];
       
       if(logname != null) {
-         // Read label from logfile
+         // Attempt to read label from logfile
          BufferedReader br;
+         String line;
+         boolean found_label = false;
          try {
             br = new BufferedReader(new FileReader(logname));
-            while(true) {
-               String line = br.readLine();
+            while((line = br.readLine()) != null) {
+               found_label = true;
+               //String line = br.readLine();
                if (line.indexOf("Symbolic Z-matrix") > 0){
                   br.readLine();
                   for(int i=0; i < Label.length; i++) {
@@ -299,7 +302,12 @@ public class OutputReaderGAUSSIAN extends OutputReader {
                }
             }
             br.close();
-           
+            
+            if (! found_label) {
+               for(int n=0; n<an.length; n++){
+                  Label[n] = PeriodicTable.label[(int)an[n]];
+               }
+            }
          } catch (IOException e) {
             e.printStackTrace();
          }
