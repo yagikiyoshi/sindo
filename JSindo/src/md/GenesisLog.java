@@ -18,8 +18,16 @@ public class GenesisLog {
          BufferedReader br = new BufferedReader(new FileReader(fname));
          String line = null;
          
+         double last_step = 0.0;
+         double last_time = 0.0;
+         
          while((line = br.readLine()) != null) {
             if (line.indexOf("INFO") < 0) continue;
+            if (! first && line.indexOf("STEP") > 0) {
+               last_step = data[0].get(data[0].size()-1);
+               last_time = data[1].get(data[0].size()-1);
+               continue;
+            }
             
             String[] splitline = Utilities.splitWithSpaceString(line.substring(6));
             
@@ -31,7 +39,9 @@ public class GenesisLog {
                   data[i] = new ArrayList<Double>();
                }
             } else {
-               for(int i=0; i<map.length; i++) {
+               data[0].add(Double.parseDouble(splitline[0])+last_step);
+               data[1].add(Double.parseDouble(splitline[1])+last_time);
+               for(int i=2; i<map.length; i++) {
                   data[i].add(Double.parseDouble(splitline[i]));
                }
             }
