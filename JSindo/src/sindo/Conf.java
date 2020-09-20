@@ -28,6 +28,7 @@ public class Conf {
       this.nCUP = nCUP;
       this.mm = mm;
       this.vv = vv;
+      this.order();
    }
    
    /**
@@ -42,6 +43,26 @@ public class Conf {
       for(int i=0; i<nCUP; i++){
          mm[i] = conf[i+1];
          vv[i] = conf[i+nCUP+1];
+      }
+      this.order();
+   }
+   
+   /**
+    * Order mode numbers as mm[0] < mm[1] < ...
+    */
+   private void order() {
+      for(int n1=1; n1<nCUP; n1++) {
+         for(int n2=0; n2<n1; n2++) {
+            if(mm[n1]<mm[n2]) {
+               int tmp = mm[n1];
+               mm[n1] = mm[n2];
+               mm[n2] = tmp;
+               
+               tmp = vv[n1];
+               vv[n1] = vv[n2];
+               vv[n2] = tmp;
+            }
+         }
       }
    }
    
@@ -80,15 +101,39 @@ public class Conf {
       }
       return fund;
    }
+   
+   /**
+    * Returns true if the current configuration is equal to input configuration
+    * @param inConf input configuration
+    * @return true or false
+    */
+   public boolean equals(Conf inConf) {
+      if (nCUP != inConf.getnCUP()) {
+         return false;
+      }else {
+         for(int i=0; i<nCUP; i++) {
+            if(this.mm[i] != inConf.getMode()[i]) {
+               return false;
+            }else {
+               if(this.vv[i] != inConf.getExc()[i]) {
+                  return false;
+               }
+            }
+         }
+      }
+      return true;
+   }
+   
    /**
     * Returns the VSCF configuration
     * @return mm1_vv1 mm2_vv2 ...
     */
    public String print(){
       String conf = "";
-      for(int i=0; i<nCUP; i++){
+      for(int i=0; i<nCUP-1; i++){
          conf = conf + mm[i]+"_"+vv[i]+" ";
       }
+      conf = conf + mm[nCUP-1]+"_"+vv[nCUP-1];
       return conf;
    }
    
