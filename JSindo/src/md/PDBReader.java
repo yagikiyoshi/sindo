@@ -16,11 +16,13 @@ public class PDBReader extends FileReaderMD {
    private String alterLoc;
    private ANResolver anr;
    private boolean traj;
+   private boolean hasSegment;
    
    public PDBReader(){
       super();
       anr = new ANResolver();
-      alterLoc = null;
+      alterLoc  = null;
+      hasSegment = true; 
    }
    /**
     * Constructs specifying the name of the file 
@@ -77,10 +79,14 @@ public class PDBReader extends FileReaderMD {
                if(line.substring(0, 4).equalsIgnoreCase("ATOM") ||  line.substring(0, 6).equalsIgnoreCase("HETATM")){
                   AtomMD atom = this.readAtom(line);
                   
-                  if(atom != null){ 
-                     if(line.length() > 72){
-                        segName = line.substring(72, line.length()).trim();
-                        if(segName.length() == 0){
+                  if(atom != null){
+                     if(hasSegment) {
+                        if(line.length() > 72){
+                           segName = line.substring(72, line.length()).trim();
+                           if(segName.length() == 0){
+                              segName = "PRO";
+                           }
+                        }else{
                            segName = "PRO";
                         }
                      }else{
@@ -369,6 +375,14 @@ public class PDBReader extends FileReaderMD {
     */
    public void setAlternateLocation(String altLoc){
       this.alterLoc = altLoc;
+   }
+   
+   /**
+    * Sets whether Segment is read
+    * @param hasSegment true, if the PDB file has Segment. (default = true)
+    */
+   public void setSegment(boolean hasSegment) {
+      this.hasSegment = hasSegment;
    }
    
    @Override
