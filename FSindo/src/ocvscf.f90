@@ -205,18 +205,25 @@
          if(index(line,"Vibrational Data") > 0) exit
       end do
 
-      read(iminfo,*)
-      scfthresh  = Vscf_getEthresh()
-      scfmaxiter = Vscf_getMaxIteration()
-      if(iscreen == 0) then
-         write(iminfo_new,'('' VSCFeth='',e8.2,'',VSCFmaxIter='',i4,'',Eth='',e8.2, &
-                    '',Gth='',e8.2,'',Fse='',i4)') &
-                    scfthresh,scfmaxiter,ethresh,gthresh,order
+      read(iminfo,'(a)') line
+      if(index(line,"Domain") > 0) then
+         write(iminfo_new,'(a)') trim(line)
+
       else
-         write(iminfo_new,'('' VSCFeth='',e8.2,'',VSCFmaxIter='',i4,'',Eth='',e8.2, &
-                    '',Gth='',e8.2,'',Fse='',i4,'',eta12th='',f6.2)') &
-                    scfthresh,scfmaxiter,ethresh,gthresh,order,eta12thresh
-      endif
+         scfthresh  = Vscf_getEthresh()
+         scfmaxiter = Vscf_getMaxIteration()
+         if(iscreen == 0) then
+            write(iminfo_new,'('' VSCFeth='',e8.2,'',VSCFmaxIter='',i4,'',Eth='',e8.2, &
+                       '',Gth='',e8.2,'',Fse='',i4)') &
+                       scfthresh,scfmaxiter,ethresh,gthresh,order
+         else
+            write(iminfo_new,'('' VSCFeth='',e8.2,'',VSCFmaxIter='',i4,'',Eth='',e8.2, &
+                       '',Gth='',e8.2,'',Fse='',i4,'',eta12th='',f6.2)') &
+                       scfthresh,scfmaxiter,ethresh,gthresh,order,eta12thresh
+         endif
+
+
+      end if
 
       do while(.true.)
          read(iminfo,'(a)') line
