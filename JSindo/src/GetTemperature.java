@@ -69,14 +69,14 @@ public class GetTemperature {
                   }
                   tave = tave / (double)(i - ist +1);
                   pw.printf("%12.4f  %15.4f   %15.4f \n", time[i], temperature[i], tave);
-                  if (i > nthrow) ave[n] += temperature[i];
+                  if (i >= nthrow) ave[n] += temperature[i];
                }
                
                
             }else {
                for(int i=0; i<time.length; i++) {
                   pw.printf("%12.4f  %15.4f \n", time[i], temperature[i]);
-                  if (i > nthrow) ave[n] += temperature[i];
+                  if (i >= nthrow) ave[n] += temperature[i];
                }
                
             }
