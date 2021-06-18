@@ -39,7 +39,8 @@
                  includes="*.class
                            */*.class"/>
       </jar>
-      <copy todir="${dir.jar}" >
+      <mkdir dir="${dir.jar}/ext" />
+      <copy todir="${dir.jar}/ext" >
         <fileset dir="${jama_dir}" includes="*.jar" />
         <fileset dir="${j3d_dir}"  includes="*.jar" />
       </copy>
