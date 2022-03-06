@@ -6,20 +6,47 @@ if [ -e manifest.mf ]; then
 fi
 echo "Main-Class: JSindo" >> manifest.mf
 
+# DL external jars
+if [ ! -e external_jars/Jama-1.0.3.jar ]; then
+  cd external_jars/
+  ./download_jars.sh
+  cd ..
+fi
+
+# create fat-jar
 mkdir tmp
 cd tmp
 
-jar -xvf ../../../external_jars/jogamp-v2.4.0-rc-20210111/jogamp-fat.jar
-cp       ../../../external_jars/jogamp-v2.4.0-rc-20210111/jogamp-all-platforms/*txt .
+cp       ../external_jars/jogamp-all-platforms/gluegen.LICENSE.txt .
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-linux-aarch64.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-linux-amd64.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-linux-armv6hf.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-linux-i586.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-macosx-universal.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-windows-amd64.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/gluegen-rt-natives-windows-i586.jar
 
-jar -xvf ../../../external_jars/jogamp-java3d-1.6.2/j3dcore.jar
-jar -xvf ../../../external_jars/jogamp-java3d-1.6.2/j3dutils.jar
-jar -xvf ../../../external_jars/jogamp-java3d-1.6.2/vecmath.jar
-rm COPYRIGHT.txt
-rm LICENSE.txt
+cp       ../external_jars/jogamp-all-platforms/jogl.LICENSE.txt .
+cp       ../external_jars/jogamp-all-platforms/jogl.README.txt  .
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-linux-aarch64.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-linux-amd64.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-linux-armv6hf.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-linux-i586.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-macosx-universal.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-windows-amd64.jar
+jar -xvf ../external_jars/jogamp-all-platforms/jar/jogl-all-natives-windows-i586.jar
 
-jar -xvf ../../../external_jars/Jama-1.0.3/Jama-1.0.3.jar
-cp       ../../../external_jars/Jama-1.0.3.txt .
+jar -xvf ../external_jars/j3dcore.jar
+jar -xvf ../external_jars/j3dutils.jar
+jar -xvf ../external_jars/vecmath.jar
+mv COPYRIGHT.txt java3d.COPYRIGHT.txt
+mv LICENSE.txt   java3d.LICENSE.txt
+
+jar -xvf ../external_jars/Jama-1.0.3.jar
+cp       ../external_jars/Jama-1.0.3.txt .
 
 jar -xvf ../jar/JSindo-4.0.beta.jar
 cp       ../../LICENSE   ./sindo.LICENSE.txt
