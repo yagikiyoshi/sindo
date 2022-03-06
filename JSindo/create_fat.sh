@@ -6,13 +6,6 @@ if [ -e manifest.mf ]; then
 fi
 echo "Main-Class: JSindo" >> manifest.mf
 
-# DL external jars
-if [ ! -e external_jars/Jama-1.0.3.jar ]; then
-  cd external_jars/
-  ./download_jars.sh
-  cd ..
-fi
-
 # create fat-jar
 mkdir tmp
 cd tmp

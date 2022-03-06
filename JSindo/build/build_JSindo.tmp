@@ -9,8 +9,7 @@
     <property name="dir.jar" value="./jar"/>
     <property name="jarfile" value="JSindo-VERSION.jar"/>
     <property environment="env"/>
-    <property name="jama_dir" value="JAMA_DIR"/>
-    <property name="j3d_dir"  value="J3D_DIR"/>
+    <property name="extjar_dir" value="external_jars"/>
 
     <target name="clean">
       <delete dir="${dir.bin}" />
@@ -20,8 +19,7 @@
     <target name="compile">
       <mkdir dir="${dir.bin}" />
       <path id="buildpath">
-        <fileset dir="${jama_dir}" includes="*.jar" />
-        <fileset dir="${j3d_dir}"  includes="*.jar" />
+        <fileset dir="${extjar_dir}" includes="*.jar" />
       </path>
       <javac srcdir="./src" destdir="${dir.bin}" 
              includeantruntime="false" 
@@ -39,11 +37,6 @@
                  includes="*.class
                            */*.class"/>
       </jar>
-      <mkdir dir="${dir.jar}/ext" />
-      <copy todir="${dir.jar}/ext" >
-        <fileset dir="${jama_dir}" includes="*.jar" />
-        <fileset dir="${j3d_dir}"  includes="*.jar" />
-      </copy>
     </target>
 
 </project>
