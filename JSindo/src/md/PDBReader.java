@@ -93,12 +93,13 @@ public class PDBReader extends FileReaderMD {
                         segName = "PRO";
                      }
                      
+                     /*
+                      * How shall we treat the chain label?
                      String chain = line.substring(21,22).trim();
                      if(chain.length() != 0) {
                         segName += chain;
-                     }else {
-                        segName += "A";
                      }
+                     */
                      
                      if(! segName.equals(current_seg.getName())) {
                         
@@ -189,8 +190,10 @@ public class PDBReader extends FileReaderMD {
          }
       }
       
-      int atomID = Integer.parseInt(line.substring(6, 11).trim());
-      atom.setID(atomID);
+      if (! line.subSequence(6, 7).equals("*")) {
+         int atomID = Integer.parseInt(line.substring(6, 11).trim());
+         atom.setID(atomID);
+      }
 
       String label = line.substring(12, 16).trim();
       atom.setLabel(label);
