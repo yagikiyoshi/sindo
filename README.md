@@ -37,7 +37,7 @@ kiyoshi.yagi@riken.jp
 ## Copyright Notice
 SINDO is distributed under the GNU General Public License version 3.
 
-Copyright 2009 - 2020
+Copyright 2009 - 2022
 
 SINDO is free software; you can redistribute it and/or  
 modify it under the terms of the GNU Lesser General Public  
@@ -52,6 +52,17 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public  
 License along with SINDO -- see the file COPYING   
 If not, see https://www.gnu.org/licenses/.
+
+## External packages
+JSindo uses the following packages.
+
+-  GlueGen, JOGL, and Java3D from JogAmp: High Performance Cross 
+   Platform Java Libraries for 3D Graphics, Multimedia and Processing.
+   See https://jogamp.org/
+
+-  JAMA : A Java Matrix Package. See https://math.nist.gov/javanumerics/jama/
+
+The license files are included in `JSindo/external_licenses`.
 
 ## Acknowledgment ##
 Dr. Hiroya Asami (Gakushuin Univ.)  
@@ -87,12 +98,7 @@ K. Yagi, T. Taketsugu, K. Hirao, and M. S. Gordon, J. Chem. Phys. 113, 1005-1017
 #### Complex Systems
 1. Anharmonic Vibrational Analysis of Biomolecules and Solvated Molecules Using Hybrid QM/MM Computations,
 K. Yagi, K. Yamada, C. Kobayashi, and Y. Sugita, J. Chem. Theory Comput. 15, 1924 (2019).
+1. Anharmonic Vibrational Calculations Based on Group-Localized Coordinates: Applications to Internal Water Molecules in Bacteriorhodopsin
+K. Yagi and Y. Sugita, J. Chem. Theory Comput. 17, 5007 (2021)
 
-
-## Grant-in-aid ##  
-2007-2012 Scientific Research (KAKENHI) on Priority Areas (477)   
-“Molecular Science for Supra Functional Systems” supported by MEXT, Japan.  
-2017-2018 Grant-in-Aid for Scientific Research on Innovative Areas (2503)   
-“Science on Function of Soft Molecular Systems by Cooperation of Theory   
-and Experiment" supported by MEXT, Japan.  
 
