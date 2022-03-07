@@ -29,9 +29,9 @@ FSindo/lib/*.a
 JSindo/bin
 JSindo/build_JSindo.xml
 JSindo/jar
-JSindo/external_jars/*jar
-JSindo/external_jars/jogamp-all-platforms
-JSindo/external_jars/jogamp-all-platforms.7z
+JSindo/external_jars
+JSindo/external_license
+
 # memo used for debug
 JSindo/memo
 
