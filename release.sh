@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # NOTE: Don't forget to update:
-#  o JSindo/src/VersionInfo.java
+#  o JSindo/src/sys/VersionInfo.java
 #  o FSindo/src/tools.f90
 #
 
@@ -35,12 +35,19 @@ cp -a README.md $sindoDir
 cp -a sindovars.sh $sindoDir
 
 # JSindo
+echo " - copying JSindo"
 cd JSindo
-ant -f build_JSindo.xml  >& /dev/null
-cp -a jar $sindoDir/JSindo
+./build.sh >& /dev/null
+cp -a jar  $sindoDir/JSindo
+cp -a src  $sindoDir/JSindo
+cp -a test $sindoDir/JSindo
+
+aa=$(grep external_license= build.sh)
+cp -a ${aa#*=} $sindoDir/JSindo
 cd ..
 
 # FSindo
+echo " - copying FSindo"
 cd FSindo
 tarball=fsindo.tar.gz
 tar --exclude *.o --exclude *.mod --exclude make.inc -zcf $tarball configure config src util
@@ -53,6 +60,7 @@ cp -a script $sindoDir
 rm $sindoDir/script/runGaussian.sh
 
 # doc
+echo " - copying doc"
 cd doc/JSindo
 cp -a *.pdf  $docDir/JSindo
 
@@ -80,8 +88,8 @@ cp -a *.pdf $docDir/lecture_notes
 
 # create archive
 cd $releaseDir
-tar -zcvf $sindo.tar.gz $sindo
-tar -zcvf $doc.tar.gz $doc
+tar -zcf $sindo.tar.gz $sindo
+tar -zcf $doc.tar.gz $doc
 
 echo ""
 echo "Release version made in ../release/$(date +%F)."
