@@ -1,10 +1,7 @@
 # How to build JSindo
 
-Jar files of JSindo is created by the following script.  
-
-    $ ./build.sh
-
-- The build of JSindo requires the Java development kit (JDK) to compile the code.  
+## Prerequisite
+  The build of JSindo requires the Java development kit (JDK) to compile the code.  
   Also, these unix commands are needed.
     - wget : to download files from the Internet
     - unar : to extract 7z files
@@ -12,12 +9,20 @@ Jar files of JSindo is created by the following script.
 
   They are available via brew (mac), apt (ubuntu), or yum (centos). 
 
-- Exernal jars will be downloaded to `external_jars` directory.
+
+## Build JSindo
+Jar files of JSindo is created by the following script.  
+
+    $ ./build.sh
+
+This command does the following.
+
+1. Exernal jars will be downloaded to `external_jars` directory.
     - jogamp (v2.4.0) : https://jogamp.org
     - java3d (v1.6.2) : https://jogamp.org
     - jama   (v1.0.3) : https://math.nist.gov/javanumerics/jama/
 
-- `build_JSindo.xml` is created in the current directory, which builds 
+1. `build_JSindo.xml` is created in the current directory, which builds 
   `JSindo-$version.jar` by the following command,
 
       $ ant -f build_JSindo.xml
@@ -25,17 +30,18 @@ Jar files of JSindo is created by the following script.
   This command compiles the source codes in `src` and `test`, creates 
   class files in `bin`, and creates the jar file in `jar`.
 
-- The jar files of JSindo and external programs are archived to 
+1. The jar files of JSindo and external programs are archived to 
   one executable jar file, `jar/JSindo-$version_fat.jar`.
 
-- All external licenses are gathered in `external_license`.
+1. Finally, all external licenses are gathered in `external_license`.
 
-- To clean up the build,
+## Clean up
+To clean up the build,
 
-      $ ant -f build_JSindo.xml clean
+    $ ant -f build_JSindo.xml clean
 
-  To clean up everthing (downloaded files will be also removed).
+To clean up everthing (downloaded files will be also removed).
 
-      $ ./cleanup.sh
+    $ ./cleanup.sh
 
 
