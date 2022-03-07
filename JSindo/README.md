@@ -9,9 +9,10 @@ Jar files of JSindo is created by the following script.
     - wget : to download files from the Internet
     - unar : to extract 7z files
     - ant  : to compile java source codes, and to build jar files.
+
   They are available via brew (mac), apt (ubuntu), and yum (centos). 
 
-- Exernal jars will be downloaded to `external_jars` directory, if it doesn't exist.
+- Exernal jars will be downloaded to `external_jars` directory.
     - jogamp (v2.4.0) : https://jogamp.org
     - java3d (v1.6.2) : https://jogamp.org
     - jama   (v1.0.3) : https://math.nist.gov/javanumerics/jama/
@@ -19,7 +20,7 @@ Jar files of JSindo is created by the following script.
 - Then, `build_JSindo.xml` is created in the current directory, which is used to build  
   JSindo-$version.jar
 
-    $ ant -f build_JSindo.xml
+      $ ant -f build_JSindo.xml
 
   This command compiles source codes in `src` and `test`, creates class files in `bin`, and creates a jar file, `jar/JSindo-$version.jar`.
 
@@ -29,10 +30,10 @@ Jar files of JSindo is created by the following script.
 
 - To clean up the build,
 
-    $ ant -f build_JSindo.xml clean
+      $ ant -f build_JSindo.xml clean
 
   To clean up everthing (downloaded jars will be also removed).
 
-    $ ./cleanup.sh
+      $ ./cleanup.sh
 
 
