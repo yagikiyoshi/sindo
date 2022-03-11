@@ -98,7 +98,9 @@ K. Yagi, T. Taketsugu, K. Hirao, and M. S. Gordon, J. Chem. Phys. 113, 1005-1017
 #### Complex Systems
 1. Anharmonic Vibrational Analysis of Biomolecules and Solvated Molecules Using Hybrid QM/MM Computations,
 K. Yagi, K. Yamada, C. Kobayashi, and Y. Sugita, J. Chem. Theory Comput. 15, 1924 (2019).
-1. Anharmonic Vibrational Calculations Based on Group-Localized Coordinates: Applications to Internal Water Molecules in Bacteriorhodopsin
-K. Yagi and Y. Sugita, J. Chem. Theory Comput. 17, 5007 (2021)
+1. Anharmonic Vibrational Calculations Based on Group-Localized Coordinates: Applications to Internal Water Molecules in Bacteriorhodopsin,
+K. Yagi and Y. Sugita, J. Chem. Theory Comput. 17, 5007 (2021).
+1. Towards complete assignment of the infrared spectrum of the protonated water cluster H+(H2O)21,
+J. Liu, J. Yang, X. C. Zeng, S. S. Xantheas, K. Yagi, and X. He, Nat. Comm. 12, 6141 (2021).
 
 

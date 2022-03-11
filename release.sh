@@ -3,7 +3,7 @@
 
 version=$(cat VERSION)_$(date +%y%m%d)
 sindo=sindo-$version
-doc=doc
+doc=doc-$version
 
 backup=.bak
 
@@ -12,7 +12,7 @@ if [ -e $releaseDir ]; then
   rm -rf $releaseDir
 fi
 sindoDir=$releaseDir/$sindo
-docDir=$releaseDir/$sindo/$doc
+docDir=$releaseDir/$doc
 
 echo "Creating a release version [ "$(date +%F)" ]"
 mkdir -p $sindoDir
@@ -73,25 +73,22 @@ rm $sindoDir/script/runGaussian.sh
 # doc
 echo " - copying doc"
 cd doc/JSindo
-cp -a *.pdf  $docDir/JSindo
-
-tar -zcf sample_JSindo.tar.gz sample_JSindo
-mv sample_JSindo.tar.gz $docDir/JSindo
+cp -a *.pdf         $docDir/JSindo
+cp -a sample_JSindo $docDir/JSindo
 
 cd ../FSindo
-cp -a *.pdf  $docDir/FSindo
-tar -zcf sample_FSindo.tar.gz sample_FSindo
-mv sample_FSindo.tar.gz $docDir/FSindo
+cp -a *.pdf         $docDir/FSindo
+cp -a sample_FSindo $docDir/FSindo
 
 cd ../MakePES
-cp -a *.pdf  $docDir/MakePES
-tar -zcf sample_MakePES.tar.gz sample_MakePES
-mv sample_MakePES.tar.gz $docDir/MakePES
+cp -a *.pdf          $docDir/MakePES
+cp -a sample_MakePES $docDir/MakePES
 
 cd ../GENESIS
 cp -a *.pdf  $docDir/GENESIS
 tar -zcf sample_sindo_genesis.tar.gz --exclude *wako.sh sample_sindo_genesis
-mv sample_sindo_genesis.tar.gz $docDir/GENESIS
+tar -zxf sample_sindo_genesis.tar.gz -C $docDir/GENESIS
+rm sample_sindo_genesis.tar.gz
 
 cd ../lecture_notes
 cp -a *.pdf $docDir/lecture_notes
@@ -99,9 +96,8 @@ cp -a *.pdf $docDir/lecture_notes
 
 # create archive
 cd $releaseDir
-#tar -zcf $sindo.tar.gz $sindo
-#tar -zcf $doc.tar.gz $doc
 zip -r $sindo.zip $sindo
+zip -r $doc.zip   $doc
 
 echo ""
 echo "Release version made in ../release/$(date +%F)."
