@@ -1,3 +1,6 @@
+#!/bin/bash
+
+. /path/to/sindo/sindovars.sh
 
 sindo < ocvscf.inp   > ocvscf.out   2>&1
 sindo < ncvqdpt2.inp > ncvqdpt2.out 2>&1

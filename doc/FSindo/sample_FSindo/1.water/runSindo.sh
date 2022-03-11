@@ -1,8 +1,9 @@
-#    SINDO=/path/to/FSindo/bin/sindo
-    SINDO=/Users/kyagi/Work/devel/sindo/sindo.master/FSindo/bin/sindo
+#!/bin/bash
 
-#    ${SINDO} < vscf.inp   > vscf.out   2>&1
-    ${SINDO} < vmp2.inp   > vmp2.out   2>&1
-#    ${SINDO} < vqdpt2.inp > vqdpt2.out 2>&1
-#    ${SINDO} < vci.inp    > vci.out    2>&1
+. /path/to/sindo/sindovars.sh
+
+sindo < vscf.inp   > vscf.out   2>&1
+sindo < vmp2.inp   > vmp2.out   2>&1
+sindo < vqdpt2.inp > vqdpt2.out 2>&1
+sindo < vci.inp    > vci.out    2>&1
 
