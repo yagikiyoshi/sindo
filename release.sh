@@ -1,20 +1,18 @@
 #!/bin/bash
 
-# NOTE: Don't forget to update:
-#  o JSindo/src/sys/VersionInfo.java
-#  o FSindo/src/tools.f90
-#
 
 version=$(cat VERSION)_$(date +%y%m%d)
 sindo=sindo-$version
-doc=doc-$version
+doc=doc
+
+backup=.bak
 
 releaseDir=$(pwd)/../release/$(date +%F)
 if [ -e $releaseDir ]; then
   rm -rf $releaseDir
 fi
 sindoDir=$releaseDir/$sindo
-docDir=$releaseDir/$doc
+docDir=$releaseDir/$sindo/$doc
 
 echo "Creating a release version [ "$(date +%F)" ]"
 mkdir -p $sindoDir
@@ -37,6 +35,10 @@ cp -a sindovars.sh $sindoDir
 # JSindo
 echo " - copying JSindo"
 cd JSindo
+
+VersionInfo=src/sys/VersionInfo.java
+sed -i $backup -e "s/development/$(date +%m%d)/"  $VersionInfo
+
 ./build.sh >& /dev/null
 cp -a jar  $sindoDir/JSindo
 cp -a src  $sindoDir/JSindo
@@ -44,15 +46,24 @@ cp -a test $sindoDir/JSindo
 
 aa=$(grep external_license= build.sh)
 cp -a ${aa#*=} $sindoDir/JSindo
+
+mv ${VersionInfo}$backup $VersionInfo
+
 cd ..
 
 # FSindo
 echo " - copying FSindo"
 cd FSindo
+
+tools=src/tools.f90
+sed -i $backup -e "s/DEVEL/$(date +%m%d) /" $tools
+
 tarball=fsindo.tar.gz
 tar --exclude *.o --exclude *.mod --exclude make.inc -zcf $tarball configure config src util
 tar -zxf $tarball -C $sindoDir/FSindo
 rm $tarball
+
+mv ${tools}$backup $tools
 cd ..
 
 # script
@@ -88,8 +99,9 @@ cp -a *.pdf $docDir/lecture_notes
 
 # create archive
 cd $releaseDir
-tar -zcf $sindo.tar.gz $sindo
-tar -zcf $doc.tar.gz $doc
+#tar -zcf $sindo.tar.gz $sindo
+#tar -zcf $doc.tar.gz $doc
+zip -r $sindo.zip $sindo
 
 echo ""
 echo "Release version made in ../release/$(date +%F)."

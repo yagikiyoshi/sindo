@@ -11,7 +11,7 @@
       Write(Iout,*) '-------------------------------------------------------'
       Write(Iout,*) '                                                     '
       Write(Iout,*) '   ***   WELCOME TO SINDO PROGRAM                    '
-      Write(Iout,*) '    ***                (  VERSION 4.0 0307  )        '
+      Write(Iout,*) '    ***                (  VERSION 4.0 DEVEL )        '
       Write(Iout,*) '     ***                                             '
       Write(Iout,*) '      ***       COPYRIGHT 2022:                      '
       Write(Iout,*) '       ***         KIYOSHI YAGI  KIYOSHI.YAGI@RIKEN.JP'
