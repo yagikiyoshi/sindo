@@ -1,5 +1,5 @@
 #!/bin/bash
 
-. ../../sindovars.sh
-java -cp "$sindo_jar/*" RunMakePES -f makePES.xml >& makePES.out
+. /path/to/sindo/sindovars.sh
+java RunMakePES -f makePES.xml >& makePES.out
 

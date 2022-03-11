@@ -30,7 +30,7 @@ cp -a LICENSE $sindoDir
 cp -a README.md $sindoDir
 
 # copy environment variables
-cp -a sindovars.sh $sindoDir
+sed -e "s/version/$(cat VERSION)/" sindovars.sh > $sindoDir/sindovars.sh
 
 # JSindo
 echo " - copying JSindo"
