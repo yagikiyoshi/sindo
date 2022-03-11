@@ -25,7 +25,7 @@ if [ ! -e ${external_jars} ]; then
   wget https://jogamp.org/deployment/java3d/1.6.2/vecmath.jar
 
   # JAMA
-  wget https://math.nist.gov/javanumerics/jama/Jama-1.0.3.jar
+  wget --no-check-certificate https://math.nist.gov/javanumerics/jama/Jama-1.0.3.jar
 
   cd ..
 
