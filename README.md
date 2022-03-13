@@ -82,10 +82,14 @@ K. Yagi, Mol. Sci. 10, A0085 (2016). [PDF]
 #### Vibrational Theories
 1. Vibrational quasi-degenerate perturbation theory with optimized coordinates: Applications to ethylene and trans-1,3-butadiene,
 K. Yagi and H. Otaki, J. Chem. Phys. 140, 084113 (2014). [13 pages]
-1. Optimized coordinates for anharmonic vibrational structure theories,
-K. Yagi, M. Keçeli, and S. Hirata, J. Chem. Phys. 137, 204118 (2012). [16 pages]
 1. Vibrational quasi-degenerate perturbation theory: Applications to Fermi resonance in CO2, H2CO, and C6H6,
 K. Yagi, S. Hirata, and K. Hirao, Phys. Chem. Chem. Phys. 10, 1781-1788 (2008).
+
+#### Coordinates
+1. Optimized coordinates for anharmonic vibrational structure theories,
+K. Yagi, M. Keçeli, and S. Hirata, J. Chem. Phys. 137, 204118 (2012). [16 pages]
+1. Anharmonic Vibrational Calculations Based on Group-Localized Coordinates: Applications to Internal Water Molecules in Bacteriorhodopsin,
+K. Yagi and Y. Sugita, J. Chem. Theory Comput. 17, 5007-5020 (2021).
 
 #### PES Generation
 1. Multiresolution potential energy surfaces for vibrational state calculations,
@@ -95,11 +99,9 @@ K. Yagi, K. Hirao, T. Taketsugu, M. W. Schmidt, and M. S. Gordon, J. Chem. Phys.
 1. Direct vibrational self-consistent field method: Application to H2O and H2CO,
 K. Yagi, T. Taketsugu, K. Hirao, and M. S. Gordon, J. Chem. Phys. 113, 1005-1017 (2000).
 
-#### Complex Systems
+#### Applications
 1. Anharmonic Vibrational Analysis of Biomolecules and Solvated Molecules Using Hybrid QM/MM Computations,
 K. Yagi, K. Yamada, C. Kobayashi, and Y. Sugita, J. Chem. Theory Comput. 15, 1924 (2019).
-1. Anharmonic Vibrational Calculations Based on Group-Localized Coordinates: Applications to Internal Water Molecules in Bacteriorhodopsin,
-K. Yagi and Y. Sugita, J. Chem. Theory Comput. 17, 5007 (2021).
 1. Towards complete assignment of the infrared spectrum of the protonated water cluster H+(H2O)21,
 J. Liu, J. Yang, X. C. Zeng, S. S. Xantheas, K. Yagi, and X. He, Nat. Comm. 12, 6141 (2021).
 
