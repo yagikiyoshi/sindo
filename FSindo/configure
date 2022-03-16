@@ -136,71 +136,90 @@
 
    fi
 
-   if [ $TARGET = ifortI8 ] || [ $TARGET = ifort ]; then
-      if [ ! -z $MKLROOT ]; then
-         echo "Intel MKL library is detected. Would you like to use MKL? [y/n]:"
+   if [ ! -z $MKLROOT ]; then
+      echo "Intel MKL library is detected. Would you like to use MKL? [y/n]:"
+      read yn
+      if [ $yn = y ] || [ $yn = Y ]; then
+         TARGET=$TARGET"_MKL"
+
+         echo "Would you like to use multi-threaded layer? [y/n]:"
          read yn
          if [ $yn = y ] || [ $yn = Y ]; then
-            TARGET=$TARGET"_MKL"
-
-            echo "Would you like to use multi-threaded layer? [y/n]:"
-            read yn
-            if [ $yn = y ] || [ $yn = Y ]; then
-               TARGET=$TARGET"_thread"
-            else
-               TARGET=$TARGET"_sequential"
-            fi
-
-            if [ $TARGET = ifortI8_MKL_thread ]; then
-               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_ilp64.a \
-                       $(MKLROOT)/lib/intel64/libmkl_lapack95_ilp64.a \
-                       -Wl,--start-group \
-                         $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
-                         $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
-                         $(MKLROOT)/lib/intel64/libmkl_core.a \
-                       -Wl,--end-group \
-                       -liomp5 -lpthread -lm'
-            elif [ $TARGET = ifortI8_MKL_sequential ]; then
-               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_ilp64.a \
-                       $(MKLROOT)/lib/intel64/libmkl_lapack95_ilp64.a \
-                       -Wl,--start-group \
-                         $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
-                         $(MKLROOT)/lib/intel64/libmkl_sequential.a \
-                         $(MKLROOT)/lib/intel64/libmkl_core.a \
-                       -Wl,--end-group \
-                       -lpthread -lm'
-            elif [ $TARGET = ifort_MKL_thread ]; then
-               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a \
-                       $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a \
-                       -Wl,--start-group \
-                         $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
-                         $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
-                         $(MKLROOT)/lib/intel64/libmkl_core.a \
-                       -Wl,--end-group \
-                       -liomp5 -lpthread -lm'
-            elif [ $TARGET = ifort_MKL_sequential ]; then
-               LAPACK='$(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a \
-                       $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a \
-                       -Wl,--start-group  \
-                         $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
-                         $(MKLROOT)/lib/intel64/libmkl_sequential.a \
-                         $(MKLROOT)/lib/intel64/libmkl_core.a \
-                       -Wl,--end-group \
-                       -lpthread -lm'
-            fi
-
-            echo ""
-            echo "The link for LAPACK/BLAS is set to:"
-            echo ""
-            echo "LAPACK=$LAPACK"
-            echo ""
-            echo "Please check if the above line is appropriate for your MKL library "
-            echo "and edit src/make.inc to correct." 
-            echo "The link adviosor provided by Intel may be helpful to figure out:"
-            echo "   > http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor."
-            echo ""
-
+            TARGET=$TARGET"_thread"
+         else
+            TARGET=$TARGET"_sequential"
          fi
+
+         if [ $TARGET = ifortI8_MKL_thread ]; then
+            LAPACK=' -Wl,--start-group \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -liomp5 -lpthread -lm -ldl'
+         elif [ $TARGET = ifortI8_MKL_sequential ]; then
+            LAPACK=' -Wl,--start-group \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_sequential.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -lpthread -lm -ldl'
+         elif [ $TARGET = ifort_MKL_thread ]; then
+            LAPACK=' -Wl,--start-group \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -liomp5 -lpthread -lm -ldl'
+         elif [ $TARGET = ifort_MKL_sequential ]; then
+            LAPACK=' -Wl,--start-group  \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_sequential.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -lpthread -lm -ldl'
+
+         elif [ $TARGET = gfortranI8_MKL_thread ]; then
+            LAPACK=' -Wl,--start-group \
+                      $(MKLROOT)/lib/intel64/libmkl_gf_ilp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -liomp5 -lpthread -lm -ldl'
+         elif [ $TARGET = gfortranI8_MKL_sequential ]; then
+            LAPACK=' -Wl,--start-group \
+                      $(MKLROOT)/lib/intel64/libmkl_gf_ilp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_sequential.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -lpthread -lm -ldl'
+         elif [ $TARGET = gfortran_MKL_thread ]; then
+            LAPACK=' -Wl,--start-group \
+                      $(MKLROOT)/lib/intel64/libmkl_gf_lp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -liomp5 -lpthread -lm -ldl'
+         elif [ $TARGET = gfortran_MKL_sequential ]; then
+            LAPACK=' -Wl,--start-group  \
+                      $(MKLROOT)/lib/intel64/libmkl_gf_lp64.a \
+                      $(MKLROOT)/lib/intel64/libmkl_sequential.a \
+                      $(MKLROOT)/lib/intel64/libmkl_core.a \
+                    -Wl,--end-group \
+                    -lpthread -lm -ldl'
+         fi
+
+         echo ""
+         echo "The link for LAPACK/BLAS is set to:"
+         echo ""
+         echo "LAPACK=$LAPACK"
+         echo ""
+         echo "Please check if the above line is appropriate for your MKL library "
+         echo "and edit src/make.inc to correct." 
+         echo "The link adviosor provided by Intel may be helpful to figure out:"
+         echo "   > https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html"
+         echo ""
+
       fi
    fi
 
