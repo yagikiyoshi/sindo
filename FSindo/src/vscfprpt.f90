@@ -23,7 +23,7 @@
    Integer :: maxCup,Target_getMaxCup,cp,ci,cj
    Integer, allocatable :: mi(:),vi(:),mj(:),vj(:),m12(:),v12(:)
 
-   Integer :: i,j,m
+   Integer :: i,j,m,mm(1)
 
       ! The property calc. is designed for zero-point and virtual VSCF
       vscfWfn='vscf-000.wfn'
@@ -42,9 +42,10 @@
       iCnf=0
       jCnf=0
       mat=0.D+00
+      mm=0
       if(matrix(idPrpt)>0) then
          ! i=0, j=0
-         Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+         Call Pmat_getMatrix(0,mm,iCnf,iCnf,mat)
          write(ifl,'(2i5)') 1,1
          write(ifl,'(i5)') nData
          write(ifl,'(5e17.8)') mat
@@ -80,7 +81,7 @@
             End do
 
             ! j=i
-            Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+            Call Pmat_getMatrix(0,mm,iCnf,iCnf,mat)
             write(ifl,'(2i5)') i+1,i+1
             write(ifl,'(i5)') nData
             write(ifl,'(5e17.8)') mat
@@ -93,7 +94,7 @@
 
       else
          ! i=0, j=0
-         Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+         Call Pmat_getMatrix(0,mm,iCnf,iCnf,mat)
          write(ifl,'(2i5)') 1,1
          write(ifl,'(i5)') nData
          write(ifl,'(5e17.8)') mat
@@ -104,7 +105,7 @@
                iCnf(mi(m))=vi(m)
             End do
 
-            Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+            Call Pmat_getMatrix(0,mm,iCnf,iCnf,mat)
             write(ifl,'(2i5)') i+1,i+1
             write(ifl,'(i5)') nData
             write(ifl,'(5e17.8)') mat

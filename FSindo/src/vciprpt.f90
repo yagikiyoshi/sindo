@@ -63,7 +63,7 @@ End module
    Integer, allocatable :: mij(:),vij(:)
    Integer :: iCnf(Nfree),jCnf(Nfree)
 
-   Integer :: i,j
+   Integer :: i,j,mode(1)
    Real(8) :: mat(nData)
 
       Call Vciprpt_readInput()
@@ -112,7 +112,7 @@ End module
             End do
          End do
 
-         Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+         Call Pmat_getMatrix(0,mode,iCnf,iCnf,mat)
          Pmat(i,i,:)=mat
 
          Do cp=1,lcup(i)

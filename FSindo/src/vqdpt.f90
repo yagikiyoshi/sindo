@@ -212,7 +212,7 @@ End module
    Implicit None
 
    Integer :: i,j,jj,k,kk
-   Integer :: lbl(Nfree)
+   Integer :: lbl(Nfree),mode(1)
    Real(8) :: Ezp_vpt2,Ezp_vpt1,Ene_vpt2,Ene_vpt1,E0,E1,E2
    Real(8), allocatable :: Hpp(:),Cpp(:,:),Ep(:)
 
@@ -221,6 +221,7 @@ End module
    Integer, allocatable :: target_idx(:)
    Integer :: wwf
 
+      mode(1)=0
       Call GetEnv('SINDOWORK',fw)
       len_fw=Len_Trim(fw)
       if(len_fw /=0) then
@@ -273,7 +274,7 @@ End module
 
       lbl=0
       Call Vpt_getE0(lbl,E0)
-      Call Hmat_getHmat(0,0,lbl,lbl,E1)
+      Call Hmat_getHmat(0,mode,lbl,lbl,E1)
       Call Vpt_getE2(lbl,E0,E2)
 
       E0=E0*H2wvn
@@ -319,7 +320,7 @@ End module
             jj=tstID(1,i)
             Call Target_getLabel(jj,Nfree,lbl)
             Call Vpt_getE0(lbl,E0)
-            Call Hmat_getHmat(0,0,lbl,lbl,E1)
+            Call Hmat_getHmat(0,mode,lbl,lbl,E1)
             Call Vpt_getE2(lbl,E0,E2)
 
             E0=E0*H2wvn
@@ -1360,7 +1361,7 @@ End module
             End do
          End do
 
-         Call Hmat_getHmat(0,0,lbli,lbli,Hmat(k))
+         Call Hmat_getHmat(0,mm(1:1),lbli,lbli,Hmat(k))
          k=k+1
 
          Do ic=1,pcup(i) 
@@ -1455,7 +1456,7 @@ End module
             End do
          End do
 
-         Call Hmat_getHmat(0,0,lbli,lbli,Hmat(ij))
+         Call Hmat_getHmat(0,mij(1:1),lbli,lbli,Hmat(ij))
 
          ij=ij+1
          Do k=1,pCnf_cup(i)
