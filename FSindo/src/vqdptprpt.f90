@@ -125,7 +125,9 @@ End module
    Real(8), allocatable :: Pmat(:,:,:),coeff(:,:),aa(:,:),bb(:)
    Real(8) :: ddot
 
-   Integer :: i,j,k,l,m
+   Integer :: i,j,k,l,m,mode(1)
+
+      mode(1)=0
 
       Call setupConf()
       Allocate(mij(maxCup),vij(maxCup))
@@ -138,7 +140,7 @@ End module
       Open(jfl,file='vqdpt-w.wfn',status='old')
 
       iCnf=0; jCnf=0
-      Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+      Call Pmat_getMatrix(0,mode,iCnf,iCnf,mat)
       write(ifl,'(''GROUP    0'')') 
       write(ifl,'(i5)') nData
       write(ifl,'(5e17.8)') mat
@@ -151,7 +153,7 @@ End module
             Do i=1,cup(nst)
                iCnf(mm(i,nst))=vv(i,nst)
             End do
-            Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+            Call Pmat_getMatrix(0,mode,iCnf,iCnf,mat)
             write(ifl,'(i5)') nData
             write(ifl,'(5e17.8)') mat
             Do i=1,cup(nst)
@@ -197,7 +199,7 @@ End module
                   End do
                End do
 
-               Call Pmat_getMatrix(0,0,iCnf,iCnf,mat)
+               Call Pmat_getMatrix(0,mode,iCnf,iCnf,mat)
                Pmat(i,i,:)=mat
 
                Do k=1,cup(nst+i)

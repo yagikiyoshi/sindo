@@ -160,10 +160,11 @@ End module
    Implicit None
 
    Integer :: i,j
-   Integer :: lbl(Nfree)
+   Integer :: lbl(Nfree), mode(1)
    Real(8) :: Ezp_vpt2,Ezp_vpt1,Ene_vpt2,Ene_vpt1,E0,E1,E2
    Integer :: wwf
 
+      mode(1)=0
       if(dump) then
          Call file_indicator(30,wwf)
          Open(wwf,file='vmp-w.wfn',status='unknown',form='FORMATTED')
@@ -189,7 +190,7 @@ End module
 
       lbl=0
       Call Vpt_getE0(lbl,E0)
-      Call Hmat_getHmat(0,0,lbl,lbl,E1)
+      Call Hmat_getHmat(0,mode,lbl,lbl,E1)
       Call Vpt_getE2(lbl,E0,E2)
 
       E1=E1-E0
@@ -226,7 +227,7 @@ End module
 
          Call Target_getLabel(i,Nfree,lbl)
          Call Vpt_getE0(lbl,E0)
-         Call Hmat_getHmat(0,0,lbl,lbl,E1)
+         Call Hmat_getHmat(0,mode,lbl,lbl,E1)
          Call Vpt_getE2(lbl,E0,E2)
 
          E1=E1-E0
@@ -330,7 +331,7 @@ End module
    Integer :: lbli(Nfree),lblj(Nfree)
    Real(8) :: E0i,E0j,E2,dE,Hij
 
-   Integer :: n,m1,m2,m3,m4,q1,mm(4)
+   Integer :: n,m1,m2,m3,m4,q1,mm(4),mode(1)
    Integer :: vv,v1,v2,v3,v4
    Integer :: q1a,q1b
 
@@ -359,7 +360,8 @@ End module
                Call Vpt_getE0(lblj,E0j)
                dE=E0i-E0j
                if(abs(dE)>thresh_ene) then
-                  Call Hmat_getHmat(1,m1,lbli,lblj,Hij)
+                  mode(1)=m1
+                  Call Hmat_getHmat(1,mode,lbli,lblj,Hij)
                   E2=E2 + Hij*Hij/dE
                endif
 
@@ -712,7 +714,7 @@ End module
    Integer :: lbli(Nfree),lblj(Nfree)
    Real(8) :: E0i,E0j,E2,dE,Hij
 
-   Integer :: n,m1,m2,m3,m4,q1,q2,q3,q4,mm(4)
+   Integer :: n,m1,m2,m3,m4,q1,q2,q3,q4,mm(4),mode(1)
 
       E2=0.D+00
       nCnf1=0
@@ -733,7 +735,8 @@ End module
             Call Vpt_getE0(lblj,E0j)
             dE=E0i-E0j
             if(abs(dE)>thresh_ene) then
-               Call Hmat_getHmat(1,m1,lbli,lblj,Hij)
+               mode(1)=m1
+               Call Hmat_getHmat(1,mode,lbli,lblj,Hij)
                E2=E2 + Hij*Hij/dE
             endif
 
