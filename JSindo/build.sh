@@ -82,7 +82,7 @@ jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-macosx-u
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-windows-amd64.jar
 
 cp      ../${external_jars}/jogamp-all-platforms/jogl.LICENSE.txt    .
-cp      ../${external_jars}/jogamp-all-platforms/jogl.README.txt     .
+cp      ../${external_jars}/jogamp-all-platforms/jogl.README.md      .
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-linux-aarch64.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-linux-amd64.jar
@@ -121,7 +121,7 @@ if [ ! -e ${external_license} ]; then
   mkdir ${external_license}
   cp ${external_jars}/jogamp-all-platforms/gluegen.LICENSE.txt ${external_license}
   cp ${external_jars}/jogamp-all-platforms/jogl.LICENSE.txt    ${external_license}
-  cp ${external_jars}/jogamp-all-platforms/jogl.README.txt     ${external_license}
+  cp ${external_jars}/jogamp-all-platforms/jogl.README.md      ${external_license}
   cp $TMP/java3d.*.txt                                         ${external_license}
   cp build/Jama-1.0.3.txt                                      ${external_license}
 
