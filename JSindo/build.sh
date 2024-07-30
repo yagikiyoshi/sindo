@@ -15,7 +15,7 @@ if [ ! -e ${external_jars} ]; then
   cd ${external_jars}/
   # JogAmp
   #
-  wget https://jogamp.org/deployment/v2.4.0-rc-20210111/archive/jogamp-all-platforms.7z
+  wget https://jogamp.org/deployment/v2.5.0/archive/jogamp-all-platforms.7z
   unar jogamp-all-platforms.7z
 
   # Java3D
@@ -78,10 +78,8 @@ jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-linux-aarch64.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-linux-amd64.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-linux-armv6hf.jar
-jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-linux-i586.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-macosx-universal.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-windows-amd64.jar
-jar -xf ../${external_jars}/jogamp-all-platforms/jar/gluegen-rt-natives-windows-i586.jar
 
 cp      ../${external_jars}/jogamp-all-platforms/jogl.LICENSE.txt    .
 cp      ../${external_jars}/jogamp-all-platforms/jogl.README.txt     .
@@ -89,10 +87,8 @@ jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-linux-aarch64.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-linux-amd64.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-linux-armv6hf.jar
-jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-linux-i586.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-macosx-universal.jar
 jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-windows-amd64.jar
-jar -xf ../${external_jars}/jogamp-all-platforms/jar/jogl-all-natives-windows-i586.jar
 
 jar -xf ../${external_jars}/j3dcore.jar
 jar -xf ../${external_jars}/j3dutils.jar
