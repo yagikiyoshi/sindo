@@ -104,7 +104,7 @@ End module
 !---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----80
 !
 !
-   Subroutine Vqdptprpt_calcPrptmatrix(idPrpt)
+   Subroutine Vqdptprpt_calcPrptMatrix(idPrpt)
 
    USE Vqdptprpt_mod
    USE Grid_surface_mod, only : nData
@@ -122,7 +122,8 @@ End module
 
    Integer :: nst,nn,n,cp
    Integer, allocatable :: mij(:),vij(:)
-   Real(8), allocatable :: Pmat(:,:,:),coeff(:,:),aa(:,:),bb(:)
+   Real(8), allocatable :: Pmat(:,:,:),coeff(:,:)
+   Real(8), allocatable :: aa(:,:),bb(:)
    Real(8) :: ddot
 
    Integer :: i,j,k,l,m,mode(1)
@@ -130,7 +131,8 @@ End module
       mode(1)=0
 
       Call setupConf()
-      Allocate(mij(maxCup),vij(maxCup))
+      Allocate(mij(maxCup*2),vij(maxCup*2))
+      mij=0; vij=0
 
       matrixDataFile = 'vqdpt-prptMatrix'//trim(extn(idPrpt))
       Call file_indicator(30,ifl)
@@ -163,6 +165,7 @@ End module
          else
             nn=nCnf(n)
             Allocate(Pmat(nn,nn,nData),coeff(nn,nn))
+            Pmat=0.D+00; coeff=0.D+00
             line=''
             Do while(index(line,'STATE=')==0)
                Read(jfl,'(a)') line
@@ -173,7 +176,7 @@ End module
                Read(jfl,*)
                Read(jfl,*)
                Read(jfl,*)
-               Read(jfl,*) coeff(:,i)
+               Read(jfl,*) coeff(1:nn,i)
             End do
 
             Do i=1,nn
@@ -191,8 +194,8 @@ End module
                                cp,mij,vij)
 
                   Call Pmat_getMatrix(cp,mij,iCnf,jCnf,mat)
-                  Pmat(i,j,:)=mat
-                  Pmat(j,i,:)=mat
+                  Pmat(i,j,1:nData)=mat
+                  Pmat(j,i,1:nData)=mat
 
                   Do k=1,cup(nst+j)
                      jCnf(mm(k,nst+j))=0
@@ -200,7 +203,7 @@ End module
                End do
 
                Call Pmat_getMatrix(0,mode,iCnf,iCnf,mat)
-               Pmat(i,i,:)=mat
+               Pmat(i,i,1:nData)=mat
 
                Do k=1,cup(nst+i)
                   iCnf(mm(k,nst+i))=0
@@ -212,15 +215,15 @@ End module
                Allocate(aa(nn,nn))
                Do m=1,nData
                   ! Calc P = C^t * P * C
-                  Call dgemm('N','N',nn,nn,nn,1.0D+00,Pmat(:,:,m),nn,coeff,nn,0.0D+00,aa,nn)
-                  Call dgemm('T','N',nn,nn,nn,1.0D+00,coeff,nn,aa,nn,0.0D+00,Pmat(:,:,m),nn)
+                  Call dgemm('N','N',nn,nn,nn,1.0D+00,Pmat(1:nn,1:nn,m),nn,coeff(1:nn,1:nn),nn,0.0D+00,aa,nn)
+                  Call dgemm('T','N',nn,nn,nn,1.0D+00,coeff(1:nn,1:nn),nn,aa,nn,0.0D+00,Pmat(1:nn,1:nn,m),nn)
                End do
 
                Do i=1,nn
                Do j=1,i
                   write(ifl,'(2i5)') i,j
                   write(ifl,'(i5)') nData
-                  write(ifl,'(5e17.8)') Pmat(j,i,:)
+                  write(ifl,'(5e17.8)') Pmat(j,i,1:nData)
                End do
                End do
                Deallocate(aa)
@@ -229,8 +232,8 @@ End module
                Allocate(aa(nn,nData),bb(nn))
                Do m=1,nData
                   Do i=1,nn
-                     Call dgemv('N',nn,nn,1.0D+00,Pmat(:,:,m),nn,coeff(:,i),1,0.0D+00,bb,1)
-                     aa(i,m)=ddot(nn,coeff(:,i),1,bb,1)
+                     Call dgemv('N',nn,nn,1.0D+00,Pmat(1:nn,1:nn,m),nn,coeff(1:nn,i),1,0.0D+00,bb,1)
+                     aa(i,m)=ddot(nn,coeff(1:nn,i),1,bb,1)
                   End do
                End do
 
@@ -252,6 +255,8 @@ End module
 
       Close(ifl)
       Close(jfl)
+
+      Deallocate(mij,vij)
 
       write(iout,100) trim(matrixDataFile)
   100 Format(6x,'-> DONE FOR VQDPT PROPERTY : [ ',a,' ]',/)
