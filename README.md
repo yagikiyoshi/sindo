@@ -29,15 +29,15 @@ SINDO is a suite of programs for molecular vibrational analysis.
 
 ## Author
 Kiyoshi Yagi  
-Theoretical Molecular Science Laboratory,  
-RIKEN  
-kiyoshi.yagi@riken.jp  
+Department of Chemistry
+University of Tsukuba
+kiyoshi.yagi@chem.tsukuba.ac.jp
 
 
 ## Copyright Notice
 SINDO is distributed under the GNU General Public License version 3.
 
-Copyright 2009 - 2022
+Copyright 2009 - 2024
 
 SINDO is free software; you can redistribute it and/or  
 modify it under the terms of the GNU Lesser General Public  
