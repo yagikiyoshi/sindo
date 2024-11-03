@@ -562,10 +562,21 @@ public class MakeGrid {
       
       grid = new double[nMC1][nGrid];
       
+      /*
       for(int i=0; i<nMC1; i++){
          HOdvr hodvr = new HOdvr(nGrid,omegaV[mc1.get(i)]);
          grid[i]=hodvr.getGridPoints();
       }
+      */
+      for(int i=0; i<nMC1; i++){
+         double omg = omegaV[mc1.get(i)];
+         if (omg < 0.0) {
+            omg = -omg;
+         }
+         HOdvr hodvr = new HOdvr(nGrid,omg);
+         grid[i]=hodvr.getGridPoints();
+      }
+      
    }
    
    private void calcEQ(){
