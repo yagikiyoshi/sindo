@@ -67,7 +67,8 @@ public class RunMakePES {
       System.out.println("                         Release "+VersionInfo.RELEASE);
       System.out.println();
       System.out.println("                COPYRIGHT "+VersionInfo.YEAR+":  ");
-      System.out.println("                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp ");
+      System.out.println("                   Kiyoshi Yagi");
+      System.out.println("                   kiyoshi.yagi@chem.tsukuba.ac.jp ");
       System.out.println();
       System.out.println("-------------------------------------------------------");
    }
