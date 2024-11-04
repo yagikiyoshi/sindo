@@ -183,6 +183,18 @@ End module
          nCHO=nCHO+1
   
          Call Mol_getFreq(omegaf)
+
+         Do i=1,Nfree
+            if (omegaf(i) < 0.0D+00) then
+               write(iout,*)
+               write(iout,'(3x,''WARNING: DETECTED IMAGINARY FREQ'')')
+               write(iout,'(3x,''WARNING: MODE='',i8)') i
+               write(iout,'(3x,''WARNING: FREQ='',f12.2)') omegaf(i)
+               write(iout,'(3x,''WARNING: BASIS SET FREQ IS SET TO BE POSITIVE'')')
+               write(iout,*)
+               omegaf(i)=-omegaf(i)
+            end if
+         End do
       endif
       maxCHO=maxVal(nCHO)
 
