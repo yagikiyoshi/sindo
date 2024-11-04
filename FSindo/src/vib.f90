@@ -84,10 +84,10 @@ End module
    Integer :: vmax_base,vmaxAll,vmaxDefault
    Integer, dimension(MaxNfree) :: vmax
    Logical :: ocvscf,vscf,vci,vpt,vqdpt,prpt
-   Logical :: readBasis
+   Logical :: readBasis, ignoreImaginaryMode
 
    Namelist /vib/Nfree,MR,vmax,vmax_base,vmaxAll,ocvscf,vscf,vci,vpt,vqdpt, &
-                 prpt,readBasis
+                 prpt,readBasis,ignoreImaginaryMode
 
       ! >> Read input
 
@@ -105,6 +105,9 @@ End module
 
       ! - Read basis functions from file
       readBasis=.false.
+
+      ! - Ignore imarinary mode
+      ignoreImaginaryMode=.true.
 
       ! - Mode Coupling 
       MR = 3
@@ -188,11 +191,18 @@ End module
             if (omegaf(i) < 0.0D+00) then
                write(iout,*)
                write(iout,'(3x,''WARNING: DETECTED IMAGINARY FREQ'')')
-               write(iout,'(3x,''WARNING: MODE='',i8)') i
-               write(iout,'(3x,''WARNING: FREQ='',f12.2)') omegaf(i)
-               write(iout,'(3x,''WARNING: BASIS SET FREQ IS SET TO BE POSITIVE'')')
+               write(iout,'(3x,''WARNING:    MODE='',i8)') i
+               write(iout,'(3x,''WARNING:    FREQ='',f12.2)') omegaf(i)
+
+               if (ignoreImaginaryMode) then
+                  write(iout,'(3x,''WARNING: THIS MODE IS DEACTIVATED.'')')
+                  write(iout,'(3x,''WARNING: SET ignoreImaginaryMode=.false. TO ACTIVATE THIS MODE.'')')
+                  nCHO(i)=0
+               else
+                  write(iout,'(3x,''WARNING: BASIS SET FREQ IS SET TO BE POSITIVE'')')
+                  omegaf(i)=-omegaf(i)
+               end if
                write(iout,*)
-               omegaf(i)=-omegaf(i)
             end if
          End do
       endif
