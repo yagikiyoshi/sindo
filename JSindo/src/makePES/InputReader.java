@@ -373,6 +373,11 @@ public class InputReader {
          }else{
             this.errorTermination("interdomain_hc = "+intd_hc+" is not a valid option.");
          }
+
+         if (! interdomain && interdomain_hc) {
+            System.out.println("        [WARNING] InterDomain_hc re-set to false (interdomain = false).");
+            interdomain_hc = false;
+         }
          System.out.println("        * InterDomain_hc (Harmonic Coupling) = " + interdomain_hc);
          qffData.setInterdomain_hc(interdomain_hc);
 
@@ -848,12 +853,16 @@ public class InputReader {
                         }
                         
                      } else if(qffName.equalsIgnoreCase("interdomain_hc")) {
-                        if(qffvalue.equalsIgnoreCase("true")) {
-                           qffdata.setInterdomain_hc(true);
-                        } else if(qffvalue.equalsIgnoreCase("false")) {
+                        if (! interdomain) {
                            qffdata.setInterdomain_hc(false);
-                        } else {
-                           this.errorTermination("interdomain_hc = [TRUE|FALSE]. "+qffvalue+" is not a valid option.");
+                        }else {
+                           if(qffvalue.equalsIgnoreCase("true")) {
+                              qffdata.setInterdomain_hc(true);
+                           } else if(qffvalue.equalsIgnoreCase("false")) {
+                              qffdata.setInterdomain_hc(false);
+                           } else {
+                              this.errorTermination("interdomain_hc = [TRUE|FALSE]. "+qffvalue+" is not a valid option.");
+                           }
                         }
                      } else {
                         this.errorTermination("keyword "+qffName+" is not a valid option in qff.");
@@ -1117,7 +1126,7 @@ public class InputReader {
          System.out.printf ("     - stepsize     = %-12.2f \n", qffdata.getStepsize());
          System.out.println("     - ndifftype    = " + qffdata.getNdifftype());
          System.out.println("     - mopfile      = " + qffdata.getMopfile());
-         System.out.println("     - intradomain_hc       = " + qffdata.isInterdomain_hc());
+         System.out.println("     - interdomain_hc       = " + qffdata.isInterdomain_hc());
          System.out.println("     - gradient_and_hessian = " + qffdata.getGradient_and_hessian());
          if(qffdata.isGenhs()) {
             System.out.println("     - genhs        = " + qffdata.isGenhs());
