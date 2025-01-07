@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<makePES>
+   <minfoFile   value="h2o_6-mp2dz.minfo" />
+   <MR          value="3" />
+   <activemode  value="31-48" />
+   <qchem>
+      <program     value="gaussian" />
+      <dryrun      value="false"/>
+      <removefiles value="true" />
+      <title       value="MP2/cc-pVDZ" />
+      <template    value="GaussianTemplate" />
+   </qchem>
+   <qff>
+      <stepsize value="0.5" />
+      <ndifftype value="hess"/>
+      <mopfile   value="prop_no_1.mop" />
+   </qff>
+</makePES>
+ 
+
