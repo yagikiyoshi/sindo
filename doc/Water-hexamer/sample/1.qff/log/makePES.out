@@ -1,0 +1,157 @@
+2019.05.04 at 19:41:08 JST
+-------------------------------------------------------
+
+      Make Potential Energy Surface for SINDO
+                         Version 4.0
+                         Release beta
+
+                COPYRIGHT 2019:  
+                   Kiyoshi Yagi  kiyoshi.yagi@riken.jp 
+
+-------------------------------------------------------
+
+Launch MakePES module
+
+  o Input options read via makePES.xml ...  [OK] 
+     - Molecular info via h2o_6-mp2dz.minfo ...  [OK] 
+     - InterDomain = false
+     - ActiveModes:
+        * Domain 1
+           31  32  33  34  35  36  37  38  39  40 
+           41  42  43  44  45  46  47  48 
+     - MR      = 3
+     - Dipole  = false
+
+  o Options for Quantum Chemistry jobs 
+
+    QCID: 1
+     - Program      = gaussian
+     - Title        = MP2/cc-pVDZ
+     - Removefiles  = true
+     - Dryryn       = false
+     - Template     = GaussianTemplate
+     - ExecCommand  = runGaussian.sh /home/yagi/pgm/sindo-4.0.beta/doc/MakePES/sample_MakePES/4.water-hexamer basename.inp 
+
+  o Options for QFF 
+
+     - QCID         = 1
+     - stepsize     = 0.50         
+     - ndifftype    = hess
+     - mopfile      = prop_no_1.mop
+     - intradomain_hc       = true
+     - gradient_and_hessian = input
+
+  o Queue Manager via resources.info ...  [OK] 
+     -----
+     ID       : 0
+     Hosts    : beluga03.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 1
+     Hosts    : beluga03.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 2
+     Hosts    : beluga01.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 3
+     Hosts    : beluga01.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 4
+     Hosts    : beluga02.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 5
+     Hosts    : beluga02.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 6
+     Hosts    : beluga04.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+     ID       : 7
+     Hosts    : beluga04.local
+     Ppn      : 1
+     Memory   : unlimit
+     SCR      : unlimit
+     Status   : FREE
+     -----
+
+Setup MakeQFF module
+
+
+Enter QFF generation:
+
+Execute electronic structure calculations.
+
+Thread0@beluga03.local> Running minfo.files/mkqff-eq.inp on beluga03 at Sat May 4 19:41:09 JST 2019
+Thread1@beluga03.local> Running minfo.files/mkqff30-0.inp on beluga03 at Sat May 4 19:41:09 JST 2019
+Thread4@beluga02.local> Running minfo.files/mkqff31-1.inp on beluga02 at Sat May 4 19:41:09 JST 2019
+Thread5@beluga02.local> Running minfo.files/mkqff32-0.inp on beluga02 at Sat May 4 19:41:09 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkqff32-1.inp on beluga04 at Sat May 4 19:41:08 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkqff33-0.inp on beluga04 at Sat May 4 19:41:08 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkqff30-1.inp on beluga01 at Sat May 4 19:41:09 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkqff31-0.inp on beluga01 at Sat May 4 19:41:09 JST 2019
+Thread0@beluga03.local> Running minfo.files/mkqff33-1.inp on beluga03 at Sat May 4 19:43:16 JST 2019
+Thread1@beluga03.local> Running minfo.files/mkqff34-0.inp on beluga03 at Sat May 4 19:43:17 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkqff34-1.inp on beluga01 at Sat May 4 19:43:19 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkqff35-0.inp on beluga01 at Sat May 4 19:43:23 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkqff35-1.inp on beluga04 at Sat May 4 19:43:25 JST 2019
+Thread5@beluga02.local> Running minfo.files/mkqff36-0.inp on beluga02 at Sat May 4 19:43:26 JST 2019
+Thread4@beluga02.local> Running minfo.files/mkqff36-1.inp on beluga02 at Sat May 4 19:43:27 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkqff37-0.inp on beluga04 at Sat May 4 19:43:26 JST 2019
+Thread0@beluga03.local> Running minfo.files/mkqff37-1.inp on beluga03 at Sat May 4 19:45:17 JST 2019
+Thread1@beluga03.local> Running minfo.files/mkqff38-0.inp on beluga03 at Sat May 4 19:45:17 JST 2019
+Thread4@beluga02.local> Running minfo.files/mkqff38-1.inp on beluga02 at Sat May 4 19:45:29 JST 2019
+Thread5@beluga02.local> Running minfo.files/mkqff39-0.inp on beluga02 at Sat May 4 19:45:30 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkqff39-1.inp on beluga01 at Sat May 4 19:45:33 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkqff40-0.inp on beluga01 at Sat May 4 19:45:36 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkqff40-1.inp on beluga04 at Sat May 4 19:45:36 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkqff41-0.inp on beluga04 at Sat May 4 19:45:37 JST 2019
+Thread1@beluga03.local> Running minfo.files/mkqff41-1.inp on beluga03 at Sat May 4 19:47:16 JST 2019
+Thread0@beluga03.local> Running minfo.files/mkqff42-0.inp on beluga03 at Sat May 4 19:47:16 JST 2019
+Thread5@beluga02.local> Running minfo.files/mkqff42-1.inp on beluga02 at Sat May 4 19:47:35 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkqff43-0.inp on beluga01 at Sat May 4 19:47:38 JST 2019
+Thread4@beluga02.local> Running minfo.files/mkqff43-1.inp on beluga02 at Sat May 4 19:47:40 JST 2019
+Thread6@beluga04.local> Running minfo.files/mkqff44-0.inp on beluga04 at Sat May 4 19:47:39 JST 2019
+Thread2@beluga01.local> Running minfo.files/mkqff44-1.inp on beluga01 at Sat May 4 19:47:41 JST 2019
+Thread7@beluga04.local> Running minfo.files/mkqff45-0.inp on beluga04 at Sat May 4 19:47:45 JST 2019
+Thread0@beluga03.local> Running minfo.files/mkqff45-1.inp on beluga03 at Sat May 4 19:49:16 JST 2019
+Thread1@beluga03.local> Running minfo.files/mkqff46-0.inp on beluga03 at Sat May 4 19:49:18 JST 2019
+Thread5@beluga02.local> Running minfo.files/mkqff46-1.inp on beluga02 at Sat May 4 19:49:38 JST 2019
+Thread4@beluga02.local> Running minfo.files/mkqff47-0.inp on beluga02 at Sat May 4 19:49:42 JST 2019
+Thread3@beluga01.local> Running minfo.files/mkqff47-1.inp on beluga01 at Sat May 4 19:49:43 JST 2019
+End of electronic structure calculations.
+
+
+Storing electronic structure data in tempfile ...   Done!
+
+Generating prop_no_1.mop... Done!
+
+Removing the tempfiles ...   Done!
+
+End of QFF generation.
+

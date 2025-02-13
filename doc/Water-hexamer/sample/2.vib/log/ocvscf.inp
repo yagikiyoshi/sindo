@@ -1,0 +1,32 @@
+#--- [  INPUT PARAMETER  ]
+&mol minfoFile = 'h2o_6-mp2dz.minfo' /
+&sys maxmem=1000 /
+
+#--- [  VIB  ]
+ &vib MR=4 ocvscf=.t. vscf=.f. vci=.f. vpt=.f. 
+      vmaxAll = -1 
+      vmax(31) = 10
+      vmax(32) = 10
+      vmax(33) = 10
+      vmax(34) = 10
+      vmax(35) = 10
+      vmax(36) = 10
+      vmax(37) = 10
+      vmax(38) = 10
+      vmax(39) = 10
+      vmax(40) = 10
+      vmax(41) = 10
+      vmax(42) = 10
+      vmax(43) = 10
+      vmax(44) = 10
+      vmax(45) = 10
+      vmax(46) = 10
+      vmax(47) = 10
+      vmax(48) = 10
+ /
+
+#--- [  OCVSCF  ]
+ &ocvscf mopfile='prop_no_1.mop' /
+
+#--- [  VSCF  ]
+ &vscf Maxitr=50 Ethresh=1.D-03 /
