@@ -37,15 +37,6 @@
             BUILDLIST=$BUILDLIST/g95/g95I8
          fi
       fi
-      if [ ! -z $(which openf90 2> /dev/null) ]; then
-         echo "     - Detected Intel Fortran Compiler (ifort)"
-         DEFAULT=openf90I8
-         if [ -z $BUILDLIST ]; then
-            BUILDLIST=openf90/openf90I8
-         else
-            BUILDLIST=$BUILDLIST/openf90/openf90I8
-         fi
-      fi
       if [ ! -z $(which ifort 2> /dev/null) ]; then
          echo "     - Detected Intel Fortran Compiler (ifort)"
          DEFAULT=ifortI8
@@ -53,6 +44,15 @@
             BUILDLIST=ifort/ifortI8
          else
             BUILDLIST=$BUILDLIST/ifort/ifortI8
+         fi
+      fi
+      if [ ! -z $(which ifx 2> /dev/null) ]; then
+         echo "     - Detected Intel Fortran Compiler (ifx)"
+         DEFAULT=ifxI8
+         if [ -z $BUILDLIST ]; then
+            BUILDLIST=ifx/ifxI8
+         else
+            BUILDLIST=$BUILDLIST/ifx/ifxI8
          fi
       fi
 
@@ -82,6 +82,12 @@
       elif [ $TARGET = ifort ]; then
          echo "   o Fortran Compiler = Intel"
          echo "   o Default integer  = 4-byte"
+      elif [ $TARGET = ifxI8 ]; then
+         echo "   o Fortran Compiler = Intel"
+         echo "   o Default integer  = 8-byte"
+      elif [ $TARGET = ifx ]; then
+         echo "   o Fortran Compiler = Intel"
+         echo "   o Default integer  = 4-byte"
       elif [ $TARGET = gfortranI8 ]; then
          echo "   o Fortran Compiler = GFortran"
          echo "   o Default integer  = 8-byte"
@@ -93,12 +99,6 @@
          echo "   o Default integer  = 8-byte"
       elif [ $TARGET = g95 ]; then
          echo "   o Fortran Compiler = G95"
-         echo "   o Default integer  = 4-byte"
-      elif [ $TARGET = openf90I8 ]; then
-         echo "   o Fortran Compiler = AMD"
-         echo "   o Default integer  = 8-byte"
-      elif [ $TARGET = openf90 ]; then
-         echo "   o Fortran Compiler = AMD"
          echo "   o Default integer  = 4-byte"
       fi
 
@@ -150,28 +150,28 @@
             TARGET=$TARGET"_sequential"
          fi
 
-         if [ $TARGET = ifortI8_MKL_thread ]; then
+         if [ $TARGET = ifortI8_MKL_thread ] || [ $TARGET = ifxI8_MKL_thread ]; then
             LAPACK=' -Wl,--start-group \
                       $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
                       $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
                       $(MKLROOT)/lib/intel64/libmkl_core.a \
                     -Wl,--end-group \
                     -liomp5 -lpthread -lm -ldl'
-         elif [ $TARGET = ifortI8_MKL_sequential ]; then
+         elif [ $TARGET = ifortI8_MKL_sequential ] || [ $TARGET = ifxI8_MKL_sequential ]; then
             LAPACK=' -Wl,--start-group \
                       $(MKLROOT)/lib/intel64/libmkl_intel_ilp64.a \
                       $(MKLROOT)/lib/intel64/libmkl_sequential.a \
                       $(MKLROOT)/lib/intel64/libmkl_core.a \
                     -Wl,--end-group \
                     -lpthread -lm -ldl'
-         elif [ $TARGET = ifort_MKL_thread ]; then
+         elif [ $TARGET = ifort_MKL_thread ] || [ $TARGET = ifx_MKL_thread ]; then
             LAPACK=' -Wl,--start-group \
                       $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
                       $(MKLROOT)/lib/intel64/libmkl_intel_thread.a \
                       $(MKLROOT)/lib/intel64/libmkl_core.a \
                     -Wl,--end-group \
                     -liomp5 -lpthread -lm -ldl'
-         elif [ $TARGET = ifort_MKL_sequential ]; then
+         elif [ $TARGET = ifort_MKL_sequential ] || [ $TARGET = ifx_MKL_sequential ]; then
             LAPACK=' -Wl,--start-group  \
                       $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a \
                       $(MKLROOT)/lib/intel64/libmkl_sequential.a \
