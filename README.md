@@ -29,8 +29,8 @@ SINDO is a suite of programs for molecular vibrational analysis.
 
 ## Author
 Kiyoshi Yagi  
-Department of Chemistry
-University of Tsukuba
+Department of Chemistry  
+University of Tsukuba  
 kiyoshi.yagi@chem.tsukuba.ac.jp
 
 
