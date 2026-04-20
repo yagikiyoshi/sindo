@@ -173,9 +173,9 @@
       
       Call file_indicator(30,ifl)
       Open(ifl,file=vscfWfn,status='old',form='FORMATTED')
-      Read(ifl,*)
-      Read(ifl,*)
-      Read(ifl,*)
+      Do while(index(line,'VSCF ENERGY')==0) 
+         Read(ifl,'(a)') line
+      end do
       Read(ifl,*) Evscf(0)
 
       line=''
