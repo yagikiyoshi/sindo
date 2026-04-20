@@ -1,5 +1,8 @@
-    SINDO=/Users/kyagi/Work/devel/sindo/sindo.master/FSindo/bin/sindo
-    export POTDIR=./pes_mrpes
+#!/bin/bash
 
-    ${SINDO} < vqdpt2.inp > vqdpt2.out 2>&1
-    ${SINDO} < vci.inp    > vci.out    2>&1
+. /path/to/sindo/sindovars.sh
+export POTDIR=./pes_mrpes
+
+sindo < vscf.inp   > vscf.out   2>&1
+sindo < vqdpt2.inp > vqdpt2.out 2>&1
+sindo < vci.inp    > vci.out    2>&1
