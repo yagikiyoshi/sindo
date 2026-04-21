@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -r bin jar build_JSindo.xml
+rm -r bin build_JSindo.xml
 
 aa=$(grep external_jars= build.sh)
 external_jars=${aa#*=}
