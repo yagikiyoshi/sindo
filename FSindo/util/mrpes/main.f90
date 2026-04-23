@@ -30,9 +30,10 @@ PROGRAM main
       End do
       Call Modal_close()
 
+
       allocate(activemodes(Nfree), qq(Nfree))
       activemodes = .true.
-      Call mrpes_Construct(Nfree,activemodes)
+      Call mrpes_Construct(Nfree,activemodes,3)
       Call mrpes_printSettings()
 
       qq = 0.D+00
