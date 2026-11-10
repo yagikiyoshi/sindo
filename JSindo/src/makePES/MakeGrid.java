@@ -493,14 +493,27 @@ public class MakeGrid {
          }
 
       }else{
-         grdXYZ.close();            
-         System.out.println("   Done! Number of grid points:  "+grdXYZ.getNumOfGrid());
+         grdXYZ.close();
+         System.out.println("   Number of grid points to be calculated:  "+grdXYZ.getNumOfGrid());
+         System.out.println("   Number of grid points done:  "+grdXYZ.getNumOfGridDone());
          System.out.println();
 
-         if(grdXYZ.getNumOfGrid() == 0) {
+         if (grdXYZ.getNumOfGrid() == 0) {
             genPES = true;
+         } else if(grdXYZ.getNumOfGridDone() == 0) {
+            genPES = false;            
          } else {
-            genPES = false;
+
+            genPES = qcData.getForceGenPES();
+            if (! genPES) {
+               
+               double rate = (double) grdXYZ.getNumOfGrid() / grdXYZ.getNumOfGridDone();
+               if (rate < 0.01d) {
+                  System.out.println("   *** It seems many grid points are already calculated. ");
+                  System.out.println("   *** Set forceGenPES = true in <qchem> group to proceed to PES generation. ");
+                  
+               }
+            }
          }
          
       }

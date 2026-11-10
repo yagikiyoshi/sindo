@@ -11,6 +11,7 @@ public class GrdXYZ {
    File f;
    PrintWriter pw;
    int num_grid;
+   int num_grid_done;
    ArrayList<String> datFilename;
    
    /**
@@ -19,6 +20,7 @@ public class GrdXYZ {
     */
    public GrdXYZ(String filename) {
       num_grid = 0;
+      num_grid_done = 0;
       datFilename = null;
       this.open(filename);
    }
@@ -92,6 +94,14 @@ public class GrdXYZ {
    }
    
    /**
+    * Returns the number of grid points that are already calculated
+    * @return the number of grid points done.
+    */
+   public int getNumOfGridDone() {
+      return num_grid_done;
+   }
+   
+   /**
     * Writes a grid point to the xyz file
     * @param makePESData PES data
     * @param mm Mode numbers
@@ -103,12 +113,14 @@ public class GrdXYZ {
       File minfo = new File(makePESData.getMinfofolder()+basename+".minfo");
       if(minfo.exists()) {
          // Skip to write this grid
+         num_grid_done++;
          return;
       }
 
       if(datFilename != null) {
          if(datFilename.contains(basename)) {
             // Skip to write this grid
+            num_grid_done++;
             return;
          }
       }

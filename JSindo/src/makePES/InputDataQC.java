@@ -23,6 +23,7 @@ public class InputDataQC {
    private boolean option;
    
    public static String GENERIC="generic";
+   private boolean forceGenPES;
    
    /**
     * This is a package private class
@@ -96,5 +97,18 @@ public class InputDataQC {
    public void setXyzBasename(String xyzBasename) {
       this.xyzBasename = xyzBasename;
    }
-   
+   /**
+    * Returns true if PES generation is forced.
+    * @return genPES
+    */
+   public boolean getForceGenPES() {
+      return forceGenPES;
+   }
+   /**
+    * Sets genPES
+    * @param forceGenPES true if genPES is forced.
+    */
+   void setForceGenPES(boolean forceGenPES) {
+      this.forceGenPES = forceGenPES;
+   }   
 }

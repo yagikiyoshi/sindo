@@ -696,6 +696,7 @@ public class InputReader {
                qcinfo.setRemoveFile(false);
                qcinfo.setInputFile(null);
                qcinfo.setXyzBasename(null);
+               qcinfo.setForceGenPES(false);
 
                NodeList qclist = node.getChildNodes();
                for(int j=0; j<qclist.getLength(); j++) {
@@ -739,6 +740,15 @@ public class InputReader {
                            qcinfo.setOption(true);
                         } else {
                            qcinfo.setOption(false);
+                        }
+
+                     } else if(qcName.equalsIgnoreCase("forceGenPES")) {
+                        if(qcvalue.equalsIgnoreCase("true")) {
+                           qcinfo.setForceGenPES(true);
+                        } else if(qcvalue.equalsIgnoreCase("false")) {
+                           qcinfo.setForceGenPES(false);
+                        } else {
+                           this.errorTermination("forceGenPES = [TRUE|FALSE]. "+qcvalue+" is not a valid option.");
                         }
 
                      } else {
@@ -1086,6 +1096,7 @@ public class InputReader {
          
          if(program.equalsIgnoreCase(InputDataQC.GENERIC)) {
             System.out.println("     - xyzfile      = " + qcdata.getXyzBasename());
+            System.out.println("     - forceGenPES  = " + qcdata.getForceGenPES());
             
          }else {
             System.out.println("     - Removefiles  = " + qcdata.isRemoveFile());
